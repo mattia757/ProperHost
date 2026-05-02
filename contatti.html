@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Properhost · Hospitality — Contatti</title>
+  <meta name="description" content="Contattaci per informazioni, disponibilità e servizi tailor-made in Sicilia.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container nav-wrap">
+    <a href="index.html" class="brand"><img src="logo.png" alt="Properhost Hospitality"><span class="brand-text"><span class="brand-main">properhost</span><span class="brand-sub">hospitality</span></span></a>
+    <nav class="nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="concierge.html">Concierge</a>
+      <a href="ville.html">Ville</a>
+      <a href="contatti.html" class="active">Contatti</a>
+    </nav>
+    <a href="contatti.html" class="nav-cta">Richiedi disponibilità</a>
+    <button class="nav-toggle" aria-label="Apri menu" aria-controls="mainNav" aria-expanded="false"><span></span></button>
+  </div>
+</header>
+
+<section class="hero page-hero" style="background-image:url('assets/contatti-hero.jpg')">
+  <div class="container hero-grid">
+    <div class="reveal">
+      <div class="eyebrow">Contatti</div>
+      <h1>Parliamo del tuo <em>soggiorno</em> in Sicilia</h1>
+      <p>Raccontaci cosa stai cercando: ti risponderemo con una proposta su misura, disponibilità e servizi dedicati.</p>
+    </div>
+    <div class="hero-card reveal">
+      <div class="small">Tempi di risposta</div>
+      <h3>Entro 24 ore lavorative</h3>
+      <p>Ogni richiesta viene gestita da un referente dedicato, senza passaggi intermedi né risposte automatiche.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container contact-layout">
+    <aside class="contact-info reveal">
+      <div class="section-tag">Scrivici</div>
+      <h2 class="section-title">I nostri <em>recapiti</em></h2>
+      <p class="section-text">Scegli il canale che preferisci. Rispondiamo via mail, telefono o WhatsApp con la stessa cura.</p>
+
+      <ul class="contact-list">
+        <li>
+          <span class="contact-label">Telefono</span>
+          <a href="tel:+393392923744">+39 339 2923 744</a>
+          <a href="tel:+393925108539">+39 392 5108 539</a>
+        </li>
+        <li>
+          <span class="contact-label">Email</span>
+          <a href="mailto:properhost.company@gmail.com">properhost.company@gmail.com</a>
+        </li>
+        <li>
+          <span class="contact-label">Sito</span>
+          <a href="https://www.properhost.it" target="_blank" rel="noopener">www.properhost.it</a>
+        </li>
+        <li>
+          <span class="contact-label">Area operativa</span>
+          <span>Palermo · Sicilia · Italia</span>
+        </li>
+      </ul>
+    </aside>
+
+    <div class="contact-card reveal">
+      <h3>Invia una richiesta</h3>
+      <p class="contact-sub">Compila il form qui sotto: ti ricontatteremo con una proposta personalizzata.</p>
+
+      <form action="https://api.staticforms.xyz/submit" method="post" class="contact-form contact-form-plain">
+        <input type="hidden" name="accessKey" value="sf_48b268096f28838111e4dcc9">
+        <div class="form-grid">
+          <div class="field">
+            <label for="name">Nome e cognome</label>
+            <input id="name" type="text" name="name" placeholder="Mario Rossi" required>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" placeholder="nome@email.com" required>
+          </div>
+          <div class="field">
+            <label for="phone">Telefono</label>
+            <input id="phone" type="tel" name="phone" placeholder="+39 333 1234567">
+          </div>
+          <div class="field">
+            <label for="guests">Numero ospiti</label>
+            <input id="guests" type="number" name="guests" min="1" placeholder="4">
+          </div>
+          <div class="field">
+            <label for="dates">Date del soggiorno</label>
+            <input id="dates" type="text" name="dates" placeholder="Es. 10-17 agosto">
+          </div>
+          <div class="field">
+            <label for="villa">Villa o area di interesse</label>
+            <input id="villa" type="text" name="villa_interest" placeholder="Taormina, Noto, Siracusa...">
+          </div>
+          <div class="field field-full">
+            <label for="message">Messaggio</label>
+            <textarea id="message" name="message" rows="6" placeholder="Raccontaci cosa stai cercando..." required></textarea>
+          </div>
+          <div class="field field-full">
+            <label class="checkbox-wrap">
+              <input type="checkbox" name="privacy" required>
+              <span>Accetto la privacy policy e autorizzo il trattamento dei dati.</span>
+            </label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Invia richiesta</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag">Servizi</div>
+      <h2 class="section-title">Cosa possiamo <em>organizzare</em> per te</h2>
+      <p class="section-text">Una selezione di esperienze e comfort che puoi richiedere direttamente nel form: ci occupiamo noi di coordinare ogni dettaglio.</p>
+    </div>
+
+    <div class="service-grid">
+      <article class="service-card reveal">
+        <div class="service-icon">🚐</div>
+        <h3>Servizio Navetta</h3>
+        <p>Transfer privati da e per aeroporti, porti e stazioni, con autista dedicato e vetture confortevoli.</p>
+      </article>
+      <article class="service-card reveal">
+        <div class="service-icon">🚗</div>
+        <h3>Noleggio Mezzi</h3>
+        <p>Auto, scooter e e-bike consegnati direttamente in villa: massima libertà di esplorare l'isola al tuo ritmo.</p>
+      </article>
+      <article class="service-card reveal">
+        <div class="service-icon">⛵</div>
+        <h3>Noleggio Gommoni</h3>
+        <p>Gommoni e piccole imbarcazioni per scoprire calette nascoste, con o senza skipper a bordo.</p>
+      </article>
+      <article class="service-card reveal">
+        <div class="service-icon">👨‍🍳</div>
+        <h3>Chef Privato</h3>
+        <p>Cene a domicilio curate da chef siciliani: menu tailor-made, materie prime locali, servizio raffinato.</p>
+      </article>
+      <article class="service-card reveal">
+        <div class="service-icon">🏝️</div>
+        <h3>Tour Favignana</h3>
+        <p>Escursioni guidate all'isola di Favignana, tra tonnare storiche, cale turchesi e scorci panoramici.</p>
+      </article>
+      <article class="service-card reveal">
+        <div class="service-icon">🌊</div>
+        <h3>Tour Levanzo</h3>
+        <p>Giornate in barca verso Levanzo: grotte marine, acque cristalline e soste gastronomiche autentiche.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand"><span class="brand-main">properhost</span><span class="brand-sub">hospitality</span></div>
+        <p class="lead">Ospitalità siciliana di charme, ville selezionate e servizi tailor-made per soggiorni autentici sull'isola.</p>
+        <p style="color:rgba(255,255,255,.55);font-size:13px">Palermo · Sicilia · Italia</p>
+      </div>
+      <div class="footer-col">
+        <h5>Contatti</h5>
+        <a href="tel:+393392923744">+39 339 2923 744</a>
+        <a href="tel:+393925108539">+39 392 5108 539</a>
+        <a href="mailto:properhost.company@gmail.com">properhost.company@gmail.com</a>
+        <a href="https://www.properhost.it" target="_blank" rel="noopener">www.properhost.it</a>
+      </div>
+      <div class="footer-col">
+        <h5>Naviga</h5>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="concierge.html">Concierge &amp; Servizi</a>
+        <a href="ville.html">Ville</a>
+        <a href="contatti.html">Contatti</a>
+      </div>
+    </div>
+    <div class="footer-wrap">
+      <div>© 2026 Properhost — Tutti i diritti riservati</div>
+      <div>Hospitality · Sicilia</div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
