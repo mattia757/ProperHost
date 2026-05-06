@@ -191,4 +191,58 @@
       });
     }
   }
+// Contact form validation
+  var contactForm = document.querySelector('.contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+      var isValid = true;
+      var name = contactForm.querySelector('[name="name"]');
+      var email = contactForm.querySelector('[name="email"]');
+      var message = contactForm.querySelector('[name="message"]');
+      
+      // Clear previous errors
+      contactForm.querySelectorAll('.field').forEach(function(f) { f.classList.remove('has-error') });
+      
+      // Validate name
+      if (!name || !name.value.trim()) {
+        isValid = false;
+        if (name) name.parentElement.classList.add('has-error');
+      }
+      
+      // Validate email
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailRegex.test(email.value)) {
+        isValid = false;
+        if (email) email.parentElement.classList.add('has-error');
+      }
+      
+      // Validate message
+      if (!message || !message.value.trim() || message.value.trim().length < 10) {
+        isValid = false;
+        if (message) message.parentElement.classList.add('has-error');
+      }
+      
+      if (!isValid) {
+        e.preventDefault();
+        // Show error message
+        var errorMsg = contactForm.querySelector('.form-error') || document.createElement('p');
+        errorMsg.className = 'form-error';
+        errorMsg.style.cssText = 'color:#c00;font-size:13px;margin-top:12px';
+        errorMsg.textContent = 'Compila tutti i campi obbligatori.';
+        contactForm.insertBefore(errorMsg, contactForm.firstChild);
+      }
+    });
+    
+    // Real-time validation feedback
+    contactForm.querySelectorAll('input, textarea').forEach(function(input) {
+      input.addEventListener('blur', function() {
+        var parent = input.parentElement;
+        if (input.hasAttribute('required') && !input.value.trim()) {
+          parent.classList.add('has-error');
+        } else {
+          parent.classList.remove('has-error');
+        }
+      });
+    });
+  }
 })();

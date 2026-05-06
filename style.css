@@ -1174,3 +1174,11 @@ html{scroll-behavior:smooth}
 /* Page hero overrides */
 .hero.page-hero h1{max-width:18ch}
 .hero.page-hero .hero-card{background:rgba(255,255,255,.08)}
+
+.field.has-error input,
+.field.has-error textarea {
+  border-bottom-color: #c00 !important;
+}
+.form-error {
+  animation: fadeIn 0.3s ease;
+}
