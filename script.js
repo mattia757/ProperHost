@@ -150,6 +150,19 @@
     startAutoplay();
   }
 
+  // Hero scroll effect
+  var hero = document.querySelector('.hero');
+  if (hero) {
+    window.addEventListener('scroll', function() {
+      var scrolled = window.scrollY;
+      if (scrolled > 100) {
+        hero.setAttribute('data-scrolled', 'true');
+      } else {
+        hero.setAttribute('data-scrolled', 'false');
+      }
+    }, { passive: true });
+  }
+
   // Cursor follow effect for hero (desktop only)
   if (window.matchMedia('(hover: hover)').matches) {
     var heroCinema = document.querySelector('.hero-cinema-content');
