@@ -3,157 +3,149 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Properhost � Hospitality — Home</title>
+  <title>Properhost · Hospitality — Home</title>
   <meta name="description" content="Ville private e servizi tailor-made per un soggiorno autentico in Sicilia.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <header class="topbar">
     <div class="container nav-wrap">
-      <a href="index.html" class="brand"><img src="logo.png" alt="Properhost Hospitality"><span class="brand-text"><span class="brand-main">properhost</span><span class="brand-sub">hospitality</span></span></a>
-      <nav class="nav" id="mainNav">
+      <nav class="nav nav-left">
+        <a href="concierge.html">Concierge</a>
+        <a href="about.html">About</a>
+        <a href="ville.html">Ville</a>
+      </nav>
+
+      <a href="index.html" class="brand">
+        <img src="logo.png" alt="Properhost Hospitality">
+        <span class="brand-text">
+          <span class="brand-main">properhost</span>
+          <span class="brand-sub">villas · concierge · services</span>
+        </span>
+      </a>
+
+      <nav class="nav nav-right">
+        <a href="concierge.html#services">Servizi</a>
+        <a href="contatti.html">Contatti</a>
+        <a href="contatti.html" class="nav-book">Book</a>
+      </nav>
+
+      <button class="nav-toggle" aria-label="Apri menu" aria-controls="mainNav" aria-expanded="false"><span></span></button>
+      <nav class="nav nav-mobile" id="mainNav">
         <a href="index.html" class="active">Home</a>
         <a href="about.html">About</a>
         <a href="concierge.html">Concierge</a>
         <a href="ville.html">Ville</a>
         <a href="contatti.html">Contatti</a>
       </nav>
-      <a href="contatti.html" class="nav-cta">Richiedi disponibilità</a>
-      <button class="nav-toggle" aria-label="Apri menu" aria-controls="mainNav" aria-expanded="false"><span></span></button>
     </div>
   </header>
 
-  <section class="hero hero-video" id="home">
+  <section class="hero" id="home">
     <video class="hero-video-bg" autoplay muted loop playsinline preload="metadata"
            poster="assets/hero-home.jpg">
       <source src="assets/hero.webm" type="video/webm">
       <source src="assets/hero.mp4" type="video/mp4">
     </video>
     <div class="hero-video-overlay"></div>
-    <div class="container hero-grid">
-      <div class="reveal">
-        <div class="eyebrow">Luxury villas in Sicily</div>
-        <h1>La Sicilia più <em>esclusiva</em>, da vivere con stile</h1>
-        <p>Ville private, dimore selezionate e servizi tailor-made per chi desidera un soggiorno autentico, raffinato e senza pensieri.</p>
-        <div class="hero-actions">
-          <a href="ville.html" class="btn btn-primary">Scopri le ville</a>
-          <a href="concierge.html" class="btn btn-ghost">Private concierge</a>
+
+    <div class="hero-cinema-content container">
+      <div class="hero-cinema-inner">
+        <div class="hero-cinema-text reveal">
+          <p>Ville private, dimore selezionate e servizi tailor-made per chi desidera un soggiorno autentico, raffinato e senza pensieri sulla costa siciliana. Ogni dettaglio coordinato per trasformare il viaggio in un'esperienza su misura.</p>
         </div>
-      </div>
-      <div class="hero-card reveal">
-        <div class="small">Private concierge</div>
-        <h3>Un’esperienza costruita intorno a te</h3>
-        <p>Transfer privati, chef in villa, esperienze locali, yacht charter e assistenza dedicata in ogni momento del tuo soggiorno.</p>
-        <a href="#services" class="btn btn-primary">Scopri i servizi</a>
+        <a href="#villas" class="hero-discover reveal" aria-label="Scopri">
+          <span>Scopri</span>
+        </a>
       </div>
     </div>
   </section>
 
-  <section class="intro">
-    <div class="container intro-grid">
-      <div class="reveal">
+  <section class="intro intro-editorial">
+    <div class="container intro-editorial-grid">
+      <div class="intro-editorial-left reveal">
         <div class="section-tag">Benvenuti</div>
-        <h2 class="section-title">Ospitalità siciliana, <em>eleganza</em> contemporanea</h2>
-        <p class="section-text">Una vetrina premium di ville di charme e servizi esclusivi. Il linguaggio visivo richiama il lusso caldo e mediterraneo: fotografie ampie, tipografia editoriale e dettagli sobri per trasmettere valore senza appesantire la navigazione.</p>
-        <ul class="list">
-          <li>Dimore selezionate con identità architettonica chiara.</li>
-          <li>Assistenza dedicata prima, durante e dopo il soggiorno.</li>
-          <li>Partner locali scelti per affidabilità e stile.</li>
-        </ul>
-      </div>
-      <div class="intro-image reveal">
-        <img src="assets/intro.jpg" alt="Costa siciliana con villa vista mare">
-      </div>
-    </div>
-  </section>
-
-  <section class="villas" id="villas">
-    <div class="container">
-      <div class="section-head reveal">
-        <div>
-          <div class="section-tag">Le nostre ville</div>
-          <h2 class="section-title">Una collezione <em>selezionata</em></h2>
-        </div>
-        <a href="ville.html" class="btn btn-outline">Vedi tutte le ville</a>
+        <h2 class="intro-editorial-title">Ospitalità siciliana, <em>eleganza</em> contemporanea</h2>
+        <a href="ville.html" class="btn-pill">Scopri le ville</a>
       </div>
 
-      <div class="cards">
-        <article class="card reveal">
-          <div class="card-media">
-            <img src="assets/villa-1.jpg" alt="Villa con piscina e vista panoramica">
-            <span class="card-tag">Taormina</span>
-          </div>
-          <div class="card-body">
-            <div class="meta">10 ospiti · 5 camere</div>
-            <h3>Villa Aurea</h3>
-            <p>Terrazze panoramiche, piscina infinity e atmosfere silenziose tra mare e pietra chiara.</p>
-            <a href="contatti.html" class="btn btn-gold">Richiedi info</a>
-          </div>
-        </article>
+      <div class="intro-editorial-col reveal">
+        <p>Dimore selezionate con identità architettonica chiara, immerse in contesti naturali iconici dell'isola. Ogni villa è scelta per posizione, dettaglio e atmosfera: il luogo conta tanto quanto il servizio.</p>
+      </div>
 
-        <article class="card reveal">
-          <div class="card-media">
-            <img src="assets/villa-2.jpg" alt="Villa mediterranea con patio elegante">
-            <span class="card-tag">Noto</span>
-          </div>
-          <div class="card-body">
-            <div class="meta">8 ospiti · 4 camere</div>
-            <h3>Villa Zagara</h3>
-            <p>Residenza luminosa immersa nei profumi del giardino mediterraneo e nella quiete del Val di Noto.</p>
-            <a href="contatti.html" class="btn btn-gold">Richiedi info</a>
-          </div>
-        </article>
-
-        <article class="card reveal">
-          <div class="card-media">
-            <img src="assets/villa-3.jpg" alt="Villa di lusso con vista sul mare in Sicilia">
-            <span class="card-tag">Siracusa</span>
-          </div>
-          <div class="card-body">
-            <div class="meta">12 ospiti · 6 camere</div>
-            <h3>Villa Bianca</h3>
-            <p>Spazi eleganti, accesso al mare e servizi privati per chi cerca privacy assoluta e comfort totale.</p>
-            <a href="contatti.html" class="btn btn-gold">Richiedi info</a>
-          </div>
-        </article>
+      <div class="intro-editorial-col reveal">
+        <p>Assistenza dedicata prima, durante e dopo il soggiorno, costruita su una rete di partner locali scelti per affidabilità e stile. Ogni dettaglio coordinato senza appesantire la tua esperienza.</p>
       </div>
     </div>
   </section>
 
-  <section class="concierge" id="concierge">
-    <div class="container concierge-grid">
-      <div class="concierge-image reveal">
-        <img src="assets/concierge.jpg" alt="Servizio concierge e accoglienza di lusso in villa">
-      </div>
-      <div class="reveal">
-        <div class="section-tag">Private concierge</div>
-        <h2 class="section-title">Ogni soggiorno, <em>un itinerario</em> su misura</h2>
-        <p class="section-text">Dalla prenotazione del transfer all’organizzazione di una cena privata con chef, ogni dettaglio viene coordinato per offrirti un’esperienza fluida, personale e memorabile.</p>
+  <section class="villa-slider" id="villas" aria-label="Le nostre ville">
+    <div class="villa-slider-track">
+      <article class="villa-slide is-active" data-villa="Villa Aurea">
+        <img src="assets/villa-1.jpg" alt="Villa Aurea — Taormina">
+      </article>
+      <article class="villa-slide" data-villa="Villa Zagara">
+        <img src="assets/villa-2.jpg" alt="Villa Zagara — Noto">
+      </article>
+      <article class="villa-slide" data-villa="Villa Bianca">
+        <img src="assets/villa-3.jpg" alt="Villa Bianca — Siracusa">
+      </article>
+      <article class="villa-slide" data-villa="Villa Soho">
+        <img src="assets/villa-4.jpg" alt="Villa Soho — Ragusa">
+      </article>
+      <article class="villa-slide" data-villa="Villa Manu">
+        <img src="assets/villa-5.jpg" alt="Villa Manu — Modica">
+      </article>
+      <article class="villa-slide" data-villa="Villa Dolce Vita">
+        <img src="assets/villa-6.jpg" alt="Villa Dolce Vita — Scicli">
+      </article>
+    </div>
 
-        <div class="features">
-          <div class="feature">
-            <strong>Chef privato</strong>
-            <span>Menu personalizzati, cooking show e cene in villa.</span>
-          </div>
-          <div class="feature">
-            <strong>Transfer & driver</strong>
-            <span>Spostamenti premium da aeroporto, porto o elicottero.</span>
-          </div>
-          <div class="feature">
-            <strong>Wellness</strong>
-            <span>Massaggi, yoga e trattamenti direttamente in struttura.</span>
-          </div>
-          <div class="feature">
-            <strong>Sea experience</strong>
-            <span>Escursioni in yacht, day charter e tramonti sul mare.</span>
-          </div>
+    <div class="villa-slider-overlay"></div>
+
+    <div class="villa-slider-content">
+      <h2 class="villa-slider-title" id="villaSliderTitle">Villa Aurea</h2>
+    </div>
+
+    <button class="villa-nav villa-nav-prev" aria-label="Villa precedente">
+      <svg width="40" height="14" viewBox="0 0 40 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M40 7H1M1 7L7 1M1 7L7 13" stroke="currentColor" stroke-width="1"/>
+      </svg>
+    </button>
+    <button class="villa-nav villa-nav-next" aria-label="Villa successiva">
+      <svg width="40" height="14" viewBox="0 0 40 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 7H39M39 7L33 1M39 7L33 13" stroke="currentColor" stroke-width="1"/>
+      </svg>
+    </button>
+
+    <a href="ville.html" class="villa-explore">Esplora</a>
+  </section>
+
+  <section class="concierge-panel-section" id="concierge">
+    <div class="concierge-panel">
+      <div class="container concierge-panel-grid">
+        <div class="concierge-panel-left reveal">
+          <div class="section-tag">Private concierge</div>
+          <h2 class="concierge-panel-title">Ogni soggiorno, <em>un itinerario</em> su misura</h2>
+          <a href="concierge.html" class="btn-pill btn-pill-on-dark">Scopri il concierge</a>
+        </div>
+
+        <div class="concierge-panel-col reveal">
+          <p>Dalla prenotazione del transfer all'organizzazione di una cena privata con chef, ogni dettaglio viene coordinato per offrirti un'esperienza fluida, personale e memorabile per tutto il soggiorno in villa.</p>
+        </div>
+
+        <div class="concierge-panel-col reveal">
+          <p>Chef privati, transfer premium, wellness in struttura, escursioni in yacht e accesso a esperienze riservate: un unico referente costruisce intorno a te l'itinerario, senza appesantire la tua permanenza.</p>
         </div>
       </div>
     </div>
+
+    <div class="concierge-fixed-bg" role="img" aria-label="Servizio concierge e accoglienza di lusso in villa"
+         style="background-image:url('assets/concierge.jpg')"></div>
   </section>
 
   <section class="services" id="services">
@@ -161,7 +153,7 @@
       <div class="reveal">
         <div class="section-tag">I nostri servizi</div>
         <h2 class="section-title">Tutto quello che serve per <em>godersi</em> la Sicilia</h2>
-        <p class="section-text">Dal transfer al chef privato, dai noleggi alle escursioni nelle isole Egadi: un’offerta essenziale pensata per viaggiare senza pensieri.</p>
+        <p class="section-text">Dal transfer al chef privato, dai noleggi alle escursioni nelle isole Egadi: un'offerta essenziale pensata per viaggiare senza pensieri.</p>
       </div>
 
       <div class="service-grid">
@@ -188,12 +180,12 @@
         <article class="service reveal">
           <span class="service-number">05</span>
           <h4>Tour Favignana</h4>
-          <p>Scopri la perla delle Egadi: Cala Rossa, Cala Azzurra e un mare cristallino. Un’esperienza indimenticabile.</p>
+          <p>Scopri la perla delle Egadi: Cala Rossa, Cala Azzurra e un mare cristallino. Un'esperienza indimenticabile.</p>
         </article>
         <article class="service reveal">
           <span class="service-number">06</span>
           <h4>Tour Levanzo</h4>
-          <p>Relax e natura autentica tra acque limpide, piccoli borghi e un’atmosfera unica tutta da scoprire.</p>
+          <p>Relax e natura autentica tra acque limpide, piccoli borghi e un'atmosfera unica tutta da scoprire.</p>
         </article>
       </div>
     </div>
