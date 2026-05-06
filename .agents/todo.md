@@ -1,79 +1,113 @@
 # Todo - ProperHost
 
-## Task Queue (async workflow)
+## Task Queue
 
-Ogni task viene completata da un agent specializzato e pushata su branch separato.
+Ogni task viene assegnata a un solo agent specializzato.
+Ogni task lavora su branch dedicato.
+Ogni task deve restare entro il proprio scope.
+Non fare interventi fuori perimetro.
+Non mischiare UI con logica JS.
+Non rompere elementi esistenti.
 
 ---
 
-### Task 1: MATERIAL DESIGN SHADOWS (completato ✓)
+### Task 01
 - **Status**: done
+- **Agent**: ui-designer
 - **Branch**: openHands
 - **Priority**: high
-- **Agent**: ui-designer
-- **Desc**: Aggiungere shadow layered, border-radius, micro-interactions
-- **Files**: style.css, script.js
-- **Notes**: Commit gia pushato
+- **Title**: Material design shadows system
+- **Desc**: Introdurre shadow layered, border-radius coerenti, micro-interactions e gerarchia visiva più premium.
+- **Scope**: miglioramento visuale globale.
+- **Files**: style.css
+- **Notes**: commit già pushato.
 
 ---
 
-### Task 2: ANIMAZIONI HERO
+### Task 02
 - **Status**: todo
+- **Agent**: ui-designer
 - **Branch**: feature/hero-animations
-- **Priority**: medium
-- **Agent**: ui-designer
-- **Desc**: Animazioni piu elaborate per hero section, entrata text, parallax migliorato
-- **Files**: index.html, style.css, script.js
+- **Priority**: high
+- **Title**: Hero scroll animation polish
+- **Desc**: Rendere la hero section più elegante con animazioni allo scroll, ingresso testi, overlay morbidi e parallax leggero.
+- **Scope**: hero fullscreen, intro iniziale, transizioni visive.
+- **Files**: index.html, style.css
+- **Dependencies**: nessuna.
+- **Notes**: mantenere la leggibilità del testo sul video background.
 
 ---
 
-### Task 3: MOBILE OPTIMIZATION
+### Task 03
 - **Status**: todo
+- **Agent**: ui-designer
 - **Branch**: feature/mobile-optimization
 - **Priority**: high
-- **Agent**: ui-designer
-- **Desc**: Migliorare responsive, touch interactions, mobile menu animation
-- **Files**: style.css, script.js
+- **Title**: Mobile visual optimization
+- **Desc**: Migliorare responsive layout, spacing, touch targets, menu mobile e densità visiva su schermi piccoli.
+- **Scope**: mobile/tablet UX.
+- **Files**: style.css, index.html
+- **Dependencies**: nessuna.
+- **Notes**: niente overflow orizzontale, niente elementi troppo piccoli.
 
 ---
 
-### Task 4: VILLA SLIDER ENHANCEMENT
+### Task 04
 - **Status**: todo
+- **Agent**: coder
 - **Branch**: feature/villa-slider
 - **Priority**: medium
-- **Agent**: coder
-- **Desc**: Touch swipe, indicator dots, transizioni piu fluide
-- **Files**: style.css, script.js, index.html
+- **Title**: Villa slider enhancement
+- **Desc**: Aggiungere touch swipe, autoplay più fluido, pause on interaction, indicatori e transizioni più stabili.
+- **Scope**: slider ville.
+- **Files**: script.js, index.html
+- **Dependencies**: style system già definito.
+- **Notes**: testare su mobile e keyboard interaction.
 
 ---
 
-### Task 5: CONTACT FORM VALIDATION
+### Task 05
 - **Status**: todo
+- **Agent**: coder
 - **Branch**: feature/form-validation
 - **Priority**: medium
-- **Agent**: coder
-- **Desc**: Validazione JS, messaggi errore, success message
+- **Title**: Contact form validation
+- **Desc**: Implementare validazione campi, messaggi di errore chiari, success state e gestione submit.
+- **Scope**: form contatti.
 - **Files**: script.js, contatti.html
+- **Dependencies**: nessuna.
+- **Notes**: messaggi accessibili e comprensibili.
 
 ---
 
-### Task 6: PAGE SPEED OPTIMIZATION
+### Task 06
 - **Status**: todo
+- **Agent**: coder
 - **Branch**: feature/page-speed
 - **Priority**: low
-- **Agent**: coder
-- **Desc**: Lazy loading images, optimized video, CSS critical
-- **Files**: index.html, style.css
-
+- **Title**: Page speed optimization
+- **Desc**: Ottimizzare caricamento media, lazy loading, comportamento video, e logica JS non necessaria.
+- **Scope**: performance frontend.
+- **Files**: index.html, style.css, script.js
+- **Dependencies**: verificare impatto su hero video.
+- **Notes**: non sacrificare qualità visiva.
 ---
 
-## workflow
+## Workflow
 
-```
-Task assign → Agent seleziona → Lavoro in branch → Push → Merge manually
-```
+1. Assegna task all’agent corretto.
+2. L’agent lavora solo sul branch openHands.
+3. L’agent completa la task senza uscire dallo scope.
+4. L’agent testa su mobile e desktop.
+5. L’agent prepara commit convenzionale.
+6. Merge manuale solo dopo verifica.
 
-## Note
-- Usare branch dedicato per ogni task
-- Commit atomici con conventional commits
-- PR opzionale prima di merge
+## Regole
+
+- Un task = un obiettivo chiaro.
+- in openHans Branch vanno tutti i commit dei task svolti.
+- Non mischiare task diverse negli stessi commit.
+- Non creare nuovi file se non previsto o quanto meno chiedi prima.
+- Non fare push di modifiche non testate.
+- Non toccare aree non richieste.
+- Se una task richiede UI e JS, dividila in due task separate.
