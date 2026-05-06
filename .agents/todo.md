@@ -1,4 +1,4 @@
-# Todo - ProperHost
+# in_progress - ProperHost
 
 ## Task Queue
 
@@ -25,7 +25,7 @@ Non rompere elementi esistenti.
 ---
 
 ### Task 02
-- **Status**: todo
+- **Status**: in_progress
 - **Agent**: ui-designer
 - **Branch**: feature/hero-animations
 - **Priority**: high
@@ -39,7 +39,7 @@ Non rompere elementi esistenti.
 ---
 
 ### Task 03
-- **Status**: todo
+- **Status**: in_progress
 - **Agent**: ui-designer
 - **Branch**: feature/mobile-optimization
 - **Priority**: high
@@ -53,7 +53,7 @@ Non rompere elementi esistenti.
 ---
 
 ### Task 04
-- **Status**: todo
+- **Status**: in_progress
 - **Agent**: coder
 - **Branch**: feature/villa-slider
 - **Priority**: medium
@@ -67,7 +67,7 @@ Non rompere elementi esistenti.
 ---
 
 ### Task 05
-- **Status**: todo
+- **Status**: in_progress
 - **Agent**: coder
 - **Branch**: feature/form-validation
 - **Priority**: medium
@@ -81,7 +81,7 @@ Non rompere elementi esistenti.
 ---
 
 ### Task 06
-- **Status**: todo
+- **Status**: in_progress
 - **Agent**: coder
 - **Branch**: feature/page-speed
 - **Priority**: low
@@ -115,7 +115,7 @@ Non rompere elementi esistenti.
 
 ## Come usare il file
 
-- `Status: todo` = task da far lavorare ad agent.
+- `Status: in_progress` = task da far lavorare ad agent.
 - `Status: done` = task già completata, non toccare.
 - Ogni task è isolata e assegnata a un solo agent.
-- Gli agenti leggono il `todo.md`, scelgono il loro `Status: todo` e lavorano.
+- Gli agenti leggono il `in_progress.md`, scelgono il loro `Status: in_progress` e lavorano.
