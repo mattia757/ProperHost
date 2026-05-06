@@ -24,21 +24,69 @@
     onScroll();
   }
 
-  // Reveal on scroll
+  // Reveal on scroll with stagger
   var revealEls = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window && revealEls.length) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) {
-          e.target.classList.add('in');
+          // Add staggered animation class
+          setTimeout(function() {
+            e.target.classList.add('in');
+          }, 80);
           io.unobserve(e.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    revealEls.forEach(function (el) { io.observe(el); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    revealEls.forEach(function (el, index) {
+      el.style.transitionDelay = (index * 0.1) + 's';
+      io.observe(el);
+    });
   } else {
     revealEls.forEach(function (el) { el.classList.add('in'); });
   }
+
+  // Parallax effect for hero
+  var heroSection = document.querySelector('.hero');
+  if (heroSection) {
+    window.addEventListener('scroll', function() {
+      var scrolled = window.scrollY;
+      if (scrolled < window.innerHeight) {
+        var heroBg = heroSection.querySelector('.hero-video-overlay');
+        if (heroBg) {
+          heroBg.style.transform = 'translateY(' + (scrolled * 0.3) + 'px)';
+        }
+      }
+    }, { passive: true });
+  }
+
+  // Smooth reveal for service cards stagger
+  var serviceCards = document.querySelectorAll('.service-grid .service, .service-grid .service-card');
+  if ('IntersectionObserver' in window && serviceCards.length) {
+    var serviceIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e, i) {
+        if (e.isIntersecting) {
+          setTimeout(function() {
+            e.target.classList.add('in');
+          }, i * 100);
+          serviceIO.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+    serviceCards.forEach(function(card) {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(30px)';
+      card.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+      serviceIO.observe(card);
+    });
+  }
+
+  // Add reveal-in class for JS-triggered reveals
+  setTimeout(function() {
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      el.classList.add('reveal-in');
+    });
+  }, 100);
 
   // Villa slider
   var slider = document.querySelector('.villa-slider');
@@ -98,7 +146,19 @@
       else if (e.key === 'ArrowRight') { next(); startAutoplay(); }
     });
 
-    // Avvio autoplay
+    // Start autoplay
     startAutoplay();
+  }
+
+  // Cursor follow effect for hero (desktop only)
+  if (window.matchMedia('(hover: hover)').matches) {
+    var heroCinema = document.querySelector('.hero-cinema-content');
+    if (heroCinema) {
+      document.addEventListener('mousemove', function(e) {
+        var x = (e.clientX / window.innerWidth - 0.5) * 20;
+        var y = (e.clientY / window.innerHeight - 0.5) * 20;
+        heroCinema.style.transform = 'translateX(' + x + 'px) translateY(' + y + 'px)';
+      });
+    }
   }
 })();
