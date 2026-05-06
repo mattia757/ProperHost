@@ -1,0 +1,31 @@
+name: TaskNotifier
+
+on:
+  issues:
+    types: [opened]
+  pull_request:
+    types: [opened]
+  push:
+    branches:
+      - openHands
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify new task
+        if: github.event_name == 'issues'
+        run: |
+          echo "New task created: ${{ github.event.issue.title }}"
+          echo "Body: ${{ github.event.issue.body }}"
+          # Integrazione con OpenHands Cloud o email qua
+
+      - name: Notify PR
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "New PR: ${{ github.event.pull_request.title }}"
+
+      - name: Notify push
+        if: github.event_name == 'push'
+        run: |
+          echo "New push to openHands branch"

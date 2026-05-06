@@ -2,11 +2,11 @@
 
 ## Task Queue
 
-Ogni task viene assegnata a un solo agent specializzato.
-Ogni task lavora su branch dedicato.
-Ogni task deve restare entro il proprio scope.
-Non fare interventi fuori perimetro.
-Non mischiare UI con logica JS.
+Ogni task viene assegnata a un solo agent specializzato.  
+Ogni task lavora su branch dedicato.  
+Ogni task deve restare entro il proprio scope.  
+Non fare interventi fuori perimetro.  
+Non mischiare UI con logica JS.  
 Non rompere elementi esistenti.
 
 ---
@@ -91,12 +91,13 @@ Non rompere elementi esistenti.
 - **Files**: index.html, style.css, script.js
 - **Dependencies**: verificare impatto su hero video.
 - **Notes**: non sacrificare qualità visiva.
+
 ---
 
 ## Workflow
 
 1. Assegna task all’agent corretto.
-2. L’agent lavora solo sul branch openHands.
+2. L’agent lavora solo sul branch `openHands`.
 3. L’agent completa la task senza uscire dallo scope.
 4. L’agent testa su mobile e desktop.
 5. L’agent prepara commit convenzionale.
@@ -105,9 +106,16 @@ Non rompere elementi esistenti.
 ## Regole
 
 - Un task = un obiettivo chiaro.
-- in openHans Branch vanno tutti i commit dei task svolti.
+- In `openHands` branch vanno tutti i commit dei task svolti, uno per volta.
 - Non mischiare task diverse negli stessi commit.
 - Non creare nuovi file se non previsto o quanto meno chiedi prima.
 - Non fare push di modifiche non testate.
 - Non toccare aree non richieste.
 - Se una task richiede UI e JS, dividila in due task separate.
+
+## Come usare il file
+
+- `Status: todo` = task da far lavorare ad agent.
+- `Status: done` = task già completata, non toccare.
+- Ogni task è isolata e assegnata a un solo agent.
+- Gli agenti leggono il `todo.md`, scelgono il loro `Status: todo` e lavorano.
