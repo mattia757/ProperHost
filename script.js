@@ -12,6 +12,41 @@
       a.addEventListener('click', function () { nav.classList.remove('open'); });
     });
   }
+  
+  // Quick book modal
+  var quickBookModal = document.getElementById('quickBookModal');
+  if (quickBookModal) {
+    var bookLink = document.querySelector('.nav-book');
+    if (bookLink) {
+      bookLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        quickBookModal.hidden = false;
+        setTimeout(function() {
+          quickBookModal.classList.add('open');
+        }, 10);
+      });
+    }
+    
+    // Close on overlay click or close button
+    quickBookModal.querySelectorAll('[data-close]').forEach(function(el) {
+      el.addEventListener('click', function() {
+        quickBookModal.classList.remove('open');
+        setTimeout(function() {
+          quickBookModal.hidden = true;
+        }, 350);
+      });
+    });
+    
+    // Close on ESC
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && quickBookModal.classList.contains('open')) {
+        quickBookModal.classList.remove('open');
+        setTimeout(function() {
+          quickBookModal.hidden = true;
+        }, 350);
+      }
+    });
+  }
 
   // Topbar scrolled state
   var topbar = document.querySelector('.topbar');
@@ -204,6 +239,59 @@
       });
     }
   }
+  
+  // Villa slider magnetic cursor navigation (desktop only)
+  (function() {
+    if (!window.matchMedia('(hover: hover)').matches) return;
+    
+    var slider = document.querySelector('.villa-slider');
+    if (!slider) return;
+    
+    var navButtons = slider.querySelectorAll('.villa-nav');
+    var proximityThreshold = 120;
+    
+    // Initially show buttons for accessibility
+    navButtons.forEach(function(btn) {
+      btn.style.opacity = '0';
+    });
+    
+    function handleMouseMove(e) {
+      var sliderRect = slider.getBoundingClientRect();
+      var sliderLeft = sliderRect.left;
+      var sliderRight = sliderRect.right;
+      var sliderTop = sliderRect.top;
+      var sliderBottom = sliderRect.bottom;
+      
+      navButtons.forEach(function(btn) {
+        var isPrev = btn.classList.contains('villa-nav-prev');
+        var isNext = btn.classList.contains('villa-nav-next');
+        
+        var inProximity = false;
+        
+        if (isPrev && e.clientX < sliderLeft + proximityThreshold && e.clientY >= sliderTop && e.clientY <= sliderBottom) {
+          inProximity = true;
+        } else if (isNext && e.clientX > sliderRight - proximityThreshold && e.clientY >= sliderTop && e.clientY <= sliderBottom) {
+          inProximity = true;
+        }
+        
+        if (inProximity) {
+          var targetY = e.clientY - sliderRect.height / 2;
+          btn.style.transform = 'translateY(' + (targetY - btn.getBoundingClientRect().top + btn.offsetHeight / 2) + 'px)';
+          btn.style.opacity = '1';
+        } else {
+          btn.style.opacity = '0';
+        }
+      });
+    }
+    
+    slider.addEventListener('mousemove', handleMouseMove, { passive: true });
+    slider.addEventListener('mouseleave', function() {
+      navButtons.forEach(function(btn) {
+        btn.style.opacity = '0';
+      });
+    });
+  })();
+  
 // Contact form validation
   var contactForm = document.querySelector('.contact-form');
   if (contactForm) {
