@@ -26,6 +26,46 @@
   </div>
 </header>
 
+  <!-- Quick booking modal -->
+  <div class="quick-book-modal" id="quickBookModal" role="dialog" aria-modal="true" aria-labelledby="quickBookTitle" hidden>
+    <div class="quick-book-overlay" data-close></div>
+    <div class="quick-book-content">
+      <button class="quick-book-close" aria-label="Chiudi" data-close>&times;</button>
+      <h3 id="quickBookTitle">Richiedi disponibilitĂ </h3>
+      <form class="quick-book-form" action="contatti.html" method="get">
+        <div class="form-group">
+          <input type="text" name="name" placeholder="Il tuo nome" required>
+        </div>
+        <div class="form-group">
+          <select name="villa" required>
+            <option value="">Seleziona villa</option>
+            <option value="Villa Aurea">Villa Aurea - Taormina</option>
+            <option value="Villa Zagara">Villa Zagara - Noto</option>
+            <option value="Villa Bianca">Villa Bianca - Siracusa</option>
+            <option value="Villa Soho">Villa Soho - Ragusa</option>
+            <option value="Villa Manu">Villa Manu - Modica</option>
+            <option value="Villa Dolce Vita">Villa Dolce Vita - Scicli</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <input type="date" name="checkin" placeholder="Check-in" required>
+          </div>
+          <div class="form-group">
+            <input type="date" name="checkout" placeholder="Check-out" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="number" name="guests" placeholder="Numero ospiti" min="1" max="12" required>
+        </div>
+        <div class="form-group">
+          <textarea name="message" placeholder="Messaggio opzionale" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Invia richiesta</button>
+      </form>
+    </div>
+  </div>
+
 <section class="hero page-hero" style="background-image:url('assets/about-hero.jpg')">
   <div class="container hero-grid">
     <div class="reveal">

@@ -12,6 +12,41 @@
       a.addEventListener('click', function () { nav.classList.remove('open'); });
     });
   }
+  
+  // Quick book modal
+  var quickBookModal = document.getElementById('quickBookModal');
+  if (quickBookModal) {
+    var bookLink = document.querySelector('.nav-book');
+    if (bookLink) {
+      bookLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        quickBookModal.hidden = false;
+        setTimeout(function() {
+          quickBookModal.classList.add('open');
+        }, 10);
+      });
+    }
+    
+    // Close on overlay click or close button
+    quickBookModal.querySelectorAll('[data-close]').forEach(function(el) {
+      el.addEventListener('click', function() {
+        quickBookModal.classList.remove('open');
+        setTimeout(function() {
+          quickBookModal.hidden = true;
+        }, 350);
+      });
+    });
+    
+    // Close on ESC
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && quickBookModal.classList.contains('open')) {
+        quickBookModal.classList.remove('open');
+        setTimeout(function() {
+          quickBookModal.hidden = true;
+        }, 350);
+      }
+    });
+  }
 
   // Topbar scrolled state
   var topbar = document.querySelector('.topbar');
