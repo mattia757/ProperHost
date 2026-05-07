@@ -352,6 +352,22 @@ em{font-style:italic;color:var(--accent-deep)}
   overflow:hidden;
   background-color:#0a0a0a;
 }
+
+/* Hero - enhanced scroll animations */
+.hero[data-scrolled="true"] .hero-video-overlay{
+  opacity:.7;
+  transition:opacity .8s var(--ease)
+}
+.hero[data-scrolled="true"] .hero-cinema-content{
+  opacity:.4;
+  transform:translateY(60px);
+  transition:opacity .6s var(--ease), transform .6s var(--ease)
+}
+.hero[data-scrolled="true"] .hero-discover{
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity .4s var(--ease), transform .4s var(--ease)
+}
 .hero-video-bg{
   position:absolute;
   inset:0;
@@ -366,21 +382,7 @@ em{font-style:italic;color:var(--accent-deep)}
   z-index:1;
 }
 
-/* Hero content posizionato in basso a destra (testo + bottone impilati) */
-.hero-cinema-content{
-  position:absolute;
-  inset:auto 0 0 0;
-  z-index:3;
-  padding-bottom:70px;
-  padding-top:140px;
-}
-.hero-cinema-inner{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-end;
-  justify-content:flex-end;
-  gap:36px;
-}
+/* Hero text entrance - enhanced */
 .hero-cinema-text{
   max-width:480px;
   text-align:right;
@@ -393,13 +395,23 @@ em{font-style:italic;color:var(--accent-deep)}
   margin:0;
   font-weight:400;
   letter-spacing:.002em;
+  /* Enhanced text animations */
+  opacity:0;
+  transform:translateY(30px) scale(.96);
+  animation:heroTextReveal 1.4s var(--ease) .2s forwards
+}
+@keyframes heroTextReveal{
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1)
+  }
 }
 
-/* Bottone "Scopri" — pillola allungata, sotto il testo */
+/* Hero discover button - enhanced */
 .hero-discover{
   min-width:180px;
   padding:22px 44px;
-  border-radius:999px;
+  border-radius:var(--radius-full);
   background:#fff;
   color:var(--primary);
   display:inline-flex;
@@ -413,7 +425,17 @@ em{font-style:italic;color:var(--accent-deep)}
   transition:all .45s var(--ease);
   z-index:4;
   flex-shrink:0;
-  box-shadow:0 14px 40px rgba(0,0,0,.18);
+  box-shadow:var(--shadow-md);
+  /* Button entrance animation */
+  opacity:0;
+  transform:translateY(20px) scale(.95);
+  animation:heroBtnReveal 1s var(--ease) .6s forwards
+}
+@keyframes heroBtnReveal{
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1)
+  }
 }
 .hero-discover:hover{
   background:var(--accent);
