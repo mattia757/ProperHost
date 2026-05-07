@@ -29,6 +29,21 @@
   --line-strong:rgba(28,40,38,.22);
   --overlay-dark:rgba(5,30,28,.60);
 
+  /* Spacing system */
+  --space-xs:8px;
+  --space-sm:16px;
+  --space-md:24px;
+  --space-lg:40px;
+  --space-xl:80px;
+  --space-2xl:120px;
+  
+  /* Section spacing */
+  --section-padding:80px;
+  --section-padding-mobile:48px;
+
+  /* Nav height reference */
+  --nav-height:100px;
+
   --max:1320px;
   --max-text:680px;
   --shadow-sm:0 2px 4px rgba(28,40,38,.04),0 4px 12px rgba(28,40,38,.06);
@@ -465,7 +480,8 @@ em{font-style:italic;color:var(--accent-deep)}
 .hero-grid{
   display:grid;
   grid-template-columns:1.5fr .85fr;
-  gap:80px;
+  
+gap:var(--space-xl);
   align-items:end;
 }
 .hero .eyebrow{color:rgba(255,255,255,.95);margin-bottom:28px;font-size:11px;letter-spacing:.42em}
@@ -517,16 +533,20 @@ em{font-style:italic;color:var(--accent-deep)}
 }
 
 /* =================== SECTIONS =================== */
-.section,.intro,.villas,.concierge,.services{padding:140px 0;background:var(--bg)}
+.section,.intro,.villas,.concierge,.services{padding:var(--section-padding) 0;background:var(--bg)}
 .section.alt,.intro,.concierge{background:var(--bg-2)}
 .section-alt{background:var(--bg-3)}
+
+@media (max-width:768px){
+  .section,.intro,.villas,.concierge,.services{padding:var(--section-padding-mobile) 0}
+}
 
 .section-head{
   display:flex;
   align-items:flex-end;
   justify-content:space-between;
   gap:40px;
-  margin-bottom:80px;
+  margin-bottom:var(--space-xl);
   flex-wrap:wrap;
   padding-bottom:36px;
   border-bottom:1px solid var(--line);
@@ -540,18 +560,18 @@ em{font-style:italic;color:var(--accent-deep)}
 }
 
 /* ========== Editorial intro layout (titolone + colonne testo + pill CTA) ========== */
-.intro-editorial{background:var(--bg-2);padding:160px 0}
+.intro-editorial{background:var(--bg-2);padding:var(--section-padding) 0}
 .intro-editorial-grid{
   display:grid;
   grid-template-columns:1.25fr 1fr 1fr;
-  gap:80px;
+  gap:var(--space-xl);
   align-items:start;
 }
 .intro-editorial-left{
   display:flex;
   flex-direction:column;
   align-items:flex-start;
-  gap:48px;
+  gap:var(--space-lg);
 }
 .intro-editorial-title{
   font-family:var(--font-display);
@@ -676,7 +696,7 @@ em{font-style:italic;color:var(--accent-deep)}
   
   /* Intro mobile */
   .intro-editorial{
-    padding:60px 0
+    padding:var(--section-padding-mobile) 0
   }
   .intro-editorial-grid{
     grid-template-columns:1fr;
@@ -959,7 +979,7 @@ em{font-style:italic;color:var(--accent-deep)}
 .feature span{font-size:14.5px;line-height:1.75;color:var(--text-2);font-family:var(--font-body)}
 
 /* =================== SERVICES =================== */
-.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:70px;border-top:1px solid var(--line-strong)}
+.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:var(--space-xl);border-top:1px solid var(--line-strong)}
 .service{padding:54px 38px 54px 0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);position:relative;transition:background .5s var(--ease)}
 .service:nth-child(3n){border-right:none}
 .service:hover{background:var(--bg-warm)}
@@ -1015,7 +1035,8 @@ em{font-style:italic;color:var(--accent-deep)}
   content:'';position:absolute;top:0;left:0;right:0;height:1px;
   background:linear-gradient(90deg, transparent, rgba(184,153,104,.45) 50%, transparent);
 }
-.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:80px;margin-bottom:70px}
+.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;
+gap:var(--space-xl);margin-bottom:70px}
 .footer-col h5{font-family:var(--font-body);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.32em;color:var(--accent-soft);margin-bottom:28px}
 .footer-col a{display:block;color:rgba(255,255,255,.72);font-size:14.5px;line-height:2.1;font-family:var(--font-body)}
 .footer-col a:hover{color:var(--accent-soft)}
@@ -1027,7 +1048,8 @@ em{font-style:italic;color:var(--accent-deep)}
 .footer-wrap{display:flex;justify-content:space-between;align-items:center;padding-top:34px;border-top:1px solid rgba(255,255,255,.12);font-size:11px;color:rgba(255,255,255,.55);font-family:var(--font-body);text-transform:uppercase;letter-spacing:.28em}
 
 /* =================== CONTACT FORM =================== */
-.contact-layout{display:grid;grid-template-columns:.9fr 1.3fr;gap:80px;align-items:start}
+.contact-layout{display:grid;grid-template-columns:.9fr 1.3fr;
+gap:var(--space-xl);align-items:start}
 .contact-info{position:sticky;top:130px}
 .contact-list{margin-top:46px;display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line-strong)}
 .contact-list li{padding:26px 0;display:flex;flex-direction:column;gap:6px;border-bottom:1px solid var(--line)}
