@@ -204,6 +204,59 @@
       });
     }
   }
+  
+  // Villa slider magnetic cursor navigation (desktop only)
+  (function() {
+    if (!window.matchMedia('(hover: hover)').matches) return;
+    
+    var slider = document.querySelector('.villa-slider');
+    if (!slider) return;
+    
+    var navButtons = slider.querySelectorAll('.villa-nav');
+    var proximityThreshold = 120;
+    
+    // Initially show buttons for accessibility
+    navButtons.forEach(function(btn) {
+      btn.style.opacity = '0';
+    });
+    
+    function handleMouseMove(e) {
+      var sliderRect = slider.getBoundingClientRect();
+      var sliderLeft = sliderRect.left;
+      var sliderRight = sliderRect.right;
+      var sliderTop = sliderRect.top;
+      var sliderBottom = sliderRect.bottom;
+      
+      navButtons.forEach(function(btn) {
+        var isPrev = btn.classList.contains('villa-nav-prev');
+        var isNext = btn.classList.contains('villa-nav-next');
+        
+        var inProximity = false;
+        
+        if (isPrev && e.clientX < sliderLeft + proximityThreshold && e.clientY >= sliderTop && e.clientY <= sliderBottom) {
+          inProximity = true;
+        } else if (isNext && e.clientX > sliderRight - proximityThreshold && e.clientY >= sliderTop && e.clientY <= sliderBottom) {
+          inProximity = true;
+        }
+        
+        if (inProximity) {
+          var targetY = e.clientY - sliderRect.height / 2;
+          btn.style.transform = 'translateY(' + (targetY - btn.getBoundingClientRect().top + btn.offsetHeight / 2) + 'px)';
+          btn.style.opacity = '1';
+        } else {
+          btn.style.opacity = '0';
+        }
+      });
+    }
+    
+    slider.addEventListener('mousemove', handleMouseMove, { passive: true });
+    slider.addEventListener('mouseleave', function() {
+      navButtons.forEach(function(btn) {
+        btn.style.opacity = '0';
+      });
+    });
+  })();
+  
 // Contact form validation
   var contactForm = document.querySelector('.contact-form');
   if (contactForm) {

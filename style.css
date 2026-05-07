@@ -872,20 +872,22 @@ gap:var(--space-xl);
   position:absolute;
   top:50%;
   transform:translateY(-50%);
-  width:64px;
-  height:64px;
+  width:48px;
+  height:48px;
   display:flex;
   align-items:center;
   justify-content:center;
-  background:transparent;
+  background:rgba(11,107,94,.85);
   border:none;
   color:#fff;
   cursor:pointer;
   z-index:5;
-  opacity:.85;
-  transition:opacity .35s var(--ease), transform .4s var(--ease);
+  opacity:0;
+  border-radius:50%;
+  transition:opacity .25s var(--ease), transform .25s var(--ease), background .25s var(--ease), box-shadow .25s var(--ease);
+  box-shadow:0 4px 20px rgba(0,0,0,.25);
 }
-.villa-nav:hover{opacity:1}
+.villa-nav:hover{opacity:1;background:var(--primary);transform:translateY(-50%) scale(1.1)}
 .villa-nav-prev{left:max(40px, calc((100vw - var(--max))/2))}
 .villa-nav-next{right:max(40px, calc((100vw - var(--max))/2))}
 .villa-nav-prev:hover{transform:translateY(-50%) translateX(-4px)}
@@ -922,7 +924,7 @@ gap:var(--space-xl);
 
 @media (max-width: 760px){
   .villa-slider{height:80vh;min-height:500px}
-  .villa-nav{width:48px;height:48px}
+  .villa-nav{display:none}
   .villa-nav-prev{left:16px}
   .villa-nav-next{right:16px}
   .villa-nav svg{width:28px;height:10px}
