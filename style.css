@@ -1910,6 +1910,67 @@ html{scroll-behavior:smooth}
   .nav-cta{display:none}
 }
 
+/* --- Task 52: language switcher IT/EN --- */
+.lang-switch{
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  margin-left: 12px;
+  padding: 4px;
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.lang-switch a{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  color: rgba(255,255,255,.78);
+  text-decoration: none;
+  letter-spacing: .22em;
+  transition: background .25s var(--ease), color .25s var(--ease);
+}
+.lang-switch a.is-active{
+  background: var(--accent);
+  color: #fff;
+  cursor: default;
+}
+.lang-switch a:not(.is-active):hover{
+  color: #fff;
+  background: rgba(255,255,255,.14);
+}
+.lang-switch a::after{display:none !important}
+
+.topbar.scrolled .lang-switch{
+  background: rgba(11,107,94,.08);
+  border-color: var(--line-strong);
+}
+.topbar.scrolled .lang-switch a{color: var(--text-2)}
+.topbar.scrolled .lang-switch a.is-active{color:#fff; background: var(--primary)}
+.topbar.scrolled .lang-switch a:not(.is-active):hover{background: var(--bg-2); color: var(--text)}
+
+@media (max-width: 980px){
+  .lang-switch{display:none}
+  .nav-mobile .lang-switch--mobile{
+    display:inline-flex;
+    margin: 24px 0 0;
+    background: var(--bg-2);
+    border-color: var(--line-strong);
+  }
+  .nav-mobile .lang-switch--mobile a{color: var(--text-2)}
+  .nav-mobile .lang-switch--mobile a.is-active{background: var(--primary); color:#fff}
+}
+
 /* --- Quick book modal: refinements --- */
 .quick-book-content h3{
   text-align:left;
@@ -2177,6 +2238,184 @@ html{scroll-behavior:smooth}
 @media (max-width: 480px){
   .villa-detail__features-grid{grid-template-columns: 1fr}
   .villa-detail__meta{flex-wrap: wrap; gap: 12px}
+}
+
+/* ============================================================
+   Task 51 — Audit card: padding, margin, ritmo verticale
+   Normalizza tutte le card per evitare testi ai bordi e ritmi
+   incoerenti tra .card / .service / .service-card / .villa-feature /
+   .hero-card / .contact-card.
+   ============================================================ */
+
+/* Container generic .card (about valori, ville cards, related) */
+.card{
+  background: var(--bg-warm);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.card .card-body{
+  padding: 28px 28px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+.card .card-body .meta{
+  margin-bottom: 0;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+.card .card-body h3{
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text);
+  margin: 0;
+}
+.card .card-body p{
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--text-2);
+  margin: 0;
+  max-width: 42ch;
+}
+.card .card-body .btn,
+.card .card-body .btn-gold{
+  margin-top: 8px;
+}
+
+/* Card senza media (es. about valori) — più aria interna */
+.card:not(:has(.card-media)) .card-body{
+  padding: 38px 32px 36px;
+  gap: 14px;
+}
+.card:not(:has(.card-media)) .card-body h3{font-size: 28px}
+
+/* Service basic (concierge: numero + titolo + paragrafo) */
+.service{
+  padding: 48px 36px 48px 0;
+}
+.service:nth-child(2),
+.service:nth-child(5){
+  padding-left: 36px;
+  padding-right: 36px;
+}
+.service h4{
+  margin: 0 0 12px 42px;
+  letter-spacing: -.005em;
+}
+.service p{
+  margin: 0 0 0 42px;
+  max-width: 42ch;
+}
+
+/* Service-card (contatti: emoji + titolo + paragrafo) */
+.service-card{
+  padding: 36px 30px 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-radius: var(--radius-lg);
+}
+.service-card .service-icon{
+  margin: 0;
+  font-size: 32px;
+  line-height: 1;
+}
+.service-card h3{
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.25;
+}
+.service-card p{
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--text-2);
+  max-width: 38ch;
+}
+
+/* Villa-feature (pagine villa singola) — già OK ma uniformo */
+.villa-feature{
+  padding: 30px 28px 32px;
+  gap: 12px;
+}
+.villa-feature h4{
+  font-size: 21px;
+  margin: 0;
+}
+.villa-feature p{
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0;
+  max-width: 36ch;
+}
+
+/* Cards--ville: card grandi con media + body */
+.cards--ville .card-body{
+  padding: 26px 28px 30px;
+  gap: 10px;
+}
+.cards--ville .card-body p{margin-top: 4px}
+.cards--ville .villa-highlights{
+  margin-top: 6px;
+  padding-top: 4px;
+  padding-bottom: 0;
+}
+.cards--ville .card-body .btn-gold{
+  margin-top: 16px;
+}
+
+/* Hero card (laterale nelle page-hero) — più aria */
+.hero-card{
+  padding: 36px 32px 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.hero-card .small{margin: 0}
+.hero-card h3{margin: 0; line-height: 1.25}
+.hero-card p{margin: 0; max-width: 38ch}
+.hero-card .btn,
+.hero-card .btn-gold{
+  margin-top: 6px;
+  align-self: flex-start;
+}
+
+/* Contact-card (form lato destro contatti/prenotazione) */
+.contact-card{
+  padding: 56px 48px 52px;
+}
+.contact-card h3{
+  margin: 0 0 8px;
+  line-height: 1.2;
+}
+.contact-card .contact-sub{
+  margin: 0 0 36px;
+  max-width: 46ch;
+}
+
+/* Mobile: padding ridotti ma sempre rispettosi dei bordi */
+@media (max-width: 760px){
+  .card .card-body,
+  .cards--ville .card-body{
+    padding: 22px 22px 26px;
+  }
+  .card:not(:has(.card-media)) .card-body{
+    padding: 28px 24px 28px;
+  }
+  .service{padding: 32px 0 32px 0}
+  .service h4,.service p{margin-left: 36px}
+  .service-card{padding: 26px 22px}
+  .villa-feature{padding: 24px 22px 26px}
+  .hero-card{padding: 28px 24px}
+  .contact-card{padding: 30px 22px 30px}
 }
 
 .field.has-error input,

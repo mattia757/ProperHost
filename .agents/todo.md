@@ -828,6 +828,47 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 
 ---
 
+### Task 51
+- **Status**: done
+- **Agent**: ui-designer
+- **Branch**: feature/cards-audit
+- **Priority**: high
+- **Title**: Audit completo card (testi, padding, margin)
+- **Desc**: Controllare tutte le card del sito (`.card`, `.cards--ville .card`, `.service-card`, `.villa-feature`, `.hero-card`, `.contact-card`) verificando padding interno, margin tra contenuti, allineamento testi e gerarchia visiva. Nessun testo deve toccare i bordi della card. La spaziatura tra title, meta, paragrafo e CTA dev'essere coerente. Le card devono avere ritmo visivo simile e rispettare la gerarchia tipografica.
+- **Scope**: globale — tutte le card su tutte le pagine.
+- **Files**: style.css
+- **Dependencies**: nessuna.
+- **Notes**: testare su 375px, 768px, 1440px.
+
+---
+
+### Task 52
+- **Status**: done
+- **Agent**: ui-designer
+- **Branch**: feature/lang-switcher-visible
+- **Priority**: high
+- **Title**: Switcher lingua IT/EN sempre visibile
+- **Desc**: Sulle pagine IT non c'è uno switcher lingua visibile per passare a EN (e viceversa con un design coerente). Aggiungere un mini-switcher "IT / EN" sticky o nel nav, ben visibile su desktop e mobile, con stato attivo evidenziato. Il link deve calcolare il path della pagina alternativa (es. `/about.html` ↔ `/en/about.html`).
+- **Scope**: navbar di tutte le pagine IT + EN.
+- **Files**: style.css, tutte le pagine HTML.
+- **Dependencies**: nessuna.
+- **Notes**: lo switcher dev'essere riconoscibile come tale al primo colpo d'occhio.
+
+---
+
+### Task 53
+- **Status**: done
+- **Agent**: ui-designer
+- **Branch**: feature/fill-empty-areas
+- **Priority**: medium
+- **Title**: Riempire o rimuovere aree vuote sparse
+- **Desc**: In alcuni punti di alcune pagine ci sono aree vuote (gap di whitespace eccessivi, sezioni sottili che danno impressione di incompletezza, padding eccessivi tra blocchi). Per ogni occorrenza: o riempire con contenuto coerente con il brand (citazioni, micro-strip, divider sottili, micro-feature), oppure ridurre il padding/togliere lo spazio. Non aggiungere dati inventati. Verificare in particolare about/valori, concierge/extra cards, ville/come scegliere, prenotazione/aside info.
+- **Scope**: index, about, concierge, ville, contatti, prenotazione + EN equivalenti.
+- **Files**: HTML pertinenti, style.css per spaziature.
+- **Dependencies**: nessuna.
+
+---
+
 ## Suggerimento di assegnazione tra agent
 
 Distribuzione ragionevole con 3 agent:
