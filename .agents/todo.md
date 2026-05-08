@@ -1,19 +1,21 @@
-# in_progress - ProperHost
+# in_progress — ProperHost (Static HTML/CSS/JS)
 
 ## Task Queue
 
-Ogni task viene assegnata a un solo agent specializzato.  
-Ogni task lavora e pusha sul branch openHands.  
-Ogni task deve restare entro il proprio scope.  
-Non fare interventi fuori perimetro.  
-Non mischiare UI con logica JS.  
+Ogni task viene assegnata a un solo agent specializzato.
+Ogni task lavora e pusha sul branch `openHands`.
+Ogni task deve restare entro il proprio scope.
+Non fare interventi fuori perimetro.
+Non mischiare UI con logica JS.
 Non rompere elementi esistenti.
 
 ## Premessa
 
-Questa task queue copre la migrazione completa del sito ProperHost dal codice statico HTML/CSS/JS attuale a un'architettura Next.js 14 (App Router) + TypeScript strict + Tailwind + Lenis + GSAP + Swiper + i18n IT/EN, sotto sottocartella `properhost-next/` (il sito statico esistente resta in root come reference durante la migrazione).
+Questa task queue copre lo sviluppo e il refinement completo del sito ProperHost come progetto **statico**, realizzato con **HTML5, CSS3 e JavaScript vanilla (ES2020+)**. Nessun framework UI, nessun bundler obbligatorio, nessuna dipendenza pesante.
 
-I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost restano invariati. Nessun task chiede di replicare elementi distintivi di brand altrui (palette, font, copy, naming, P.IVA, mail). Vedi sezione "Identità ProperHost" sotto: è il vincolo che ogni task deve rispettare.
+Il sito esiste già nei file di root: `index.html`, `about.html`, `concierge.html`, `ville.html`, `contatti.html`, `style.css`, `script.js`, `assets/`. Le task sotto coprono sia il polish dell'esistente sia l'aggiunta di nuove feature (preloader, custom cursor, animazioni avanzate, i18n IT/EN, pagine villa singola, modal prenotazione, ottimizzazione performance, deploy).
+
+I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost restano invariati. Nessun task chiede di replicare elementi distintivi di brand altrui. Vedi sezione "Identità ProperHost": è il vincolo che ogni task deve rispettare.
 
 ## Identità ProperHost (vincolante)
 
@@ -33,8 +35,8 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 - `--muted: #7a857f` — metadati
 
 ### Tipografia
-- Display (H1-H3, claim, wordmark): **Cormorant Garamond** — italic 400/500, regular 300/400. Caricato via `next/font/google`.
-- Body (paragrafi, UI, microcopy): **Inter** — 300/400/500/600/700. Caricato via `next/font/google`.
+- Display (H1-H3, claim, wordmark): **Cormorant Garamond** — italic 400/500, regular 300/400. Caricata via Google Fonts con `<link rel="preconnect">` + `<link rel="stylesheet">` o `@import` in CSS (preferire `<link>` per performance).
+- Body (paragrafi, UI, microcopy): **Inter** — 300/400/500/600/700. Caricata via Google Fonts allo stesso modo.
 
 ### Brand
 - Nome: **Properhost** · Hospitality
@@ -50,6 +52,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 - Inventare nomi di ville o servizi non presenti nella lista sopra.
 - Copiare claim editoriali da altri brand (no "Vivi la Sicilia, davvero", "Concierge smart per ogni esigenza", "Ville d'incanto, immerse nella bellezza siciliana", "La tua fuga da sogno comincia qui", "Siamo custodi di un'ospitalità raffinata", "Sicilia, su misura"). Il copy ProperHost esistente nei file `index.html` / `about.html` / `concierge.html` / `ville.html` / `contatti.html` è la fonte autorevole — riusarlo, eventualmente raffinarlo, mai sostituirlo con copy altrui.
 - Usare email / P.IVA / domini di altri brand.
+- Introdurre framework (React, Vue, Svelte, Next.js, ecc.) o bundler obbligatori (Webpack, Vite con framework, ecc.).
 
 ## Workflow
 
@@ -62,6 +65,14 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 
 ## Regole globali
 
+- HTML5 semantico, CSS3 moderno, JavaScript vanilla (ES2020+).
+- Niente framework UI o frontend.
+- Librerie esterne (Lenis, GSAP, Swiper) caricate via CDN ufficiale o file locali in `vendor/`. Documentare nel commit la versione esatta.
+- Codice modulare: separare logica in moduli JS distinti dentro `js/`, importati con `<script type="module" src="./js/main.js">`. `script.js` legacy può essere mantenuto durante la migrazione e ridotto via via.
+- Niente jQuery.
+- Niente `var`: usare `const`/`let`. Niente `function` style legacy quando una arrow funziona.
+- Tutti i listener registrati globalmente devono essere cleanup-able o documentati come permanenti.
+- Tutte le animazioni rispettano `prefers-reduced-motion`.
 - Un task = un obiettivo chiaro. Niente scope creep.
 - Tutti i commit dei task vanno sul branch indicato; merge in `main` solo dopo review.
 - Non mischiare task diverse nello stesso commit.
@@ -69,11 +80,6 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 - Non fare push di modifiche non testate.
 - Non toccare aree non richieste.
 - Se una task richiede sia UI che logica JS pesante, dividila in due task separate.
-- TypeScript strict ovunque. Niente `any`. Niente `// @ts-ignore`.
-- Tutti i componenti animati devono pulire le proprie risorse al dismount (ScrollTrigger, Lenis, Swiper, event listeners).
-- Tutte le animazioni rispettano `prefers-reduced-motion`.
-
----
 
 ---
 
@@ -180,7 +186,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 - **Branch**: feature/transition-speed-fix
 - **Priority**: high
 - **Title**: Transition speed optimization
-- **Desc**: Le attuali transizioni e animazioni CSS risultano troppo lente e si percepisce un ritardo visivo importante. Ridurre la durata delle `transition` e delle `animation` su tutti gli elementi interattivi (hover, reveal, scroll-trigger). Puntare a valori tra 150ms e 400ms per le micro-interazioni e 500ms–700ms per gli scroll reveal più elaborati. Rimuovere o ridurre `transition-delay` eccessivi. Verificare che nessun elemento sembri "in ritardo" all'apertura della pagina o allo scroll.
+- **Desc**: Le attuali transizioni e animazioni CSS risultano troppo lente e si percepisce un ritardo visivo importante. Ridurre la durata delle `transition` e delle `animation` su tutti gli elementi interattivi (hover, reveal, scroll-trigger). Puntare a valori tra 150ms e 400ms per le micro-interazioni e 500ms-700ms per gli scroll reveal più elaborati. Rimuovere o ridurre `transition-delay` eccessivi. Verificare che nessun elemento sembri "in ritardo" all'apertura della pagina o allo scroll.
 - **Scope**: tutte le animazioni e transizioni CSS, globale.
 - **Files**: style.css
 - **Dependencies**: nessuna.
@@ -210,9 +216,9 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 - **Title**: Slider magnetic cursor navigation buttons
 - **Desc**: Nel carosello delle ville in `index.html`, aggiungere due bottoni di navigazione (freccia sinistra e freccia destra) con le seguenti caratteristiche: (1) appaiono solo quando il mouse si avvicina alla rispettiva estremità laterale dello slider (es. entro 120px dal bordo sinistro/destro); (2) seguono il cursore verticalmente in modo fluido tramite JavaScript (cursor-following effect); (3) sono composti da un cerchio piccolo (es. 48px) con sfondo semitrasparente o tinted (es. rgba del colore primario teal), con icona freccia Material Design centrata in bianco; (4) hanno effetto hover con leggera scala e cambio opacità; (5) sono completamente nascosti su mobile (touch swipe già gestito); (6) transizione di apparizione fluida (opacity + scale). Il comportamento deve essere implementato in JavaScript puro, l'aspetto grafico in CSS.
 - **Scope**: slider delle ville in index.html — solo JS per logica cursor-follow e show/hide, solo CSS per stile bottoni.
-- **Files**: script.js, style.css
+- **Files**: script.js (o nuovo modulo `js/sliderCursorButtons.js`), style.css
 - **Dependencies**: Task 04 (slider enhancement) deve essere completata o in stato avanzato.
-- **Notes**: tenere separata la logica JS (cursor follow, proximity detection) dallo styling CSS (cerchio, icona, transizioni). Se l'intervento richiede modifiche HTML strutturali, limitarle al minimo indispensabile e documentarle nel commit.
+- **Notes**: tenere separata la logica JS dallo styling CSS. Se l'intervento richiede modifiche HTML strutturali, limitarle al minimo indispensabile.
 
 ---
 
@@ -236,7 +242,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 - **Branch**: feature/whitespace-fill-sections
 - **Priority**: medium
 - **Title**: Whitespace fill & content density
-- **Desc**: In `index.html` sono presenti aree con troppo spazio bianco vuoto che danno un'impressione di incompletezza. Identificare tutte le aree vuote e riempirle con contenuti visivi coerenti: aggiungere sezioni con testo descrittivo, card di servizi, citazioni, icone materiali, statistiche, o elementi decorativi sottili. Il contenuto aggiunto deve essere coerente con il brand ProperHost (hospitality siciliana, premium, teal/gold). Non aggiungere spazio, ma riempire quello esistente con qualcosa di significativo e bello. Usare layout a griglia o a colonne per distribuire i contenuti in modo equilibrato.
+- **Desc**: In `index.html` sono presenti aree con troppo spazio bianco vuoto che danno un'impressione di incompletezza. Identificare tutte le aree vuote e riempirle con contenuti visivi coerenti: aggiungere sezioni con testo descrittivo, card di servizi, citazioni, icone materiali, statistiche, o elementi decorativi sottili. Il contenuto aggiunto deve essere coerente con il brand ProperHost (hospitality siciliana, premium, teal/gold). Non aggiungere spazio, ma riempire quello esistente con qualcosa di significativo e bello.
 - **Scope**: contenuto e layout visivo di index.html.
 - **Files**: index.html, style.css
 - **Dependencies**: nessuna.
@@ -250,11 +256,11 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 - **Branch**: feature/background-image-reveals
 - **Priority**: medium
 - **Title**: Scroll-reveal background images
-- **Desc**: Aggiungere più sezioni con immagini di background che si svelano progressivamente allo scroll, come già fatto con le transizioni esistenti ma in modo più diffuso lungo tutta la pagina. Le immagini di sfondo devono: (1) avere overlay semitrasparente per garantire leggibilità del testo sovrapposto; (2) usare `background-attachment: fixed` (parallax) dove supportato, o un effetto clip/reveal via scroll; (3) apparire in modo fluido con transizioni di opacità o scale; (4) usare immagini coerenti con Sicilia, ville, paesaggi mediterranei (usare i path già presenti nel progetto o placeholder). Il risultato deve essere esteticamente accattivante e professionale. Distribuire questi effetti in almeno 3 punti della pagina.
+- **Desc**: Aggiungere più sezioni con immagini di background che si svelano progressivamente allo scroll. Le immagini di sfondo devono: (1) avere overlay semitrasparente per garantire leggibilità del testo sovrapposto; (2) usare `background-attachment: fixed` (parallax) dove supportato, o un effetto clip/reveal via scroll; (3) apparire in modo fluido con transizioni di opacità o scale; (4) usare immagini coerenti con Sicilia, ville, paesaggi mediterranei (usare i path già presenti nel progetto). Distribuire questi effetti in almeno 3 punti della pagina.
 - **Scope**: sezioni con background image in index.html.
 - **Files**: index.html, style.css
 - **Dependencies**: Task 08 (transition speed) consigliata prima.
-- **Notes**: non usare immagini esterne via URL remoti se non già presenti nel progetto. Testare che il testo sopra le immagini sia sempre leggibile (contrasto sufficiente). Su mobile disabilitare `background-attachment: fixed` (causa jank su iOS).
+- **Notes**: non usare immagini esterne via URL remoti. Testare che il testo sopra le immagini sia sempre leggibile. Su mobile disabilitare `background-attachment: fixed` (causa jank su iOS).
 
 ---
 
@@ -264,8 +270,8 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 - **Branch**: feature/ville-page-premium
 - **Priority**: high
 - **Title**: Ville page premium redesign
-- **Desc**: La pagina delle ville è la più importante del sito e deve essere ridisegnata in chiave premium Material UI. Interventi richiesti: (1) galleria fotografica delle ville con layout a griglia o masonry, immagini grandi e di impatto; (2) card delle ville con ombre layered, border-radius coerente, hover con elevazione e reveal di dettagli; (3) sezione highlights/punti di forza di ogni villa con icone Material e copy descrittivo; (4) transizioni allo scroll per l'entrata di ogni elemento (slide-in, fade-in, reveal); (5) palette coerente con teal/gold/ivory, sfondi scuri o immagini full-width per separare le sezioni; (6) tipografia gerarchica chiara (titolo villa, sottotitolo, descrizione, call to action); (7) CTA visibile per ogni villa (es. "Richiedi disponibilità" come button Material con ripple). Il risultato deve essere visivamente al livello di un sito di luxury hospitality internazionale.
-- **Scope**: pagina ville (ville.html o equivalente), solo CSS e HTML strutturale visivo.
+- **Desc**: La pagina delle ville è la più importante del sito e deve essere ridisegnata in chiave premium. Interventi richiesti: (1) galleria fotografica delle ville con layout a griglia o masonry, immagini grandi e di impatto; (2) card delle ville con ombre layered, border-radius coerente, hover con elevazione e reveal di dettagli; (3) sezione highlights di ogni villa con icone Material e copy descrittivo; (4) transizioni allo scroll per l'entrata di ogni elemento; (5) palette coerente con teal/gold/ivory, sfondi scuri o immagini full-width per separare le sezioni; (6) tipografia gerarchica chiara; (7) CTA visibile per ogni villa.
+- **Scope**: pagina ville (ville.html), solo CSS e HTML strutturale visivo.
 - **Files**: ville.html, style.css
 - **Dependencies**: Task 07 (spacing), Task 08 (transition speed).
 - **Notes**: non modificare la logica JS esistente. Se servono nuove classi HTML, aggiungerle con nomi semantici e documentarli. Usare le immagini già presenti nel progetto.
@@ -278,658 +284,575 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 - **Branch**: feature/availability-cta-differentiation
 - **Priority**: medium
 - **Title**: "Richiedi disponibilità" CTA differentiation
-- **Desc**: Il pulsante "Richiedi disponibilità" nel nav porta attualmente alla stessa pagina contatti, creando ridondanza e confusione. Differenziare le due esperienze in modo chiaro: (1) il pulsante "Richiedi disponibilità" deve aprire un modal/drawer inline (senza navigare fuori dalla pagina corrente) con un form sintetico: nome, villa desiderata (select), date check-in/check-out, numero ospiti, messaggio opzionale, invio; (2) la pagina "Contatti" rimane per richieste generali, informazioni e comunicazioni non legate a prenotazioni; (3) il pulsante nel nav deve essere stilisticamente distinto: usare lo stile Material button con colore gold (`#b89968`) o teal in contrasto con il nav, con ripple effect e piccola icona calendario o chiave. Il modal deve avere overlay scuro, chiusura con ESC e click fuori, animazione di entrata fluida. La divisione logica è: "Richiedi disponibilità" = prenotazione rapida → modal; "Contatti" = comunicazione generica → pagina dedicata.
-- **Scope**: navbar (index.html e tutte le pagine), modal HTML/CSS, stile CTA.
-- **Files**: index.html, style.css (modal UI); script.js (apertura/chiusura modal — task JS separata se necessario).
+- **Desc**: Il pulsante "Richiedi disponibilità" nel nav porta attualmente alla stessa pagina contatti, creando ridondanza. Differenziare le due esperienze: (1) il pulsante "Richiedi disponibilità" deve aprire un modal/drawer inline (senza navigare fuori dalla pagina) con un form sintetico: nome, villa desiderata (select), date check-in/check-out, numero ospiti, messaggio opzionale, invio; (2) la pagina "Contatti" rimane per richieste generali; (3) il pulsante nel nav deve essere stilisticamente distinto: stile button con colore gold (`#b89968`) o teal in contrasto con il nav, con piccola icona calendario o chiave. Il modal deve avere overlay scuro, chiusura con ESC e click fuori, animazione di entrata fluida.
+- **Scope**: navbar (tutte le pagine), modal HTML/CSS, stile CTA. La logica JS modal va in task separata se diventa pesante.
+- **Files**: index.html (e tutte le pagine), style.css; eventualmente `js/modalBooking.js`.
 - **Dependencies**: nessuna.
-- **Notes**: Se il modal richiede logica JS complessa (validazione, submit), aprire una task separata per il coder. Questo task copre solo la struttura HTML del modal e lo stile CSS. Il coder gestirà l'interattività in una task dedicata se non già coperta da Task 05.
+- **Notes**: Il modal richiede logica JS (apertura, chiusura, validazione, submit) — coordinare con Task 05 o aprire task JS dedicata.
+
+---
+
+## Task Queue · Refactor Phase 1 — Architettura statica & primitive
 
 ---
 
 ### Task 16
 - **Status**: todo
 - **Agent**: coder
-- **Branch**: feature/migration-init
+- **Branch**: feature/project-structure
 - **Priority**: high
-- **Title**: Init Next.js 14 + TypeScript strict + Tailwind + ESLint
-- **Desc**: Inizializzare il progetto Next.js 14 dentro una sottocartella `properhost-next/` nella root del repo (NON sovrascrivere i file statici esistenti). Comando di partenza: `pnpm create next-app@latest properhost-next --ts --tailwind --eslint --app --src-dir --import-alias "@/*" --use-pnpm`. Selezionare App Router (default), Turbopack se richiesto. Una volta creato il progetto, aprire `properhost-next/tsconfig.json` e impostare `compilerOptions.strict: true`, `noUncheckedIndexedAccess: true`, `noImplicitAny: true`, `noImplicitReturns: true`, `noFallthroughCasesInSwitch: true`, `forceConsistentCasingInFileNames: true`. Aggiornare `paths` per esporre alias aggiuntivi: `@/components/*`, `@/lib/*`, `@/messages/*`, `@/styles/*`, `@/data/*`, `@/types/*`. Creare struttura directory: `properhost-next/src/app/[locale]/` (vuoto), `src/components/` (vuoto), `src/components/sections/` (vuoto), `src/lib/`, `src/messages/`, `src/styles/`, `src/data/`, `src/types/`. Aggiornare `package.json` con script: `"dev": "next dev"`, `"build": "next build"`, `"start": "next start"`, `"lint": "next lint"`, `"typecheck": "tsc --noEmit"`. Verificare: (a) `pnpm install` parte senza errori; (b) `pnpm dev` avvia su localhost:3000 mostrando la home di default; (c) `pnpm build` produce build senza warning; (d) `pnpm typecheck` passa pulito. Pushare un primo commit `chore: init next.js 14 scaffolding`.
-- **Scope**: solo scaffolding del progetto Next.js. Nessun componente custom, nessuno stile custom, nessuna logica applicativa, nessuna libreria extra (Lenis/GSAP/Swiper sono in Task 18).
-- **Files**: nuovi: `properhost-next/package.json`, `properhost-next/tsconfig.json`, `properhost-next/next.config.ts`, `properhost-next/tailwind.config.ts`, `properhost-next/postcss.config.mjs`, `properhost-next/.eslintrc.json`, `properhost-next/.gitignore`, struttura cartelle dentro `src/`. Modifiche: nessuna ai file root del sito statico.
+- **Title**: Riorganizzazione struttura progetto statico
+- **Desc**: Riorganizzare la struttura dei file per renderla manutenibile su scala. Mantenere il sito alla root (no sottocartelle per le pagine HTML in produzione, per pulizia degli URL: `/index.html`, `/about.html`, ecc.). Creare le seguenti cartelle: `css/` (suddividere `style.css` in moduli: `css/tokens.css`, `css/base.css`, `css/typography.css`, `css/components.css`, `css/sections.css`, `css/pages.css`, `css/responsive.css`, importati in ordine da un `css/main.css` con `@import` o linkati separatamente in `<head>`); `js/` (suddividere `script.js` in moduli ES: `js/main.js` come entry point con `<script type="module">`, `js/lenis.js`, `js/preloader.js`, `js/cursor.js`, `js/navbar.js`, `js/villaSlider.js`, `js/serviziSlider.js`, `js/faq.js`, `js/forms.js`, `js/i18n.js`, `js/animations.js`); `assets/` (immagini, video — già presente, mantenere); `vendor/` (eventuali librerie locali se non si usa CDN); `data/` (file JSON: `data/villas.json`, `data/services.json`, `data/faqs.json`, `data/i18n/it.json`, `data/i18n/en.json`); `og/` (immagini Open Graph). Mantenere `style.css` e `script.js` come puntatori temporanei/legacy durante la migrazione, da deprecare quando ogni modulo è migrato. Verificare che ogni pagina HTML referenzi i nuovi path e che il sito funzioni esattamente come prima dopo la riorganizzazione.
+- **Scope**: solo riorganizzazione file, nessun cambiamento di logica o stile.
+- **Files**: spostamento di style.css → css/* e script.js → js/*. Modifiche ai `<link>` e `<script>` in tutte le pagine HTML.
 - **Dependencies**: nessuna.
-- **Notes**: NON eliminare i file statici esistenti (`index.html`, `about.html`, `concierge.html`, `ville.html`, `contatti.html`, `style.css`, `script.js`, `assets/`). Sono il riferimento per copy e asset durante tutta la migrazione. Su Windows usare PowerShell/Bash; verificare che il path `properhost-next/` sia case-sensitive coerente (lowercase). Se `pnpm` non è installato, usare `npm` o `yarn` ma documentarlo in `README.md` del nuovo progetto. Verificare che la cartella `node_modules` sia in `.gitignore`.
+- **Notes**: testare tutte le pagine dopo lo spostamento. Mantenere git history pulita usando `git mv` dove possibile. Niente file orfani.
 
 ---
 
 ### Task 17
 - **Status**: todo
 - **Agent**: ui-designer
-- **Branch**: feature/migration-brand-tokens
+- **Branch**: feature/css-tokens-fonts
 - **Priority**: high
-- **Title**: Brand tokens (CSS variables) + font wiring (Cormorant + Inter)
-- **Desc**: Configurare l'identità visiva ProperHost a livello di tokens. (1) Aprire `properhost-next/src/styles/globals.css` (creare se non esiste, e importarlo in `app/[locale]/layout.tsx`). Definire dentro `:root { ... }` TUTTE le CSS variables della palette ProperHost esattamente come elencate nella sezione "Identità ProperHost" di questo PLAN: `--primary`, `--primary-dark`, `--primary-soft`, `--accent`, `--accent-soft`, `--accent-deep`, `--bg`, `--bg-2`, `--bg-3`, `--bg-warm`, `--white: #ffffff`, `--text`, `--text-2`, `--muted`, `--muted-2: #b8b0a0`, `--line: rgba(28,40,38,.10)`, `--line-strong: rgba(28,40,38,.22)`, `--shadow-sm: 0 8px 22px rgba(28,40,38,.06)`, `--shadow: 0 30px 70px rgba(5,30,28,.12)`, `--ease: cubic-bezier(.22,.61,.36,1)`, `--max: 1320px`, `--max-text: 680px`. (2) In `properhost-next/tailwind.config.ts` mappare ogni token nel `theme.extend.colors` (es. `primary: 'var(--primary)'`, `accent: 'var(--accent)'`, `'bg-2': 'var(--bg-2)'`, `'text-2': 'var(--text-2)'`, ecc.), in `theme.extend.boxShadow` esporre `sm: 'var(--shadow-sm)'` e `DEFAULT: 'var(--shadow)'`, in `theme.extend.maxWidth` esporre `container: 'var(--max)'` e `text: 'var(--max-text)'`. (3) Nel layout root caricare i font usando `next/font/google`: `import { Cormorant_Garamond, Inter } from 'next/font/google'` con configurazione `Cormorant_Garamond({ subsets: ['latin'], weight: ['300','400','500'], style: ['normal','italic'], variable: '--font-display', display: 'swap' })` e `Inter({ subsets: ['latin'], weight: ['300','400','500','600','700'], variable: '--font-body', display: 'swap' })`. Applicare entrambe le className al tag `<html>` (es. `<html className={`${cormorant.variable} ${inter.variable}`}>`). (4) In `tailwind.config.ts` aggiungere `theme.extend.fontFamily.display: ['var(--font-display)', 'serif']` e `body: ['var(--font-body)', 'sans-serif']`. (5) Settare in `globals.css` il `body` con `font-family: var(--font-body); background: var(--bg); color: var(--text);`. Verificare nel browser con DevTools: le CSS vars sono risolte, i font caricano (Network tab mostra woff2 da Google Fonts), nessun FOIT, le classi `bg-primary`, `text-accent-deep`, `font-display` funzionano.
-- **Scope**: solo brand tokens, Tailwind config e font wiring. Nessun componente, nessuna pagina, nessun reset CSS oltre quello base di Tailwind.
-- **Files**: nuovi/modificati: `properhost-next/src/styles/globals.css`, `properhost-next/tailwind.config.ts`, `properhost-next/src/app/[locale]/layout.tsx` (creazione minimale solo per testare i font, sarà ampliata in Task 27).
+- **Title**: CSS variables (palette tokens) consolidate + Google Fonts wiring
+- **Desc**: Consolidare TUTTE le CSS variables della palette ProperHost in un unico file `css/tokens.css`, definite dentro `:root { ... }`: tutte le voci della sezione "Identità ProperHost" + extra utili per l'app (`--white: #ffffff`, `--muted-2: #b8b0a0`, `--line: rgba(28,40,38,.10)`, `--line-strong: rgba(28,40,38,.22)`, `--shadow-sm: 0 8px 22px rgba(28,40,38,.06)`, `--shadow: 0 30px 70px rgba(5,30,28,.12)`, `--ease: cubic-bezier(.22,.61,.36,1)`, `--max: 1320px`, `--max-text: 680px`, `--nav-height: 92px`, `--nav-height-scrolled: 64px`). Rimuovere ogni hex inline da altri file CSS — sostituire con riferimento a `var(--*)`. In `<head>` di ogni pagina HTML aggiungere preconnect e load font Google: `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap">`. In `css/typography.css` definire `--font-display: 'Cormorant Garamond', serif;` e `--font-body: 'Inter', system-ui, sans-serif;`, applicare al `body { font-family: var(--font-body); }` e creare classe `.font-display { font-family: var(--font-display); }` per i titoli. Verificare con DevTools che le CSS vars siano risolte ovunque e che i font carichino senza FOIT (grazie a `display=swap`).
+- **Scope**: solo tokens CSS + font wiring. Nessun nuovo componente.
+- **Files**: nuovo `css/tokens.css`; modifiche in tutti i file CSS esistenti (sostituzione hex con var) e in tutti gli HTML (preconnect + link font).
 - **Dependencies**: Task 16.
-- **Notes**: NON usare valori hex inline nei componenti — sempre `bg-primary`, `text-accent-deep`, `bg-bg-2`, `font-display`, ecc. via Tailwind. NON caricare font diversi da Cormorant Garamond e Inter (no NT Fabulous, no Raleway). Verificare che `display: 'swap'` sia attivo per evitare FOIT. Su Tailwind v4 (se presente in Next.js 14 latest) la sintassi della config potrebbe cambiare — usare `@theme` directive in CSS se necessario. Se la build CSS produce warning su CSS vars non riconosciute da Tailwind, ignorare (sono runtime).
+- **Notes**: NON usare hex inline nei componenti — sempre tramite CSS var. NON caricare font diversi da Cormorant Garamond e Inter. Verificare LCP non peggiori per il caricamento font (preconnect aiuta).
 
 ---
 
 ### Task 18
 - **Status**: todo
 - **Agent**: coder
-- **Branch**: feature/migration-libs
+- **Branch**: feature/libs-loading
 - **Priority**: high
-- **Title**: Install + wrap Lenis, GSAP, Swiper (lib utility)
-- **Desc**: Installare e wrappare le librerie di animazione e slider. (1) `pnpm add lenis gsap swiper`. Per SplitText di GSAP: se è disponibile la licenza GreenSock Club, configurare l'auth in `~/.npmrc` o `properhost-next/.npmrc` con `@gsap:registry=https://npm.greensock.com` + `//npm.greensock.com/:_authToken=${GSAP_AUTH_TOKEN}` (token via env, NON committare); altrimenti installare alternativa OSS `pnpm add split-type` come fallback. (2) Creare `properhost-next/src/lib/gsap.ts` con `'use client'`-compatible export: `import gsap from 'gsap'; import { ScrollTrigger } from 'gsap/ScrollTrigger';` poi `if (typeof window !== 'undefined') { gsap.registerPlugin(ScrollTrigger); }`. Se SplitText disponibile: import e register. Esporta `gsap`, `ScrollTrigger`, opzionale `SplitText`. (3) Creare `properhost-next/src/lib/lenis.ts` con factory function `createLenis()` che ritorna istanza Lenis con config: `{ duration: 1.2, easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true, smoothTouch: false, syncTouch: false }`. Export anche `setupLenisRaf(lenis)` che fa setup del raf loop con `requestAnimationFrame` e collega `lenis.on('scroll', ScrollTrigger.update)` e `gsap.ticker.add((time) => lenis.raf(time * 1000)); gsap.ticker.lagSmoothing(0)`. (4) Creare `properhost-next/src/lib/swiper.ts` che esporta i moduli usati: `import { Navigation, Pagination, Autoplay, EffectFade, FreeMode, Keyboard, A11y } from 'swiper/modules'` ed esporta come named exports per import unificato dai componenti. (5) Verificare che il bundle Next.js NON includa codice GSAP/Lenis/Swiper nel bundle server: usare `'use client'` correttamente nei componenti consumatori e import dinamici se necessario. Test: `pnpm build` deve completare senza errori.
-- **Scope**: solo install delle dipendenze e creazione dei wrapper. Nessun uso effettivo nei componenti (sarà nelle task successive 22, 23, 28, 30, 32).
-- **Files**: nuovi: `properhost-next/src/lib/gsap.ts`, `properhost-next/src/lib/lenis.ts`, `properhost-next/src/lib/swiper.ts`. Modifiche: `properhost-next/package.json` (deps aggiunte), opzionale `.npmrc` se GSAP Club. Opzionale: `src/lib/splitText.ts` se SplitText non disponibile (helper compatibile con split-type).
-- **Dependencies**: Task 16, Task 17.
-- **Notes**: NON importare `gsap`, `lenis` o `swiper` direttamente nei componenti — sempre via wrapper di `src/lib/`. Su SSR Lenis e GSAP con plugin browser-only devono essere protetti da check `typeof window !== 'undefined'`. Se SplitText non disponibile, documentare nel commento di `src/lib/gsap.ts` con `// SplitText fallback: src/lib/splitText.ts (uses split-type)`. Verificare che la versione di Swiper installata sia ≥11.x (cambiamenti API rispetto a v8).
+- **Title**: Caricamento Lenis, GSAP, Swiper via CDN + wrapper modules
+- **Desc**: Caricare le tre librerie principali via CDN ufficiale e creare wrapper JS che le incapsulino. **Lenis** (smooth scroll): `<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>` (versione bundled UMD) o ESM da `https://cdn.skypack.dev/lenis`. **GSAP + ScrollTrigger**: `<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>` e `<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>`. **Swiper**: `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">` e `<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>`. Creare wrapper module `js/lenis.js` con factory `createLenis()` che ritorna istanza configurata `{ duration: 1.2, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true, smoothTouch: false }`, registra raf loop e collega `lenis.on('scroll', ScrollTrigger.update); gsap.ticker.add(time => lenis.raf(time * 1000)); gsap.ticker.lagSmoothing(0)`. Esportare anche `destroyLenis(instance)`. Wrapper `js/gsapSetup.js` registra `ScrollTrigger` e (se disponibile) `SplitText`; per SplitText senza licenza GSAP Club, usare fallback: caricare `split-type` da CDN `https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js` e wrappare con interfaccia compatibile. Wrapper `js/swiperSetup.js` esporta solo helper di config (autoplay, fade, freeMode) per i moduli che useranno Swiper. Tutti i caricamenti CDN devono usare `defer` per non bloccare il render iniziale, e `crossorigin="anonymous"` per integrità.
+- **Scope**: solo caricamento librerie e wrapper. Nessun uso effettivo nei componenti (sarà nelle task 22, 23, 30, 32, 42, 43, 44).
+- **Files**: nuovi `js/lenis.js`, `js/gsapSetup.js`, `js/swiperSetup.js`. Modifiche a tutte le pagine HTML in `<head>` per caricare CDN.
+- **Dependencies**: Task 16.
+- **Notes**: pinare le versioni (no `@latest`) per evitare regressioni invisibili. Verificare in console che `window.gsap`, `window.ScrollTrigger`, `window.Swiper` e `window.Lenis` siano definiti dopo il load. Su SSR-like preview o pagine offline, fallback grazioso (try/catch).
 
 ---
 
 ### Task 19
 - **Status**: todo
 - **Agent**: coder
-- **Branch**: feature/migration-assets
-- **Priority**: high
-- **Title**: Migrate static assets in public/ (immagini, video, logo)
-- **Desc**: Copiare tutti gli asset esistenti dalla cartella `assets/` del sito statico nella cartella `properhost-next/public/assets/` mantenendo gli stessi nomi file (per non dover toccare i path nel copy). Lista completa da copiare (verificare che ognuno esista prima): `logo.png` (anche dalla root), `hero.mp4`, `hero.webm`, `hero-home.jpg`, `hero-home-alt.jpg`, `intro.jpg`, `concierge.jpg`, `concierge-hero.jpg`, `sea.jpg`, `cta.jpg`, `villa-1.jpg`, `villa-2.jpg`, `villa-3.jpg`, `villa-4.jpg`, `villa-5.jpg`, `villa-6.jpg`, `ville-hero.jpg`, `about-hero.jpg`, `about-panel.jpg`, `contatti-hero.jpg`. Se ci sono asset mancanti elencati qui, segnalarlo in commit message ma non bloccare la task. Verificare che (a) i file siano binari integri (apri ogni jpg/png in viewer per confermare); (b) i nomi siano lowercase senza spazi (kebab-case già OK); (c) la struttura sia `properhost-next/public/assets/<file>` e non nidificata oltre. Creare anche un file `properhost-next/public/favicon.ico` (placeholder o estratto dal logo se non presente). Aggiornare `properhost-next/src/app/[locale]/layout.tsx` con `metadata.icons.icon: '/favicon.ico'`. NON ottimizzare le immagini in questa task (sarà Task 46): solo copy 1:1.
-- **Scope**: solo copia degli asset. Nessuna ottimizzazione, conversione, ridimensionamento. Nessuna modifica ai nomi (a meno di problemi caratteri speciali, in tal caso documentare).
-- **Files**: nuovi: tutti i file in `properhost-next/public/assets/` + `properhost-next/public/favicon.ico`.
+- **Branch**: feature/assets-audit
+- **Priority**: medium
+- **Title**: Audit e organizzazione assets
+- **Desc**: Audit della cartella `assets/` esistente e organizzazione finale. Verificare presenza di tutti i file referenziati nelle pagine HTML: `logo.png`, `hero.mp4`, `hero.webm`, `hero-home.jpg`, `hero-home-alt.jpg`, `intro.jpg`, `concierge.jpg`, `concierge-hero.jpg`, `sea.jpg`, `cta.jpg`, `villa-1.jpg` … `villa-6.jpg`, `ville-hero.jpg`, `about-hero.jpg`, `about-panel.jpg`, `contatti-hero.jpg`. Per ogni asset: (1) verificare integrità file aprendolo in un viewer; (2) lowercase senza spazi (kebab-case); (3) dimensioni ragionevoli (jpg < 500KB ciascuna come obiettivo, tranne hero che può essere fino a 1MB). NON ottimizzare in questa task (Task 46 dedicata). Creare un favicon completo: `favicon.ico` (32x32), `favicon-16.png`, `favicon-32.png`, `apple-touch-icon.png` (180x180), tutti derivati dal logo ProperHost o da una "P" stilizzata in palette teal/gold. Aggiungere in tutte le pagine HTML i link `<link rel="icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png">`. Documentare nel commit eventuali asset mancanti rispetto alla lista.
+- **Scope**: solo audit, rinomina, favicon. Niente compressione/conversione.
+- **Files**: cartella `assets/`, root favicon files, modifiche `<head>` di tutte le pagine HTML.
 - **Dependencies**: Task 16.
-- **Notes**: NON eliminare gli asset originali nella cartella `assets/` di root — sono ancora referenziati dal sito statico durante la migrazione. NON rinominare i file (tutte le task successive useranno questi nomi). Su Windows attenzione al copy via shell: usare `Copy-Item -Recurse` o l'esplora risorse, non comandi che corrompono binari. Se un file pesa più di 5MB (es. `hero.mp4` = 3.8MB, `hero.webm` = 4.2MB), tenerli per ora — l'ottimizzazione video è in Task 49.
+- **Notes**: NON eliminare asset già referenziati. Su Windows attenzione al case-sensitivity quando si rinomina. Se logo non esiste in formato adatto a favicon, generare un placeholder con tool a scelta (GIMP, online).
 
 ---
 
 ### Task 20
 - **Status**: todo
 - **Agent**: coder
-- **Branch**: feature/migration-i18n
+- **Branch**: feature/i18n-vanilla
 - **Priority**: high
-- **Title**: Setup i18n IT/EN con next-intl (default IT, EN secondaria)
-- **Desc**: Configurare internazionalizzazione completa con `next-intl`. (1) `pnpm add next-intl`. (2) Creare `properhost-next/src/i18n/request.ts` (config server-side) con `import { getRequestConfig } from 'next-intl/server'` che valida la locale ricevuta e carica il file di messaggi corrispondente. (3) Creare `properhost-next/src/middleware.ts` con `import createMiddleware from 'next-intl/middleware'` e config: `locales: ['it', 'en'], defaultLocale: 'it', localePrefix: 'as-needed'` (così `/` rimanda a `/it/` ma URL pulito di default). Esportare `matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']`. (4) Aggiornare `properhost-next/next.config.ts` con plugin `withNextIntl('./src/i18n/request.ts')`. (5) Strutturare `properhost-next/src/app/[locale]/` con `layout.tsx` (wrappa `NextIntlClientProvider` con `messages` e `locale`) e `page.tsx` (placeholder iniziale). (6) Creare `properhost-next/src/messages/it.json` e `en.json` strutturati per namespace come segue (popolare estraendo letteralmente il copy dai file statici esistenti):
-
-  ```json
-  {
-    "meta": { "title": "Properhost · Hospitality", "description": "Ville private e servizi tailor-made per un soggiorno autentico in Sicilia." },
-    "nav": { "home": "Home", "about": "About", "concierge": "Concierge", "ville": "Ville", "servizi": "Servizi", "contatti": "Contatti", "book": "Book" },
-    "hero": { "eyebrow": "Luxury villas in Sicily", "subtitle": "Ville private, dimore selezionate e servizi tailor-made per chi desidera un soggiorno autentico, raffinato e senza pensieri sulla costa siciliana. Ogni dettaglio coordinato per trasformare il viaggio in un'esperienza su misura.", "discover": "Scopri" },
-    "mission": { "tag": "Benvenuti", "title": "Ospitalità siciliana, eleganza contemporanea", "ctaLabel": "Scopri le ville", "col1": "...", "col2": "..." },
-    "villas": { "tag": "Le nostre ville", "title": "Una collezione selezionata", "explore": "Esplora", "items": { "aurea": { "name": "Villa Aurea", "location": "Taormina", "guests": "10 ospiti · 5 camere", "summary": "..." }, "zagara": { ... }, "bianca": { ... }, "soho": { ... }, "manu": { ... }, "dolceVita": { ... } } },
-    "concierge": { "tag": "Private concierge", "title": "Ogni soggiorno, un itinerario su misura", "col1": "...", "col2": "...", "ctaLabel": "Scopri il concierge" },
-    "services": { "tag": "I nostri servizi", "title": "Tutto quello che serve per godersi la Sicilia", "items": [{ "id": "01", "title": "Servizio Navetta", "desc": "..." }, ...] },
-    "cta": { "tag": "Contattaci", "title": "Progettiamo insieme il tuo soggiorno in Sicilia", "primaryLabel": "Vai al form contatti", "phoneLabel": "+39 339 2923 744" },
-    "faq": { "title": "Domande frequenti", "intro": "...", "items": [{ "q": "...", "a": "..." }, ...] },
-    "footer": { "lead": "...", "headings": { "contacts": "Contatti", "navigate": "Naviga" }, "rights": "© 2026 Properhost — Tutti i diritti riservati" },
-    "contact": { "form": { "name": "Nome e cognome", "email": "Email", "phone": "Telefono", "guests": "Numero ospiti", "dates": "Date del soggiorno", "villa": "Villa o area di interesse", "message": "Messaggio", "privacy": "Accetto la privacy policy...", "submit": "Invia richiesta" } }
-  }
-  ```
-
-  (7) Tradurre `en.json` mantenendo il tono editoriale luxury (es. "Ville private, dimore selezionate" → "Private villas, hand-picked residences"). NON tradurre meccanicamente con Google Translate — il copy inglese deve suonare naturale a un madrelingua di una rivista travel. (8) Test: visitare `/it` e `/en` deve renderizzare la pagina con copy diverso. (9) Estrarre il copy ESATTO dal sito statico esistente: leggere `index.html` (e tutti gli altri `.html`) e copiare letteralmente le stringhe rilevanti.
-- **Scope**: solo configurazione i18n, middleware, file di traduzione popolati. Nessun componente UI dello switcher (sarà in Navbar Task 25).
-- **Files**: nuovi: `properhost-next/src/middleware.ts`, `properhost-next/src/i18n/request.ts`, `properhost-next/src/messages/it.json`, `properhost-next/src/messages/en.json`. Modifiche: `properhost-next/next.config.ts`, `properhost-next/src/app/[locale]/layout.tsx`, `properhost-next/src/app/[locale]/page.tsx`.
-- **Dependencies**: Task 16, Task 17, Task 19.
-- **Notes**: NON inventare copy: tutto il testo italiano viene da file statici esistenti — letterale. NON tradurre con tool automatici per l'inglese. Se una stringa italiana non ha un equivalente esistente nei file statici (es. FAQ, label form aggiuntivi), lasciare in `it.json` con valore corretto e in `en.json` con `"TODO_TRANSLATION"` da revisionare. NON usare `next/router` (App Router usa `next/navigation`). Verificare che `localePrefix: 'as-needed'` produca URL `/` per IT e `/en/` per EN (non `/it/` esplicito).
+- **Title**: i18n IT/EN vanilla (data-i18n + JSON + URL prefix /en/)
+- **Desc**: Implementare internazionalizzazione vanilla senza librerie. **Strategia URL**: italiano default (URL puliti `/`, `/about.html`, `/ville.html`, ecc.); inglese in sottocartella `/en/` (es. `/en/index.html`, `/en/about.html`). Creare la cartella `en/` con copia di ogni pagina HTML, identica come markup ma con `<html lang="en">` e contenuti in inglese. **Strategia contenuti**: opzione A (consigliata, semplice) — testi inglesi inseriti direttamente nei file HTML di `/en/`; opzione B (più sofisticata) — usare attributi `data-i18n="namespace.key"` su tutti gli elementi testuali e un loader JS che fetch `data/i18n/it.json` o `data/i18n/en.json` in base alla lingua corrente, sostituendo i textContent al load. Per ProperHost statico, scegliere **opzione A** per massimizzare SEO e velocità (i contenuti sono nel markup, non lazy-fetched). Comunque creare i file `data/i18n/it.json` e `data/i18n/en.json` con tutte le stringhe organizzate per namespace (`nav`, `hero`, `mission`, `villas`, `concierge`, `services`, `cta`, `faq`, `footer`, `contact`, `about`, `prenotazione`) come fonte unica di verità per la traduzione, da cui derivare i contenuti delle pagine HTML manualmente. Estrarre il copy IT letteralmente dai file statici esistenti. Tradurre EN con tono editoriale luxury (no Google Translate meccanico). **Switcher lingua**: aggiungere a navbar e footer link `IT` / `EN` che, in base al path corrente, rimandi alla versione opposta (es. da `/about.html` a `/en/about.html` e viceversa) — implementare in `js/i18n.js` con funzione `getAlternateLocaleHref(currentPath, targetLocale)`. Aggiungere in `<head>` di ogni pagina `<link rel="alternate" hreflang="it" href="...">` e `<link rel="alternate" hreflang="en" href="...">` per SEO i18n.
+- **Scope**: setup i18n + creazione cartella `/en/` + switcher + JSON di riferimento. NON è richiesto un sistema dinamico runtime (rest del copy è statico nel markup).
+- **Files**: nuovi `data/i18n/it.json`, `data/i18n/en.json`, `js/i18n.js`, intera cartella `en/` con tutte le pagine duplicate e tradotte. Modifiche a tutti gli HTML root per aggiungere hreflang e link switcher.
+- **Dependencies**: Task 16.
+- **Notes**: il copy EN deve suonare naturale a un madrelingua di una rivista travel. Lasciare commento `<!-- TODO: review EN translation -->` se incerto. Verificare che `<html lang="en">` sia presente in tutte le pagine inglesi.
 
 ---
 
 ### Task 21
 - **Status**: todo
 - **Agent**: coder
-- **Branch**: feature/migration-lint
+- **Branch**: feature/lint-format
 - **Priority**: medium
-- **Title**: ESLint + Prettier + Husky strict toolchain
-- **Desc**: Configurare il toolchain di linting/formatting strict per garantire qualità del codice e prevenire regressioni. (1) Installare deps dev: `pnpm add -D eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks eslint-config-prettier prettier husky lint-staged`. (2) Configurare `properhost-next/.eslintrc.json` con `extends: ['next/core-web-vitals', 'plugin:@typescript-eslint/recommended', 'plugin:@typescript-eslint/strict', 'plugin:import/recommended', 'plugin:import/typescript', 'plugin:jsx-a11y/recommended', 'prettier']`. Rules custom: `'@typescript-eslint/no-explicit-any': 'error'`, `'@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }]`, `'import/order': ['error', { groups: ['builtin','external','internal','parent','sibling','index'], 'newlines-between': 'always', alphabetize: { order: 'asc' } }]`, `'react/self-closing-comp': 'error'`, `'react-hooks/exhaustive-deps': 'error'`. (3) Configurare `properhost-next/.prettierrc.json`: `{ "singleQuote": true, "semi": false, "trailingComma": "all", "printWidth": 100, "arrowParens": "always", "tabWidth": 2, "endOfLine": "lf" }`. Creare `.prettierignore` con `node_modules`, `.next`, `public`, `*.md`. (4) Setup Husky: `pnpm exec husky init`. Creare `.husky/pre-commit` con `pnpm exec lint-staged`. (5) Configurare `lint-staged` in `package.json`: `"lint-staged": { "*.{ts,tsx,js,jsx}": ["eslint --fix", "prettier --write"], "*.{json,css,md}": ["prettier --write"] }`. (6) Aggiungere script: `"lint": "next lint"`, `"lint:fix": "next lint --fix"`, `"format": "prettier --write .\""`, `"format:check": "prettier --check ."`, `"typecheck": "tsc --noEmit"`. (7) Eseguire una passata `pnpm lint:fix` e `pnpm format` per allineare i file generati dalle Task 16-20. Verificare che `pnpm lint && pnpm typecheck && pnpm format:check` passi tutto pulito.
-- **Scope**: solo configurazione tooling. Nessuna modifica ai file di codice esistenti (a parte fix automatici eseguiti una volta dal `pnpm lint:fix`).
-- **Files**: `properhost-next/.eslintrc.json`, `properhost-next/.prettierrc.json`, `properhost-next/.prettierignore`, `properhost-next/.husky/pre-commit`, `properhost-next/package.json` (script + lint-staged + deps dev). Possibili aggiustamenti automatici nei file di codice esistenti.
+- **Title**: ESLint + Prettier + .editorconfig + opzionale husky
+- **Desc**: Configurare toolchain di linting/formatting per HTML, CSS, JS vanilla. (1) Init `package.json` minimale (solo per gestire devDeps): `npm init -y`, poi `npm install --save-dev eslint @eslint/js prettier eslint-config-prettier`. (2) `.eslintrc.json` con `{ "env": { "browser": true, "es2022": true }, "extends": ["eslint:recommended", "prettier"], "parserOptions": { "ecmaVersion": "latest", "sourceType": "module" }, "rules": { "no-var": "error", "prefer-const": "error", "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }], "eqeqeq": "error", "curly": "error" } }`. (3) `.prettierrc.json`: `{ "singleQuote": true, "semi": true, "trailingComma": "all", "printWidth": 100, "arrowParens": "always", "tabWidth": 2, "endOfLine": "lf" }`. (4) `.prettierignore` con `node_modules`, `assets`, `vendor`. (5) `.editorconfig` con `root = true` + UTF-8 + LF + indent 2. (6) Script in `package.json`: `"lint": "eslint 'js/**/*.js'"`, `"lint:fix": "eslint 'js/**/*.js' --fix"`, `"format": "prettier --write '**/*.{html,css,js,json,md}'"`, `"format:check": "prettier --check '**/*.{html,css,js,json,md}'"`. (7) Opzionale husky: `npx husky init`, pre-commit hook che esegue `npm run format:check && npm run lint`. (8) Eseguire una passata `npm run lint:fix && npm run format` per allineare i file esistenti. Verificare che tutto passi pulito.
+- **Scope**: solo tooling. Nessuna modifica logica.
+- **Files**: nuovi `package.json`, `.eslintrc.json`, `.prettierrc.json`, `.prettierignore`, `.editorconfig`, opzionale `.husky/pre-commit`. Aggiunta `node_modules/` a `.gitignore`.
 - **Dependencies**: Task 16.
-- **Notes**: NON disabilitare regole strict per "far passare" il codice — risolverle è il punto del task. Se una regola crea molti falsi positivi su tipi auto-generati Next.js, usare `overrides` mirati (es. su `*.config.ts`). `tsconfig.json.strict` deve restare `true`. Su Windows attenzione a `endOfLine: 'lf'` — può richiedere `git config core.autocrlf input`. Husky può rifiutarsi di installarsi se non c'è `.git/` in root: in tal caso, eseguire `git init` se manca.
+- **Notes**: NON disabilitare regole strict per "far passare" il codice. Su Windows verificare `endOfLine: 'lf'` con `git config core.autocrlf input`.
 
 ---
 
-## Task Queue · Migration Phase 1 — Primitives
+## Task Queue · Refactor Phase 2 — Componenti / Primitive UI
 
 ---
 
 ### Task 22
 - **Status**: todo
 - **Agent**: coder
-- **Branch**: feature/migration-preloader
+- **Branch**: feature/preloader
 - **Priority**: medium
-- **Title**: Componente Preloader fullscreen con counter + curtain SVG exit
-- **Desc**: Creare `properhost-next/src/components/Preloader.tsx` come componente client (`'use client'` in cima al file). Comportamento: al primo load della pagina, mostra un overlay fullscreen (`position: fixed; inset: 0; z-index: 9999`) con sfondo `var(--primary-dark)` (#053e36). Al centro un counter percentuale enorme in Cormorant Garamond regular, font-size `clamp(8rem, 18vw, 16rem)`, color white, rappresentato da `<span ref={counterRef}>0</span>%`. Il counter deve crescere da 0 a 100 in modo guidato dal load progress reale dell'app: usare un mix di `document.readyState`, preload del video hero (`/assets/hero-home.jpg` come poster, `hero.mp4` per metadati), e font ready (`document.fonts.ready`). Se questi segnali completano in <1.2s (caso comune), forzare comunque una durata minima di 1.4s con curva ease-out per sensazione di "qualità". Implementare con GSAP timeline: `tl.to(counter, { innerHTML: 100, duration: 1.4, ease: 'power2.out', snap: { innerHTML: 1 }, onUpdate: () => counterRef.textContent = Math.round(...) + '' })`. Al raggiungimento di 100, esegui exit animation: due path SVG curvi (uno top con `clipPath` o transform da y:0 a y:-100%, uno bottom da y:0 a y:100%) si ritraggono rivelando la pagina sottostante. Path desktop reference: `<path d="M0,0 C480,80 1440,80 1920,0 L1920,1080 L0,1080 Z" />` per top e mirrorato per bottom; viewBox `0 0 1920 1080`. Path mobile: viewBox `0 0 768 1024` con curve scalata. Durata exit 1.2s, easing `power3.inOut`. Salvare flag in `sessionStorage.setItem('properhost.preloaderShown', '1')` per non ripetere il preloader nelle navigazioni interne della stessa sessione (controllo all'avvio: se flag presente, render ritorna `null` immediatamente). Rispettare `prefers-reduced-motion`: se `window.matchMedia('(prefers-reduced-motion: reduce)').matches` è true, salta il counter e fai un fade-out 200ms.
-- **Scope**: solo componente Preloader. Non integrarlo ancora nel root layout (sarà Task 27). Test isolato: importarlo in una pagina di test temporanea per verificare comportamento.
-- **Files**: nuovo: `properhost-next/src/components/Preloader.tsx`.
-- **Dependencies**: Task 17 (font), Task 18 (GSAP wrapper).
-- **Notes**: Il preloader deve essere assoluto/fixed sopra il contenuto, NON un wrapper che blocca il render della pagina (così la pagina è già montata sotto e l'exit del preloader la rivela). Usare `gsap.context()` con cleanup obbligatorio al dismount per evitare memory leak. Test edge case: connessione lenta (la pagina impiega 5s a caricare) — il counter deve aspettare il caricamento reale, non scadere a 100 prima. Test sessione: secondo refresh della stessa scheda, preloader NON deve apparire. Se scelta di design: il counter è puramente decorativo e va a 100 in 1.4s indipendentemente dal load reale, va bene (decisione del designer); in tal caso semplificare la logica.
+- **Title**: Preloader fullscreen vanilla (counter + curtain SVG exit)
+- **Desc**: Creare componente preloader come blocco HTML inserito all'inizio di `<body>` in tutte le pagine (oppure iniettato via JS al `DOMContentLoaded`, decisione del coder). **Markup**: `<div id="preloader" aria-hidden="true"><div class="preloader__counter"><span class="preloader__num">0</span>%</div><svg class="preloader__curtain preloader__curtain--top" viewBox="0 0 1920 1080" preserveAspectRatio="none"><path d="M0,0 C480,80 1440,80 1920,0 L1920,1080 L0,1080 Z" fill="var(--primary-dark)"/></svg></div>`. **Stile**: `position: fixed; inset: 0; z-index: 9999; background: var(--primary-dark); display: flex; align-items: center; justify-content: center;`. Counter Cormorant regular `clamp(8rem, 18vw, 16rem)` color white. **Logica JS** in `js/preloader.js`: al `DOMContentLoaded`, controllare `sessionStorage.getItem('properhost.preloaderShown')` — se `'1'` rimuovere subito il preloader; altrimenti animare counter da 0 a 100 con GSAP timeline (`duration: 1.4, ease: 'power2.out', snap: { textContent: 1 }`), poi exit animation (curtain SVG path che si ritrae con clip-path o transform y -100% in 1.2s ease power3.inOut), poi rimuovere il nodo dal DOM e settare `sessionStorage.setItem('properhost.preloaderShown', '1')`. **Reduced motion**: se `matchMedia('(prefers-reduced-motion: reduce)').matches`, fade-out 200ms senza counter. Dipendenze visuali: il preloader copre TUTTA la pagina inclusa la navbar; nessuna interazione possibile finché non sparisce. Importare il modulo in `js/main.js` per priorità di esecuzione.
+- **Scope**: solo Preloader.
+- **Files**: nuovo `js/preloader.js`. Markup HTML inline in tutte le pagine (oppure script che lo crea). CSS in `css/components.css` o nuovo `css/preloader.css`.
+- **Dependencies**: Task 17, 18.
+- **Notes**: testare connessione lenta in DevTools; il preloader non deve bloccare il rendering della pagina sotto. Cleanup obbligatorio: rimuovere il nodo dal DOM dopo l'exit per liberare memoria. Test sessione: secondo refresh non deve riapparire.
 
 ---
 
 ### Task 23
 - **Status**: todo
 - **Agent**: coder
-- **Branch**: feature/migration-cursor
+- **Branch**: feature/custom-cursor
 - **Priority**: low
-- **Title**: Componente CustomCursor (cerchio gold, espande su hover, freccia su slider)
-- **Desc**: Creare `properhost-next/src/components/CustomCursor.tsx` come componente client. Sostituisce il cursore di sistema con un cerchio personalizzato che segue il mouse con leggero ritardo. Markup: `<div ref={cursorRef} className="custom-cursor" />`. Stato base CSS: `position: fixed; top: 0; left: 0; width: 32px; height: 32px; border-radius: 50%; background: rgba(184,153,104,0.4); border: 1px solid rgba(216,193,154,0.6); pointer-events: none; z-index: 9999; mix-blend-mode: difference; transform: translate(-50%, -50%); will-change: transform;`. Movimento: usare `gsap.quickTo(cursorRef.current, 'x', { duration: 0.3, ease: 'power3.out' })` e analogo per `y`. Listener su `window.mousemove`: aggiornare con `xTo(e.clientX); yTo(e.clientY)`. Stati hover (rilevati con event delegation su body): (1) target match `'a, button, [role="button"], .interactive'` → `gsap.to(cursorRef.current, { width: 60, height: 60, backgroundColor: 'rgba(184,153,104,1)', duration: 0.3 })`; (2) target match `'.draggable, .swiper, [data-cursor="arrow-next"]'` → cursore diventa cerchio bianco solid 64px con SVG freccia → centrata (manipolare `innerHTML` o usare un secondo elemento con conditional render); analogo per `[data-cursor="arrow-prev"]` con freccia ←; (3) target match `'input, textarea, [contenteditable]'` → cursore nasconde (`opacity: 0`) e ripristina cursore di sistema. Su `mouseleave` torna allo stato base. Disabilitato completamente su touch devices: check `window.matchMedia('(hover: none)').matches` o `'ontouchstart' in window` — se true, render ritorna `null`. Disabilitato anche con `prefers-reduced-motion: reduce`: render ritorna `null`. Lo stile CSS può essere inline o in `globals.css` con classe `.custom-cursor`.
-- **Scope**: solo componente cursore. Va montato globalmente nel root layout (Task 27), non in questa task.
-- **Files**: nuovo: `properhost-next/src/components/CustomCursor.tsx`. Eventuali stili in `properhost-next/src/styles/globals.css` (se classe `.custom-cursor` definita lì).
-- **Dependencies**: Task 18 (GSAP wrapper).
-- **Notes**: Su Safari `mix-blend-mode: difference` può avere bug grafici sopra video — testare e fallback a `solid color` se necessario, oppure rimuovere il blend mode mantenendo solo trasparenza. Cleanup obbligatorio: `useEffect` return rimuove tutti gli event listener registrati. NON bloccare il `pointer-events` dei link/button reali — il cursore deve avere `pointer-events: none`. Test: hover su un link, il cursore si espande; hover sullo slider ville, il cursore mostra freccia →. Performance: usare `will-change: transform` ma rimuoverlo dopo (al dismount) per non sprecare GPU.
+- **Title**: Custom cursor vanilla (cerchio gold, espande su hover, freccia su slider)
+- **Desc**: Implementare cursore personalizzato in `js/cursor.js` come modulo. **Detection touch device**: se `matchMedia('(hover: none)').matches` o `'ontouchstart' in window`, return early (non istanziare). **Reduced motion**: idem return early. **Markup creato runtime**: `<div id="custom-cursor" aria-hidden="true"></div>` appeso a `body`. **Stile** (CSS in `css/cursor.css`): `position: fixed; top: 0; left: 0; width: 32px; height: 32px; border-radius: 50%; background: rgba(184,153,104,0.4); border: 1px solid rgba(216,193,154,0.6); pointer-events: none; z-index: 9998; mix-blend-mode: difference; transform: translate(-50%, -50%); will-change: transform; transition: width 200ms ease, height 200ms ease, background 200ms ease;`. **Movimento**: usare GSAP `gsap.quickTo(el, 'x', { duration: 0.3, ease: 'power3.out' })` su `mousemove`. **Stati hover** via event delegation su `body`: `'a, button, [role="button"], .interactive'` → cursore 60px gold solid; `[data-cursor="arrow-next"]`, `[data-cursor="arrow-prev"]`, `.swiper` → cursore 64px bianco con SVG freccia; `'input, textarea, [contenteditable]'` → cursore nascosto e ripristina cursore di sistema. **Cleanup**: tutti gli event listener registrati con riferimento, removable se necessario in futuro.
+- **Scope**: solo custom cursor.
+- **Files**: nuovo `js/cursor.js`, nuovo `css/cursor.css` (o aggiunta in `components.css`).
+- **Dependencies**: Task 18.
+- **Notes**: su Safari `mix-blend-mode: difference` può avere bug grafici sopra video; testare e fallback a opacity solid se necessario. Performance: `will-change` solo quando il cursore è attivo, rimuoverlo se istanza distrutta.
 
 ---
 
 ### Task 24
 - **Status**: todo
 - **Agent**: ui-designer
-- **Branch**: feature/migration-section-divider
+- **Branch**: feature/section-divider
 - **Priority**: medium
-- **Title**: Componente SectionDivider (curtain SVG curvo riusabile)
-- **Desc**: Creare `properhost-next/src/components/SectionDivider.tsx` come componente riutilizzabile per le transizioni curve tra sezioni con bg color diversi. Props TypeScript: `{ direction: 'top' | 'bottom'; fillColor: string; height?: number; className?: string; ariaHidden?: boolean }`. `direction: 'top'` significa che la curva chiude la parte BASSA della sezione precedente (quindi la curva è in basso, il fill è il colore della sezione successiva). `direction: 'bottom'` significa che la curva apre la parte ALTA della sezione successiva (il fill è il colore della sezione precedente). `fillColor` accetta CSS color o token (es. `'var(--primary)'`). `height` default 80px (mobile) / 120px (desktop) — usare clamp interno `clamp(60px, 8vw, 140px)`. Markup: SVG full-width responsive con `<svg width="100%" height={height} viewBox="0 0 1920 120" preserveAspectRatio="none">` e un `<path>` con `d` che disegna una curva Bézier morbida da sinistra a destra. Path desktop suggerito per direzione 'top' (curva concava verso il basso): `d="M0,0 C480,80 1440,80 1920,0 L1920,120 L0,120 Z"`. Per direzione 'bottom' (curva convessa): `d="M0,120 C480,40 1440,40 1920,120 L1920,0 L0,0 Z"`. Il `<path>` ha `fill={fillColor}`. Aggiungere `aria-hidden="true"` di default (è decorativo). CSS: `display: block; width: 100%; line-height: 0;` per evitare gap di 1px. Posizionamento da parte del consumatore: il divider è un elemento di flusso normale che si posiziona in `<section>` fra due bg, oppure absolute con `bottom: -1px`/`top: -1px` per coprire seam. Rendere componente server-only (no client directive necessaria).
-- **Scope**: solo il componente SVG riutilizzabile. Le occorrenze nelle sezioni saranno in Task 35 (stitching home).
-- **Files**: nuovo: `properhost-next/src/components/SectionDivider.tsx`.
-- **Dependencies**: Task 17 (CSS vars per fillColor da token).
-- **Notes**: Il SectionDivider va spesso posizionato OUT-of-flow con `position: absolute; bottom: -1px; left: 0; right: 0` per evitare gap di 1px tra sezioni dovuti ad antialiasing. Verificare su Chrome, Safari, Firefox: a volte il gap appare solo su uno. Il divider NON deve essere un PNG o un `<img>` — sempre SVG inline per scalabilità e accessibilità. Edge case: se le due sezioni hanno bg con gradient complessi, il divider con singolo `fillColor` non basta — in tal caso accettare di non usare divider in quella transizione, o usare gradient SVG (out of scope per ora). Test: con due sezioni `bg-bg` e `bg-bg-2` adiacenti, inserire divider con `fillColor="var(--bg-2)"` `direction="top"` — la transizione deve essere seamless senza gap visibile.
+- **Title**: Section Divider SVG riutilizzabile (curve tra sezioni)
+- **Desc**: Creare componente HTML/CSS riusabile per le transizioni curve tra sezioni con bg color diversi. Può essere implementato come (a) snippet HTML da copia-incollare con classe condivisa, oppure (b) helper JS in `js/sectionDivider.js` con funzione `createDivider({ direction, fillColor, height })` che ritorna un nodo DOM da appendere. Preferire **approccio (a)** per ProperHost statico (massima semplicità). **Markup**: `<svg class="section-divider section-divider--top" viewBox="0 0 1920 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0,0 C480,80 1440,80 1920,0 L1920,120 L0,120 Z" fill="var(--bg-2)"/></svg>`. **CSS** in `css/components.css`: `.section-divider { display: block; width: 100%; height: clamp(60px, 8vw, 140px); line-height: 0; }`. Variante `.section-divider--bottom` con path `d="M0,120 C480,40 1440,40 1920,120 L1920,0 L0,0 Z"`. **Convenzione**: il `fill` del path deve corrispondere al bg della sezione successiva (per `--top`) o precedente (per `--bottom`). Documentare nel CSS un esempio chiaro. **Posizionamento**: il divider è elemento di flusso normale tra `<section>`. Per evitare gap di 1px da antialiasing, posizionarlo con `margin-top: -1px` o `position: relative; top: -1px`.
+- **Scope**: solo definizione del componente + esempio in CSS.
+- **Files**: aggiunte a `css/components.css`. Eventuale snippet in un file `snippets/section-divider.html` come reference.
+- **Dependencies**: Task 17.
+- **Notes**: SVG inline (NO `<img>`). Il divider è decorativo: `aria-hidden="true"` obbligatorio.
 
 ---
 
 ### Task 25
 - **Status**: todo
 - **Agent**: coder
-- **Branch**: feature/migration-navbar
+- **Branch**: feature/navbar
 - **Priority**: high
-- **Title**: Componente Navbar (split nav + wordmark centrale + lang switcher + drawer mobile)
-- **Desc**: Creare `properhost-next/src/components/Navbar.tsx` come componente client. È l'elemento più visibile del sito, deve essere robusto su tutti i breakpoint. **Layout desktop (≥980px)**: `position: fixed; top: 0; left: 0; right: 0; z-index: 50; padding: 32px 0;`. Container interno: grid `grid-template-columns: 1fr auto 1fr; align-items: center; gap: 50px;`. Colonna sinistra (`justify-self: end`): nav con 3 link ordinati `Concierge → /concierge`, `About → /about`, `Ville → /ville`. Colonna centrale: wordmark "Properhost" in Cormorant Garamond italic font-size `clamp(40px, 4.6vw, 58px)` color white, sotto sottotitolo "VILLAS · CONCIERGE · SERVICES" in Inter 9.5px letter-spacing 0.46em uppercase color rgba(255,255,255,.78) margin-top 14px. Tutto è un unico `<Link href="/">` cliccabile. Colonna destra (`justify-self: start`): nav con 3 link `Servizi → /concierge#services`, `Contatti → /contatti`, `Book → /prenotazione` (l'ultimo con classe `nav-book` e una linea decorativa `::before` di 14px gold a sinistra del link, padding-left 24px). Dopo i link a destra, lo switcher lingua: due piccoli link "IT" / "EN" separati da `/`, uppercase Inter 12px letter-spacing 0.32em, link attivo color `var(--accent-soft)`, inattivo color rgba(255,255,255,.6). **Stato scrolled** (oltre 80px di scroll): la navbar diventa `position: fixed`, sfondo `rgba(246,241,232,.96)` con `backdrop-filter: blur(16px)`, padding ridotto a 18px. Tutti i link e il wordmark passano da `color: white` a `color: var(--text)`, gli hover passano a `var(--accent-deep)`. Animare la transizione (180ms ease). **Layout mobile (<980px)**: collassare a `grid-template-columns: auto auto`. A sinistra wordmark compatto (Cormorant 22px). A destra solo hamburger 42px. Quando hamburger cliccato, apre drawer fullscreen che entra da destra: `position: fixed; inset: 0 0 0 auto; width: 100%; max-width: 380px; background: var(--bg);`, `transform: translateX(100%)` di default, `transform: translateX(0)` con classe `.open`, transition 0.5s `var(--ease)`. Drawer contiene tutti i link (Concierge, About, Ville, Servizi, Contatti, Book) verticalmente in Cormorant 18px color `var(--text)`, ognuno con `border-bottom: 1px solid var(--line)`. In fondo al drawer, switcher lingua. **Switcher lingua**: usa `usePathname()` di `next/navigation` per ottenere il path corrente, costruisce il path verso l'altra locale sostituendo il segmento `[locale]` (es. `/ville` → `/en/ville`). **A11y**: `<nav role="navigation" aria-label="Main">`, `<button aria-label="Apri menu" aria-expanded={isOpen} aria-controls="mobile-drawer">` su hamburger, `aria-current="page"` sul link attivo (usare `usePathname` per match), focus visibile (`outline: 2px dotted var(--accent); outline-offset: 4px`). Tastierabile: tab per navigare, Enter per attivare, Esc per chiudere drawer.
-- **Scope**: solo Navbar component + drawer mobile + switcher lingua. NON include il modal "Richiedi disponibilità" (è un componente separato, eventualmente Task fuori migration plan).
-- **Files**: nuovo: `properhost-next/src/components/Navbar.tsx`. Modifiche: `properhost-next/src/messages/it.json` e `en.json` per le label nav (se non già aggiunte in Task 20).
-- **Dependencies**: Task 17, Task 20 (i18n per label e switcher), Task 19 (logo se serve).
-- **Notes**: I link interni usano `<Link>` di `next/link`. Lo switcher lingua usa `useRouter` + `usePathname` di `next/navigation`. NON usare `next/router` (App Router). Cleanup listener scroll al dismount obbligatorio. Test su tutti i breakpoint: 375px (mobile), 768px (tablet, drawer ancora attivo), 980px (transizione a desktop), 1440px (desktop pieno). Test scrolled state: scrollare oltre 80px deve attivare il bg blur senza salti visivi. Test focus trap nel drawer mobile: quando è aperto, Tab non deve uscire dal drawer (implementare focus trap o accettare comportamento standard, decisione del coder con commento).
+- **Title**: Navbar split + wordmark + lang switcher + drawer mobile
+- **Desc**: Refactor della navbar attuale in componente coerente, ripetuto in tutte le pagine HTML (root + `/en/`). **Layout desktop (>=980px)**: `position: fixed; top: 0; left: 0; right: 0; z-index: 50; padding: 32px 0;`. Container interno grid `1fr auto 1fr; align-items: center; gap: 50px;`. Sinistra (justify-self: end): nav con `Concierge`, `About`, `Ville`. Centro: `<a href="/">` con wordmark "Properhost" Cormorant italic `clamp(40px, 4.6vw, 58px)` color white + sottotitolo "VILLAS · CONCIERGE · SERVICES" Inter 9.5px letter-spacing 0.46em uppercase color rgba(255,255,255,.78) margin-top 14px. Destra (justify-self: start): nav con `Servizi` (link a `/concierge.html#services`), `Contatti`, `Book` (con classe `nav-book` e dash gold prefix). Dopo, switcher lingua "IT / EN". **Stato scrolled** (oltre 80px): la navbar diventa `bg: rgba(246,241,232,.96); backdrop-filter: blur(16px); padding: 18px 0;`, link e wordmark passano a `color: var(--text)`, hover `var(--accent-deep)`. Animare con CSS transition 180ms. Toggle classe `.is-scrolled` da `js/navbar.js` su `scroll` event throttled. **Mobile (<980px)**: grid `auto auto`. A sinistra wordmark compatto Cormorant 22px. A destra hamburger button 42px. Click hamburger → drawer fullscreen entra da destra: `<div id="mobile-drawer" class="mobile-drawer"><nav>... </nav></div>` con `position: fixed; inset: 0 0 0 auto; width: 100%; max-width: 380px; background: var(--bg); transform: translateX(100%); transition: transform 0.5s var(--ease);`, `.is-open` rimuove transform. Drawer contiene tutti i link verticali Cormorant 18px color `var(--text)`, ognuno con `border-bottom: 1px solid var(--line)`. In fondo lo switcher lingua. **Switcher**: in `js/i18n.js`, `getAlternateLocaleHref()` calcola l'URL della lingua alternativa basato su `window.location.pathname`. **A11y**: `<nav role="navigation" aria-label="Main">`, hamburger `aria-label="Apri menu" aria-expanded aria-controls="mobile-drawer"`, `aria-current="page"` sul link attivo (calcolato JS), focus visibile (`outline: 2px dotted var(--accent); outline-offset: 4px`), Esc per chiudere drawer.
+- **Scope**: navbar + drawer + lang switcher (no modal "Richiedi disponibilità", quello è Task 15).
+- **Files**: HTML in tutte le pagine (oppure in modulo `partials/navbar.html` da includere via JS o build step). CSS in `css/components.css` o `css/navbar.css`. JS in `js/navbar.js`.
+- **Dependencies**: Task 17, 20.
+- **Notes**: la navbar è ripetuta in 5+ pagine — considerare uno script di build minimo (Node script che fa template inclusion al deploy) oppure un loader JS che fetch e injecta `partials/navbar.html` al `DOMContentLoaded` per evitare duplicazione del markup. Decisione del coder: per ora copia-incolla manuale è accettabile dato il numero limitato di pagine; documentare nel commit.
 
 ---
 
 ### Task 26
 - **Status**: todo
 - **Agent**: ui-designer
-- **Branch**: feature/migration-footer
+- **Branch**: feature/footer
 - **Priority**: medium
-- **Title**: Componente Footer (4-col grid con brand, contatti, naviga, social)
-- **Desc**: Creare `properhost-next/src/components/Footer.tsx`. **Layout**: `<footer>` semantico, `background: var(--primary-soft)` (#022823), `color: white`, padding `110px 0 44px`. Linea divisoria oro al top: `::before` con `position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(184,153,104,.45) 50%, transparent)`. Container interno max-w 1320px, padding-x 48px. **Grid**: desktop `grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 80px; margin-bottom: 70px`. Mobile: `grid-template-columns: 1fr; gap: 48px`. **Colonna 1 (brand)**: wordmark "Properhost" Cormorant italic 34px color white + sottotitolo "HOSPITALITY" Inter 11px letter-spacing 0.42em color rgba(255,255,255,.78) margin-top 8px. Sotto, paragrafo lead Inter 15px color rgba(255,255,255,.72) line-height 1.85 max-w 34ch: testo "Ospitalità siciliana di charme, ville selezionate e servizi tailor-made per soggiorni autentici sull'isola." Sotto, riga "Palermo · Sicilia · Italia" Inter 13px color rgba(255,255,255,.55). **Colonna 2 (contatti)**: titolo h5 "Contatti" Inter 11px font-weight 600 uppercase letter-spacing 0.32em color `var(--accent-soft)` margin-bottom 28px. Sotto, lista verticale di link: `<a href="tel:+393392923744">+39 339 2923 744</a>`, `<a href="tel:+393925108539">+39 392 5108 539</a>`, `<a href="mailto:properhost.company@gmail.com">properhost.company@gmail.com</a>`, `<a href="https://www.properhost.it" target="_blank" rel="noopener">www.properhost.it</a>`. Tutti Inter 14.5px line-height 2.1 color rgba(255,255,255,.72) hover `var(--accent-soft)`. **Colonna 3 (naviga)**: titolo h5 "Naviga" stesso stile. Lista link a tutte le pagine: Home, About, Concierge & Servizi, Ville, Richiedi disponibilità. Link a `next/link` href corrispondenti. **Colonna 4 (social)**: titolo h5 "Seguici". Sotto, riga di icone SVG inline (Instagram, Facebook), 24×24px color white, hover `var(--accent-soft)`. Handle social: usare `#` come placeholder con commento `// TODO: handle social ProperHost da definire con cliente`. **Strip in basso**: separatore `border-top: 1px solid rgba(255,255,255,.12); padding-top: 34px`. Riga flex space-between: a sinistra `© 2026 Properhost — Tutti i diritti riservati` Inter 11px letter-spacing 0.28em uppercase color rgba(255,255,255,.55), a destra mini switcher lingua "IT / EN" stesso stile (duplicato di quello in Navbar). Mobile: strip diventa column con gap 14px.
-- **Scope**: solo Footer component. Niente form newsletter (non richiesto). Niente menu servizi separato (i servizi sono parte di Concierge nella nav).
-- **Files**: nuovo: `properhost-next/src/components/Footer.tsx`. Modifiche: `messages/*.json` per le label footer e i titoli colonna.
-- **Dependencies**: Task 17, Task 20.
-- **Notes**: Le icone social vanno in SVG inline (no librerie esterne come react-icons o lucide). NON inventare URL social: usare `#` come placeholder, lasciare TODO commentato. NON aggiungere copy non presente nel sito attuale (no newsletter, no link extra). Verificare che i link tel: e mailto: aprano correttamente l'app di default. Test: a 375px tutto deve impilarsi pulito, link tap-friendly (almeno 44×44px area cliccabile).
+- **Title**: Footer 4-col (brand, contatti, naviga, social)
+- **Desc**: Creare footer coerente, ripetuto in tutte le pagine. **Markup**: `<footer class="site-footer">` con `background: var(--primary-soft); color: white; padding: 110px 0 44px; position: relative;`. Linea decorativa gold al top via `::before`: `content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(184,153,104,.45) 50%, transparent);`. Container max-w 1320px padding-x 48px. Grid desktop `1.6fr 1fr 1fr 1fr; gap: 80px; margin-bottom: 70px`. Mobile <760px: grid `1fr; gap: 48px`. **Col 1 (brand)**: wordmark + sottotitolo + paragrafo lead 34ch + riga "Palermo · Sicilia · Italia". **Col 2 (Contatti)**: titolo h5 Inter 11px uppercase letter-spacing 0.32em color `var(--accent-soft)`. Lista link: tel `+39 339 2923 744`, tel `+39 392 5108 539`, mail `properhost.company@gmail.com`, sito `www.properhost.it`. Inter 14.5px line-height 2.1 color rgba(255,255,255,.72). Hover `var(--accent-soft)`. **Col 3 (Naviga)**: link a Home, About, Concierge & Servizi, Ville, Richiedi disponibilità. **Col 4 (Seguici)**: SVG inline Instagram + Facebook 24×24, hover gold. Handle social con `#` placeholder + commento HTML `<!-- TODO: handle social ProperHost da definire -->`. **Strip in basso**: separatore `border-top: 1px solid rgba(255,255,255,.12); padding-top: 34px`. Riga flex space-between: copyright a sinistra, mini switcher lingua "IT / EN" a destra. Mobile: stripe diventa column gap 14px.
+- **Scope**: solo Footer.
+- **Files**: HTML in tutte le pagine. CSS in `css/components.css` o `css/footer.css`.
+- **Dependencies**: Task 17, 20.
+- **Notes**: SVG icons inline (no librerie). Niente newsletter (non richiesta). Tap-friendly su mobile (44×44px area cliccabile).
 
 ---
 
 ### Task 27
 - **Status**: todo
 - **Agent**: coder
-- **Branch**: feature/migration-root-layout
+- **Branch**: feature/page-shell
 - **Priority**: high
-- **Title**: Root Layout con Lenis provider + Preloader + Cursor + Navbar + Footer
-- **Desc**: Completare `properhost-next/src/app/[locale]/layout.tsx` integrando tutti i componenti primitivi creati nelle Task 22-26. **Struttura del JSX**:
-
-  ```tsx
-  <html lang={locale} className={`${cormorant.variable} ${inter.variable}`}>
-    <body>
-      <NextIntlClientProvider messages={messages} locale={locale}>
-        <Preloader />
-        <CustomCursor />
-        <LenisProvider>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-        </LenisProvider>
-      </NextIntlClientProvider>
-    </body>
-  </html>
-  ```
-
-  **`<LenisProvider>` componente client**: nuovo file `properhost-next/src/components/LenisProvider.tsx`. Usa la factory di Task 18: al mount crea istanza Lenis, avvia raf loop, registra cleanup al dismount. Detecta `prefers-reduced-motion`: se attivo, NON inizializza Lenis (lascia scroll nativo). Espone children inalterati. **Wiring font**: in alto al file, `import { Cormorant_Garamond, Inter } from 'next/font/google'` con la config decisa in Task 17 (variabili CSS). Applica le className al `<html>`. **Metadata**: aggiungere `export const metadata: Metadata = { title: { default: 'Properhost · Hospitality', template: '%s · Properhost' }, description: t('meta.description'), icons: { icon: '/favicon.ico' }, openGraph: { ... }, twitter: { ... } }` (placeholder OG/Twitter, popolare in Task 47). Per i18n nei metadata: usare `getTranslations` di next-intl da `next-intl/server`. **`generateStaticParams`**: esportare funzione che ritorna `[{ locale: 'it' }, { locale: 'en' }]` per static generation di entrambe le locali. **Test**: avviare `pnpm dev`, visitare `/` e `/en/`. Deve apparire (a) Preloader brevemente, (b) Navbar fissa in alto, (c) main vuoto al momento, (d) Footer in fondo. CustomCursor visibile su desktop. Lenis attivo: scroll fluido. Console deve essere pulita, niente warning hydration.
-- **Scope**: solo wiring del root layout e composizione dei componenti già creati. Nessuna pagina concreta (è in Task 35).
-- **Files**: modifiche: `properhost-next/src/app/[locale]/layout.tsx`. Nuovi: `properhost-next/src/components/LenisProvider.tsx`.
-- **Dependencies**: Task 17, Task 18, Task 20, Task 22, Task 23, Task 25, Task 26.
-- **Notes**: Verificare che Lenis non interferisca con Swiper (Swiper gestisce il proprio touch nativo nel componente VilleSlider/ServiziSlider, e Lenis deve lasciar passare i touch dentro lo slider). Cleanup obbligatorio di Lenis al dismount. `prefers-reduced-motion` deve disabilitare Lenis E i plugin GSAP attivi. Test critico: navigare tra pagine `/about` → `/ville` (quando esisteranno) — Lenis deve essere persistente (non reinizializzarsi e perdere stato di scroll), oppure reinizializzarsi pulito (decisione: se persistente complica, accettare reinit pulito). Verificare console: NIENTE warning React, NIENTE warning hydration mismatch (causa comune: codice che usa `window` durante SSR — proteggere tutto con `typeof window !== 'undefined'` o `useEffect`).
+- **Title**: Page shell unificato (head + preloader + cursor + lenis init + navbar + footer)
+- **Desc**: Standardizzare l'inizializzazione di tutte le pagine. (1) Definire un blocco `<head>` standard con tutti i meta, preconnect, link font, link CSS in ordine corretto, link JS con `defer`/`type="module"`, da copiare in tutte le pagine HTML; documentarlo in `snippets/head.html`. (2) Inserire il preloader markup all'inizio di `<body>`. (3) Subito dopo, istanziare il custom cursor (markup creato runtime). (4) Includere navbar standard. (5) `<main>` con contenuto specifico pagina. (6) Includere footer standard. (7) Script di chiusura prima di `</body>`: `<script type="module" src="/js/main.js"></script>`. (8) `js/main.js` inizializza in ordine: `import { setupGsap } from './gsapSetup.js'; import { initPreloader } from './preloader.js'; import { initLenis } from './lenis.js'; import { initCursor } from './cursor.js'; import { initNavbar } from './navbar.js'; import { initRevealAnimations } from './animations.js';` poi `document.addEventListener('DOMContentLoaded', () => { setupGsap(); initPreloader(); const lenis = initLenis(); initCursor(); initNavbar(); initRevealAnimations(); });`. **Cleanup**: nessuno richiesto su sito statico (no SPA), ma documentare l'ordine come "se Lenis e GSAP coesistono, Lenis deve essere inizializzato dopo GSAP per agganciare ScrollTrigger.update".
+- **Scope**: orchestrazione globale.
+- **Files**: tutte le pagine HTML. `js/main.js` nuovo o aggiornato. `snippets/head.html` come reference.
+- **Dependencies**: Task 17, 18, 22, 23, 25, 26.
+- **Notes**: Lenis NON deve interferire con Swiper sui slider — Swiper gestisce il proprio touch. Test critico: scrollare smoothly tra hero, slider, sezioni — tutto fluido senza salti.
 
 ---
 
-## Task Queue · Migration Phase 2 — Sezioni Home
+## Task Queue · Refactor Phase 3 — Sezioni Home
 
 ---
 
 ### Task 28
 - **Status**: todo
 - **Agent**: ui-designer
-- **Branch**: feature/migration-hero
+- **Branch**: feature/hero-section
 - **Priority**: high
-- **Title**: Sezione Hero (video bg full-screen + paragrafo bottom-right + CTA tondo "Scopri")
-- **Desc**: Creare `properhost-next/src/components/sections/Hero.tsx`. **Layout**: `min-h-screen relative overflow-hidden bg-black`. **Video di sfondo**: `<video autoPlay muted loop playsInline preload="metadata" poster="/assets/hero-home.jpg" className="absolute inset-0 w-full h-full object-cover z-0">` con sources `<source src="/assets/hero.webm" type="video/webm" />` e `<source src="/assets/hero.mp4" type="video/mp4" />`. **Overlay**: `<div className="absolute inset-0 z-1" style={{ background: 'linear-gradient(180deg, rgba(0,0,0,.20) 0%, rgba(0,0,0,.32) 50%, rgba(0,0,0,.55) 100%)' }} />`. **Contenuto in basso a destra**: container assoluto `position: absolute; bottom: 70px; right: max(40px, calc((100vw - var(--max))/2 + 28px)); z-index: 3`. Dentro, layout flex column align-end gap 36px: (a) paragrafo Cormorant Garamond regular font-size 21px line-height 1.55 color rgba(255,255,255,.95) text-align right max-w 480px — copy da `messages.hero.subtitle`: "Ville private, dimore selezionate e servizi tailor-made per chi desidera un soggiorno autentico, raffinato e senza pensieri sulla costa siciliana. Ogni dettaglio coordinato per trasformare il viaggio in un'esperienza su misura." (b) bottone "Scopri" pill bianco: `<Link href="#villas">` min-width 180px padding 22px 44px border-radius 999px background white color `var(--primary)` font-family Inter font-size 12px font-weight 600 letter-spacing 0.36em uppercase box-shadow `0 14px 40px rgba(0,0,0,.18)`. Hover: bg `var(--accent)` color white translateY(-3px) box-shadow `0 20px 50px rgba(0,0,0,.24)`. **Scroll indicator** (decorativo): `position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); width: 1px; height: 70px; background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,.55) 100%); z-index: 2`. **Animazione di ingresso** (al mount, GSAP timeline su `useGSAP` o `useEffect`): paragrafo entra con `opacity: 0; y: 30` → `opacity: 1; y: 0` duration 1.0 ease power3.out; bottone con stagger 0.2s; scroll indicator fade in dopo 1.5s. Bounce verticale infinito sullo scroll indicator dopo l'ingresso. **Mobile (<760px)**: container bottom-right diventa bottom-left con padding 24px. Bottone full-width o min-width ridotta a 150px. Video resta full-screen. Paragrafo font 17px max-w 100%.
-- **Scope**: solo Hero section. NON includere SplitText reveal del titolo (questa hero non ha h1 grande visibile, solo paragrafo e CTA — il SplitText sarà su h2 in Mission, Task 42). NON includere autoplay del video con audio.
-- **Files**: nuovo: `properhost-next/src/components/sections/Hero.tsx`. Modifiche: `messages/*.json` con namespace `hero` (subtitle, discoverLabel).
-- **Dependencies**: Task 17, Task 19 (asset video), Task 20.
-- **Notes**: Video deve avere `playsInline` per iOS (autoplay funziona solo se muted+playsInline). Su connessioni lente fallback automatico al poster image (`hero-home.jpg`). NON usare `<Image>` Next per il video (è tag `<video>` nativo). Test: su mobile (in particolare iOS Safari) verificare che il video parta in autoplay; se no, accettare il poster come fallback (NON forzare autoplay con audio o intervento utente). Test connessione lenta (Throttling 3G in DevTools): la pagina deve mostrare il poster mentre il video carica. Verificare CLS: il video con `aspect-ratio` o dimensioni esplicite (alternativa: `object-cover` su container `min-h-screen` lo rende safe).
+- **Title**: Hero fullscreen (video bg + paragrafo bottom-right + CTA "Scopri")
+- **Desc**: Refactor della hero in `index.html`. **Markup**: `<section class="hero" aria-label="Home"><video class="hero__video" autoplay muted loop playsinline preload="metadata" poster="/assets/hero-home.jpg"><source src="/assets/hero.webm" type="video/webm"><source src="/assets/hero.mp4" type="video/mp4"></video><div class="hero__overlay" aria-hidden="true"></div><div class="hero__content"><p class="hero__lead">Ville private, dimore selezionate e servizi tailor-made...</p><a class="btn btn--scopri" href="#villas">Scopri</a></div><div class="hero__scroll-indicator" aria-hidden="true"></div></section>`. **CSS**: hero `min-height: 100vh; position: relative; overflow: hidden; background: black;`. Video `position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;`. Overlay z-1 con `linear-gradient(180deg, rgba(0,0,0,.20) 0%, rgba(0,0,0,.32) 50%, rgba(0,0,0,.55) 100%)`. Content `position: absolute; bottom: 70px; right: max(40px, calc((100vw - 1320px)/2 + 28px)); z-index: 3; display: flex; flex-direction: column; align-items: flex-end; gap: 36px;`. Lead Cormorant 21px line-height 1.55 color rgba(255,255,255,.95) text-align right max-w 480px. Bottone "Scopri" pill bianco min-width 180px padding 22px 44px border-radius 999px bg white color `var(--primary)` Inter 12px font-weight 600 letter-spacing 0.36em uppercase shadow 0 14px 40px rgba(0,0,0,.18). Hover bg `var(--accent)` color white translateY -3px. Scroll indicator `position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); width: 1px; height: 70px; background: linear-gradient(180deg, transparent, rgba(255,255,255,.55));`. **Animazione ingresso** (in `js/animations.js` o `js/heroAnimations.js`): GSAP timeline `tl.from('.hero__lead', { opacity: 0, y: 30, duration: 1.0, ease: 'power3.out' }).from('.btn--scopri', { opacity: 0, y: 30, duration: 0.8, ease: 'power3.out' }, '-=0.6').from('.hero__scroll-indicator', { opacity: 0, duration: 0.5 }, '+=0.3');`. Bounce verticale infinito sullo scroll indicator. **Mobile (<760px)**: content allineato bottom-left, padding 24px, paragrafo font 17px, bottone min-width 150px o full-width.
+- **Scope**: solo hero in index.html.
+- **Files**: `index.html`, `css/sections.css` o `css/hero.css`, `js/animations.js`.
+- **Dependencies**: Task 17, 18, 19.
+- **Notes**: video con `playsinline` per iOS autoplay. Su connessioni lente fallback al poster. Verificare CLS = 0.
 
 ---
 
 ### Task 29
 - **Status**: todo
 - **Agent**: ui-designer
-- **Branch**: feature/migration-mission
+- **Branch**: feature/mission-section
 - **Priority**: high
-- **Title**: Sezione Mission/Intro (editorial 3-col: titolone + 2 colonne testo + CTA pillola)
-- **Desc**: Creare `properhost-next/src/components/sections/Mission.tsx`. **Layout**: `<section className="bg-bg-2 py-40 md:py-48 lg:py-52">`. Container interno max-w 1320px padding-x 48px. **Grid**: desktop `grid-template-columns: 1.25fr 1fr 1fr; gap: 80px; align-items: start`. Mobile (<1100px): collassa a 2 colonne `1fr 1fr` con la prima a `grid-column: 1 / -1`. Mobile <760px: 1 colonna unica. **Colonna 1 (sinistra, headline + CTA)**: `<div className="flex flex-col items-start gap-12">`. Dentro: (a) section-tag "Benvenuti" — span Inter font-size 11px font-weight 500 uppercase letter-spacing 0.36em color `var(--accent-deep)` con dash decorativo `::before` di 28px x 1px gold a sinistra. Markup suggerito: `<span className="section-tag">Benvenuti</span>` con CSS gestito globalmente o via Tailwind. (b) titolo h2 Cormorant Garamond font-weight 400 font-size `clamp(40px, 4.6vw, 64px)` line-height 1.04 letter-spacing -0.012em color `var(--primary)` "Ospitalità siciliana, **eleganza** contemporanea" con `<em>eleganza</em>` italic font-weight 500 color `var(--accent-deep)`. Markup: `<h2 className="font-display ...">Ospitalità siciliana, <em>eleganza</em> contemporanea</h2>`. (c) CTA pill: `<Link href="/ville" className="btn-pill">Scopri le ville</Link>` con stile Inter 11px uppercase letter-spacing 0.34em padding 20px 44px border-radius 999px bg `var(--primary)` color white border 1px solid `var(--primary)`. Hover: bg `var(--accent)` border `var(--accent)` translateY(-2px) box-shadow `0 14px 36px rgba(11,107,94,.22)`. **Colonna 2 (testo descrittivo)**: padding-top 14px (allinea con la prima riga del titolo). Paragrafo Inter font-size 15px font-weight 400 line-height 1.95 color `var(--text-2)`. Copy da `messages.mission.col1`: "Dimore selezionate con identità architettonica chiara, immerse in contesti naturali iconici dell'isola. Ogni villa è scelta per posizione, dettaglio e atmosfera: il luogo conta tanto quanto il servizio." **Colonna 3**: stessa struttura. Copy da `messages.mission.col2`: "Assistenza dedicata prima, durante e dopo il soggiorno, costruita su una rete di partner locali scelti per affidabilità e stile. Ogni dettaglio coordinato senza appesantire la tua esperienza." **Animazioni**: aggiungere `data-reveal` o classe `reveal` sui 3 blocchi figli del grid. Saranno animati con stagger in Task 43 (ScrollTrigger). Per ora, fade-in CSS base 800ms con opacity 0→1 al primo render. **Mobile**: spaziatura ridotta a `py-24`, gap grid 32px.
+- **Title**: Mission/Intro editorial 3-col
+- **Desc**: Refactor sezione intro/mission in `index.html`. **Markup**: `<section class="mission"><div class="container"><div class="mission__grid"><div class="mission__col mission__col--lead"><span class="section-tag">Benvenuti</span><h2 class="font-display">Ospitalità siciliana, <em>eleganza</em> contemporanea</h2><a class="btn btn--pill-primary" href="ville.html">Scopri le ville</a></div><div class="mission__col"><p>Dimore selezionate con identità architettonica chiara, immerse in contesti naturali iconici dell'isola...</p></div><div class="mission__col"><p>Assistenza dedicata prima, durante e dopo il soggiorno...</p></div></div></div></section>`. **CSS**: section `bg: var(--bg-2); padding: 160px 0 192px;`. Container max-w 1320px padding-x 48px. Grid `grid-template-columns: 1.25fr 1fr 1fr; gap: 80px; align-items: start;`. <1100px: 2 col con prima `grid-column: 1 / -1`. <760px: 1 col. **Section-tag** Inter 11px font-weight 500 uppercase letter-spacing 0.36em color `var(--accent-deep)` con dash 28x1px gold prima (via `::before`). **H2** Cormorant 400 `clamp(40px, 4.6vw, 64px)` line-height 1.04 letter-spacing -0.012em color `var(--primary)`, `<em>` italic 500 color `var(--accent-deep)`. **Pill primary** bg `var(--primary)` color white Inter 11px uppercase letter-spacing 0.34em padding 20px 44px border-radius 999px border 1px solid `var(--primary)`. Hover bg `var(--accent)` translateY -2px shadow 0 14px 36px rgba(11,107,94,.22). **Paragrafi col 2 e 3** Inter 15px line-height 1.95 color `var(--text-2)` padding-top 14px (allineamento prima riga col1).
 - **Scope**: solo Mission section.
-- **Files**: nuovo: `properhost-next/src/components/sections/Mission.tsx`. Modifiche: `messages/*.json` namespace `mission`.
-- **Dependencies**: Task 17, Task 20.
-- **Notes**: NON inserire foto in questa sezione (è puro editoriale, lo standard luxury). NON usare orange (palette altrui) — il CTA è sempre teal/oro. NON inventare copy: i due paragrafi sopra sono ProperHost (rielaborati dal copy esistente in `index.html` `intro` section). NON usare claim altrui ("Ville d'incanto" è di un competitor — lasciarlo fuori). Verificare allineamento delle colonne: la prima riga del paragrafo col2 e col3 deve combaciare visivamente con il titolo della col1 (regolare padding-top se necessario). Test responsive: su 1024px deve restare su 3 col, su 980px collassa a 2, su 760px a 1.
+- **Files**: `index.html`, CSS pertinente.
+- **Dependencies**: Task 17.
+- **Notes**: copy ProperHost letterale dai file esistenti, NON sostituire con copy altrui. Niente foto in questa sezione (è puro editoriale).
 
 ---
 
 ### Task 30
 - **Status**: todo
 - **Agent**: coder
-- **Branch**: feature/migration-villa-slider
+- **Branch**: feature/villa-slider-swiper
 - **Priority**: high
-- **Title**: Sezione VilleSlider full-bleed (Swiper fade, 6 ville, frecce, CTA)
-- **Desc**: Creare `properhost-next/src/components/sections/VilleSlider.tsx` come componente client. **Layout**: full-bleed `width: 100vw; height: 100vh; min-height: 600px; position: relative; overflow: hidden; background: #0a0a0a`. **Dati villa**: definirli in un array `src/data/villas.ts` tipato:
-
-  ```ts
-  export type Villa = { slug: string; name: string; location: string; image: string; alt: string }
-  export const VILLAS: Villa[] = [
-    { slug: 'aurea',       name: 'Villa Aurea',       location: 'Taormina', image: '/assets/villa-1.jpg', alt: 'Villa Aurea — Taormina' },
-    { slug: 'zagara',      name: 'Villa Zagara',      location: 'Noto',     image: '/assets/villa-2.jpg', alt: 'Villa Zagara — Noto' },
-    { slug: 'bianca',      name: 'Villa Bianca',      location: 'Siracusa', image: '/assets/villa-3.jpg', alt: 'Villa Bianca — Siracusa' },
-    { slug: 'soho',        name: 'Villa Soho',        location: 'Ragusa',   image: '/assets/villa-4.jpg', alt: 'Villa Soho — Ragusa' },
-    { slug: 'manu',        name: 'Villa Manu',        location: 'Modica',   image: '/assets/villa-5.jpg', alt: 'Villa Manu — Modica' },
-    { slug: 'dolce-vita',  name: 'Villa Dolce Vita',  location: 'Scicli',   image: '/assets/villa-6.jpg', alt: 'Villa Dolce Vita — Scicli' },
-  ]
-  ```
-
-  Importarlo nel componente. **Swiper config**: `import { Swiper, SwiperSlide } from 'swiper/react'`, modules da `@/lib/swiper`: Autoplay, EffectFade, Keyboard, A11y. Config: `effect="fade"`, `loop={true}`, `autoplay={{ delay: 6500, disableOnInteraction: false, pauseOnMouseEnter: true }}`, `keyboard={{ enabled: true }}`, `a11y={{ enabled: true, prevSlideMessage: 'Villa precedente', nextSlideMessage: 'Villa successiva' }}`. **Slide markup**: per ogni villa, `<SwiperSlide><Image src={villa.image} alt={villa.alt} fill priority={idx===0} sizes="100vw" className="object-cover" /></SwiperSlide>`. Ken Burns effect (zoom-out 1.05→1 in 8s) sull'immagine attiva: applicare classe `.is-active img { animation: ken-burns 8s linear forwards }` con keyframes `from { transform: scale(1.05) } to { transform: scale(1) }`. **Overlay**: `<div className="absolute inset-0 z-2 pointer-events-none" style={{ background: 'linear-gradient(180deg, rgba(0,0,0,.18) 0%, rgba(0,0,0,.10) 40%, rgba(0,0,0,.45) 100%)' }} />`. **Titolo centrato**: `<h2 ref={titleRef}>` Cormorant italic font-weight 400 font-size `clamp(56px, 8vw, 120px)` color white text-align center text-shadow `0 4px 30px rgba(0,0,0,.35)`. Posizione assoluta `position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 3; pointer-events: none`. Inizialmente mostra il nome del primo villa. Al cambio slide, fade-out (`opacity: 0; transform: translateY(10px)` 350ms) → cambia testo → fade-in. Hook: `swiper.on('slideChangeTransitionStart', ...)`. **Frecce di navigazione**: due `<button>` con SVG arrow custom (stile minimal, freccia di 40×14 viewBox `0 0 40 14` con linee sottili 1px). Posizione absolute top 50% transform translateY(-50%), left/right `max(40px, calc((100vw - var(--max))/2))`. Click → `swiperRef.current?.slidePrev()` / `slideNext()`. **CTA "Esplora"**: pillola bianca outline al center bottom, link a `/ville` (catalogo). `position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%)`. Padding 18px 42px border 1px solid rgba(255,255,255,.85) border-radius 999px color white Inter 11px uppercase letter-spacing 0.34em. Hover: bg white color `var(--primary)`. **Touch swipe**: nativo in Swiper. **Keyboard**: ArrowLeft/ArrowRight già gestiti da Swiper config. **Cleanup**: `useEffect` return distrugge l'istanza Swiper.
-- **Scope**: solo VilleSlider section. Le pagine villa singola sono separate (Task 39). NON pre-popolare ulteriori interaction (modali, hover state complesse) — solo navigazione + autoplay.
-- **Files**: nuovo: `properhost-next/src/components/sections/VilleSlider.tsx`, `properhost-next/src/data/villas.ts`. Modifiche: `messages/*.json` namespace `villas` per le label statiche (eyebrow, exploreLabel, ariaLabels).
-- **Dependencies**: Task 17, Task 18 (Swiper wrapper), Task 19 (asset villa), Task 20.
-- **Notes**: Usare `<Image>` Next con `priority` per la prima slide (LCP) e `loading="lazy"` per le altre. `fill` + `sizes="100vw"` + parent con `position: relative` `width:100% height:100%`. Cleanup Swiper al dismount via `useEffect` return — altrimenti memory leak su navigazioni interne. NON hardcodare i nomi villa nel componente: leggerli da `VILLAS` array. NON usare arrow button delle classi default Swiper — i nostri sono custom. Test: autoplay funziona, mouseenter pausa, mouseleave riprende, click sulle frecce funziona, keyboard ←/→ funziona, swipe su touch device funziona. Performance: il Ken Burns con animation CSS deve essere applicato solo all'attiva (con classe `.is-active`) per non animare 6 immagini in parallelo.
+- **Title**: VilleSlider full-bleed (Swiper fade, 6 ville, frecce, CTA)
+- **Desc**: Refactor slider ville usando Swiper (libreria già caricata in Task 18). **Dati ville**: array in `data/villas.json` (oppure inline nel JS):
+```json
+[
+  { "slug": "aurea", "name": "Villa Aurea", "location": "Taormina", "image": "/assets/villa-1.jpg", "alt": "Villa Aurea — Taormina" },
+  { "slug": "zagara", "name": "Villa Zagara", "location": "Noto", "image": "/assets/villa-2.jpg", "alt": "Villa Zagara — Noto" },
+  { "slug": "bianca", "name": "Villa Bianca", "location": "Siracusa", "image": "/assets/villa-3.jpg", "alt": "Villa Bianca — Siracusa" },
+  { "slug": "soho", "name": "Villa Soho", "location": "Ragusa", "image": "/assets/villa-4.jpg", "alt": "Villa Soho — Ragusa" },
+  { "slug": "manu", "name": "Villa Manu", "location": "Modica", "image": "/assets/villa-5.jpg", "alt": "Villa Manu — Modica" },
+  { "slug": "dolce-vita", "name": "Villa Dolce Vita", "location": "Scicli", "image": "/assets/villa-6.jpg", "alt": "Villa Dolce Vita — Scicli" }
+]
+```
+**Markup** generato JS da template literal o markup statico in `index.html` con id `#villas`: `<section class="villa-slider" id="villas"><div class="swiper villa-swiper">...slides...</div><h2 class="villa-slider__title font-display">Villa Aurea</h2><button class="villa-slider__arrow villa-slider__arrow--prev">...</button><button class="villa-slider__arrow villa-slider__arrow--next">...</button><a class="btn btn--pill-outline" href="ville.html">Esplora</a></section>`. **CSS**: section `width: 100vw; height: 100vh; min-height: 600px; position: relative; overflow: hidden; background: #0a0a0a;`. Slide `<img loading="lazy">` (la prima `loading="eager" fetchpriority="high"` per LCP). **Swiper config** in `js/villaSlider.js`: `new Swiper('.villa-swiper', { modules: [Autoplay, EffectFade, Keyboard, A11y], effect: 'fade', loop: true, autoplay: { delay: 6500, disableOnInteraction: false, pauseOnMouseEnter: true }, keyboard: { enabled: true }, a11y: { prevSlideMessage: 'Villa precedente', nextSlideMessage: 'Villa successiva' } })`. **Ken Burns**: classe `.swiper-slide-active img { animation: ken-burns 8s linear forwards }` con keyframes `from { transform: scale(1.05) } to { transform: scale(1) }`. **Titolo centrato fade-out/in** al `slideChangeTransitionStart` con GSAP. **Frecce custom** SVG, position absolute, click → `swiper.slidePrev()` / `slideNext()`. **CTA "Esplora"** pill outline bianco al center-bottom link a `ville.html`.
+- **Scope**: solo VilleSlider.
+- **Files**: `index.html`, `data/villas.json`, `js/villaSlider.js`, CSS pertinente.
+- **Dependencies**: Task 17, 18, 19.
+- **Notes**: usare `<img>` con `loading`, `decoding="async"`, `srcset`/`sizes` per responsive. Cleanup Swiper non necessario su sito statico (no navigation tra "pagine" — ricaricamento full).
 
 ---
 
 ### Task 31
 - **Status**: todo
 - **Agent**: ui-designer
-- **Branch**: feature/migration-concierge-panel
+- **Branch**: feature/concierge-panel
 - **Priority**: medium
-- **Title**: Sezione ConciergePanel (panel teal editoriale + bg image fixed parallax)
-- **Desc**: Creare `properhost-next/src/components/sections/ConciergePanel.tsx`. **Struttura a due strati verticali**: (1) **Pannello teal con contenuto editoriale**: `<div className="bg-primary text-white py-24 md:py-32">`. Container max-w 1320px. Grid `grid-template-columns: 1.25fr 1fr 1fr; gap: 80px; align-items: start`. **Colonna 1 (sinistra)**: section-tag "Private concierge" Inter 11px uppercase letter-spacing 0.36em color `var(--accent-soft)` con dash gold prima. Titolo h2 Cormorant font-weight 400 font-size `clamp(40px, 4.6vw, 64px)` line-height 1.04 color white "Ogni soggiorno, **un itinerario** su misura" con `<em>un itinerario</em>` italic font-weight 500 color `var(--accent-soft)`. Sotto, CTA pill outline bianco: `<Link href="/concierge">` min-width 200px padding 20px 44px border-radius 999px background transparent color white border 1px solid rgba(255,255,255,.85) "Scopri il concierge". Hover: bg white color `var(--primary)` border-color white. **Colonna 2**: paragrafo Inter 15px line-height 1.95 color rgba(255,255,255,.85) — copy: "Dalla prenotazione del transfer all'organizzazione di una cena privata con chef, ogni dettaglio viene coordinato per offrirti un'esperienza fluida, personale e memorabile per tutto il soggiorno in villa." **Colonna 3**: paragrafo simile — copy: "Chef privati, transfer premium, wellness in struttura, escursioni in yacht e accesso a esperienze riservate: un unico referente costruisce intorno a te l'itinerario, senza appesantire la tua permanenza." (2) **Background image fixed (parallax)**: subito sotto il pannello, `<div className="concierge-fixed-bg" role="img" aria-label="Servizio concierge in villa">` con CSS: `height: 70vh; background-image: url('/assets/concierge.jpg'); background-attachment: fixed; background-size: cover; background-position: center; position: relative`. Overlay leggero `::before` con `background: linear-gradient(180deg, rgba(2,40,35,.10) 0%, rgba(2,40,35,.20) 100%)`. **Mobile (<760px)**: disabilitare `background-attachment: fixed` (causa jank pesante su iOS Safari) → `background-attachment: scroll`. Ridurre height a 50vh. Pannello: collassa a 1 colonna gap 32px. **NO foto sopra il pannello**, solo sotto.
-- **Scope**: solo ConciergePanel section. NON ricreare la features grid (chef privato, transfer, wellness, sea experience) della vecchia versione — quella sezione vive nella pagina `/concierge` dedicata (Task 37).
-- **Files**: nuovo: `properhost-next/src/components/sections/ConciergePanel.tsx`. Modifiche: `messages/*.json` namespace `conciergePanel`.
-- **Dependencies**: Task 17, Task 19 (asset concierge.jpg), Task 20.
-- **Notes**: Il copy nei tre blocchi è ProperHost — NON sostituirlo con copy altrui (es. "Concierge smart per ogni esigenza" è di un competitor — non usarlo). Il colore del pannello è teal `var(--primary)`, NON blu polvere altrui (`#7f98b2`). Test parallax desktop: scrollare la pagina, l'immagine fissa deve restare ferma mentre il contenuto scorre. Test mobile: iOS Safari deve mostrare l'immagine in scroll normale, non con jank. Verificare contrasto AA: testo bianco su `var(--primary)` (#0b6b5e) ha contrasto sufficiente, ma testare con strumento.
+- **Title**: ConciergePanel (panel teal editoriale + bg image fixed parallax)
+- **Desc**: Sezione doppia in `index.html`. **Pannello teal**: `<section class="concierge-panel"><div class="container"><div class="concierge-panel__grid"><div class="concierge-panel__col-lead"><span class="section-tag section-tag--gold">Private concierge</span><h2 class="font-display">Ogni soggiorno, <em>un itinerario</em> su misura</h2><a class="btn btn--pill-outline-light" href="concierge.html">Scopri il concierge</a></div><div class="concierge-panel__col"><p>...</p></div><div class="concierge-panel__col"><p>...</p></div></div></div></section>`. CSS: bg `var(--primary)` color white padding 96-128px. Section-tag color `var(--accent-soft)`. H2 white con `<em>` italic color `var(--accent-soft)`. Pill outline bianco bg transparent border 1px solid rgba(255,255,255,.85). Hover bg white color `var(--primary)`. **Bg image fissa**: subito sotto, `<div class="concierge-fixed-bg" role="img" aria-label="Servizio concierge in villa"></div>` con CSS `height: 70vh; background-image: url('/assets/concierge.jpg'); background-attachment: fixed; background-size: cover; background-position: center;`. Overlay `::before` linear-gradient teal scuro. **Mobile <760px**: disabilitare `background-attachment: fixed` (causa jank iOS) → `scroll`. Height ridotta a 50vh.
+- **Scope**: solo ConciergePanel section.
+- **Files**: `index.html`, CSS.
+- **Dependencies**: Task 17, 19.
+- **Notes**: copy ProperHost. NON usare claim altrui ("Concierge smart per ogni esigenza" è di un competitor).
 
 ---
 
 ### Task 32
 - **Status**: todo
 - **Agent**: coder
-- **Branch**: feature/migration-servizi-slider
+- **Branch**: feature/servizi-slider
 - **Priority**: medium
-- **Title**: Sezione ServiziSlider (Swiper free-mode 6 servizi)
-- **Desc**: Creare `properhost-next/src/components/sections/ServiziSlider.tsx` componente client. **Layout**: `<section className="bg-bg-3 py-32 md:py-40">`. Container max-w 1320px. **Header centrato**: section-tag "I nostri servizi" Inter uppercase letter-spacing 0.36em color `var(--accent-deep)` con dash gold prima. Titolo h2 Cormorant font-weight 300 font-size `clamp(32px, 4.6vw, 58px)` line-height 1.05 color `var(--primary)` "Tutto quello che serve per **godersi** la Sicilia" con `<em>godersi</em>` italic color `var(--accent-deep)`. Paragrafo Inter 17px line-height 1.85 color `var(--text-2)` max-w 680px margin-x auto: "Dal transfer al chef privato, dai noleggi alle escursioni nelle isole Egadi: un'offerta essenziale pensata per viaggiare senza pensieri." **Frecce di navigazione custom**: posizionate ai lati del titolo (non sopra/sotto lo slider). SVG geometrico (riferimento poligonale: triangolo + linea, viewBox `0 0 100 46.5` con `<polygon points="41.9 8 40.5 6.6 24.3 22.8 40.5 39 41.9 37.6 28.1 23.8 75.7 23.8 75.7 21.8 28.1 21.8 41.9 8" fill="var(--primary)" />` per la freccia sinistra; mirror per destra). Size 60-80px desktop, 40px mobile. Click → controllano lo Swiper. **Dati servizi**: array tipato in `src/data/services.ts`:
-
-  ```ts
-  export type Service = { id: string; number: string; title: string; description: string }
-  export const SERVICES: Service[] = [
-    { id: 'navetta',  number: '01', title: 'Servizio Navetta', description: 'Trasferimenti su richiesta da e per porto e aeroporto: comodo, veloce e sempre puntuale. Arrivi e riparti senza pensare a nulla.' },
-    { id: 'mezzi',    number: '02', title: 'Noleggio Mezzi',  description: 'Auto, scooter e biciclette per muoverti in totale libertà. Scegli il mezzo giusto per il tuo stile di viaggio.' },
-    { id: 'gommoni', number: '03', title: 'Noleggio Gommoni', description: 'Un gommone tutto per te per esplorare calette nascoste e vivere il mare in totale autonomia. Esperienza esclusiva su prenotazione.' },
-    { id: 'chef',     number: '04', title: 'Chef Privato',     description: 'La vera cucina siciliana direttamente nel tuo alloggio: piatti tipici personalizzati, ingredienti freschi e locali.' },
-    { id: 'favignana', number: '05', title: 'Tour Favignana', description: 'Scopri la perla delle Egadi: Cala Rossa, Cala Azzurra e un mare cristallino. Un\'esperienza indimenticabile.' },
-    { id: 'levanzo',  number: '06', title: 'Tour Levanzo',    description: 'Relax e natura autentica tra acque limpide, piccoli borghi e un\'atmosfera unica tutta da scoprire.' },
-  ]
-  ```
-
-  **Swiper config**: modules FreeMode, Navigation, A11y. `slidesPerView={3}` desktop, `1.5` tablet, `1.2` mobile. `freeMode={{ enabled: true, momentum: true }}`. `spaceBetween={30}`. `centeredSlides={false}`. Cursore custom su hover dello slider: `data-cursor="drag"` per attivare lo stato cursore custom (cerchio gold con freccia ↔). **Card di ogni slide**: `<article className="service-card bg-bg-warm border border-line p-10 transition-all duration-500">`. Padding 42px 32px. Numero "01" Cormorant italic font-size 18px color `var(--accent-deep)` con dash gold prefix (30px x 1px). Titolo h4 Cormorant 24px font-weight 400 line-height 1.25 color `var(--text)` margin 0 0 14px 42px. Paragrafo Inter 15px line-height 1.75 color `var(--text-2)` margin-left 42px. Hover card: border-color `var(--accent)` background white transform translateY(-6px) box-shadow `var(--shadow-sm)`.
-- **Scope**: solo ServiziSlider section. Niente CTA "Richiedi" su ogni card per ora (semplificare; può essere aggiunta successivamente come task UI).
-- **Files**: nuovo: `properhost-next/src/components/sections/ServiziSlider.tsx`, `properhost-next/src/data/services.ts`. Modifiche: `messages/*.json` namespace `services` con array di traduzioni per ogni id servizio.
-- **Dependencies**: Task 17, Task 18, Task 20.
-- **Notes**: Copy servizi è ProperHost (vedi `index.html` linee 167-198 del file statico). NON aggiungere servizi non presenti. Lo stile delle frecce è geometrico/poligonale come da viewBox dato — è uno stile minimal e neutro che molti brand luxury usano, non distintivo di un brand specifico. Test: drag dello slider funziona, frecce funzionano, su mobile slidesPerView 1.2 mostra la "peek" del prossimo card. Cleanup Swiper al dismount.
+- **Title**: ServiziSlider (Swiper free-mode 6 servizi)
+- **Desc**: Refactor sezione servizi con Swiper free-mode. **Dati** in `data/services.json`:
+```json
+[
+  { "id": "navetta", "number": "01", "title": "Servizio Navetta", "description": "Trasferimenti su richiesta da e per porto e aeroporto..." },
+  { "id": "mezzi", "number": "02", "title": "Noleggio Mezzi", "description": "Auto, scooter e biciclette..." },
+  { "id": "gommoni", "number": "03", "title": "Noleggio Gommoni", "description": "Un gommone tutto per te..." },
+  { "id": "chef", "number": "04", "title": "Chef Privato", "description": "La vera cucina siciliana..." },
+  { "id": "favignana", "number": "05", "title": "Tour Favignana", "description": "Scopri la perla delle Egadi..." },
+  { "id": "levanzo", "number": "06", "title": "Tour Levanzo", "description": "Relax e natura autentica..." }
+]
+```
+**Markup**: `<section class="servizi-slider" id="services"><div class="container"><header><span class="section-tag section-tag--gold-deep">I nostri servizi</span><h2 class="font-display">Tutto quello che serve per <em>godersi</em> la Sicilia</h2><p>Dal transfer al chef privato...</p></header><div class="swiper servizi-swiper">...slides generated JS or static...</div><div class="servizi-slider__nav"><button class="servizi-slider__arrow--prev">←</button><button class="servizi-slider__arrow--next">→</button></div></div></section>`. **CSS**: section bg `var(--bg-3)` padding 128-160px. Card servizi padding 42px 32px bg `var(--bg-warm)` border 1px solid `var(--line)`. Numero Cormorant italic 18px color `var(--accent-deep)` con dash gold prefix. Titolo h4 Cormorant 24px. Paragrafo Inter 15px color `var(--text-2)`. Hover card: border-color `var(--accent)` bg white translateY -6px shadow `var(--shadow-sm)`. **Swiper config** in `js/serviziSlider.js`: `new Swiper('.servizi-swiper', { modules: [FreeMode, Navigation, A11y], slidesPerView: 1.2, spaceBetween: 30, freeMode: { enabled: true, momentum: true }, breakpoints: { 760: { slidesPerView: 1.5 }, 1024: { slidesPerView: 3 } }, navigation: { prevEl: '.servizi-slider__arrow--prev', nextEl: '.servizi-slider__arrow--next' } })`. Frecce SVG poligonali (viewBox 0 0 100 46.5) come stile minimal.
+- **Scope**: solo ServiziSlider.
+- **Files**: `index.html`, `data/services.json`, `js/serviziSlider.js`, CSS.
+- **Dependencies**: Task 17, 18.
+- **Notes**: copy servizi ProperHost da `index.html` esistente. Cursore custom su drag area: `data-cursor="drag"` (gestito da `js/cursor.js`).
 
 ---
 
 ### Task 33
 - **Status**: todo
 - **Agent**: ui-designer
-- **Branch**: feature/migration-cta-prenota
+- **Branch**: feature/cta-prenota
 - **Priority**: medium
-- **Title**: Sezione CtaPrenota (parallax bg + claim grande + double button)
-- **Desc**: Creare `properhost-next/src/components/sections/CtaPrenota.tsx`. **Layout**: full-bleed `<section className="cta py-40 md:py-56 relative text-center text-white overflow-hidden">`. **Background**: bg-image `url('/assets/cta.jpg')` con `background-size: cover; background-position: center; background-attachment: fixed` (parallax sussurrato). **Overlay**: gradient `linear-gradient(180deg, rgba(11,107,94,.78) 0%, rgba(2,40,35,.92) 100%)` come `::before` absolute inset-0 z-1 (toni teal ProperHost, NON `rgba(73,111,145,.40)` altrui). **Container**: max-w 700px relative z-2 padding-x 48px. **Contenuto centrato**: section-tag "Contattaci" Inter 11px uppercase letter-spacing 0.36em color `var(--accent-soft)` con dash gold prima. Titolo h2 Cormorant font-weight 300 font-size `clamp(36px, 5vw, 64px)` line-height 1.05 color white margin-x auto max-w 20ch "Progettiamo insieme il tuo soggiorno in **Sicilia**" con `<em>Sicilia</em>` italic font-weight 400 color `var(--accent-soft)`. Paragrafo Inter 18px line-height 1.85 color rgba(255,255,255,.88) max-w 580px margin-x auto: "Scrivici: ti risponderemo con una proposta personalizzata, disponibilità e servizi dedicati." **Doppio CTA**: container flex gap 14px justify-center flex-wrap. (a) Button primario teal: `<Link href="/contatti" className="btn btn-primary">Vai al form contatti</Link>` — bg `var(--primary)` color white border 1px solid `var(--primary)` Inter 11px uppercase letter-spacing 0.28em padding 18px 36px. Hover: bg `var(--accent)` border-color `var(--accent)` translateY(-2px). (b) Button ghost outline bianco: `<a href="tel:+393392923744" className="btn btn-ghost">+39 339 2923 744</a>` — bg transparent color white border 1px solid rgba(255,255,255,.7). Hover: border-color `var(--accent)`. **Animazione**: titolo h2 con `data-reveal` per SplitText (Task 42). **Mobile (<760px)**: padding ridotto a `py-24`, disabilitare `background-attachment: fixed` (passa a `scroll`), titolo font 32-44px, paragrafo 16px. CTA stack verticalmente.
-- **Scope**: solo CtaPrenota section.
-- **Files**: nuovo: `properhost-next/src/components/sections/CtaPrenota.tsx`. Modifiche: `messages/*.json` namespace `cta`.
-- **Dependencies**: Task 17, Task 19 (cta.jpg), Task 20.
-- **Notes**: NON usare claim altrui ("La tua fuga da sogno comincia qui" è di un competitor — non usarlo). NON usare bottone terracotta (`#D36B3D` è palette altrui) — solo teal/oro ProperHost. Il copy del paragrafo è ProperHost da `index.html`. Test: parallax funziona su desktop scrollando, mobile usa scroll normale (verificare iOS). Il titolo deve respirare nel layout mobile (max-w 20ch lo aiuta).
+- **Title**: CtaPrenota full-bleed (parallax bg + claim + double button)
+- **Desc**: Sezione CTA finale in `index.html`. **Markup**: `<section class="cta-prenota"><div class="cta-prenota__bg" aria-hidden="true"></div><div class="cta-prenota__overlay" aria-hidden="true"></div><div class="container"><span class="section-tag section-tag--gold">Contattaci</span><h2 class="font-display">Progettiamo insieme il tuo soggiorno in <em>Sicilia</em></h2><p>Scrivici: ti risponderemo con una proposta personalizzata...</p><div class="cta-prenota__buttons"><a class="btn btn--primary" href="contatti.html">Vai al form contatti</a><a class="btn btn--ghost-light" href="tel:+393392923744">+39 339 2923 744</a></div></div></section>`. **CSS**: section padding 160-224px text-align center color white relative overflow hidden. `__bg` absolute inset-0 z-0 `background-image: url('/assets/cta.jpg'); background-size: cover; background-position: center; background-attachment: fixed;`. `__overlay` absolute inset-0 z-1 `linear-gradient(180deg, rgba(11,107,94,.78) 0%, rgba(2,40,35,.92) 100%)`. Container relative z-2 max-w 700px. **Mobile <760px**: padding 96px, `background-attachment: scroll`, h2 32-44px, p 16px, buttons stack vertical.
+- **Scope**: solo CtaPrenota.
+- **Files**: `index.html`, CSS.
+- **Dependencies**: Task 17, 19.
+- **Notes**: NO claim altrui ("La tua fuga da sogno comincia qui" è competitor). NO bottone terracotta (palette altrui). Solo teal/oro ProperHost.
 
 ---
 
 ### Task 34
 - **Status**: todo
 - **Agent**: coder
-- **Branch**: feature/migration-faq
+- **Branch**: feature/faq-accordion
 - **Priority**: medium
-- **Title**: Sezione FAQ accordion (6 domande, una aperta alla volta)
-- **Desc**: Creare `properhost-next/src/components/sections/Faq.tsx` componente client (per gestire stato aperto). **Layout**: `<section className="bg-primary-dark py-32 text-white">`. Container max-w 920px padding-x 48px. **Header centrato**: titolo h2 Cormorant font-weight 300 font-size `clamp(40px, 5vw, 64px)` line-height 1.05 color white margin-bottom 16px text-align center "Domande frequenti". Paragrafo Inter 16px line-height 1.85 color rgba(255,255,255,.85) max-w 580px margin-x auto text-align center: "Le risposte alle richieste più comuni. Per tutto il resto, scrivici o chiamaci direttamente." **Lista accordion**: `<ul className="faq-list mt-16">`. **Stato React**: `const [openIndex, setOpenIndex] = useState<number | null>(null)`. Click su una domanda imposta openIndex (toggle: se uguale all'indice, mette null). **Item markup**: per ogni voce `<li className="faq-item">` con: (a) `<button>` full-width text-left flex justify-between items-center padding 24px 0 border-bottom `1px solid rgba(255,255,255,.12)`. Contenuto: span domanda Inter 16px font-weight 500 color white. Sulla destra icona +/− gold (Inter font 24px color `var(--accent-soft)`, ruota 45° quando aperta). aria-expanded, aria-controls. (b) `<div className="faq-answer">` con `max-height: 0; overflow: hidden; transition: max-height 400ms ease-out`. Quando aperta: max-height `<scrollHeight>px` calcolato via JS o `max-height: 1000px` se semplificato. Padding-bottom 24px. Risposta Inter 15px line-height 1.7 color rgba(255,255,255,.78). **Dati FAQ**: array tipato in `src/data/faqs.ts`:
-
-  ```ts
-  export type Faq = { q: string; a: string }
-  export const FAQS_IT: Faq[] = [
-    { q: 'Come prenoto una villa Properhost?', a: 'La prenotazione passa sempre da una richiesta di disponibilità tramite il modulo contatti o WhatsApp/telefono. Riceverai una proposta personalizzata con date, prezzo, eventuali servizi inclusi ed extra. La conferma definitiva avviene dopo il versamento dell\'acconto.' },
-    { q: 'Cosa include il servizio concierge?', a: 'Il concierge coordina tutto ciò che riguarda l\'esperienza in villa: check-in dedicato, transfer da/per aeroporto e porto, chef privato, escursioni in mare, prenotazioni ristoranti, wellness in struttura, organizzazione di occasioni speciali. Alcuni servizi sono inclusi, altri si attivano su richiesta con preventivo dedicato.' },
-    { q: 'Quali metodi di pagamento accettate?', a: 'Bonifico bancario per acconto e saldo. Per richieste specifiche di pagamento con carta o frazionato, contattaci direttamente — valutiamo soluzioni caso per caso.' },
-    { q: 'Quali sono le politiche di cancellazione e modifica del soggiorno?', a: 'Le condizioni variano in base alla villa e al periodo. In generale: cancellazione con rimborso parziale fino a 60 giorni prima del check-in, dopo il termine il rimborso è discrezionale. Le modifiche di date si valutano in base alla disponibilità della struttura. Tutto è specificato nel contratto di soggiorno.' },
-    { q: 'Quali servizi extra posso richiedere durante il soggiorno?', a: 'Tutti i servizi del catalogo concierge — chef privato, transfer, noleggi (auto, scooter, gommone), tour delle Egadi, wellness, esperienze enogastronomiche, occasioni speciali. Le richieste vanno comunicate idealmente in fase di prenotazione, ma valutiamo anche aggiunte last-minute compatibilmente con la disponibilità dei partner.' },
-    { q: 'In quali zone della Sicilia operate?', a: 'Le ville della collezione attuale si trovano sulla costa orientale e nel Val di Noto: Taormina, Noto, Siracusa, Ragusa, Modica, Scicli. I servizi concierge coprono l\'intera Sicilia per chi soggiorna nelle nostre dimore.' },
-  ]
-  ```
-
-  **Animazione apertura**: usare GSAP per `to(answer, { height: 'auto', duration: 0.4, ease: 'power2.out' })` e chiusura `to(answer, { height: 0, duration: 0.3, ease: 'power2.in' })`. Solo una domanda aperta alla volta (chiudere la precedente prima di aprire la nuova). **A11y**: ogni button ha `aria-expanded`, `aria-controls` puntato all'id della risposta, e la risposta ha `role="region" aria-labelledby` puntato all'id del button.
-- **Scope**: solo FAQ section. Le risposte vanno scritte ad hoc per ProperHost (non esistono nel sito statico) — vedi i 6 esempi sopra.
-- **Files**: nuovo: `properhost-next/src/components/sections/Faq.tsx`, `properhost-next/src/data/faqs.ts`. Modifiche: `messages/*.json` namespace `faq` con array di {q, a}.
-- **Dependencies**: Task 17, Task 18 (GSAP), Task 20.
-- **Notes**: Le risposte sopra sono BOZZA — il cliente ProperHost dovrebbe revisionarle perché alcune (es. politiche di cancellazione, metodi di pagamento) richiedono dati reali del business. Lasciare commento `// TODO: confermare con cliente le risposte 3 e 4 (pagamento, cancellazione)`. Tono: editoriale, breve, professionale. NON copiare FAQ da altri brand. Il colore di sfondo `var(--primary-dark)` è una scelta luxury per dare contrasto con le sezioni precedenti su `var(--bg-2)`/`var(--bg-3)`.
+- **Title**: FAQ accordion (6 domande, una aperta alla volta)
+- **Desc**: Sezione FAQ in `index.html`. **Dati** in `data/faqs.json` (6 voci q/a, BOZZA): "Come prenoto una villa Properhost?", "Cosa include il servizio concierge?", "Quali metodi di pagamento accettate?", "Quali sono le politiche di cancellazione?", "Quali servizi extra posso richiedere?", "In quali zone della Sicilia operate?". **Markup**: `<section class="faq"><div class="container"><h2 class="font-display">Domande frequenti</h2><p>Le risposte alle richieste più comuni...</p><ul class="faq-list">[generated JS]</ul></div></section>`. Per ogni voce `<li class="faq-item"><button class="faq-item__q" aria-expanded="false" aria-controls="faq-a-{i}"><span>Domanda...</span><span class="faq-item__icon">+</span></button><div class="faq-item__a" id="faq-a-{i}" role="region" aria-labelledby="faq-q-{i}"><p>Risposta...</p></div></li>`. **CSS**: section bg `var(--primary-dark)` color white padding 128px. Container max-w 920px. H2 Cormorant 300 `clamp(40px, 5vw, 64px)`. Each item: button full-width text-left flex justify-between padding 24px 0 border-bottom 1px solid rgba(255,255,255,.12). Icon `+` Inter 24px gold, ruota 45° quando aperto (`is-open` class). Answer `max-height: 0; overflow: hidden; transition: max-height 400ms ease-out;`, when open `max-height: 600px`. **JS** in `js/faq.js`: click handler delega su `.faq-list`, toggle `is-open`, chiude le altre, aggiorna `aria-expanded`. Animazione apertura via GSAP `gsap.to(answer, { height: 'auto', duration: 0.4, ease: 'power2.out' })`.
+- **Scope**: solo FAQ section.
+- **Files**: `index.html`, `data/faqs.json`, `js/faq.js`, CSS.
+- **Dependencies**: Task 17, 18.
+- **Notes**: risposte BOZZA, marcate `<!-- TODO: confermare con cliente le risposte 3 e 4 -->`. Non copiare FAQ da altri brand.
 
 ---
 
 ### Task 35
 - **Status**: todo
 - **Agent**: coder
-- **Branch**: feature/migration-home-page
+- **Branch**: feature/home-stitching
 - **Priority**: high
-- **Title**: Home page stitching con SectionDividers (composizione finale)
-- **Desc**: Creare `properhost-next/src/app/[locale]/page.tsx` come Server Component (default in App Router) — i singoli componenti sezione che ne hanno bisogno sono già marcati `'use client'`. Importare e comporre tutte le sezioni nell'ordine corretto, intervallate da `<SectionDivider />` dove c'è cambio di bg color. **Struttura JSX**:
-
-  ```tsx
-  import Hero from '@/components/sections/Hero'
-  import Mission from '@/components/sections/Mission'
-  import VilleSlider from '@/components/sections/VilleSlider'
-  import ConciergePanel from '@/components/sections/ConciergePanel'
-  import ServiziSlider from '@/components/sections/ServiziSlider'
-  import CtaPrenota from '@/components/sections/CtaPrenota'
-  import Faq from '@/components/sections/Faq'
-  import SectionDivider from '@/components/SectionDivider'
-
-  export default function HomePage() {
-    return (
-      <>
-        <Hero />
-        <SectionDivider direction="top" fillColor="var(--bg-2)" />
-        <Mission />
-        <VilleSlider />
-        <SectionDivider direction="bottom" fillColor="var(--primary)" />
-        <ConciergePanel />
-        <SectionDivider direction="top" fillColor="var(--bg-3)" />
-        <ServiziSlider />
-        <CtaPrenota />
-        <SectionDivider direction="bottom" fillColor="var(--primary-dark)" />
-        <Faq />
-      </>
-    )
-  }
-  ```
-
-  **Verifica colore divider**: il `fillColor` di ogni divider DEVE coincidere con il bg della sezione successiva (per `direction="top"`) o precedente (per `direction="bottom"`), per ottenere effetto seamless. Mappa: Hero (nero) → Mission (`bg-2`) richiede divider con fill `bg-2`. Mission (`bg-2`) → VilleSlider (nero) richiede di solito nessun divider (la transizione cromatica drastica è ok in luxury, oppure divider `direction="bottom" fillColor="var(--bg-2)"` per chiudere la mission). VilleSlider (nero) → ConciergePanel (`primary`) richiede divider `direction="bottom" fillColor="black"` o saltare (direzione di design). ConciergePanel (sotto: bg fissa parallax) → ServiziSlider (`bg-3`) richiede divider con fill `bg-3`. ServiziSlider (`bg-3`) → CtaPrenota (parallax con overlay teal scuro): divider opzionale. CtaPrenota → FAQ (`primary-dark`): divider `bottom fillColor="var(--primary-dark)"`. **Posizionamento**: i SectionDivider sono elementi di flusso che vanno tra le sezioni, quindi `<section>` non li deve nidificare. **Metadata**: aggiungere export `metadata` a livello di pagina con title e description specifiche home (override del default in layout). Usare `getTranslations` da `next-intl/server` per i metadata localizzati. **Skeleton/Loading**: opzionale, non richiesto in questo step. **Test**: `pnpm dev`, visitare `/it` e `/en`, verificare ordine sezioni, transizioni fluide, scroll Lenis, niente CLS, niente errori console.
-- **Scope**: solo composizione home. Nessuna nuova logica di sezione. Nessuna modifica ai componenti già creati.
-- **Files**: nuovo: `properhost-next/src/app/[locale]/page.tsx`. Modifiche: `messages/*.json` per metadata.home se non già presente.
+- **Title**: Home page stitching con SectionDividers
+- **Desc**: Comporre `index.html` con tutte le sezioni nell'ordine corretto, intervallate da `<svg class="section-divider">` dove c'è cambio di bg color. Ordine: Hero → SectionDivider (top, fill `var(--bg-2)`) → Mission → VilleSlider → SectionDivider (bottom, fill `var(--primary)`) → ConciergePanel + concierge fixed bg → SectionDivider (top, fill `var(--bg-3)`) → ServiziSlider → CtaPrenota → SectionDivider (bottom, fill `var(--primary-dark)`) → Faq. Verificare che ogni divider abbia `fill` corrispondente al bg adiacente. Posizionare con `margin-top: -1px` per evitare seam. **Test**: scroll fluido Lenis, niente CLS, niente errori console. Cross-browser Chrome, Safari, Firefox.
+- **Scope**: solo composizione finale home.
+- **Files**: `index.html`.
 - **Dependencies**: Task 24, 27, 28, 29, 30, 31, 32, 33, 34.
-- **Notes**: Verificare che lo scroll Lenis funzioni fluido tra tutte le sezioni. Verificare CLS = 0 (tutte le immagini hanno width/height espliciti via `<Image>` Next con dimensioni o `fill` + parent dimensionato). Lighthouse target 90+ già a questo step (Performance). Test cross-browser: Chrome, Safari, Firefox. Se i divider creano gap di 1px in qualche browser, usare `position: relative; margin-top: -1px` sul divider successivo come hack noto.
+- **Notes**: target Lighthouse 90+ già a questo punto.
 
 ---
 
-## Task Queue · Migration Phase 3 — Pagine interne
+## Task Queue · Refactor Phase 4 — Pagine interne
 
 ---
 
 ### Task 36
 - **Status**: todo
 - **Agent**: ui-designer
-- **Branch**: feature/migration-page-about
+- **Branch**: feature/about-page
 - **Priority**: medium
-- **Title**: Pagina /about (mission, valori, territorio)
-- **Desc**: Creare `properhost-next/src/app/[locale]/about/page.tsx`. Estrarre il copy esistente da `about.html` del sito statico e tradurlo in struttura componenti. Sezioni: (1) Page hero con bg image `/assets/about-hero.jpg`, eyebrow "About", h1 Cormorant "Un modo più **personale** di vivere la Sicilia", paragrafo descrittivo, side card luxury con sub-claim "Calore mediterraneo, standard internazionali" e descrizione. (2) Sezione "Il progetto" con grid 2-col: testo a sinistra (titolo "Ospitalità di charme, **senza rigidità**", paragrafo, lista 3 punti) e immagine a destra (`/assets/about-panel.jpg`) con cornice oro sfalsata. (3) Sezione "Valori" con titolo "Tre principi che **guidano** ogni soggiorno" e 3 card senza foto: "01 Autenticità", "02 Discrezione", "03 Precisione" con copy esistente. (4) Sezione CTA "Scopri la selezione completa di ville e servizi" con doppio button (Ville + Concierge). Layout responsive coerente con la home. Usare i componenti `<SectionDivider />` tra cambi bg. Metadata: title "About · Properhost", description specifica about. Riutilizzare le classi/utilities già definite (eyebrow, section-tag, btn-pill, card-luxury, ecc.).
-- **Scope**: solo pagina /about. Nessun nuovo componente complesso (riusare quelli di home).
-- **Files**: nuovo: `properhost-next/src/app/[locale]/about/page.tsx`. Eventuali sub-componenti riutilizzabili in `src/components/sections/AboutHero.tsx`, ecc. Modifiche: `messages/*.json` namespace `about`.
-- **Dependencies**: Task 27 (layout), Task 24 (SectionDivider), Task 19 (asset).
-- **Notes**: Tutto il copy viene da `about.html` esistente — letterale, NON inventare. Le 3 card valori non hanno immagine, sono pure testuali con numero in metadata gold. Verificare che la pagina si integri visivamente con la home (stesso footer, stessa navbar fixed, stesso scroll).
+- **Title**: about.html refinement (mission, valori, territorio)
+- **Desc**: Refactor `about.html` (e `en/about.html`) usando i pattern definiti. Sezioni: (1) Page hero con bg `/assets/about-hero.jpg`, eyebrow "About", h1 Cormorant "Un modo più <em>personale</em> di vivere la Sicilia", side card "Calore mediterraneo, standard internazionali". (2) "Il progetto" grid 2-col con testo e immagine `/assets/about-panel.jpg` con cornice oro sfalsata. (3) "Valori" 3 card senza foto: "01 Autenticità", "02 Discrezione", "03 Precisione". (4) CTA finale doppio button (Ville + Concierge). Riusare `<svg class="section-divider">` tra cambi bg. Meta title/description specifici.
+- **Scope**: solo about.html (root + en/).
+- **Files**: `about.html`, `en/about.html`, CSS.
+- **Dependencies**: Task 27, 24, 19.
+- **Notes**: copy letterale da `about.html` esistente.
 
 ---
 
 ### Task 37
 - **Status**: todo
 - **Agent**: ui-designer
-- **Branch**: feature/migration-page-concierge
+- **Branch**: feature/concierge-page
 - **Priority**: medium
-- **Title**: Pagina /concierge (dettaglio servizi, features grid)
-- **Desc**: Creare `properhost-next/src/app/[locale]/concierge/page.tsx`. Estrarre copy da `concierge.html` esistente. Sezioni: (1) Page hero con bg `/assets/concierge-hero.jpg`, eyebrow "Concierge", h1 "Servizi pensati **intorno** al tuo soggiorno", side card "Un unico referente per tutto". (2) Sezione "Assistenza dedicata" con grid 2-col: immagine a sinistra (`/assets/concierge.jpg`) con cornice oro, testo a destra (titolo "Organizzazione precisa, **atmosfera** rilassata", paragrafo, lista 4 punti su transfer/chef/boat/wellness). (3) Sezione "Servizi principali" con il ServiziSlider o una griglia 6 servizi (id="services" per ancora interna). (4) Sezione 3 card extra: Wine & Food, Celebrations, Family Care con copy esistente. (5) Sezione CTA con bg `/assets/sea.jpg`. Riutilizzare componenti esistenti. Metadata title/description specifici concierge.
-- **Scope**: solo pagina /concierge.
-- **Files**: nuovo: `properhost-next/src/app/[locale]/concierge/page.tsx` + eventuali sub-components. Modifiche: `messages/*.json` namespace `conciergePage`.
-- **Dependencies**: Task 27, Task 32 (ServiziSlider riusato).
-- **Notes**: Copy da `concierge.html`. La pagina deve avere ancora `#services` per il deep-link dalla nav.
+- **Title**: concierge.html refinement (dettaglio servizi, features grid)
+- **Desc**: Refactor `concierge.html` (e `en/concierge.html`). Sezioni: (1) Page hero `/assets/concierge-hero.jpg`, h1 "Servizi pensati <em>intorno</em> al tuo soggiorno". (2) "Assistenza dedicata" grid 2-col image-left + text-right. (3) Sezione "Servizi principali" con anchor `#services`, riusare ServiziSlider o griglia 6 servizi. (4) 3 card extra: Wine & Food, Celebrations, Family Care. (5) CTA con bg `/assets/sea.jpg`.
+- **Scope**: solo concierge.html (root + en/).
+- **Files**: `concierge.html`, `en/concierge.html`, CSS.
+- **Dependencies**: Task 27, 32 (ServiziSlider riuso).
+- **Notes**: la pagina deve avere `id="services"` per deep-link da nav.
 
 ---
 
 ### Task 38
 - **Status**: todo
 - **Agent**: ui-designer
-- **Branch**: feature/migration-page-ville-list
+- **Branch**: feature/ville-list-page
 - **Priority**: high
-- **Title**: Pagina /ville (catalogo griglia 6 ville)
-- **Desc**: Creare `properhost-next/src/app/[locale]/ville/page.tsx`. Estrarre copy da `ville.html` esistente. Sezioni: (1) Page hero con bg `/assets/ville-hero.jpg`, eyebrow "Le nostre ville", h1 "Dimore selezionate per **location**, privacy e carattere", side card "Dalla costa orientale al Val di Noto". (2) Sezione "Catalogo ville" con grid 3-col (mobile 1, tablet 2): 6 card villa premium con immagine (4:5 aspect ratio), tag location, meta ospiti/camere, nome Cormorant, breve description, CTA "Richiedi info" (link a `/contatti?villa={slug}` o `/ville/{slug}`). Hover: scale immagine 1.07, gradient overlay, translateY -8px. (3) Sezione "Come scegliere" grid 2-col: testo a sinistra (titolo "La villa giusta dipende da **posizione** e stile", lista 3 punti) e immagine a destra (`/assets/about-panel.jpg`). (4) CTA finale con bg `/assets/sea.jpg`: "Hai già in mente una **zona** o una villa?". Usare i dati di `src/data/villas.ts` (Task 30) per popolare le card. Metadata title/description.
-- **Scope**: solo pagina catalogo /ville. Le pagine villa singola sono Task 39.
-- **Files**: nuovo: `properhost-next/src/app/[locale]/ville/page.tsx`. Eventuale `src/components/VillaCard.tsx` riutilizzabile. Modifiche: `messages/*.json`.
-- **Dependencies**: Task 27, Task 30 (data villas).
-- **Notes**: Copy da `ville.html`. Le 6 card devono linkare a `/ville/[slug]` (Task 39) anche se quella pagina non esiste ancora — usa `<Link>` con href dinamico, in dev darà 404 finché Task 39 non è fatta.
+- **Title**: ville.html catalogo 6 ville
+- **Desc**: Refactor `ville.html` (e `en/ville.html`). Sezioni: (1) Page hero `/assets/ville-hero.jpg`, h1 "Dimore selezionate per <em>location</em>, privacy e carattere". (2) Catalogo grid 3-col (mobile 1, tablet 2): 6 card villa. Card markup: `<article class="villa-card"><a class="villa-card__link" href="ville/{slug}.html"><div class="villa-card__image"><img src="..." alt="..." loading="lazy" decoding="async"></div><div class="villa-card__body"><span class="villa-card__location">Taormina</span><h3 class="villa-card__name font-display">Villa Aurea</h3><p class="villa-card__meta">10 ospiti · 5 camere</p><p class="villa-card__summary">...</p><span class="villa-card__cta">Richiedi info →</span></div></a></article>`. Hover: image scale 1.07, card translateY -8px, shadow elevata. (3) "Come scegliere" grid 2-col. (4) CTA finale con bg `/assets/sea.jpg`.
+- **Scope**: solo ville.html (root + en/).
+- **Files**: `ville.html`, `en/ville.html`, CSS, eventualmente JS per generare le card da `data/villas.json`.
+- **Dependencies**: Task 27, 30 (data ville).
+- **Notes**: link card a `ville/{slug}.html` (Task 39).
 
 ---
 
 ### Task 39
 - **Status**: todo
 - **Agent**: coder
-- **Branch**: feature/migration-page-ville-detail
+- **Branch**: feature/villa-detail-pages
 - **Priority**: high
-- **Title**: Dynamic route /ville/[slug] (6 villa detail pages)
-- **Desc**: Creare `properhost-next/src/app/[locale]/ville/[slug]/page.tsx` come dynamic segment. Implementare `generateStaticParams` che ritorna i 6 slug: aurea, zagara, bianca, soho, manu, dolce-vita. **Validazione slug**: nel page component, leggere `params.slug`, fare lookup in `VILLAS` array; se non trovato, chiamare `notFound()` da `next/navigation`. Sezioni della pagina: (1) Page hero con bg dell'immagine villa (`villa.image`), eyebrow "Villa Properhost", h1 nome villa Cormorant grande, sotto location e meta (es. "10 ospiti · 5 camere"). (2) Sezione "La villa" grid 2-col: descrizione lunga a sinistra (paragrafi multipli, copy specifico per villa — da popolare in `messages` o estendere `VILLAS` con campo `description`), gallery di 3-4 thumb a destra. (3) Sezione "Punti di forza" con 4-5 features specifiche villa (es. piscina infinity, terrazza panoramica, accesso al mare, chef incluso 1 sera, ecc.) — copy bozza, da raffinare con cliente. (4) Sezione "Richiedi disponibilità" con form sintetico inline o link a `/contatti?villa={slug}`. (5) Sezione "Altre ville" che mostra le 2 ville successive nel catalogo (next/prev nel array, wrap circolare). Per ora (mancando descrizioni specifiche villa per villa), usare placeholder `description: '<TODO: descrizione specifica per Villa X>'` nel data file e segnalare che il copy deve essere fornito dal cliente.
-- **Scope**: solo template dynamic ville detail. Le descrizioni specifiche villa per villa sono BOZZA — task content separata sarà necessaria per finalizzarle.
-- **Files**: nuovo: `properhost-next/src/app/[locale]/ville/[slug]/page.tsx`, `properhost-next/src/app/[locale]/ville/[slug]/not-found.tsx`. Estensione di `src/data/villas.ts` con campo `description`, `features`, `gallery` (array di immagini). Modifiche: `messages/*.json`.
-- **Dependencies**: Task 27, Task 30 (data villas), Task 38.
-- **Notes**: Per ora ProperHost ha 1 immagine per villa (`villa-1.jpg`...`villa-6.jpg`). La gallery 3-4 thumb è BOZZA: o (a) usiamo 4 volte la stessa immagine come placeholder con commento `// TODO: gallery reali per villa`, o (b) decidiamo che ogni villa ha una sola immagine e rimuoviamo la sezione gallery. Decisione del coder: optare per (b) come default, lasciando hook per future gallery. Configurare ISR: `export const revalidate = 3600` per consentire aggiornamento contenuti senza redeploy.
+- **Title**: 6 pagine villa singola statiche
+- **Desc**: Creare 6 pagine HTML statiche, una per villa: `ville/aurea.html`, `ville/zagara.html`, `ville/bianca.html`, `ville/soho.html`, `ville/manu.html`, `ville/dolce-vita.html` (e duplicate in `en/ville/`). Template comune (decisione del coder: copia-incolla manuale di un template oppure script Node che generi da `data/villas.json` — preferire script per consistency). **Sezioni per pagina**: (1) Page hero con bg dell'immagine villa, eyebrow "Villa Properhost", h1 nome villa, sotto location e meta (es. "10 ospiti · 5 camere"). (2) "La villa" grid 2-col: descrizione lunga a sinistra, gallery thumb a destra (per ora 1 immagine placeholder, marcato `<!-- TODO: gallery reali per villa -->`). (3) "Punti di forza" 4-5 features specifiche (BOZZA: piscina infinity, terrazza panoramica, accesso al mare, chef incluso 1 sera, ecc.). (4) "Richiedi disponibilità" link a `/contatti.html?villa={slug}` (precompilazione query param gestita in Task 40). (5) "Altre ville" mostra le 2 ville successive nel catalogo (next/prev wrap circolare). Estendere `data/villas.json` con campi `description`, `features[]`, `gallery[]`. Per ora `description` placeholder con `TODO: descrizione specifica per Villa X`.
+- **Scope**: solo template + 6 pagine villa singola.
+- **Files**: nuovi `ville/*.html` (6 file root + 6 in `en/ville/`), modifiche `data/villas.json`.
+- **Dependencies**: Task 27, 30.
+- **Notes**: scegliere script Node per generare le pagine in modo consistent (file `scripts/generate-villas.js` opzionale). La duplicazione del template è il principale tradeoff vs framework — accettarla con disciplina.
 
 ---
 
 ### Task 40
 - **Status**: todo
 - **Agent**: coder
-- **Branch**: feature/migration-page-contatti
+- **Branch**: feature/contatti-page
 - **Priority**: high
-- **Title**: Pagina /contatti (form completo + recapiti)
-- **Desc**: Creare `properhost-next/src/app/[locale]/contatti/page.tsx`. Estrarre copy da `contatti.html`. Sezioni: (1) Page hero con bg `/assets/contatti-hero.jpg`, eyebrow "Contatti", h1 "Parliamo del tuo **soggiorno** in Sicilia", side card "Entro 24 ore lavorative". (2) Sezione contact-layout con grid asymmetric: a sinistra (sticky) recapiti — section-tag, h2, paragrafo, lista contact-list (Telefono, Email, Sito, Area operativa). A destra contact-card bianca con form. **Form**: campi (nome, email, telefono, ospiti number, dates text, villa text con preselect da query string `?villa=aurea`, messaggio textarea, checkbox privacy). Submit: action a `https://api.staticforms.xyz/submit` (mantenere lo stesso endpoint del sito statico) con accessKey `sf_48b268096f28838111e4dcc9` come hidden input. **Validazione client-side**: required su nome, email, messaggio, privacy. Email valida via regex. Number positivo per ospiti. Mostrare errori sotto i campi (Inter 12px color red-600). On submit success: mostrare messaggio "Grazie, ti ricontatteremo a breve" e pulire form. (3) Sezione service-grid con 6 servizi (riutilizzare ServiziSlider in modalità grid statica oppure cards con icone emoji come da `contatti.html`). Metadata.
-- **Scope**: solo pagina /contatti. La validazione del form va lato client; il submit usa l'endpoint StaticForms esistente.
-- **Files**: nuovo: `properhost-next/src/app/[locale]/contatti/page.tsx`. Eventuale `src/components/ContactForm.tsx` separato.
-- **Dependencies**: Task 27, Task 32 (ServiziSlider riusato), Task 19.
-- **Notes**: Tenere lo stesso endpoint `staticforms.xyz` e accessKey per non interrompere il flusso prenotazioni esistente. Se in futuro il cliente vuole spostarlo a un'API route Next o a Resend/SendGrid, sarà task separato. Validazione: usare React state, non librerie pesanti come react-hook-form (per ora).
+- **Title**: contatti.html form completo + recapiti
+- **Desc**: Refactor `contatti.html` (e `en/contatti.html`). Sezioni: (1) Page hero `/assets/contatti-hero.jpg`, eyebrow "Contatti", h1 "Parliamo del tuo <em>soggiorno</em> in Sicilia". (2) Layout asymmetric: sticky a sinistra recapiti (telefono ×2, email, sito, area operativa), a destra contact card bianca con form. **Form**: action `https://api.staticforms.xyz/submit` (mantenere endpoint esistente), method POST, hidden `accessKey=sf_48b268096f28838111e4dcc9`. Campi: nome (required), email (required), telefono, ospiti (number), date (text), villa (text con preselect da `?villa={slug}` query param via JS), messaggio (textarea, required), checkbox privacy (required). Pre-compilazione villa: in `js/forms.js` leggere `URLSearchParams(window.location.search).get('villa')`, fare lookup nel `villas.json` per il nome formattato, popolare il campo. **Validazione client**: regex email, ospiti positivo, required check; errori sotto i campi Inter 12px color red-600. **Submit handling**: intercept con `fetch`, on success mostrare success message "Grazie, ti ricontatteremo a breve" e clear form. (3) Service-grid con 6 servizi (riusare ServiziSlider in modalità grid statica con `slidesPerView: 3` fixed, oppure card statiche).
+- **Scope**: solo contatti.html.
+- **Files**: `contatti.html`, `en/contatti.html`, `js/forms.js`, CSS.
+- **Dependencies**: Task 27, 32, 19.
+- **Notes**: mantenere endpoint StaticForms per non interrompere flusso. Validation senza librerie pesanti.
 
 ---
 
 ### Task 41
 - **Status**: todo
 - **Agent**: coder
-- **Branch**: feature/migration-page-prenotazione
+- **Branch**: feature/prenotazione-page
 - **Priority**: medium
-- **Title**: Pagina /prenotazione (richiesta disponibilità form esteso)
-- **Desc**: Creare `properhost-next/src/app/[locale]/prenotazione/page.tsx`. Pagina dedicata alla richiesta disponibilità (linkata dal pulsante "Book" nel nav). Layout simile a /contatti ma form più strutturato per la prenotazione. Campi: villa preferita (select da VILLAS array, opzione "Da definire / consigliami"), data check-in (date input), data check-out (date input), numero ospiti adulti (number), numero bambini (number), numero camere preferito (number), servizi extra interessati (checkbox group: Chef privato, Transfer, Concierge dedicato, Tour, Wellness, Yacht), note libere (textarea), nome (required), email (required), telefono (required), privacy (checkbox required). Il form va a stessa endpoint StaticForms con campo hidden `form_type=prenotazione` per distinguere dai contatti generici. Validazione client. Hero con copy diverso da /contatti, focus su "Disponibilità & Preventivo".
-- **Scope**: solo pagina /prenotazione.
-- **Files**: nuovo: `properhost-next/src/app/[locale]/prenotazione/page.tsx`. Eventuale `src/components/BookingForm.tsx`.
-- **Dependencies**: Task 27, Task 30 (data villas), Task 40 (riusare logica form).
-- **Notes**: Verificare che il submit StaticForms accetti i nuovi campi (in caso di limite plan, ridurre i campi al minimo essenziale e mettere il resto nelle "note libere"). Date validation: check-out deve essere dopo check-in.
+- **Title**: prenotazione.html (richiesta disponibilità form esteso)
+- **Desc**: Creare `prenotazione.html` (e `en/prenotazione.html`) come pagina dedicata, linkata dal "Book" del nav. Layout simile a contatti ma form più strutturato. Campi: villa preferita (select da villas.json + opzione "Da definire / consigliami"), check-in (date), check-out (date), adulti (number), bambini (number), camere preferite (number), servizi extra (checkbox group: Chef privato, Transfer, Concierge dedicato, Tour, Wellness, Yacht), note (textarea), nome (required), email (required), telefono (required), privacy (checkbox required). Stessa endpoint StaticForms, hidden `form_type=prenotazione` per distinguere. Validation: check-out > check-in. Hero con copy diverso da contatti, focus su "Disponibilità & Preventivo".
+- **Scope**: solo prenotazione.html.
+- **Files**: nuovo `prenotazione.html`, `en/prenotazione.html`, modifiche `js/forms.js`, CSS.
+- **Dependencies**: Task 27, 30, 40.
+- **Notes**: verificare limite plan StaticForms su numero campi; in caso, ridurre o spostare alcuni campi nelle "note libere".
 
 ---
 
-## Task Queue · Migration Phase 4 — Animazioni
+## Task Queue · Refactor Phase 5 — Animazioni & motion
 
 ---
 
 ### Task 42
 - **Status**: todo
 - **Agent**: ui-designer
-- **Branch**: feature/migration-splittext
+- **Branch**: feature/splittext-reveal
 - **Priority**: medium
-- **Title**: SplitText reveal su tutti i titoli h1/h2/h3 con ScrollTrigger
-- **Desc**: Creare hook custom `properhost-next/src/lib/useSplitReveal.ts` che (a) accetta un ref a un elemento testuale e una config `{ type: 'lines' | 'words' | 'chars' | 'lines,words' | 'lines,words,chars'; stagger?: number; duration?: number; delay?: number }`; (b) all'entrata in viewport (ScrollTrigger `start: 'top 80%'`) anima il SplitText con fromTo `y: 100%; opacity: 0` → `y: 0; opacity: 1`, stagger 0.05-0.12s, duration 1.0s, ease `power3.out`. Usare SplitText di GSAP se disponibile (Club), altrimenti `split-type` come fallback. Applicare il hook a tutti i titoli h1/h2/h3 di sezione: Hero (nessun h1 grande), Mission h2, ConciergePanel h2, ServiziSlider h2, CtaPrenota h2, Faq h2, Page hero h1 di about/concierge/ville/contatti/prenotazione, VilleSlider h2 (titolo villa nel center, animato già al cambio slide ma anche al primo entry). Usare un attributo `data-split-text-type` sui titoli per indicare il tipo: "lines,words" default, "chars" per i titoli più piccoli decorativi. Cleanup obbligatorio al dismount: `splitInstance.revert()` + `scrollTrigger.kill()`. Rispettare `prefers-reduced-motion`: se attivo, il hook non fa nulla (testo appare statico).
-- **Scope**: solo hook + applicazione a tutti i titoli esistenti. Non animare paragrafi (è Task 43).
-- **Files**: nuovo: `properhost-next/src/lib/useSplitReveal.ts`. Modifiche: tutti i componenti sezione che hanno h2/h1 (Hero, Mission, ConciergePanel, ServiziSlider, CtaPrenota, Faq, AboutPage, ConciergePage, VillePage, VillaDetailPage, ContattiPage, PrenotazionePage).
-- **Dependencies**: Task 18 (GSAP wrapper, SplitText o fallback), Task 28-34 (sezioni create).
-- **Notes**: Il hook deve essere usato in componenti `'use client'`. NON applicare SplitText a testi che cambiano dinamicamente (es. il villa name nel slider che cambia ad ogni slide — quello ha la sua animazione fade dedicata). Test: ogni titolo entra una volta sola al primo viewport entry; se l'utente scrolla in su e in giù, non riparte (uso `once: true` di ScrollTrigger). Verificare che il revert al dismount lasci il testo originale visibile (non vuoto).
+- **Title**: SplitText reveal su h1/h2/h3 con ScrollTrigger
+- **Desc**: Creare helper in `js/animations.js` che applica SplitText reveal a tutti i titoli con attributo `data-split-reveal`. Helper config: tipo split (`'lines'`, `'words'`, `'lines,words'`, `'chars'`), stagger, duration, ease. Per ogni elemento, all'entrata in viewport (ScrollTrigger `start: 'top 80%'`) animare con `gsap.from(splitInstance.lines, { y: '100%', opacity: 0, stagger: 0.08, duration: 1.0, ease: 'power3.out' })`. Usare SplitText GSAP Club se licenza disponibile, altrimenti fallback `split-type` (caricato in Task 18). Applicare attributo `data-split-reveal="lines,words"` ai titoli h2 di Mission, ConciergePanel, ServiziSlider, CtaPrenota, Faq, e h1 dei page hero (about, concierge, ville, ville singola, contatti, prenotazione). Il villa-slider title ha animazione propria al cambio slide, non SplitText. **Reduced motion**: helper return early se attivo, testo statico visibile. **Once**: ogni reveal solo al primo viewport entry (`once: true`).
+- **Scope**: solo helper SplitText + applicazione attributi.
+- **Files**: `js/animations.js`, modifiche HTML per `data-split-reveal`.
+- **Dependencies**: Task 18, 28-34.
+- **Notes**: cleanup `splitInstance.revert()` se la pagina viene ricaricata in modalità SPA (su sito statico, full reload, non necessario).
 
 ---
 
 ### Task 43
 - **Status**: todo
 - **Agent**: ui-designer
-- **Branch**: feature/migration-scroll-reveals
+- **Branch**: feature/scroll-reveals
 - **Priority**: medium
-- **Title**: ScrollTrigger reveals su elementi `.reveal` (paragrafi, card, CTA)
-- **Desc**: Creare un effetto reveal generico per tutti gli elementi non-titoli: paragrafi, card, button, immagini di sezione. Approccio: in un componente client globale `properhost-next/src/components/RevealOnScroll.tsx` o in un hook `useReveal.ts`, alla mount registrare un IntersectionObserver (o ScrollTrigger batch) che osserva tutti gli `[data-reveal]` o `.reveal` nel DOM. Quando un elemento entra al 80% del viewport, aggiungere classe `.in` o animare con GSAP `fromTo({ opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' })`. Stagger naturale via `ScrollTrigger.batch()` con `interval: 0.12s`. Applicare attributo `data-reveal` a: paragrafi delle sezioni, card di servizi, card di ville, immagini di mission/concierge, CTA pillola, list item. Compatibile con SplitText (Task 42) — i titoli hanno la loro logica, gli altri elementi hanno questa. Rispettare `prefers-reduced-motion`.
-- **Scope**: solo logica reveal generica + applicazione attributi sui componenti.
-- **Files**: nuovi: `properhost-next/src/lib/useReveal.ts` o `properhost-next/src/components/RevealOnScroll.tsx`. Modifiche: aggiungere `data-reveal` ai componenti sezione.
-- **Dependencies**: Task 18, Task 28-34.
-- **Notes**: Già in `script.js` del sito statico c'è una versione vanilla di questa logica con `IntersectionObserver`. La versione Next/GSAP deve essere superiore: stagger naturale, easing più morbido, integrazione con Lenis. Test: ogni reveal solo una volta (usare `once: true` o `scrollTrigger.kill()` dopo trigger).
+- **Title**: ScrollTrigger reveals su `[data-reveal]` (paragrafi, card, CTA)
+- **Desc**: In `js/animations.js`, registrare un `ScrollTrigger.batch('[data-reveal]', { start: 'top 85%', interval: 0.12, onEnter: batch => gsap.from(batch, { opacity: 0, y: 40, duration: 0.9, ease: 'power3.out', stagger: 0.12 }), once: true })`. Applicare attributo `data-reveal` a paragrafi sezione, card servizi/ville, immagini di mission/concierge, CTA pillola, list item. Compatibile con SplitText (Task 42) — i titoli hanno la loro logica, gli altri elementi hanno questa. **Reduced motion**: skip totale.
+- **Scope**: solo logica reveal generica + applicazione attributi.
+- **Files**: `js/animations.js`, modifiche HTML.
+- **Dependencies**: Task 18, 28-34.
+- **Notes**: già esiste in `script.js` versione vanilla con IntersectionObserver — sostituire con ScrollTrigger batch per stagger naturale e integrazione con Lenis.
 
 ---
 
 ### Task 44
 - **Status**: todo
 - **Agent**: ui-designer
-- **Branch**: feature/migration-parallax
+- **Branch**: feature/parallax-subtle
 - **Priority**: low
 - **Title**: Parallax sussurrato su Hero overlay e CtaPrenota bg
-- **Desc**: Implementare effetto parallax leggero (ratio 0.3 = sussurrato, NON aggressivo) su: (a) Hero — l'overlay video si muove verticalmente al 30% della velocità di scroll, dando una sensazione di profondità. Implementazione: ScrollTrigger con `scrub: true`, animazione `gsap.to(heroOverlay, { y: 200, scrollTrigger: { trigger: heroSection, start: 'top top', end: 'bottom top', scrub: 1 } })`. (b) CtaPrenota — già ha `background-attachment: fixed` su CSS (Task 33), che è un parallax statico. Aggiungere un parallax JS più sofisticato: muovere l'overlay teal con scrub. (c) Concierge fixed bg: idem. **Mobile**: disabilitare tutti i parallax (verifica `window.innerWidth < 768` o media query) — su mobile il parallax è jank pesante e poco apprezzato. **Reduced motion**: disabilitare completamente.
-- **Scope**: solo parallax su 3 punti (hero, cta, concierge bg).
-- **Files**: modifiche: `Hero.tsx`, `CtaPrenota.tsx`, `ConciergePanel.tsx`. Eventuale hook `useParallax.ts`.
-- **Dependencies**: Task 18, Task 28, Task 31, Task 33.
-- **Notes**: Il parallax deve essere "sussurrato" — non più del 30% della velocità di scroll. NON spingere a 70-80% (sembra esagerato/economico). Test: scrollare lentamente, percepire la profondità ma non un'animazione invadente.
+- **Desc**: In `js/animations.js`, applicare parallax leggero (ratio 0.3) a 3 punti: (a) Hero overlay si muove al 30% dello scroll: `gsap.to('.hero__overlay', { y: 200, scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 } })`. (b) CtaPrenota bg image: stesso pattern con `y: -100`. (c) Concierge fixed bg: ratio simile. **Mobile (<768px)**: disabilitare tutti i parallax (jank pesante iOS). **Reduced motion**: disable.
+- **Scope**: solo 3 parallax.
+- **Files**: `js/animations.js`.
+- **Dependencies**: Task 18, 28, 31, 33.
+- **Notes**: ratio sussurrato (0.2-0.3), non aggressivo. Test scroll lento: percepire profondità senza distrazione.
 
 ---
 
 ### Task 45
 - **Status**: todo
 - **Agent**: coder
-- **Branch**: feature/migration-reduced-motion
+- **Branch**: feature/reduced-motion
 - **Priority**: medium
 - **Title**: prefers-reduced-motion fallback completo (a11y critica)
-- **Desc**: Implementare un sistema centrale per rispettare `prefers-reduced-motion: reduce`. (1) Creare hook `useReducedMotion()` in `properhost-next/src/lib/useReducedMotion.ts` che ritorna boolean reattivo all'OS preference (con `matchMedia` listener). (2) In `LenisProvider`: se reducedMotion → NON inizializzare Lenis, lasciare scroll nativo. (3) In `Preloader`: se reducedMotion → render solo fade-out 200ms invece di counter+curtain. (4) In `CustomCursor`: se reducedMotion → non renderizzare. (5) In `useSplitReveal` e `useReveal`: se reducedMotion → applicare immediatamente lo stato finale (testo visibile, no animazione). (6) In `useParallax`: se reducedMotion → no animation. (7) Aggiungere CSS rule globale: `@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }`. Test: in DevTools attivare "Emulate prefers-reduced-motion: reduce" e verificare che (a) non c'è preloader animato, (b) cursore di sistema visibile, (c) Lenis disabilitato (scroll è nativo, snappy), (d) titoli appaiono istantaneamente, (e) parallax disabilitato.
-- **Scope**: aggiunte mirate ai componenti esistenti per la a11y. Niente refactor pesante.
-- **Files**: nuovo: `properhost-next/src/lib/useReducedMotion.ts`. Modifiche: `LenisProvider.tsx`, `Preloader.tsx`, `CustomCursor.tsx`, `useSplitReveal.ts`, `useReveal.ts`, `useParallax.ts`, `globals.css`.
+- **Desc**: Implementare sistema centrale per rispettare `prefers-reduced-motion: reduce`. (1) Helper `js/utils.js` con `export const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;` e listener reattivo. (2) Lenis: se reduced → NON inizializzare (scroll nativo). (3) Preloader: fade-out 200ms invece di counter. (4) CustomCursor: NON renderizzare. (5) SplitText reveal e generic reveal: applicare stato finale immediato. (6) Parallax: skip. (7) CSS rule globale in `css/base.css`: `@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }`. Test in DevTools "Emulate prefers-reduced-motion: reduce" e verificare comportamento.
+- **Scope**: aggiunte mirate.
+- **Files**: nuovo `js/utils.js`, modifiche a `js/lenis.js`, `js/preloader.js`, `js/cursor.js`, `js/animations.js`, `css/base.css`.
 - **Dependencies**: Task 22, 23, 27, 42, 43, 44.
-- **Notes**: La preferenza utente è importante per accessibilità — utenti con disturbi vestibolari, ADHD, epilessia possono soffrire fortemente di animazioni. NON è opzionale.
+- **Notes**: preferenza utente cruciale per a11y. NON è opzionale.
 
 ---
 
-## Task Queue · Migration Phase 5 — Performance, SEO, A11y, Deploy
+## Task Queue · Refactor Phase 6 — Performance, SEO, A11y, Deploy
 
 ---
 
 ### Task 46
 - **Status**: todo
 - **Agent**: coder
-- **Branch**: feature/migration-image-optim
+- **Branch**: feature/image-optim
 - **Priority**: high
-- **Title**: Migrare tutte le `<img>` a `<Image>` Next con sizes responsive
-- **Desc**: Sostituire ogni `<img>` nei componenti con il componente `<Image>` di `next/image`. Per ogni Image: definire `width` e `height` espliciti (per evitare CLS) o usare `fill` con parent `position: relative` dimensionato. Definire `sizes` responsive accurato (es. `(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 33vw` per le card villa nella griglia). Usare `priority` SOLO per immagini above-the-fold critiche per LCP (es. hero poster, prima slide del VilleSlider). Tutte le altre con `loading="lazy"` (default). `placeholder="blur"` con `blurDataURL` generato a build time (next-image-export-optimizer o usare base64 statici). Configurare `next.config.ts` con `images.formats: ['image/avif', 'image/webp']` per servire formati moderni.
-- **Scope**: solo refactor immagini. Niente nuove feature.
-- **Files**: modifiche: tutti i componenti che usano `<img>` (sezioni home, page hero di pagine interne, ecc.). Modifiche `next.config.ts`.
-- **Dependencies**: Task 28-41 (componenti creati).
-- **Notes**: Le immagini hero video (poster) e villa-1.jpg sono LCP candidates su rispettive pagine — `priority`. Verificare con Lighthouse che LCP < 2.5s.
+- **Title**: Ottimizzazione immagini (AVIF/WebP, srcset, lazy)
+- **Desc**: Per ogni immagine in `assets/`: (1) generare versioni WebP e AVIF con tool a scelta (Squoosh CLI, ImageMagick, sharp via script Node `scripts/optim-images.js`). (2) Generare versioni responsive multiple (es. 400w, 800w, 1200w, 1600w, 2400w per le hero). (3) Sostituire ogni `<img src="...">` con `<picture><source type="image/avif" srcset="..."><source type="image/webp" srcset="..."><img src="fallback.jpg" alt="..." loading="lazy" decoding="async" width="..." height="..."></picture>`. (4) Per immagini above-the-fold critiche per LCP (hero poster, prima slide VilleSlider, page hero immagini): `loading="eager"` e `fetchpriority="high"`. (5) Tutte le altre `loading="lazy"`. (6) `width` e `height` espliciti su ogni `<img>` per evitare CLS. (7) Mantenere asset originali come fallback ma servire AVIF/WebP. Target peso totale: hero < 800KB, ville < 300KB ciascuna. Documentare nel commit la riduzione di peso.
+- **Scope**: solo refactor immagini.
+- **Files**: nuovi file in `assets/` (versioni avif/webp/responsive), modifiche in tutti i file HTML che usano `<img>`. Eventuale `scripts/optim-images.js`.
+- **Dependencies**: Task 19, 28-41.
+- **Notes**: target Lighthouse LCP < 2.5s.
 
 ---
 
 ### Task 47
 - **Status**: todo
 - **Agent**: coder
-- **Branch**: feature/migration-seo
+- **Branch**: feature/seo-meta-jsonld
 - **Priority**: high
-- **Title**: SEO completo (metadata, OG, Twitter, structured data, sitemap, robots)
-- **Desc**: (1) Per ogni pagina (home, /about, /concierge, /ville, /ville/[slug], /contatti, /prenotazione) esportare `metadata: Metadata` con title specifico, description, openGraph (title, description, images, type, locale), twitter (card type, title, description, images). Usare `getTranslations` per i18n nelle metadata. (2) Aggiungere structured data JSON-LD: in `/ville/[slug]/page.tsx` schema `LodgingBusiness` con name, address, geo, image, priceRange, aggregateRating placeholder, telephone. In root layout schema `Organization` con name "Properhost", URL, logo, address Palermo, contactPoint. In /contatti schema `ContactPage`. (3) Creare `properhost-next/src/app/sitemap.ts` che genera sitemap.xml con tutte le rotte statiche e dinamiche (locales × pagine × slug villa). (4) Creare `properhost-next/src/app/robots.ts` con `User-agent: *, Allow: /, Sitemap: <baseUrl>/sitemap.xml`. (5) Aggiungere `<link rel="canonical">` per ogni pagina. (6) `og:image` come immagine 1200×630 dedicata: creare in `public/og/` (placeholder usando crop di hero-home.jpg).
-- **Scope**: solo SEO/metadata. Niente analytics (separato).
-- **Files**: nuovi: `src/app/sitemap.ts`, `src/app/robots.ts`, `public/og/og-default.jpg`, `public/og/og-villa-{slug}.jpg`. Modifiche: tutti i `page.tsx` per esportare metadata, layout root per Organization JSON-LD.
-- **Dependencies**: Task 35, 36, 37, 38, 39, 40, 41.
-- **Notes**: Per generare og:image 1200×630 brand-specific, possibile usare `@vercel/og` Next API route (ma richiede effort). Per ora: usare hero-home.jpg cropped manualmente — TODO dedicato per immagini OG custom.
+- **Title**: SEO completo (meta, OG, Twitter, JSON-LD, sitemap, robots)
+- **Desc**: (1) Per ogni pagina HTML aggiungere `<head>`: title univoco, meta description, meta keywords (opzionale), `<link rel="canonical">`, `<link rel="alternate" hreflang="it/en">`, OG tags (`og:title`, `og:description`, `og:image`, `og:url`, `og:type`, `og:locale`), Twitter Card (`twitter:card`, `twitter:title`, ecc.), theme-color (palette teal). (2) JSON-LD: in tutte le pagine schema `Organization` per ProperHost (name, url, logo, address Palermo, contactPoint con tel ed email). In `ville/{slug}.html` schema `LodgingBusiness` con name, address, image, priceRange, telephone. In `contatti.html` schema `ContactPage`. Inserire come `<script type="application/ld+json">{}</script>` nel `<head>`. (3) Creare `sitemap.xml` manuale alla root con tutte le URL (root + `/en/`, tutte le pagine + 6 ville x 2 lingue). Aggiornare ad ogni nuova pagina. Tool consigliato per generazione semi-automatica: script Node che legge la struttura cartelle. (4) Creare `robots.txt` alla root con `User-agent: *`, `Allow: /`, `Sitemap: https://www.properhost.it/sitemap.xml`. (5) OG image dedicate 1200×630 per ogni pagina (placeholder iniziale: crop di hero-home.jpg, salvate in `og/`).
+- **Scope**: solo SEO/metadata.
+- **Files**: modifiche a tutti i `<head>` HTML, nuovi `sitemap.xml`, `robots.txt`, immagini in `og/`.
+- **Dependencies**: Task 35-41.
+- **Notes**: target Lighthouse SEO 95+. Per og:image custom, valutare in futuro generatore (es. Cloudinary o canvas-based script).
 
 ---
 
 ### Task 48
 - **Status**: todo
 - **Agent**: ui-designer
-- **Branch**: feature/migration-a11y
+- **Branch**: feature/a11y-polish
 - **Priority**: high
-- **Title**: A11y polish (focus visibili, ARIA, scrollbar, skip link)
-- **Desc**: (1) Aggiungere skip-to-content link all'inizio del body: `<a href="#main" className="skip-link">Vai al contenuto</a>` con CSS che lo nasconde fuori dallo schermo finché non riceve focus. (2) Verificare che TUTTI gli elementi interattivi (link, button, input, select, textarea) abbiano focus visibile chiaro: outline 2px dotted `var(--accent)` outline-offset 4px, mai `outline: none` senza alternativa. (3) Aggiungere `aria-label` o `aria-labelledby` a tutti gli elementi non testuali (icone, button-icon, slider). (4) Verificare ordine tab logico in tutte le pagine. (5) Scrollbar custom: `::-webkit-scrollbar { width: 6px } ::-webkit-scrollbar-track { background: transparent } ::-webkit-scrollbar-thumb { background: rgba(11,107,94,.3) } ::-webkit-scrollbar-thumb:hover { background: rgba(11,107,94,.6) }`. (6) Aggiungere `lang={locale}` su `<html>`. (7) Test con strumenti: Lighthouse A11y → 100, axe DevTools → 0 violazioni, screen reader (VoiceOver/NVDA) → naviga tutta la home.
-- **Scope**: solo polish a11y. Niente refactor strutturale.
-- **Files**: modifiche: `globals.css` (skip-link, focus, scrollbar), Navbar.tsx, layout.tsx, vari componenti per ARIA.
+- **Title**: A11y polish (focus, ARIA, skip-link, scrollbar, contrast)
+- **Desc**: (1) Aggiungere skip-to-content link all'inizio di `<body>` in tutte le pagine: `<a href="#main" class="skip-link">Vai al contenuto</a>` nascosto fuori schermo finché non riceve focus. CSS: `.skip-link { position: absolute; left: -9999px; ... } .skip-link:focus { left: 1rem; top: 1rem; ... }`. Aggiungere `<main id="main">` in tutte le pagine. (2) Verificare focus visibile su TUTTI gli interattivi: `outline: 2px dotted var(--accent); outline-offset: 4px;`. Mai `outline: none` senza alternativa. (3) ARIA su elementi non testuali: tutte le icone decorative `aria-hidden="true"`, tutti i bottoni-icona `aria-label="..."`, slider `aria-label`, modali `aria-modal="true" role="dialog"`. (4) Ordine tab logico: verificare con Tab in tutte le pagine. (5) Scrollbar custom: `::-webkit-scrollbar { width: 6px } ::-webkit-scrollbar-thumb { background: rgba(11,107,94,.3); border-radius: 3px } ::-webkit-scrollbar-thumb:hover { background: rgba(11,107,94,.6) }`. (6) `<html lang="it">` (e `lang="en"` per `/en/`). (7) Test completo: Lighthouse A11y → 100, axe DevTools 0 violazioni, screen reader (VoiceOver/NVDA) → naviga tutta la home senza ostacoli.
+- **Scope**: polish a11y.
+- **Files**: modifiche a tutti gli HTML, CSS in `css/base.css`.
 - **Dependencies**: Task 25, 27, 35-41.
-- **Notes**: A11y NON è opzionale. Score 100 Lighthouse A11y è target obbligatorio.
+- **Notes**: A11y NON opzionale. Score 100 obbligatorio.
 
 ---
 
 ### Task 49
 - **Status**: todo
 - **Agent**: coder
-- **Branch**: feature/migration-lighthouse
+- **Branch**: feature/lighthouse-audit
 - **Priority**: high
-- **Title**: Lighthouse audit completo + ottimizzazioni (target 95+ Perf)
-- **Desc**: Eseguire Lighthouse audit (Chrome DevTools) su `pnpm build && pnpm start` → localhost:3000, in modalità Mobile e Desktop. Risolvere ogni problema fino a target: Performance ≥95, Accessibility = 100, Best Practices ≥95, SEO ≥95. Aree tipiche di intervento: (1) **LCP**: ottimizzare hero video (codec H.265 max 1080p), comprimere `villa-1.jpg` (LCP della home post-hero), usare `priority` correttamente, preload font. (2) **CLS**: tutte le immagini con dimensioni esplicite, video con `aspect-ratio`, font con `display: 'swap'` + `size-adjust` se necessario. (3) **TBT**: ridurre JS bundle — tree-shake Swiper modules, lazy-import GSAP plugins, dynamic import di componenti pesanti (Faq solo se in viewport, ecc.). (4) **FCP**: minimizzare CSS critico inline. (5) **Best Practices**: HTTPS only, no console errors, immagini con alt valide. (6) **SEO**: meta description su tutte le pagine, canonical url, robots/sitemap valid. Documentare ogni intervento nel commit.
-- **Scope**: ottimizzazioni cross-cutting per raggiungere target Lighthouse.
+- **Title**: Lighthouse audit + ottimizzazioni (target Performance 95+)
+- **Desc**: Eseguire Lighthouse audit (Chrome DevTools) su sito servito staticamente (es. `npx serve .` su localhost:3000), in modalità Mobile e Desktop. Risolvere ogni problema fino a target: Performance ≥95, Accessibility = 100, Best Practices ≥95, SEO ≥95. Aree tipiche: (1) **LCP**: ottimizzare hero video (codec H.265 max 1080p, max 3MB); preload poster. (2) **CLS**: tutte immagini con `width`/`height`, video con `aspect-ratio`. (3) **TBT**: minify JS, defer non-critical scripts (analytics se presenti, dopo onLoad), code-split dove possibile. (4) **FCP**: critical CSS inline nel `<head>` per above-the-fold (estrarre con tool come `critical` o manualmente). (5) Best Practices: serve via HTTPS, no console errors, alt valide. (6) SEO: già coperto in Task 47. Documentare ogni intervento nel commit.
+- **Scope**: ottimizzazioni cross-cutting.
 - **Files**: vari, secondo necessità.
 - **Dependencies**: Task 35-48.
-- **Notes**: Lighthouse fluttua tra run; fare 3 run consecutive e prendere la mediana. Target: 95+ stabile.
+- **Notes**: Lighthouse fluttua; mediana di 3 run. Target 95+ stabile.
 
 ---
 
 ### Task 50
 - **Status**: todo
 - **Agent**: coder
-- **Branch**: feature/migration-vercel-deploy
+- **Branch**: feature/deploy-static
 - **Priority**: high
-- **Title**: Deploy Vercel + ISR + custom domain
-- **Desc**: (1) Connettere il repo GitHub a Vercel, configurare il root del progetto come `properhost-next/` (monorepo support se l'altro sito statico è ancora in root). Build command: `pnpm build`. Output: `.next`. (2) Configurare Environment Variables se necessarie (es. `STATICFORMS_KEY` se il key del form va in env). (3) Configurare ISR: in `/ville` e `/ville/[slug]` esportare `export const revalidate = 3600` (rigenera ogni ora). (4) Deploy preview da branch `develop` o equivalente, poi merge in `main` per production. (5) Configurare custom domain: properhost.it punta al deployment Vercel, gestire DNS A/CNAME come da guide Vercel. SSL automatico. (6) Configurare redirect del vecchio sito statico al nuovo (se hosting precedente diverso). (7) Configurare 301 redirect da legacy URL come `/index.html` → `/`, `/about.html` → `/about`, ecc. (8) Test post-deploy: visitare ogni pagina, controllare console pulita, verificare che il form di /contatti invii correttamente (test reale a properhost.company@gmail.com con flag).
-- **Scope**: solo deploy ops + DNS + ISR config.
-- **Files**: `properhost-next/vercel.json` (se config custom serve), `properhost-next/next.config.ts` (per redirect).
+- **Title**: Deploy statico (Netlify / Vercel / Cloudflare Pages) + DNS + redirect
+- **Desc**: (1) Scegliere host statico: **Netlify** (consigliato per semplicità + form handling alternativo se mai si volesse migrare via da StaticForms), **Vercel** (ottimo CDN), **Cloudflare Pages** (CDN rapido + free SSL). Per ProperHost statico: **Netlify** o **Cloudflare Pages**. (2) Connettere repo GitHub all'host scelto, configurare branch `main` come production. Build command: `# nessuna build` (sito 100% statico) — oppure `npm run build` se si introduce uno script di image-optim/sitemap-generation in Task 46/47. Output dir: root del repo. (3) Configurare custom domain `www.properhost.it` (e redirect da `properhost.it` → `www.properhost.it` o viceversa, scelta SEO). DNS: A record o CNAME come da guida host. SSL automatico via Let's Encrypt. (4) Configurare 301 redirect da legacy URL (se applicabile, es. `/index.html` → `/`). Su Netlify usare `_redirects` file. Su Cloudflare Pages: `_redirects` o regole CF. (5) Configurare cache headers per asset statici (immagini, font: `Cache-Control: public, max-age=31536000, immutable`). Su Netlify: `_headers` file. (6) Test post-deploy: visitare ogni pagina IT + EN, console pulita, form contatti invia correttamente (test reale a properhost.company@gmail.com con flag visibile per identificare il test). (7) Setup analytics privacy-friendly (Plausible o Umami) opzionale, in task separata.
+- **Scope**: solo deploy ops + DNS + redirect.
+- **Files**: nuovi `_redirects`, `_headers` (per Netlify) o equivalenti.
 - **Dependencies**: Task 35-49.
-- **Notes**: Verificare che `next-intl` middleware funzioni correttamente in production (test `/en` route). Verificare che i font Google carichino dalla CDN Vercel. Monitor primi giorni con Vercel Analytics o Plausible (separato).
+- **Notes**: verificare che i path assoluti `/assets/...` funzionino (vs relativi). Test mobile su rete reale, non solo emulator. Backup DNS originali prima della modifica.
 
 ---
 
 ## Suggerimento di assegnazione tra agent
 
-Senza conoscere il ruolo specifico dei tuoi 3 agent, distribuzione ragionevole:
+Distribuzione ragionevole con 3 agent:
 
 - **ui-designer**: Task 17, 24, 26, 28, 29, 31, 33, 36, 37, 38, 42, 43, 44, 48
 - **coder**: Task 16, 18, 19, 20, 21, 22, 23, 25, 27, 30, 32, 34, 35, 39, 40, 41, 45, 46, 47, 49, 50
-- **terzo agent (qa-tester / fullstack / infra)**: può assorbire 21, 45, 48, 49, 50 oppure aiutare in parallelo su review/test cross-task
+- **terzo agent (qa-tester / fullstack / infra)**: può assorbire 21, 45, 48, 49, 50 oppure aiutare in parallelo su review/test cross-task.
 
-Se i tuoi agent hanno ruoli diversi (es. uno specializzato in SEO, uno in animazioni GSAP, uno in deploy), riassegna di conseguenza. Posso aggiornare la mappa se mi dici i ruoli esatti.
+Se gli agent hanno ruoli diversi, riassegnare di conseguenza.
 
 ## Workflow
 
 1. Assegna task all'agent corretto.
-2. L'agent lavora solo sul branch `openHands`.
+2. L'agent lavora solo sul branch `openHands` (o sul branch indicato dalla task).
 3. L'agent completa la task senza uscire dallo scope.
-4. L'agent testa su mobile e desktop.
+4. L'agent testa su mobile, tablet e desktop.
 5. L'agent prepara commit convenzionale.
 6. Merge manuale solo dopo verifica.
 
 ## Regole
 
 - Un task = un obiettivo chiaro.
-- In `openHands` branch vanno tutti i commit dei task svolti, uno per volta.
+- Su `openHands` vanno tutti i commit dei task svolti, uno per volta.
 - Non mischiare task diverse negli stessi commit.
-- Non creare nuovi file se non previsto o quanto meno chiedi prima.
+- Non creare nuovi file se non previsto, o quanto meno chiedi prima.
 - Non fare push di modifiche non testate.
 - Non toccare aree non richieste.
 - Se una task richiede UI e JS, dividila in due task separate.
