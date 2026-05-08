@@ -870,6 +870,58 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 
 ---
 
+### Task 54
+- **Status**: todo
+- **Agent**: ui-designer
+- **Branch**: openHands
+- **Priority**: high
+- **Title**: Togliere la scritte sotto il logo della pagina index.html
+- **Desc**: Togliere la scritte sotto il logo della pagina index.html
+- **Scope**: index
+- **Files**: HTML pertinenti
+- **Dependencies**: nessuna.
+
+---
+
+### Task 55
+- **Status**: todo
+- **Agent**: ui-designer
+- **Branch**: openHands
+- **Priority**: high
+- **Title**: Il testo sovrapposto al video, deve essere spostato tutto a destra
+- **Desc**: Il testo sovrapposto al video, deve essere spostato tutto a destra
+- **Scope**: index
+- **Files**: HTML pertinenti
+- **Dependencies**: nessuna.
+
+---
+
+### Task 56
+- **Status**: todo
+- **Agent**: ui-designer
+- **Branch**: openHands
+- **Priority**: high
+- **Title**: Nella sezione Private Concierge devi inserire dello spazio tra il titolo grande, il bottono e la descrizione dopo il bottone
+- **Desc**: Nella sezione Private Concierge devi inserire dello spazio tra il titolo grande, il bottono e la descrizione dopo il bottone
+- **Scope**: index
+- **Files**: HTML pertinenti
+- **Dependencies**: nessuna.
+
+---
+
+### Task 56
+- **Status**: todo
+- **Agent**: ui-designer
+- **Branch**: openHands
+- **Priority**: high
+- **Title**: Nella sezione Our Services non si vedono le immagini sotto la descrizione, compare solo la scritta nel cursore
+- **Desc**: Nella sezione Our Services non si vedono le immagini sotto la descrizione, compare solo la scritta nel cursore
+- **Scope**: index
+- **Files**: HTML pertinenti
+- **Dependencies**: nessuna.
+
+---
+
 ## Suggerimento di assegnazione tra agent
 
 Distribuzione ragionevole con 3 agent:
