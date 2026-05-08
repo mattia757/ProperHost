@@ -1,5 +1,40 @@
 // Properhost — script condiviso
 (function () {
+  // Preloader
+  var preloader = document.getElementById('preloader');
+  var preloaderBar = document.getElementById('preloaderBar');
+  if (preloader) {
+    var loaded = false;
+    var progress = 0;
+    var interval = setInterval(function() {
+      progress += Math.random() * 15;
+      if (progress > 90) progress = 90;
+      if (preloaderBar) preloaderBar.style.width = progress + '%';
+    }, 150);
+    
+    function hidePreloader() {
+      if (loaded) return;
+      loaded = true;
+      clearInterval(interval);
+      if (preloaderBar) preloaderBar.style.width = '100%';
+      setTimeout(function() {
+        preloader.classList.add('hidden');
+        if (document.body) document.body.style.overflow = '';
+      }, 400);
+    }
+    
+    // Hide on load
+    if (document.readyState === 'complete') {
+      hidePreloader();
+    } else {
+      window.addEventListener('load', hidePreloader);
+      setTimeout(hidePreloader, 3000);
+    }
+    
+    // Prevent scroll while loading
+    if (document.body) document.body.style.overflow = 'hidden';
+  }
+  
   // Mobile nav toggle
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.getElementById('mainNav');
