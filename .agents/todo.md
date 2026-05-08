@@ -297,7 +297,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 16
-- **Status**: todo
+- **Status**: done
 - **Agent**: coder
 - **Branch**: feature/project-structure
 - **Priority**: high
@@ -325,7 +325,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 18
-- **Status**: todo
+- **Status**: done
 - **Agent**: coder
 - **Branch**: feature/libs-loading
 - **Priority**: high
@@ -759,7 +759,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 46
-- **Status**: todo
+- **Status**: done
 - **Agent**: coder
 - **Branch**: feature/image-optim
 - **Priority**: high
@@ -801,9 +801,10 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 49
-- **Status**: todo
+- **Status**: blocked
 - **Agent**: coder
 - **Branch**: feature/lighthouse-audit
+- **Blocked by**: richiede Chrome/Lighthouse esterno; checklist preparata in `.agents/LIGHTHOUSE.md`.
 - **Priority**: high
 - **Title**: Lighthouse audit + ottimizzazioni (target Performance 95+)
 - **Desc**: Eseguire Lighthouse audit (Chrome DevTools) su sito servito staticamente (es. `npx serve .` su localhost:3000), in modalità Mobile e Desktop. Risolvere ogni problema fino a target: Performance ≥95, Accessibility = 100, Best Practices ≥95, SEO ≥95. Aree tipiche: (1) **LCP**: ottimizzare hero video (codec H.265 max 1080p, max 3MB); preload poster. (2) **CLS**: tutte immagini con `width`/`height`, video con `aspect-ratio`. (3) **TBT**: minify JS, defer non-critical scripts (analytics se presenti, dopo onLoad), code-split dove possibile. (4) **FCP**: critical CSS inline nel `<head>` per above-the-fold (estrarre con tool come `critical` o manualmente). (5) Best Practices: serve via HTTPS, no console errors, alt valide. (6) SEO: già coperto in Task 47. Documentare ogni intervento nel commit.
@@ -815,7 +816,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 50
-- **Status**: todo
+- **Status**: done
 - **Agent**: coder
 - **Branch**: feature/deploy-static
 - **Priority**: high

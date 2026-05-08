@@ -1,0 +1,70 @@
+/* ==========================================================
+   ProperHost · CSS Design Tokens
+   Single source of truth per palette, spacing, type, motion.
+   ========================================================== */
+
+:root {
+  /* Palette — brand */
+  --primary: #0b6b5e;
+  --primary-dark: #053e36;
+  --primary-soft: #022823;
+  --accent: #b89968;
+  --accent-soft: #d8c19a;
+  --accent-deep: #8a6f43;
+
+  /* Palette — neutrals / surfaces */
+  --bg: #f6f1e8;
+  --bg-2: #efe7d6;
+  --bg-3: #e7dcc6;
+  --bg-warm: #fbf7ef;
+  --white: #ffffff;
+
+  /* Text */
+  --text: #1c2826;
+  --text-2: #3f504c;
+  --muted: #7a857f;
+  --muted-2: #b8b0a0;
+
+  /* Lines & overlays */
+  --line: rgba(28, 40, 38, 0.10);
+  --line-strong: rgba(28, 40, 38, 0.22);
+  --overlay-dark: rgba(5, 30, 28, 0.60);
+
+  /* Spacing scale */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 80px;
+  --space-2xl: 120px;
+  --section-padding: 80px;
+  --section-padding-mobile: 48px;
+
+  /* Layout */
+  --nav-height: 100px;
+  --nav-height-scrolled: 64px;
+  --max: 1320px;
+  --max-text: 680px;
+
+  /* Shadows (layered, premium) */
+  --shadow-sm: 0 2px 4px rgba(28, 40, 38, 0.04), 0 4px 12px rgba(28, 40, 38, 0.06);
+  --shadow-md: 0 4px 8px rgba(28, 40, 38, 0.06), 0 12px 24px rgba(28, 40, 38, 0.08);
+  --shadow-lg: 0 8px 16px rgba(28, 40, 38, 0.08), 0 24px 48px rgba(28, 40, 38, 0.12);
+  --shadow-xl: 0 12px 24px rgba(28, 40, 38, 0.1), 0 32px 64px rgba(28, 40, 38, 0.14);
+  --shadow-card: 0 2px 8px rgba(28, 40, 38, 0.04), 0 8px 24px rgba(28, 40, 38, 0.08), 0 16px 48px rgba(28, 40, 38, 0.06);
+  --shadow-elevated: 0 4px 12px rgba(28, 40, 38, 0.08), 0 16px 32px rgba(28, 40, 38, 0.12), 0 24px 56px rgba(28, 40, 38, 0.1);
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* Typography stacks */
+  --font-display: 'Cormorant Garamond', 'Cormorant', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+}

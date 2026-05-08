@@ -1,0 +1,16 @@
+/* ==========================================================
+   Componenti riusabili: preloader, custom cursor, navbar,
+   back-to-top, buttons, cards, footer, lang switcher.
+   Implementazione attualmente in style.css:
+     - preloader      66-131
+     - custom cursor  132-176
+     - topbar/nav     300-489 + 1836-1912 (nav-cta gold)
+     - back-to-top    490-523
+     - buttons        524-563 + 804-841 (pill)
+     - cards          1137-1184 + 2243-2428 (audit cards)
+     - footer         1236-1253
+     - contact form   1254-1287
+     - section divider 1991-2002
+     - lang switcher  1913-1973
+   Da migrare qui in iterazione successiva del refactor.
+   ========================================================== */

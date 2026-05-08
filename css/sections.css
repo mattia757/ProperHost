@@ -1,0 +1,15 @@
+/* ==========================================================
+   Sezioni: hero, mission, villa-slider, concierge, servizi, cta, faq.
+   Implementazione attualmente in style.css:
+     - hero            564-736
+     - sections base   737-803
+     - villa-slider   1003-1136
+     - features       1173-1184
+     - services       1185-1206
+     - cta            1207-1235
+     - reveal/anim    1288-1379
+     - section breath 1573-1597
+     - whitespace fill 1598-1696
+     - bg reveals    1697-1744
+   Da migrare qui in iterazione successiva del refactor.
+   ========================================================== */

@@ -1,0 +1,18 @@
+# Netlify / Cloudflare Pages redirects
+# Apex -> www
+https://properhost.it/*  https://www.properhost.it/:splat  301!
+
+# Trailing index.html cleanup
+/index.html        /              301
+/en/index.html     /en/           301
+
+# Common typos / legacy URLs
+/villas            /ville.html    301
+/villas/           /ville.html    301
+/contact           /contatti.html 301
+/contact.html      /contatti.html 301
+/booking           /prenotazione.html 301
+/booking.html      /prenotazione.html 301
+
+# SPA-style fallback for unknown routes -> 404 page (kept simple: serve home)
+/*                 /index.html    200

@@ -53,6 +53,15 @@ def process(src: Path, dst: Path, target: int):
             ratio = target / longest
             im = im.resize((int(w * ratio), int(h * ratio)), Image.LANCZOS)
         im.save(dst, "JPEG", quality=82, progressive=True, optimize=True)
+        # Task 46: also emit a WebP next to the JPEG for <picture>/<source> use
+        webp = dst.with_suffix(".webp")
+        im.save(webp, "WEBP", quality=80, method=6)
+        # Optional: AVIF (richiede pillow-avif-plugin). Skippiamo se non disponibile.
+        try:
+            avif = dst.with_suffix(".avif")
+            im.save(avif, "AVIF", quality=55)
+        except (KeyError, OSError):
+            pass
 
 for src_name, out_name, target in ITEMS:
     src = SRC / src_name

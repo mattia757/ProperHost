@@ -1,0 +1,7 @@
+/* ==========================================================
+   Tipografia: scale display + body, eyebrow, section-title.
+   Implementazione attuale in style.css righe 245-299.
+   ========================================================== */
+
+.font-display { font-family: var(--font-display); }
+.font-body { font-family: var(--font-body); }
