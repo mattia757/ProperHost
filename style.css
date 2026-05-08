@@ -1415,6 +1415,529 @@ html{scroll-behavior:smooth}
 .hero.page-hero h1{max-width:18ch}
 .hero.page-hero .hero-card{background:rgba(255,255,255,.08)}
 
+/* ============================================================
+   POLISH PASS — Task 07-15
+   Task 07: testi mai sui bordi · Task 08: transizioni più veloci
+   Task 09: hero text position · Task 10: slider buttons polish
+   Task 11: spaziatura sezioni · Task 12: whitespace fill content
+   Task 13: bg image reveals · Task 14: ville cards premium
+   Task 15: CTA "Richiedi disponibilità" differenziata
+   ============================================================ */
+
+/* --- Task 07: safe padding/spacing globale --- */
+:root{
+  --container-pad: clamp(20px, 4vw, 48px);
+  --section-pad: clamp(72px, 9vw, 140px);
+  --section-pad-tight: clamp(56px, 7vw, 96px);
+}
+.container{
+  width:min(100%, var(--max));
+  padding-inline: var(--container-pad);
+  margin-inline:auto;
+}
+.section,.intro,.villas,.concierge,.services{
+  padding-block: var(--section-pad);
+}
+.section.alt,.intro,.concierge{padding-block: var(--section-pad)}
+.cta{padding-block: clamp(96px, 12vw, 180px)}
+.section-text{padding-right: 12px}
+.hero-cinema-text p{padding-inline: 4px}
+.cta h2,.cta p{padding-inline: clamp(16px, 4vw, 32px)}
+
+/* Mobile: nessun testo deve toccare i bordi del container */
+@media (max-width:760px){
+  .container{padding-inline: 20px}
+  .section-text,.hero-cinema-text p,
+  .intro-editorial-col p,.concierge-panel-col p{
+    padding-inline: 4px;
+  }
+  .section-title,.intro-editorial-title,.concierge-panel-title{
+    padding-inline: 0;
+  }
+  /* Centered text che diventa storto su mobile: forza left-align quando non è davvero centrato */
+  .hero-cinema-text{text-align:left}
+  .hero-cinema-text p{text-align:left;line-height:1.55}
+  .hero-cinema-inner{align-items:flex-start !important}
+  .hero-discover{align-self:flex-start !important;margin-top:8px}
+}
+
+/* --- Task 08: transitions più veloci (150-400ms / 500-700ms) --- */
+.card{
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-radius .35s var(--ease) !important;
+}
+.card:hover{transform:translateY(-6px)}
+.card-media img{transition: transform .5s var(--ease) !important}
+.card:hover .card-media img{transform:scale(1.06)}
+.card-media::after{transition: opacity .3s var(--ease) !important}
+
+.intro-image img,.image-panel img,.concierge-image img,
+.intro-image::before,.image-panel::before,.concierge-image::before{
+  transition: transform .45s var(--ease) !important;
+}
+
+.service-card{transition: border-color .3s var(--ease), background .3s var(--ease), transform .35s var(--ease), box-shadow .35s var(--ease) !important}
+.service-card:hover{transform:translateY(-4px)}
+
+.villa-slider-title{transition: opacity .3s var(--ease), transform .5s var(--ease) !important}
+.villa-nav{transition: opacity .25s var(--ease), transform .25s var(--ease), background .25s var(--ease), box-shadow .25s var(--ease) !important}
+
+.preloader{transition: opacity .4s var(--ease), visibility .4s !important}
+
+.btn-pill,.btn,.btn-primary,.btn-outline,.btn-ghost,.btn-gold{
+  transition: background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease), transform .25s var(--ease), box-shadow .25s var(--ease) !important;
+}
+
+.reveal{transition: opacity .5s var(--ease), transform .55s var(--ease), filter .5s var(--ease) !important}
+
+/* Hero entrate più rapide e con delay ridotti */
+.hero-cinema-text p{
+  animation: heroTextReveal .9s var(--ease) .15s forwards !important;
+}
+.hero-discover{
+  animation: heroBtnReveal .7s var(--ease) .45s forwards !important;
+}
+
+/* --- Task 09: Hero text position fix --- */
+.hero-cinema-content{
+  position:absolute;
+  inset:0;
+  z-index:3;
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-end;
+  padding: var(--nav-height) max(32px, calc((100vw - var(--max))/2 + 28px)) 88px;
+  pointer-events:none;
+}
+.hero-cinema-inner{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:32px;
+  pointer-events:auto;
+  max-width:520px;
+  width:100%;
+}
+.hero-cinema-text{
+  max-width:100%;
+}
+@media (max-width:1100px){
+  .hero-cinema-content{
+    padding-right: clamp(24px, 5vw, 48px);
+    padding-left: clamp(24px, 5vw, 48px);
+    padding-bottom: 72px;
+  }
+}
+@media (max-width:760px){
+  .hero-cinema-content{
+    padding: calc(var(--nav-height) + 24px) 22px 56px;
+    align-items:flex-end;
+    justify-content:flex-start;
+  }
+  .hero-cinema-inner{
+    align-items:flex-start;
+    max-width:100%;
+    gap:22px;
+  }
+}
+
+/* --- Task 10: Slider magnetic cursor buttons polish --- */
+.villa-nav{
+  width:56px;
+  height:56px;
+  background: rgba(11,107,94,.78);
+  border: 1px solid rgba(255,255,255,.14);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 24px rgba(0,0,0,.28), 0 1px 0 rgba(255,255,255,.05) inset;
+}
+.villa-nav svg{
+  width:22px;
+  height:22px;
+  stroke-width:1.4;
+}
+.villa-nav:hover{
+  background: var(--primary);
+  border-color: rgba(255,255,255,.24);
+  box-shadow: 0 10px 30px rgba(0,0,0,.36), 0 1px 0 rgba(255,255,255,.08) inset;
+}
+@media (hover:none){.villa-nav{display:none !important}}
+
+/* --- Task 11: spaziatura ritmica tra sezioni --- */
+.villa-slider{margin-block: 0}
+.concierge-panel{padding-block: clamp(96px, 11vw, 160px)}
+.concierge-panel-section{padding-block: 0}
+.concierge-fixed-bg{
+  height: clamp(360px, 56vw, 560px);
+  margin-block: 0;
+  position:relative;
+}
+.concierge-fixed-bg::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(180deg, rgba(2,40,35,.30) 0%, rgba(2,40,35,.10) 50%, rgba(2,40,35,.45) 100%);
+  pointer-events:none;
+}
+.intro-editorial,.services{padding-block: var(--section-pad)}
+.cta{margin-block: 0}
+@media (max-width:760px){
+  .concierge-fixed-bg{
+    background-attachment: scroll !important;
+    height: clamp(280px, 60vw, 380px);
+  }
+}
+
+/* --- Task 12: editorial fill components --- */
+.editorial-quote{
+  background: var(--bg-warm);
+  padding-block: var(--section-pad-tight);
+  position:relative;
+  overflow:hidden;
+}
+.editorial-quote::before{
+  content:"";
+  position:absolute;
+  top:0; left:50%;
+  transform:translateX(-50%);
+  width:80px; height:1px;
+  background: var(--accent);
+}
+.editorial-quote .container{
+  max-width:880px;
+  text-align:center;
+}
+.editorial-quote blockquote{
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(26px, 3.4vw, 44px);
+  line-height: 1.35;
+  color: var(--primary);
+  letter-spacing: -.005em;
+  margin: 0 auto 32px;
+  max-width: 22ch;
+}
+.editorial-quote blockquote em{color: var(--accent-deep); font-weight:500}
+.editorial-quote cite{
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .36em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.editorial-quote cite::before{
+  content:"";
+  display:inline-block;
+  width:24px; height:1px;
+  background: var(--accent);
+  vertical-align: middle;
+  margin-right: 14px;
+  transform: translateY(-2px);
+}
+
+.numbers-strip{
+  background: var(--bg-2);
+  padding-block: var(--section-pad-tight);
+  border-block: 1px solid var(--line);
+}
+.numbers-strip .container{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items:start;
+}
+.numbers-strip .number{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  position:relative;
+  padding-left: 18px;
+}
+.numbers-strip .number::before{
+  content:"";
+  position:absolute;
+  left:0; top:14px;
+  width:8px; height:1px;
+  background: var(--accent);
+}
+.numbers-strip .number strong{
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(38px, 4.4vw, 58px);
+  color: var(--primary);
+  line-height: 1;
+  letter-spacing: -.01em;
+}
+.numbers-strip .number span{
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  font-weight: 500;
+  line-height: 1.5;
+}
+@media (max-width: 1024px){
+  .numbers-strip .container{grid-template-columns: repeat(2, 1fr); gap: 36px}
+}
+@media (max-width: 480px){
+  .numbers-strip .container{grid-template-columns: 1fr; gap: 28px}
+}
+
+/* --- Task 13: parallax / reveal background image strip --- */
+.bg-strip{
+  position:relative;
+  min-height: clamp(360px, 60vw, 560px);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#fff;
+  padding-block: clamp(80px, 10vw, 160px);
+  overflow:hidden;
+}
+.bg-strip::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(180deg, rgba(2,40,35,.55) 0%, rgba(11,107,94,.55) 60%, rgba(2,40,35,.78) 100%);
+  z-index:1;
+}
+.bg-strip .container{position:relative; z-index:2; max-width: 760px}
+.bg-strip .section-tag{color: var(--accent-soft)}
+.bg-strip .section-tag::before{background: var(--accent-soft)}
+.bg-strip h2{
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(34px, 4.6vw, 60px);
+  color:#fff;
+  line-height:1.1;
+  margin-bottom: 22px;
+}
+.bg-strip h2 em{font-style:italic; color:var(--accent-soft); font-weight:400}
+.bg-strip p{
+  color: rgba(255,255,255,.86);
+  font-size: 17px;
+  line-height: 1.75;
+  max-width: 56ch;
+  margin: 0 auto;
+}
+@media (max-width: 768px){
+  .bg-strip{
+    background-attachment: scroll;
+    min-height: clamp(280px, 70vw, 420px);
+  }
+}
+
+/* --- Task 14: Ville page premium polish --- */
+.cards.cards--ville{
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 32px;
+  margin-top: 48px;
+}
+.cards--ville .card{
+  background: var(--bg-warm);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position:relative;
+  transition: transform .4s var(--ease), box-shadow .4s var(--ease), border-color .4s var(--ease);
+}
+.cards--ville .card:hover{
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-elevated);
+  border-color: var(--accent-soft);
+}
+.cards--ville .card-media{
+  aspect-ratio: 4/5;
+  border-radius: 0;
+}
+.cards--ville .card-body{
+  padding: 28px 28px 32px;
+  gap: 12px;
+}
+.cards--ville .card-body h3{font-size: 28px}
+.cards--ville .card-body .meta{
+  color: var(--muted);
+  font-size: 10.5px;
+  letter-spacing: .3em;
+}
+.cards--ville .card-body p{font-size: 14.5px; line-height: 1.7; color: var(--text-2); margin-top: 4px}
+.cards--ville .card-tag{
+  background: rgba(11,107,94,.95);
+  color:#fff;
+  letter-spacing: .28em;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 9.5px;
+  top: 18px;
+  left: 18px;
+}
+.villa-highlights{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 8px 14px;
+  padding: 14px 0 6px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--text-2);
+}
+.villa-highlights span{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.villa-highlights span svg{
+  width:14px;
+  height:14px;
+  stroke: var(--accent-deep);
+  stroke-width: 1.4;
+  fill: none;
+}
+.cards--ville .card-body .btn-gold{
+  align-self:flex-start;
+  margin-top: 14px;
+  border-radius: var(--radius-full);
+  padding: 12px 22px;
+  letter-spacing: .26em;
+  border-color: var(--accent);
+  color: var(--accent-deep);
+  background: transparent;
+}
+.cards--ville .card-body .btn-gold:hover{
+  background: var(--accent);
+  color:#fff;
+  border-color: var(--accent);
+}
+@media (max-width:1100px){
+  .cards.cards--ville{grid-template-columns: repeat(2, 1fr)}
+}
+@media (max-width:680px){
+  .cards.cards--ville{grid-template-columns: 1fr; gap: 28px}
+  .cards--ville .card-body{padding: 24px 22px 28px}
+}
+
+/* --- Task 15: nav book / nav-cta differenziati come bottone gold --- */
+.nav-book{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 11px 22px !important;
+  border: 1px solid var(--accent) !important;
+  border-radius: var(--radius-full);
+  background: var(--accent);
+  color:#fff !important;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 10.5px;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  margin-left: 8px;
+  transition: background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease), transform .25s var(--ease), box-shadow .25s var(--ease) !important;
+}
+.nav-book::before{display:none !important}
+.nav-book::after{display:none !important}
+.nav-book:hover{
+  background: transparent;
+  color: var(--accent-soft) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(184,153,104,.28);
+}
+.topbar.scrolled .nav-book{
+  background: var(--primary);
+  border-color: var(--primary) !important;
+  color:#fff !important;
+}
+.topbar.scrolled .nav-book:hover{
+  background: var(--accent);
+  border-color: var(--accent) !important;
+  color:#fff !important;
+}
+
+.nav-cta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 12px 22px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-full);
+  background: var(--accent);
+  color:#fff;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease), transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+.nav-cta:hover{
+  background: transparent;
+  color: var(--accent-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(184,153,104,.22);
+}
+.topbar:not(.scrolled) .nav-cta:hover{
+  color: var(--accent-soft);
+}
+.topbar.scrolled .nav-cta{
+  background: var(--primary);
+  border-color: var(--primary);
+  color:#fff;
+}
+.topbar.scrolled .nav-cta:hover{
+  background: var(--accent);
+  border-color: var(--accent);
+  color:#fff;
+}
+@media (max-width: 980px){
+  .nav-cta{display:none}
+}
+
+/* --- Quick book modal: refinements --- */
+.quick-book-content h3{
+  text-align:left;
+  margin-bottom: 8px;
+}
+.quick-book-content::before{
+  content:"";
+  display:block;
+  width: 36px; height: 1px;
+  background: var(--accent);
+  margin-bottom: 22px;
+}
+.quick-book-form .btn-primary{
+  padding: 16px 36px;
+  letter-spacing: .28em;
+}
+
+/* --- Section dividers naturali --- */
+.section-divider{
+  display:block;
+  width:100%;
+  height: clamp(60px, 8vw, 120px);
+  margin-top: -1px;
+  position:relative;
+  z-index:1;
+  pointer-events:none;
+}
+.section-divider svg{display:block; width:100%; height:100%}
+
+/* --- Reduced motion: rispetta sempre --- */
+@media (prefers-reduced-motion: reduce){
+  .villa-slide.is-active img{transform:none !important}
+  .hero-cinema-text p,.hero-discover{animation:none !important; opacity:1 !important; transform:none !important}
+  .bg-strip,.cta,.concierge-fixed-bg{background-attachment: scroll !important}
+}
+
 .field.has-error input,
 .field.has-error textarea {
   border-bottom-color: #c00 !important;

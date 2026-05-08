@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Properhost � Hospitality — Ville</title>
+  <title>Properhost · Hospitality — Ville</title>
+  <meta name="description" content="Le ville Properhost in Sicilia: dimore selezionate per location, privacy e carattere — da Taormina a Scicli.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -47,10 +48,50 @@
       <a href="ville.html" class="active">Ville</a>
       <a href="contatti.html">Contatti</a>
     </nav>
-    <a href="contatti.html" class="nav-cta">Richiedi disponibilità</a>
+    <a href="contatti.html" class="nav-cta" data-quick-book>Richiedi disponibilità</a>
     <button class="nav-toggle" aria-label="Apri menu" aria-controls="mainNav" aria-expanded="false"><span></span></button>
   </div>
 </header>
+
+<!-- Quick booking modal -->
+<div class="quick-book-modal" id="quickBookModal" role="dialog" aria-modal="true" aria-labelledby="quickBookTitle" hidden>
+  <div class="quick-book-overlay" data-close></div>
+  <div class="quick-book-content">
+    <button class="quick-book-close" aria-label="Chiudi" data-close>&times;</button>
+    <h3 id="quickBookTitle">Richiedi disponibilità</h3>
+    <form class="quick-book-form" action="contatti.html" method="get">
+      <div class="form-group">
+        <input type="text" name="name" placeholder="Il tuo nome" required>
+      </div>
+      <div class="form-group">
+        <select name="villa" required>
+          <option value="">Seleziona villa</option>
+          <option value="Villa Aurea">Villa Aurea — Taormina</option>
+          <option value="Villa Zagara">Villa Zagara — Noto</option>
+          <option value="Villa Bianca">Villa Bianca — Siracusa</option>
+          <option value="Villa Soho">Villa Soho — Ragusa</option>
+          <option value="Villa Manu">Villa Manu — Modica</option>
+          <option value="Villa Dolce Vita">Villa Dolce Vita — Scicli</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <input type="date" name="checkin" placeholder="Check-in" required>
+        </div>
+        <div class="form-group">
+          <input type="date" name="checkout" placeholder="Check-out" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="number" name="guests" placeholder="Numero ospiti" min="1" max="12" required>
+      </div>
+      <div class="form-group">
+        <textarea name="message" placeholder="Messaggio opzionale" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Invia richiesta</button>
+    </form>
+  </div>
+</div>
 
 <section class="hero page-hero" style="background-image:url('assets/ville-hero.jpg')">
   <div class="container hero-grid">
@@ -75,67 +116,105 @@
       <p class="section-text">L’impostazione luxury del sito, con un catalogo allargato per sembrare una vera collezione navigabile.</p>
     </div>
 
-    <div class="cards" style="margin-top:40px">
+    <div class="cards cards--ville">
       <article class="card reveal">
-        <div class="card-media"><img src="assets/villa-1.jpg" alt="Villa Aurea"><span class="card-tag">Taormina</span></div>
+        <div class="card-media"><img src="assets/villa-1.jpg" alt="Villa Aurea — Taormina" loading="lazy"><span class="card-tag">Taormina</span></div>
         <div class="card-body">
           <div class="meta">10 ospiti · 5 camere</div>
           <h3>Villa Aurea</h3>
           <p>Linee pulite, piscina panoramica e luce dorata sulle terrazze vista mare.</p>
-          <a href="contatti.html" class="btn btn-gold">Richiedi info</a>
+          <div class="villa-highlights" aria-label="Caratteristiche principali">
+            <span><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21V13h6v8"/></svg> Vista mare</span>
+            <span><svg viewBox="0 0 24 24"><path d="M3 12c3-3 6-3 9 0s6 3 9 0M3 17c3-3 6-3 9 0s6 3 9 0"/></svg> Piscina</span>
+            <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Concierge</span>
+          </div>
+          <a href="contatti.html?villa=Villa%20Aurea" class="btn btn-gold" data-quick-book>Richiedi info</a>
         </div>
       </article>
 
       <article class="card reveal">
-        <div class="card-media"><img src="assets/villa-2.jpg" alt="Villa Zagara"><span class="card-tag">Noto</span></div>
+        <div class="card-media"><img src="assets/villa-2.jpg" alt="Villa Zagara — Noto" loading="lazy"><span class="card-tag">Noto</span></div>
         <div class="card-body">
           <div class="meta">8 ospiti · 4 camere</div>
           <h3>Villa Zagara</h3>
-          <p>Patio ombreggiati e un giardino mediterraneo pensato per vivere l’esterno.</p>
-          <a href="contatti.html" class="btn btn-gold">Richiedi info</a>
+          <p>Patio ombreggiati e un giardino mediterraneo pensato per vivere l'esterno.</p>
+          <div class="villa-highlights" aria-label="Caratteristiche principali">
+            <span><svg viewBox="0 0 24 24"><path d="M12 3l3 6h6l-5 4 2 7-6-4-6 4 2-7-5-4h6z"/></svg> Giardino</span>
+            <span><svg viewBox="0 0 24 24"><path d="M3 12c3-3 6-3 9 0s6 3 9 0M3 17c3-3 6-3 9 0s6 3 9 0"/></svg> Piscina</span>
+            <span><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></svg> Patio</span>
+          </div>
+          <a href="contatti.html?villa=Villa%20Zagara" class="btn btn-gold" data-quick-book>Richiedi info</a>
         </div>
       </article>
 
       <article class="card reveal">
-        <div class="card-media"><img src="assets/villa-3.jpg" alt="Villa Bianca"><span class="card-tag">Siracusa</span></div>
+        <div class="card-media"><img src="assets/villa-3.jpg" alt="Villa Bianca — Siracusa" loading="lazy"><span class="card-tag">Siracusa</span></div>
         <div class="card-body">
           <div class="meta">12 ospiti · 6 camere</div>
           <h3>Villa Bianca</h3>
           <p>Privacy, accesso al mare e ambienti ampi per gruppi e famiglie.</p>
-          <a href="contatti.html" class="btn btn-gold">Richiedi info</a>
+          <div class="villa-highlights" aria-label="Caratteristiche principali">
+            <span><svg viewBox="0 0 24 24"><path d="M3 12c3-3 6-3 9 0s6 3 9 0M3 17c3-3 6-3 9 0s6 3 9 0"/></svg> Mare</span>
+            <span><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="10" r="2"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5M14 20c0-2 2-3 4-3s3 1 3 3"/></svg> Famiglie</span>
+            <span><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21V13h6v8"/></svg> 6 camere</span>
+          </div>
+          <a href="contatti.html?villa=Villa%20Bianca" class="btn btn-gold" data-quick-book>Richiedi info</a>
         </div>
       </article>
 
       <article class="card reveal">
-        <div class="card-media"><img src="assets/villa-4.jpg" alt="Villa Soho"><span class="card-tag">Ragusa</span></div>
+        <div class="card-media"><img src="assets/villa-4.jpg" alt="Villa Soho — Ragusa" loading="lazy"><span class="card-tag">Ragusa</span></div>
         <div class="card-body">
           <div class="meta">6 ospiti · 3 camere</div>
           <h3>Villa Soho</h3>
           <p>Atmosfera contemporanea e interni dal gusto essenziale.</p>
-          <a href="contatti.html" class="btn btn-gold">Richiedi info</a>
+          <div class="villa-highlights" aria-label="Caratteristiche principali">
+            <span><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 12h16M12 4v16"/></svg> Design</span>
+            <span><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></svg> Centro</span>
+            <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Concierge</span>
+          </div>
+          <a href="contatti.html?villa=Villa%20Soho" class="btn btn-gold" data-quick-book>Richiedi info</a>
         </div>
       </article>
 
       <article class="card reveal">
-        <div class="card-media"><img src="assets/villa-5.jpg" alt="Villa Manu"><span class="card-tag">Modica</span></div>
+        <div class="card-media"><img src="assets/villa-5.jpg" alt="Villa Manu — Modica" loading="lazy"><span class="card-tag">Modica</span></div>
         <div class="card-body">
           <div class="meta">10 ospiti · 5 camere</div>
           <h3>Villa Manu</h3>
           <p>Volumi mediterranei, piscina privata e grande area dining esterna.</p>
-          <a href="contatti.html" class="btn btn-gold">Richiedi info</a>
+          <div class="villa-highlights" aria-label="Caratteristiche principali">
+            <span><svg viewBox="0 0 24 24"><path d="M3 12c3-3 6-3 9 0s6 3 9 0M3 17c3-3 6-3 9 0s6 3 9 0"/></svg> Piscina</span>
+            <span><svg viewBox="0 0 24 24"><path d="M4 19h16M6 19V8h12v11M9 19v-6h6v6"/></svg> Dining</span>
+            <span><svg viewBox="0 0 24 24"><path d="M12 3l3 6h6l-5 4 2 7-6-4-6 4 2-7-5-4h6z"/></svg> Privata</span>
+          </div>
+          <a href="contatti.html?villa=Villa%20Manu" class="btn btn-gold" data-quick-book>Richiedi info</a>
         </div>
       </article>
 
       <article class="card reveal">
-        <div class="card-media"><img src="assets/villa-6.jpg" alt="Villa Dolce Vita"><span class="card-tag">Scicli</span></div>
+        <div class="card-media"><img src="assets/villa-6.jpg" alt="Villa Dolce Vita — Scicli" loading="lazy"><span class="card-tag">Scicli</span></div>
         <div class="card-body">
           <div class="meta">8 ospiti · 4 camere</div>
           <h3>Villa Dolce Vita</h3>
           <p>Una dimora luminosa con spazi pensati per relax, sole e convivialità.</p>
-          <a href="contatti.html" class="btn btn-gold">Richiedi info</a>
+          <div class="villa-highlights" aria-label="Caratteristiche principali">
+            <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg> Luce</span>
+            <span><svg viewBox="0 0 24 24"><path d="M3 12c3-3 6-3 9 0s6 3 9 0M3 17c3-3 6-3 9 0s6 3 9 0"/></svg> Piscina</span>
+            <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg> Relax</span>
+          </div>
+          <a href="contatti.html?villa=Villa%20Dolce%20Vita" class="btn btn-gold" data-quick-book>Richiedi info</a>
         </div>
       </article>
     </div>
+  </div>
+</section>
+
+<section class="bg-strip reveal" style="background-image:url('assets/sea.jpg')" aria-label="Esperienza in villa">
+  <div class="container">
+    <div class="section-tag">Le ville, da vivere</div>
+    <h2>Locazioni iconiche, <em>privacy</em> assoluta</h2>
+    <p>Dalla terrazza panoramica di Taormina al patio barocco del Val di Noto: ogni dimora racconta una Sicilia diversa, con la stessa attenzione al dettaglio.</p>
   </div>
 </section>
 

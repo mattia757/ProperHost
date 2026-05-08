@@ -99,37 +99,37 @@
     });
   }
   
-  // Quick book modal
+  // Quick book modal — opens from .nav-book (index.html) and .nav-cta (other pages)
   var quickBookModal = document.getElementById('quickBookModal');
   if (quickBookModal) {
-    var bookLink = document.querySelector('.nav-book');
-    if (bookLink) {
-      bookLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        quickBookModal.hidden = false;
-        setTimeout(function() {
-          quickBookModal.classList.add('open');
-        }, 10);
+    function openQuickBook() {
+      quickBookModal.hidden = false;
+      requestAnimationFrame(function () {
+        quickBookModal.classList.add('open');
       });
+      document.body.style.overflow = 'hidden';
     }
-    
-    // Close on overlay click or close button
-    quickBookModal.querySelectorAll('[data-close]').forEach(function(el) {
-      el.addEventListener('click', function() {
-        quickBookModal.classList.remove('open');
-        setTimeout(function() {
-          quickBookModal.hidden = true;
-        }, 350);
+    function closeQuickBook() {
+      quickBookModal.classList.remove('open');
+      document.body.style.overflow = '';
+      setTimeout(function () { quickBookModal.hidden = true; }, 320);
+    }
+
+    var bookTriggers = document.querySelectorAll('.nav-book, .nav-cta, [data-quick-book]');
+    bookTriggers.forEach(function (trigger) {
+      trigger.addEventListener('click', function (e) {
+        e.preventDefault();
+        openQuickBook();
       });
     });
-    
-    // Close on ESC
-    document.addEventListener('keydown', function(e) {
+
+    quickBookModal.querySelectorAll('[data-close]').forEach(function (el) {
+      el.addEventListener('click', closeQuickBook);
+    });
+
+    document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && quickBookModal.classList.contains('open')) {
-        quickBookModal.classList.remove('open');
-        setTimeout(function() {
-          quickBookModal.hidden = true;
-        }, 350);
+        closeQuickBook();
       }
     });
   }
