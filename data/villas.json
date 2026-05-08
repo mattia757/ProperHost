@@ -1,0 +1,68 @@
+[
+  {
+    "slug": "aurea",
+    "name": "Villa Aurea",
+    "location": "Taormina",
+    "guests": 10,
+    "bedrooms": 5,
+    "image": "/assets/villa-1.jpg",
+    "alt": "Villa Aurea — Taormina",
+    "description": "Linee pulite, piscina panoramica e luce dorata sulle terrazze vista mare.",
+    "highlights": ["Vista mare", "Piscina", "Concierge"]
+  },
+  {
+    "slug": "zagara",
+    "name": "Villa Zagara",
+    "location": "Noto",
+    "guests": 8,
+    "bedrooms": 4,
+    "image": "/assets/villa-2.jpg",
+    "alt": "Villa Zagara — Noto",
+    "description": "Patio ombreggiati e un giardino mediterraneo pensato per vivere l'esterno.",
+    "highlights": ["Giardino", "Piscina", "Patio"]
+  },
+  {
+    "slug": "bianca",
+    "name": "Villa Bianca",
+    "location": "Siracusa",
+    "guests": 12,
+    "bedrooms": 6,
+    "image": "/assets/villa-3.jpg",
+    "alt": "Villa Bianca — Siracusa",
+    "description": "Privacy, accesso al mare e ambienti ampi per gruppi e famiglie.",
+    "highlights": ["Mare", "Famiglie", "6 camere"]
+  },
+  {
+    "slug": "soho",
+    "name": "Villa Soho",
+    "location": "Ragusa",
+    "guests": 6,
+    "bedrooms": 3,
+    "image": "/assets/villa-4.jpg",
+    "alt": "Villa Soho — Ragusa",
+    "description": "Atmosfera contemporanea e interni dal gusto essenziale.",
+    "highlights": ["Design", "Centro", "Concierge"]
+  },
+  {
+    "slug": "manu",
+    "name": "Villa Manu",
+    "location": "Modica",
+    "guests": 10,
+    "bedrooms": 5,
+    "image": "/assets/villa-5.jpg",
+    "alt": "Villa Manu — Modica",
+    "description": "Volumi mediterranei, piscina privata e grande area dining esterna.",
+    "highlights": ["Piscina", "Dining", "Privata"]
+  },
+  {
+    "slug": "dolce-vita",
+    "name": "Villa Dolce Vita",
+    "location": "Scicli",
+    "guests": 8,
+    "bedrooms": 4,
+    "image": "/assets/villa-6.jpg",
+    "alt": "Villa Dolce Vita — Scicli",
+    "description": "Una dimora luminosa con spazi pensati per relax, sole e convivialità.",
+    "highlights": ["Luce", "Piscina", "Relax"]
+  }
+]

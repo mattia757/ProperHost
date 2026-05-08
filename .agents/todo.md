@@ -167,7 +167,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 07
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: feature/text-alignment-spacing
 - **Priority**: high
@@ -181,7 +181,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 08
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: feature/transition-speed-fix
 - **Priority**: high
@@ -195,7 +195,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 09
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: feature/hero-text-position
 - **Priority**: high
@@ -209,7 +209,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 10
-- **Status**: todo
+- **Status**: done
 - **Agent**: coder
 - **Branch**: feature/slider-cursor-buttons
 - **Priority**: medium
@@ -223,7 +223,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 11
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: feature/section-breathing-space
 - **Priority**: medium
@@ -237,7 +237,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 12
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: feature/whitespace-fill-sections
 - **Priority**: medium
@@ -251,7 +251,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 13
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: feature/background-image-reveals
 - **Priority**: medium
@@ -265,7 +265,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 14
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: feature/ville-page-premium
 - **Priority**: high
@@ -279,7 +279,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 15
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: feature/availability-cta-differentiation
 - **Priority**: medium
@@ -311,7 +311,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 17
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: feature/css-tokens-fonts
 - **Priority**: high
@@ -339,7 +339,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 19
-- **Status**: todo
+- **Status**: done
 - **Agent**: coder
 - **Branch**: feature/assets-audit
 - **Priority**: medium
@@ -353,7 +353,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 20
-- **Status**: todo
+- **Status**: done
 - **Agent**: coder
 - **Branch**: feature/i18n-vanilla
 - **Priority**: high
@@ -367,7 +367,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 21
-- **Status**: todo
+- **Status**: done
 - **Agent**: coder
 - **Branch**: feature/lint-format
 - **Priority**: medium
@@ -385,7 +385,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 22
-- **Status**: todo
+- **Status**: done
 - **Agent**: coder
 - **Branch**: feature/preloader
 - **Priority**: medium
@@ -399,7 +399,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 23
-- **Status**: todo
+- **Status**: done
 - **Agent**: coder
 - **Branch**: feature/custom-cursor
 - **Priority**: low
@@ -413,7 +413,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 24
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: feature/section-divider
 - **Priority**: medium
@@ -427,7 +427,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 25
-- **Status**: todo
+- **Status**: done
 - **Agent**: coder
 - **Branch**: feature/navbar
 - **Priority**: high
@@ -441,7 +441,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 26
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: feature/footer
 - **Priority**: medium
@@ -455,7 +455,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 27
-- **Status**: todo
+- **Status**: done
 - **Agent**: coder
 - **Branch**: feature/page-shell
 - **Priority**: high
@@ -473,7 +473,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 28
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: feature/hero-section
 - **Priority**: high
@@ -487,7 +487,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 29
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: feature/mission-section
 - **Priority**: high
@@ -501,7 +501,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 30
-- **Status**: todo
+- **Status**: done
 - **Agent**: coder
 - **Branch**: feature/villa-slider-swiper
 - **Priority**: high
@@ -526,7 +526,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 31
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: feature/concierge-panel
 - **Priority**: medium
@@ -540,7 +540,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 32
-- **Status**: todo
+- **Status**: done
 - **Agent**: coder
 - **Branch**: feature/servizi-slider
 - **Priority**: medium
@@ -565,7 +565,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 33
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: feature/cta-prenota
 - **Priority**: medium
@@ -579,7 +579,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 34
-- **Status**: todo
+- **Status**: done
 - **Agent**: coder
 - **Branch**: feature/faq-accordion
 - **Priority**: medium
@@ -593,7 +593,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 35
-- **Status**: todo
+- **Status**: done
 - **Agent**: coder
 - **Branch**: feature/home-stitching
 - **Priority**: high
@@ -611,7 +611,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 36
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: feature/about-page
 - **Priority**: medium
@@ -625,7 +625,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 37
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: feature/concierge-page
 - **Priority**: medium
@@ -639,7 +639,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 38
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: feature/ville-list-page
 - **Priority**: high
@@ -653,7 +653,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 39
-- **Status**: todo
+- **Status**: done
 - **Agent**: coder
 - **Branch**: feature/villa-detail-pages
 - **Priority**: high
@@ -667,7 +667,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 40
-- **Status**: todo
+- **Status**: done
 - **Agent**: coder
 - **Branch**: feature/contatti-page
 - **Priority**: high
@@ -681,7 +681,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 41
-- **Status**: todo
+- **Status**: done
 - **Agent**: coder
 - **Branch**: feature/prenotazione-page
 - **Priority**: medium
@@ -699,7 +699,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 42
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: feature/splittext-reveal
 - **Priority**: medium
@@ -713,7 +713,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 43
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: feature/scroll-reveals
 - **Priority**: medium
@@ -727,7 +727,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 44
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: feature/parallax-subtle
 - **Priority**: low
@@ -741,7 +741,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 45
-- **Status**: todo
+- **Status**: done
 - **Agent**: coder
 - **Branch**: feature/reduced-motion
 - **Priority**: medium
@@ -773,7 +773,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 47
-- **Status**: todo
+- **Status**: done
 - **Agent**: coder
 - **Branch**: feature/seo-meta-jsonld
 - **Priority**: high
@@ -787,7 +787,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 48
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: feature/a11y-polish
 - **Priority**: high

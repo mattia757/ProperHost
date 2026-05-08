@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Properhost · Hospitality — Villas and services in Sicily</title>
+  <meta name="description" content="Private villas and tailor-made services for an authentic stay in Sicily. Charm hospitality for unforgettable holidays.">
+  <meta name="author" content="Properhost">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="Properhost · Hospitality — Villas and services in Sicily">
+  <meta property="og:description" content="Private villas and tailor-made services for an authentic stay in Sicily.">
+  <meta property="og:image" content="https://www.properhost.it/assets/og-home.jpg">
+  <meta property="og:url" content="https://www.properhost.it/en/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_GB">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Properhost · Hospitality">
+  <meta name="twitter:description" content="Private villas and tailor-made services for an authentic stay in Sicily.">
+
+  <meta name="theme-color" content="#0b6b5e">
+
+  <link rel="canonical" href="https://www.properhost.it/en/">
+  <link rel="alternate" hreflang="it" href="https://www.properhost.it/">
+  <link rel="alternate" hreflang="en" href="https://www.properhost.it/en/">
+  <link rel="alternate" hreflang="x-default" href="https://www.properhost.it/">
+  <link rel="icon" href="/logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="/logo.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Properhost",
+    "url": "https://www.properhost.it",
+    "logo": "https://www.properhost.it/logo.png",
+    "description": "Sicilian charm hospitality, hand-picked villas and tailor-made services for authentic stays on the island.",
+    "address": { "@type": "PostalAddress", "addressLocality": "Palermo", "addressRegion": "Sicily", "addressCountry": "IT" },
+    "contactPoint": { "@type": "ContactPoint", "telephone": "+39-339-2923-744", "email": "properhost.company@gmail.com", "contactType": "reservations" }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="preloader" id="preloader" role="status" aria-label="Loading">
+    <div class="preloader-logo"><img src="../logo.png" alt="Properhost" width="48" height="48"><div class="preloader-logo-text">properhost<span>hospitality</span></div></div>
+    <div class="preloader-bar"><div class="preloader-bar-fill" id="preloaderBar"></div></div>
+    <p class="preloader-text">Loading...</p>
+  </div>
+
+  <div class="custom-cursor" id="customCursor" aria-hidden="true"></div>
+  <div class="custom-cursor-text" id="customCursorText" aria-hidden="true"></div>
+
+  <a href="#home" class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </a>
+
+  <header class="topbar">
+    <div class="container nav-wrap">
+      <nav class="nav nav-left">
+        <a href="concierge.html">Concierge</a>
+        <a href="about.html">About</a>
+        <a href="ville.html">Villas</a>
+      </nav>
+
+      <a href="index.html" class="brand">
+        <img src="../logo.png" alt="Properhost Hospitality" fetchpriority="high">
+        <span class="brand-text">
+          <span class="brand-main">properhost</span>
+          <span class="brand-sub">villas · concierge · services</span>
+        </span>
+      </a>
+
+      <nav class="nav nav-right">
+        <a href="concierge.html#services">Services</a>
+        <a href="contatti.html">Contact</a>
+        <a href="prenotazione.html" class="nav-book" data-quick-book>Book</a>
+        <a href="../" class="nav-lang" aria-label="Italiano">IT</a>
+      </nav>
+
+      <div class="quick-book-modal" id="quickBookModal" role="dialog" aria-modal="true" aria-labelledby="quickBookTitle" hidden>
+        <div class="quick-book-overlay" data-close></div>
+        <div class="quick-book-content">
+          <button class="quick-book-close" aria-label="Close" data-close>&times;</button>
+          <h3 id="quickBookTitle">Check availability</h3>
+          <form class="quick-book-form" action="../contatti.html" method="get">
+            <div class="form-group"><input type="text" name="name" placeholder="Your name" required></div>
+            <div class="form-group">
+              <select name="villa" required>
+                <option value="">Select a villa</option>
+                <option value="Villa Aurea">Villa Aurea — Taormina</option>
+                <option value="Villa Zagara">Villa Zagara — Noto</option>
+                <option value="Villa Bianca">Villa Bianca — Siracusa</option>
+                <option value="Villa Soho">Villa Soho — Ragusa</option>
+                <option value="Villa Manu">Villa Manu — Modica</option>
+                <option value="Villa Dolce Vita">Villa Dolce Vita — Scicli</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><input type="date" name="checkin" required></div>
+              <div class="form-group"><input type="date" name="checkout" required></div>
+            </div>
+            <div class="form-group"><input type="number" name="guests" placeholder="Number of guests" min="1" max="12" required></div>
+            <div class="form-group"><textarea name="message" placeholder="Optional message" rows="3"></textarea></div>
+            <button type="submit" class="btn btn-primary">Send request</button>
+          </form>
+        </div>
+      </div>
+
+      <button class="nav-toggle" aria-label="Open menu" aria-controls="mainNav" aria-expanded="false"><span></span></button>
+      <nav class="nav nav-mobile" id="mainNav">
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="concierge.html">Concierge</a>
+        <a href="ville.html">Villas</a>
+        <a href="contatti.html">Contact</a>
+        <a href="../">Italiano</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+  <section class="hero" id="home">
+    <video class="hero-video-bg" autoplay muted loop playsinline preload="metadata" poster="../assets/hero-home.jpg">
+      <source src="../assets/hero.webm" type="video/webm">
+      <source src="../assets/hero.mp4" type="video/mp4">
+    </video>
+    <div class="hero-video-overlay"></div>
+
+    <div class="hero-cinema-content container">
+      <div class="hero-cinema-inner">
+        <div class="hero-cinema-text reveal">
+          <p>Private villas, curated homes and tailor-made services for those seeking an authentic, refined, hassle-free stay on the Sicilian coast. Every detail orchestrated to turn the journey into a bespoke experience.</p>
+        </div>
+        <a href="#villas" class="hero-discover reveal" aria-label="Discover">
+          <span>Discover</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="intro intro-editorial">
+    <div class="container intro-editorial-grid">
+      <div class="intro-editorial-left reveal">
+        <div class="section-tag">Welcome</div>
+        <h2 class="intro-editorial-title">Sicilian hospitality, <em>contemporary</em> elegance</h2>
+        <a href="ville.html" class="btn-pill">Browse the villas</a>
+      </div>
+
+      <div class="intro-editorial-col reveal">
+        <p>Homes selected for clear architectural identity, set in the island's most iconic natural contexts. Each villa is chosen for its location, detail and atmosphere: place matters as much as service.</p>
+      </div>
+
+      <div class="intro-editorial-col reveal">
+        <p>Dedicated assistance before, during and after the stay, built on a network of local partners chosen for reliability and style. Every detail is coordinated without weighing on your experience.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="villa-slider" id="villas" aria-label="Our villas">
+    <div class="villa-slider-track">
+      <article class="villa-slide is-active" data-villa="Villa Aurea"><img src="../assets/villa-1.jpg" alt="Villa Aurea — Taormina" loading="lazy"></article>
+      <article class="villa-slide" data-villa="Villa Zagara"><img src="../assets/villa-2.jpg" alt="Villa Zagara — Noto" loading="lazy"></article>
+      <article class="villa-slide" data-villa="Villa Bianca"><img src="../assets/villa-3.jpg" alt="Villa Bianca — Siracusa" loading="lazy"></article>
+      <article class="villa-slide" data-villa="Villa Soho"><img src="../assets/villa-4.jpg" alt="Villa Soho — Ragusa" loading="lazy"></article>
+      <article class="villa-slide" data-villa="Villa Manu"><img src="../assets/villa-5.jpg" alt="Villa Manu — Modica" loading="lazy"></article>
+      <article class="villa-slide" data-villa="Villa Dolce Vita"><img src="../assets/villa-6.jpg" alt="Villa Dolce Vita — Scicli" loading="lazy"></article>
+    </div>
+
+    <div class="villa-slider-overlay"></div>
+    <div class="villa-slider-content"><h2 class="villa-slider-title" id="villaSliderTitle">Villa Aurea</h2></div>
+    <button class="villa-nav villa-nav-prev" aria-label="Previous villa"><svg width="40" height="14" viewBox="0 0 40 14" fill="none"><path d="M40 7H1M1 7L7 1M1 7L7 13" stroke="currentColor" stroke-width="1"/></svg></button>
+    <button class="villa-nav villa-nav-next" aria-label="Next villa"><svg width="40" height="14" viewBox="0 0 40 14" fill="none"><path d="M0 7H39M39 7L33 1M39 7L33 13" stroke="currentColor" stroke-width="1"/></svg></button>
+    <a href="ville.html" class="villa-explore">Explore</a>
+  </section>
+
+  <section class="numbers-strip" aria-label="Properhost in numbers">
+    <div class="container">
+      <div class="number reveal"><strong>6</strong><span>Hand-picked villas</span></div>
+      <div class="number reveal"><strong>6</strong><span>Tailor-made services</span></div>
+      <div class="number reveal"><strong>24h</strong><span>Average response time</span></div>
+      <div class="number reveal"><strong>1</strong><span>Dedicated point of contact</span></div>
+    </div>
+  </section>
+
+  <section class="bg-strip reveal" style="background-image:url('../assets/sea.jpg')" aria-label="Sicilian experience">
+    <div class="container">
+      <div class="section-tag">The island, lived in</div>
+      <h2>An authentic Sicily, <em>told</em> with restraint</h2>
+      <p>From the eastern coast to the Val di Noto, every villa is chosen for its setting, atmosphere and a precise idea of welcome. The territory enters your stay, never forced.</p>
+    </div>
+  </section>
+
+  <section class="concierge-panel-section" id="concierge">
+    <div class="concierge-panel">
+      <div class="container concierge-panel-grid">
+        <div class="concierge-panel-left reveal">
+          <div class="section-tag">Private concierge</div>
+          <h2 class="concierge-panel-title">Every stay, <em>a tailored</em> itinerary</h2>
+          <a href="concierge.html" class="btn-pill btn-pill-on-dark">Discover concierge</a>
+        </div>
+
+        <div class="concierge-panel-col reveal">
+          <p>From transfer arrangements to a private chef dinner, every detail is coordinated to deliver a fluid, personal, memorable experience throughout your villa stay.</p>
+        </div>
+
+        <div class="concierge-panel-col reveal">
+          <p>Private chefs, premium transfers, in-villa wellness, yacht excursions and access to exclusive experiences: a single point of contact builds the itinerary around you, without weighing on your time.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="concierge-fixed-bg" role="img" aria-label="Concierge service in villa" style="background-image:url('../assets/concierge.jpg')"></div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-tag">Our services</div>
+        <h2 class="section-title">Everything you need to <em>enjoy</em> Sicily</h2>
+        <p class="section-text">From transfer to private chef, from rentals to Egadi Islands tours: an essential offer designed for travel without afterthought.</p>
+      </div>
+
+      <div class="service-grid">
+        <article class="service reveal"><span class="service-number">01</span><h4>Shuttle service</h4><p>On-demand transfers from ports and airports: comfortable, fast, always on time. Arrive and leave without thinking about logistics.</p></article>
+        <article class="service reveal"><span class="service-number">02</span><h4>Vehicle rental</h4><p>Cars, scooters and bicycles to move around in total freedom. Pick the right vehicle for your travel style.</p></article>
+        <article class="service reveal"><span class="service-number">03</span><h4>Boat rental</h4><p>A dinghy reserved for you to explore hidden coves and live the sea on your own terms. Exclusive experience, on request.</p></article>
+        <article class="service reveal"><span class="service-number">04</span><h4>Private chef</h4><p>Authentic Sicilian cuisine straight to your villa: traditional dishes tailored, fresh local ingredients, refined service.</p></article>
+        <article class="service reveal"><span class="service-number">05</span><h4>Favignana tour</h4><p>Discover the pearl of the Egadi Islands: Cala Rossa, Cala Azzurra and crystalline waters. An unforgettable experience.</p></article>
+        <article class="service reveal"><span class="service-number">06</span><h4>Levanzo tour</h4><p>Relax and authentic nature among clear waters, small villages and a unique atmosphere to be discovered.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <div class="container">
+      <header class="faq__header reveal">
+        <div class="section-tag">FAQ</div>
+        <h2>Frequently <em>asked</em></h2>
+        <p>Answers to the most common requests. For anything else, just write to us: we reply within 24 working hours.</p>
+      </header>
+      <ul class="faq-list">
+        <li class="faq-item">
+          <button class="faq-item__q" aria-expanded="false" aria-controls="faq-a-1" id="faq-q-1"><span class="faq-item__q-text">How do I book a Properhost villa?</span><span class="faq-item__icon" aria-hidden="true">+</span></button>
+          <div class="faq-item__a" id="faq-a-1" role="region" aria-labelledby="faq-q-1"><div class="faq-item__a-inner">Fill in the contact form or click "Check availability": you'll receive a tailored proposal with villa, dates, guests and included services within 24 working hours.</div></div>
+        </li>
+        <li class="faq-item">
+          <button class="faq-item__q" aria-expanded="false" aria-controls="faq-a-2" id="faq-q-2"><span class="faq-item__q-text">What does the concierge service include?</span><span class="faq-item__icon" aria-hidden="true">+</span></button>
+          <div class="faq-item__a" id="faq-a-2" role="region" aria-labelledby="faq-q-2"><div class="faq-item__a-inner">Airport and port transfers, private chef, vehicle and boat rentals, Favignana and Levanzo tours, organisation of experiences and special occasions. A single point of contact coordinates everything.</div></div>
+        </li>
+        <li class="faq-item">
+          <button class="faq-item__q" aria-expanded="false" aria-controls="faq-a-3" id="faq-q-3"><span class="faq-item__q-text">Where in Sicily do you operate?</span><span class="faq-item__icon" aria-hidden="true">+</span></button>
+          <div class="faq-item__a" id="faq-a-3" role="region" aria-labelledby="faq-q-3"><div class="faq-item__a-inner">The selected villas are located between Taormina, Noto, Siracusa, Ragusa, Modica and Scicli. The concierge operates across the whole eastern coast and the Val di Noto.</div></div>
+        </li>
+        <li class="faq-item">
+          <button class="faq-item__q" aria-expanded="false" aria-controls="faq-a-4" id="faq-q-4"><span class="faq-item__q-text">Can I add extra services during my stay?</span><span class="faq-item__icon" aria-hidden="true">+</span></button>
+          <div class="faq-item__a" id="faq-a-4" role="region" aria-labelledby="faq-q-4"><div class="faq-item__a-inner">Yes. A private chef for an evening, day transfers, boat excursions or private lessons can also be booked after check-in with reasonable notice.</div></div>
+        </li>
+        <li class="faq-item">
+          <button class="faq-item__q" aria-expanded="false" aria-controls="faq-a-5" id="faq-q-5"><span class="faq-item__q-text">How do cancellations and deposits work?</span><span class="faq-item__icon" aria-hidden="true">+</span></button>
+          <div class="faq-item__a" id="faq-a-5" role="region" aria-labelledby="faq-q-5"><div class="faq-item__a-inner">Conditions vary by villa and season: they are communicated in writing during the proposal phase, before any payment. The deposit is typically held only in the case of verified damage.</div></div>
+        </li>
+        <li class="faq-item">
+          <button class="faq-item__q" aria-expanded="false" aria-controls="faq-a-6" id="faq-q-6"><span class="faq-item__q-text">Are the villas suitable for families with children?</span><span class="faq-item__icon" aria-hidden="true">+</span></button>
+          <div class="faq-item__a" id="faq-a-6" role="region" aria-labelledby="faq-q-6"><div class="faq-item__a-inner">Yes. We can arrange babysitting, cots, car seats and family-friendly activities. Mention it in your request: we'll suggest the most suitable villas.</div></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="editorial-quote">
+    <div class="container reveal">
+      <blockquote>
+        We don't choose villas for size, but for the <em>breathing room</em> they offer those who live in them.
+      </blockquote>
+      <cite>Properhost · Sicily</cite>
+    </div>
+  </section>
+
+  <section class="cta" id="contatti" style="--cta-image:url('../assets/cta.jpg')">
+    <div class="container reveal">
+      <div class="section-tag">Get in touch</div>
+      <h2>Let's design your stay in <em>Sicily</em>, together</h2>
+      <p>Write to us: we'll respond with a tailored proposal, real availability and dedicated services.</p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:8px">
+        <a href="contatti.html" class="btn btn-primary">Go to contact form</a>
+        <a href="tel:+393392923744" class="btn btn-ghost">+39 339 2923 744</a>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-brand"><span class="brand-main">properhost</span><span class="brand-sub">hospitality</span></div>
+          <p class="lead">Sicilian charm hospitality, hand-picked villas and tailor-made services for authentic stays on the island.</p>
+          <p style="color:rgba(255,255,255,.55);font-size:13px">Palermo · Sicily · Italy</p>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <a href="tel:+393392923744">+39 339 2923 744</a>
+          <a href="tel:+393925108539">+39 392 5108 539</a>
+          <a href="mailto:properhost.company@gmail.com">properhost.company@gmail.com</a>
+          <a href="https://www.properhost.it" target="_blank" rel="noopener">www.properhost.it</a>
+        </div>
+        <div class="footer-col">
+          <h5>Navigate</h5>
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="concierge.html">Concierge &amp; Services</a>
+          <a href="ville.html">Villas</a>
+          <a href="contatti.html">Contact</a>
+        </div>
+      </div>
+      <div class="footer-wrap">
+        <div>© 2026 Properhost — All rights reserved</div>
+        <div>Hospitality · Sicily · <a href="../" style="color:inherit;text-decoration:underline">IT</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

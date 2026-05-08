@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /.agents/
+Disallow: /.github/
+Disallow: /dashboard.html
+
+Sitemap: https://www.properhost.it/sitemap.xml

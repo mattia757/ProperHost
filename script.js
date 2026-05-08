@@ -1,5 +1,8 @@
 // Properhost — script condiviso
 (function () {
+  // Reduced motion guard
+  var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   // Preloader
   var preloader = document.getElementById('preloader');
   var preloaderBar = document.getElementById('preloaderBar');
@@ -35,10 +38,10 @@
     if (document.body) document.body.style.overflow = 'hidden';
   }
   
-  // Custom cursor (desktop only)
+  // Custom cursor (desktop only, no reduced motion)
   var cursor = document.getElementById('customCursor');
   var cursorText = document.getElementById('customCursorText');
-  if (cursor && window.matchMedia('(hover: hover)').matches) {
+  if (cursor && !prefersReducedMotion && window.matchMedia('(hover: hover)').matches) {
     var cursorLinks = document.querySelectorAll('a, button, .villa-slide, .service, input, textarea, select');
     
     document.addEventListener('mousemove', function(e) {
@@ -169,7 +172,7 @@
 
   // Parallax effect for hero
   var heroSection = document.querySelector('.hero');
-  if (heroSection) {
+  if (heroSection && !prefersReducedMotion) {
     window.addEventListener('scroll', function() {
       var scrolled = window.scrollY;
       if (scrolled < window.innerHeight) {
@@ -315,7 +318,7 @@
   }
 
   // Cursor follow effect for hero (desktop only)
-  if (window.matchMedia('(hover: hover)').matches) {
+  if (!prefersReducedMotion && window.matchMedia('(hover: hover)').matches) {
     var heroCinema = document.querySelector('.hero-cinema-content');
     if (heroCinema) {
       document.addEventListener('mousemove', function(e) {
@@ -378,6 +381,26 @@
     });
   })();
   
+  // FAQ accordion (one open at a time)
+  var faqList = document.querySelector('.faq-list');
+  if (faqList) {
+    faqList.addEventListener('click', function (e) {
+      var btn = e.target.closest('.faq-item__q');
+      if (!btn) {return;}
+      var item = btn.parentElement;
+      var isOpen = item.classList.contains('is-open');
+      faqList.querySelectorAll('.faq-item.is-open').forEach(function (other) {
+        other.classList.remove('is-open');
+        var q = other.querySelector('.faq-item__q');
+        if (q) {q.setAttribute('aria-expanded', 'false');}
+      });
+      if (!isOpen) {
+        item.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  }
+
 // Contact form validation
   var contactForm = document.querySelector('.contact-form');
   if (contactForm) {
