@@ -74,6 +74,18 @@
     });
   }
   
+  // Back to top button
+  var backToTop = document.getElementById('backToTop');
+  if (backToTop) {
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 400) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    }, { passive: true });
+  }
+  
   // Mobile nav toggle
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.getElementById('mainNav');

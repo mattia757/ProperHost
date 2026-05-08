@@ -444,6 +444,40 @@ em{font-style:italic;color:var(--accent-deep)}
   .nav-mobile a::after{display:none}
 }
 
+/* =================== BACK TO TOP =================== */
+.back-to-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 48px;
+  height: 48px;
+  background: var(--accent);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease), visibility 0.3s;
+  box-shadow: var(--shadow-md);
+}
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.back-to-top:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.back-to-top svg {
+  width: 20px;
+  height: 20px;
+}
+
 /* =================== BUTTONS =================== */
 .btn{
   display:inline-flex;
