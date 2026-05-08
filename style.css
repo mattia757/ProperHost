@@ -63,6 +63,117 @@
   --font-body:'Inter','Helvetica Neue',Arial,sans-serif;
 }
 
+/* =================== PRELOADER =================== */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s var(--ease), visibility 0.6s;
+}
+.preloader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.preloader-logo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.preloader-logo img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+.preloader-logo-text {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--text);
+}
+.preloader-logo-text span {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.preloader-bar {
+  width: 120px;
+  height: 2px;
+  background: var(--bg-3);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.preloader-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  border-radius: var(--radius-full);
+  transition: width 0.3s var(--ease);
+}
+.preloader-text {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 20px;
+  letter-spacing: 0.05em;
+}
+
+/* =================== CUSTOM CURSOR =================== */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s var(--ease), height 0.25s var(--ease), background 0.25s var(--ease);
+  mix-blend-mode: difference;
+  opacity: 1;
+}
+.custom-cursor.hover {
+  width: 48px;
+  height: 48px;
+  background: rgba(184, 153, 104, 0.15);
+  border-color: var(--accent);
+}
+.custom-cursor.hidden {
+  opacity: 0;
+}
+.custom-cursor-text {
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent);
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(24px, 24px);
+  opacity: 0;
+  transition: opacity 0.2s var(--ease);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.custom-cursor-text.visible {
+  opacity: 1;
+}
+
 /* =================== RESET =================== */
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -76,6 +187,41 @@ body{
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
   overflow-x:hidden;
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px dotted var(--accent);
+  outline-offset: 4px;
+}
+
+/* Skip to content link */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 8px;
+  z-index: 10001;
+  background: var(--bg);
+  color: var(--text);
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  text-decoration: none;
+}
+.skip-link:focus {
+  left: 8px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 img{max-width:100%;display:block}
 a{text-decoration:none;color:inherit;transition:color .25s var(--ease)}
@@ -281,11 +427,14 @@ em{font-style:italic;color:var(--accent-deep)}
     width:26px;height:1px;
     background:#fff;
     position:absolute;
-    transition:transform .25s var(--ease), top .25s var(--ease);
+    transition:transform .25s var(--ease), top .25s var(--ease), opacity .2s var(--ease);
   }
   .nav-toggle span{top:50%}
   .nav-toggle span::before{content:'';top:-8px;left:0}
   .nav-toggle span::after{content:'';top:8px;left:0}
+  .nav-toggle[aria-expanded="true"] span{opacity:0;transform:none}
+  .nav-toggle[aria-expanded="true"] span::before{top:50%;transform:rotate(45deg)}
+  .nav-toggle[aria-expanded="true"] span::after{top:50%;transform:rotate(-45deg)}
   .topbar.scrolled .nav-toggle span,
   .topbar.scrolled .nav-toggle span::before,
   .topbar.scrolled .nav-toggle span::after{background:var(--text)}
@@ -301,12 +450,23 @@ em{font-style:italic;color:var(--accent-deep)}
     gap:0;
     padding:110px 32px 40px;
     transform:translateX(100%);
-    transition:transform .35s var(--ease);
+    transition:transform .35s var(--ease), opacity .35s var(--ease);
     box-shadow:-20px 0 60px rgba(0,0,0,.18);
     z-index:40;
     display:flex !important;
+    opacity:0;
   }
-  .nav-mobile.open{transform:translateX(0)}
+  .nav-mobile.open{transform:translateX(0);opacity:1}
+  .nav-mobile::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    width:calc(100% - 380px);
+    background:rgba(5,30,28,.4);
+    opacity:0;
+    transition:opacity .35s var(--ease);
+  }
+  .nav-mobile.open::before{opacity:1}
   .nav-mobile a{
     color:var(--text);
     font-size:16px;
@@ -317,6 +477,40 @@ em{font-style:italic;color:var(--accent-deep)}
   }
   .nav-mobile a:last-child{border-bottom:none}
   .nav-mobile a::after{display:none}
+}
+
+/* =================== BACK TO TOP =================== */
+.back-to-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 48px;
+  height: 48px;
+  background: var(--accent);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease), visibility 0.3s;
+  box-shadow: var(--shadow-md);
+}
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.back-to-top:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.back-to-top svg {
+  width: 20px;
+  height: 20px;
 }
 
 /* =================== BUTTONS =================== */
