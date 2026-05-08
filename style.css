@@ -2522,3 +2522,153 @@ html{scroll-behavior:smooth}
   }
 }
 
+/* ============================================================
+   UNIFIED RESPONSIVE NAVBAR
+   Single source of truth: layout flex, no-wrap, drawer mobile.
+   Override globale per garantire navbar identica su tutte le pagine.
+   ============================================================ */
+.topbar{ padding: 24px 0; }
+.topbar.scrolled{ padding: 14px 0; }
+
+.nav-wrap{
+  display: flex !important;
+  grid-template-columns: none !important;
+  align-items: center !important;
+  justify-content: space-between;
+  gap: clamp(14px, 1.8vw, 28px);
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+
+/* BRAND — logo + wordmark sempre a sinistra, su una riga */
+.brand{
+  flex: 0 0 auto;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 12px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.brand img{
+  display: block !important;
+  height: 40px;
+  width: auto;
+  flex-shrink: 0;
+}
+.brand-text{
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+  line-height: 1;
+  white-space: nowrap;
+}
+.brand-main{
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.2vw, 26px) !important;
+  font-style: italic;
+  font-weight: 500;
+  color: #fff;
+  white-space: nowrap;
+  line-height: 1;
+  margin: 0;
+}
+.topbar.scrolled .brand-main{ color: var(--text); }
+.brand-sub{
+  font-family: var(--font-body);
+  font-size: 8.5px !important;
+  font-weight: 500;
+  letter-spacing: .36em !important;
+  color: rgba(255,255,255,.78);
+  text-transform: uppercase;
+  margin-top: 4px !important;
+  white-space: nowrap;
+}
+.topbar.scrolled .brand-sub{ color: var(--muted); }
+
+/* MAIN NAV — flex no-wrap, centro */
+.nav#mainNav{
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 1.4vw, 26px) !important;
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+.nav#mainNav a{ white-space: nowrap; }
+
+/* CTA + LANG — destra, mai a capo */
+.nav-cta,
+.lang-switch{
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+.nav-cta{
+  font-size: clamp(9.5px, 0.9vw, 11px) !important;
+  padding: 11px clamp(14px, 1.4vw, 22px) !important;
+}
+
+/* TOGGLE — flex item ben fissato (visibile solo mobile) */
+.nav-toggle{ flex: 0 0 auto; }
+
+/* MEDIUM viewport (≤1180px): nasconde sub-titolo brand per evitare sovraffollamento */
+@media (max-width: 1180px){
+  .brand-sub{ display: none !important; }
+  .nav#mainNav{ gap: 16px !important; }
+  .nav-cta{ padding: 10px 14px !important; font-size: 9.5px !important; letter-spacing: .22em !important; }
+  .lang-switch{ margin-left: 6px !important; }
+}
+
+/* TABLET narrow (≤1024px): font nav un po' più piccolo */
+@media (max-width: 1024px){
+  .nav#mainNav a{ font-size: 11px !important; letter-spacing: .22em !important; }
+}
+
+/* MOBILE (≤980px): drawer dal lato destro */
+@media (max-width: 980px){
+  .topbar{ padding: 18px 0; }
+  .topbar.scrolled{ padding: 12px 0; }
+  .nav-wrap{ gap: 12px; justify-content: space-between; }
+  .brand-main{ font-size: 18px !important; }
+  .brand img{ height: 34px; }
+
+  .nav#mainNav{
+    position: fixed;
+    inset: 0 0 0 auto;
+    width: 100%;
+    max-width: 360px;
+    background: var(--bg);
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    gap: 0 !important;
+    padding: 110px 32px 40px;
+    transform: translateX(100%);
+    transition: transform .35s var(--ease);
+    box-shadow: -20px 0 60px rgba(0,0,0,.18);
+    z-index: 40;
+  }
+  .nav#mainNav.open{ transform: translateX(0); }
+  .nav#mainNav a{
+    color: var(--text);
+    font-size: 15px;
+    padding: 18px 0;
+    width: 100%;
+    border-bottom: 1px solid var(--line);
+    letter-spacing: .22em;
+  }
+  .nav#mainNav a:last-of-type{ border-bottom: none; }
+  .nav#mainNav a::after{ display: none !important; }
+
+  .nav-cta{ display: none !important; }
+  .lang-switch:not(.lang-switch--mobile){ display: none !important; }
+  .nav-toggle{ display: inline-flex !important; }
+}
+
+@media (max-width: 480px){
+  .brand-main{ font-size: 16px !important; }
+  .nav-wrap{ gap: 8px; }
+}
+
