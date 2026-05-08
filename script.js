@@ -35,6 +35,45 @@
     if (document.body) document.body.style.overflow = 'hidden';
   }
   
+  // Custom cursor (desktop only)
+  var cursor = document.getElementById('customCursor');
+  var cursorText = document.getElementById('customCursorText');
+  if (cursor && window.matchMedia('(hover: hover)').matches) {
+    var cursorLinks = document.querySelectorAll('a, button, .villa-slide, .service, input, textarea, select');
+    
+    document.addEventListener('mousemove', function(e) {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+      if (cursorText) {
+        cursorText.style.left = e.clientX + 'px';
+        cursorText.style.top = e.clientY + 'px';
+      }
+    });
+    
+    cursorLinks.forEach(function(el) {
+      el.addEventListener('mouseenter', function() {
+        cursor.classList.add('hover');
+        var label = el.getAttribute('aria-label') || el.textContent;
+        if (cursorText && label) {
+          cursorText.textContent = label.substring(0, 20);
+          cursorText.classList.add('visible');
+        }
+      });
+      el.addEventListener('mouseleave', function() {
+        cursor.classList.remove('hover');
+        if (cursorText) cursorText.classList.remove('visible');
+      });
+    });
+    
+    // Hide on mouse leave window
+    document.addEventListener('mouseleave', function() {
+      cursor.classList.add('hidden');
+    });
+    document.addEventListener('mouseenter', function() {
+      cursor.classList.remove('hidden');
+    });
+  }
+  
   // Mobile nav toggle
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.getElementById('mainNav');
