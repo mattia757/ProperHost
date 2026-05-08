@@ -871,7 +871,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 54
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: openHands
 - **Priority**: high
@@ -884,7 +884,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 55
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: openHands
 - **Priority**: high
@@ -897,7 +897,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 56
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: openHands
 - **Priority**: high
@@ -910,7 +910,7 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ---
 
 ### Task 56
-- **Status**: todo
+- **Status**: done
 - **Agent**: ui-designer
 - **Branch**: openHands
 - **Priority**: high
