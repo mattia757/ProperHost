@@ -185,32 +185,44 @@
   }
 
   // Smooth reveal for service cards stagger
+  // Bugfix Task 57/59: in passato venivano impostati inline opacity:0 + translateY,
+  // poi sostituiti aggiungendo la classe `.in`. Ma gli inline-style hanno priorità
+  // sui rule CSS, quindi le card restavano nascoste anche dopo `in`.
+  // Soluzione: niente inline-style, lasciamo fare al CSS `.reveal` / `.reveal.in`
+  // (che già esistono) e aggiungiamo solo lo stagger via transition-delay.
   var serviceCards = document.querySelectorAll('.service-grid .service, .service-grid .service-card');
   if ('IntersectionObserver' in window && serviceCards.length) {
+    serviceCards.forEach(function(card, i) {
+      // assicura che ogni service card sia trattata come reveal element
+      if (!card.classList.contains('reveal')) card.classList.add('reveal');
+      card.style.transitionDelay = (i * 0.08) + 's';
+    });
     var serviceIO = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e, i) {
+      entries.forEach(function (e) {
         if (e.isIntersecting) {
-          setTimeout(function() {
-            e.target.classList.add('in');
-          }, i * 100);
+          e.target.classList.add('in');
           serviceIO.unobserve(e.target);
         }
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
     serviceCards.forEach(function(card) {
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(30px)';
-      card.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
       serviceIO.observe(card);
     });
   }
 
-  // Add reveal-in class for JS-triggered reveals
+  // Safety net Task 57/59: dopo 1.5s qualunque .reveal ancora invisibile viene
+  // forzato a visibile. Copre il caso di ScrollTrigger/Lenis che non notificano
+  // l'IntersectionObserver, immagini fuori viewport iniziale o errori di script.
   setTimeout(function() {
-    document.querySelectorAll('.reveal').forEach(function(el) {
-      el.classList.add('reveal-in');
+    document.querySelectorAll('.reveal:not(.in)').forEach(function(el) {
+      var rect = el.getBoundingClientRect();
+      // forza solo gli elementi sopra il fold + un po' sotto, gli altri
+      // verranno gestiti dall'observer normalmente
+      if (rect.top < window.innerHeight + 200) {
+        el.classList.add('in');
+      }
     });
-  }, 100);
+  }, 1500);
 
   // Villa slider
   var slider = document.querySelector('.villa-slider');
@@ -226,13 +238,14 @@
     var touchStartX = 0;
     var touchEndX = 0;
 
-    // Dots indicator
+    // Dots indicator (Task 55: stile gestito interamente dal CSS via classi)
     var dotsContainer = document.createElement('div');
     dotsContainer.className = 'villa-slider-dots';
-    dotsContainer.style.cssText = 'position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:10';
+    dotsContainer.style.cssText = 'position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;gap:12px;z-index:7';
     slides.forEach(function(slide, i) {
       var dot = document.createElement('span');
-      dot.style.cssText = 'width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;transition:all .3s';
+      dot.setAttribute('role', 'button');
+      dot.setAttribute('aria-label', 'Vai a slide ' + (i + 1));
       dot.addEventListener('click', function() { goTo(i); startAutoplay(); });
       dotsContainer.appendChild(dot);
     });
@@ -240,8 +253,8 @@
     var dots = dotsContainer.querySelectorAll('span');
     function updateDots() {
       dots.forEach(function(dot, i) {
-        dot.style.background = i === current ? 'rgba(255,255,255,.9)' : 'rgba(255,255,255,.4)';
-        dot.style.transform = i === current ? 'scale(1.3)' : 'scale(1)';
+        if (i === current) dot.classList.add('is-active');
+        else dot.classList.remove('is-active');
       });
     }
 
@@ -329,55 +342,17 @@
     }
   }
   
-  // Villa slider magnetic cursor navigation (desktop only)
+  // Task 55 — Villa slider: frecce SEMPRE visibili (no più magnetic cursor)
+  // L'utente non aveva alcun modo evidente di scorrere le foto: ora le frecce
+  // restano sempre a video con leggero hover-amplify.
   (function() {
-    if (!window.matchMedia('(hover: hover)').matches) return;
-    
     var slider = document.querySelector('.villa-slider');
     if (!slider) return;
-    
     var navButtons = slider.querySelectorAll('.villa-nav');
-    var proximityThreshold = 120;
-    
-    // Initially show buttons for accessibility
     navButtons.forEach(function(btn) {
-      btn.style.opacity = '0';
-    });
-    
-    function handleMouseMove(e) {
-      var sliderRect = slider.getBoundingClientRect();
-      var sliderLeft = sliderRect.left;
-      var sliderRight = sliderRect.right;
-      var sliderTop = sliderRect.top;
-      var sliderBottom = sliderRect.bottom;
-      
-      navButtons.forEach(function(btn) {
-        var isPrev = btn.classList.contains('villa-nav-prev');
-        var isNext = btn.classList.contains('villa-nav-next');
-        
-        var inProximity = false;
-        
-        if (isPrev && e.clientX < sliderLeft + proximityThreshold && e.clientY >= sliderTop && e.clientY <= sliderBottom) {
-          inProximity = true;
-        } else if (isNext && e.clientX > sliderRight - proximityThreshold && e.clientY >= sliderTop && e.clientY <= sliderBottom) {
-          inProximity = true;
-        }
-        
-        if (inProximity) {
-          var targetY = e.clientY - sliderRect.height / 2;
-          btn.style.transform = 'translateY(' + (targetY - btn.getBoundingClientRect().top + btn.offsetHeight / 2) + 'px)';
-          btn.style.opacity = '1';
-        } else {
-          btn.style.opacity = '0';
-        }
-      });
-    }
-    
-    slider.addEventListener('mousemove', handleMouseMove, { passive: true });
-    slider.addEventListener('mouseleave', function() {
-      navButtons.forEach(function(btn) {
-        btn.style.opacity = '0';
-      });
+      // forza visibilità (override dell'opacity:0 di base nel CSS)
+      btn.style.opacity = '1';
+      btn.classList.add('villa-nav--visible');
     });
   })();
   

@@ -71,29 +71,34 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
   </a>
 
-  <header class="topbar">
-    <div class="container nav-wrap">
-      <a href="index.html" class="brand" aria-label="Properhost — Home">
-        <img src="../logo.png" alt="Properhost Hospitality" width="40" height="40" fetchpriority="high">
-        <span class="brand-text">
-          <span class="brand-main">properhost</span>
-          <span class="brand-sub">hospitality</span>
-        </span>
-      </a>
-      <nav class="nav" id="mainNav" aria-label="Main">
-        <a href="index.html" class="active">Home</a>
-        <a href="about.html">About</a>
+  <header class="topbar topbar--split">
+    <div class="container nav-wrap nav-wrap--split">
+      <nav class="nav nav--left" aria-label="Sections" id="mainNav">
         <a href="concierge.html">Concierge</a>
+        <a href="about.html">About</a>
         <a href="ville.html">Villas</a>
-        <a href="contatti.html">Contact</a>
       </nav>
-      <a href="prenotazione.html" class="nav-cta" data-quick-book>Check availability</a>
+
+      <a href="index.html" class="brand brand--center" aria-label="Properhost — Home">
+        <span class="brand-main">Properhost</span>
+        <span class="brand-sub">Villas · Concierge · Services</span>
+      </a>
+
+      <nav class="nav nav--right" aria-label="Right sections">
+        <a href="index.html" class="active">Home</a>
+        <a href="contatti.html">Contact</a>
+        <a href="prenotazione.html" class="nav-book">Book</a>
+      </nav>
+    </div>
+
+    <div class="topbar-aside" aria-label="Language">
       <span class="lang-switch" role="group" aria-label="Language">
-        <a href="../" hreflang="it">IT</a>
+        <a href="../index.html" hreflang="it">IT</a>
         <a href="#" class="is-active" aria-current="page">EN</a>
       </span>
-      <button class="nav-toggle" aria-label="Open menu" aria-controls="mainNav" aria-expanded="false"><span></span></button>
     </div>
+
+    <button class="nav-toggle" aria-label="Open menu" aria-controls="mainNav" aria-expanded="false"><span></span></button>
   </header>
 
   <!-- Quick booking modal -->
@@ -134,6 +139,12 @@
       <source src="../assets/hero.mp4" type="video/mp4">
     </video>
     <div class="hero-video-overlay"></div>
+
+    <!-- Wordmark Properhost al centro del video -->
+    <div class="hero-brandmark" aria-hidden="true">
+      <span class="hero-brandmark__name">Properhost</span>
+      <span class="hero-brandmark__tag">Villas · Concierge · Services</span>
+    </div>
 
     <div class="hero-cinema-content container">
       <div class="hero-cinema-inner">
@@ -367,7 +378,7 @@
       </div>
       <div class="footer-wrap">
         <div>© 2026 Properhost — All rights reserved</div>
-        <div>Hospitality · Sicily · <a href="../" style="color:inherit;text-decoration:underline">IT</a></div>
+        <div>Hospitality · Sicily · <a href="../index.html" style="color:inherit;text-decoration:underline">IT</a></div>
       </div>
     </div>
   </footer>

@@ -873,52 +873,84 @@ I contenuti, palette, tipografia, nomi ville, contatti e identità di ProperHost
 ### Task 54
 - **Status**: done
 - **Agent**: ui-designer
-- **Branch**: openHands
+- **Branch**: feature/hero-nav-centered-logo
 - **Priority**: high
-- **Title**: Togliere la scritte sotto il logo della pagina index.html
-- **Desc**: Togliere la scritte sotto il logo della pagina index.html
-- **Scope**: index
-- **Files**: HTML pertinenti
-- **Dependencies**: nessuna.
+- **Title**: Hero index — navbar split con logo centrato + wordmark Properhost al centro del video
+- **Desc**: Refactor della parte iniziale di `index.html` per replicare il pattern visto su SiciLife (riferimento di layout, NON di palette/copy/identità). Modifiche richieste: (1) **Navbar split**: il logo ProperHost (immagine `logo.png` o wordmark "Properhost" già presente) va posizionato esattamente al CENTRO della navbar, in alto. A SINISTRA del logo le voci `Concierge`, `About`, `Services` (o l'attuale spezzatura ITA equivalente). A DESTRA del logo le voci `Apartments`, `Villas`, `Book` (o equivalente: `Ville`, `Contatti`, `Richiedi disponibilità`). Mantenere a estrema destra il pulsante CTA "Richiedi disponibilità" e lo switcher lingua IT/EN. Layout grid `1fr auto 1fr` con `align-items: center; gap: clamp(24px, 4vw, 60px)`. (2) **Logo Properhost al centro del video hero**: aggiungere overlay con il wordmark/logo Properhost grande, centrato nel viewport del video hero (orizzontale e verticale), in bianco con leggera ombra per leggibilità sopra il video. Cormorant italic `clamp(48px, 7vw, 96px)` o uso del file logo. Sotto il wordmark, sottotitolo "VILLAS · CONCIERGE · SERVICES" Inter 11px letter-spacing 0.46em uppercase color rgba(255,255,255,.78). (3) **Testo descrittivo + bottone "Scopri" tutto a destra**: il blocco di testo (`Ville private, dimore selezionate e servizi tailor-made...`) e il bottone "Scopri" devono trovarsi nella parte destra del viewport hero (allineamento `align-items: flex-end; text-align: right`), non più al centro. Posizionare il blocco con `position: absolute; bottom: clamp(60px, 10vh, 120px); right: clamp(24px, 6vw, 100px); max-width: 480px;`. Il bottone "Scopri" rimane sotto il paragrafo, allineato a destra. (4) Su mobile (<760px): la navbar collassa in hamburger, il logo centrale del video diventa più piccolo (`clamp(32px, 9vw, 56px)`), il blocco testo+bottone passa a `bottom-left` con padding 24px e width 100%.
+- **Scope**: navbar di `index.html` (e `en/index.html`) + hero section + overlay video. NON toccare le altre pagine in questo task (la navbar split può essere estesa in task separato se richiesto).
+- **Files**: `index.html`, `en/index.html`, `style.css` (o moduli CSS pertinenti se già splittato).
+- **Dependencies**: Task 25, 28.
+- **Notes**: il riferimento SiciLife è SOLO di layout (logo al centro + nav su entrambi i lati). NON copiare palette, copy, font o identità di SiciLife. Mantenere palette teal/oro ProperHost, font Cormorant + Inter, copy ProperHost esistente. Verificare che il logo grande sopra il video non interferisca con la leggibilità del paragrafo bottom-right (tonalità bianca con drop-shadow leggera). Test su 375px, 768px, 1440px.
 
 ---
 
 ### Task 55
 - **Status**: done
-- **Agent**: ui-designer
-- **Branch**: openHands
+- **Agent**: coder
+- **Branch**: feature/villa-slider-photo-navigation
 - **Priority**: high
-- **Title**: Il testo sovrapposto al video, deve essere spostato tutto a destra
-- **Desc**: Il testo sovrapposto al video, deve essere spostato tutto a destra
-- **Scope**: index
-- **Files**: HTML pertinenti
-- **Dependencies**: nessuna.
+- **Title**: VilleSlider — aggiungere navigazione per scorrere le foto delle ville
+- **Desc**: Nella sezione del carosello ville di `index.html` (slider che mostra le 6 ville, es. "Villa Aurea") attualmente non esiste un meccanismo visibile per l'utente per scorrere manualmente le foto/ville. Verificare lo stato attuale dello slider (Swiper o vanilla) e: (1) aggiungere frecce di navigazione `←` / `→` sempre visibili (non solo on hover) ai lati dello slider, ben distinguibili — cerchio 56px bg `rgba(255,255,255,.18)` backdrop-filter blur(12px) border 1px solid `rgba(255,255,255,.35)` color white, hover bg `var(--accent)` con scale(1.06); (2) aggiungere indicatori (pagination dots o bullet count "01 / 06") nella parte inferiore centrale dello slider, con stato attivo evidenziato in `var(--accent)`; (3) abilitare touch swipe su mobile (se non già attivo) con momentum naturale; (4) abilitare navigazione tastiera (`ArrowLeft`/`ArrowRight`) quando lo slider è in viewport; (5) il titolo della villa visibile (es. "Villa Aurea") deve sempre aggiornarsi al cambio slide con fade morbido; (6) mantenere autoplay 6500ms con `pauseOnMouseEnter: true` e `disableOnInteraction: false`. Verificare che gli arrow buttons NON entrino in conflitto col custom cursor (Task 23) o coi magnetic buttons del Task 10.
+- **Scope**: solo slider ville in `index.html` (e `en/index.html`) — navigazione foto.
+- **Files**: `index.html`, `en/index.html`, `script.js` o `js/villaSlider.js`, `style.css` o CSS pertinente.
+- **Dependencies**: Task 04, Task 30.
+- **Notes**: il problema utente è "non c'è un modo per scorrere le foto" — la priorità è la VISIBILITÀ del controllo. Se Swiper è già usato, abilitare i moduli `Navigation` e `Pagination` con elementi custom stilizzati. Test obbligatorio su mobile reale (touch swipe) e desktop (frecce + tastiera).
 
 ---
 
 ### Task 56
 - **Status**: done
 - **Agent**: ui-designer
-- **Branch**: openHands
-- **Priority**: high
-- **Title**: Nella sezione Private Concierge devi inserire dello spazio tra il titolo grande, il bottono e la descrizione dopo il bottone
-- **Desc**: Nella sezione Private Concierge devi inserire dello spazio tra il titolo grande, il bottono e la descrizione dopo il bottone
-- **Scope**: index
-- **Files**: HTML pertinenti
-- **Dependencies**: nessuna.
+- **Branch**: feature/scopri-button-spacing
+- **Priority**: medium
+- **Title**: Spaziatura bottone "Scopri" — distanziamento simmetrico tra paragrafo sopra e contenuto sotto
+- **Desc**: Nella hero di `index.html`, il bottone "Scopri" attualmente non è distanziato in modo equilibrato: la distanza tra il paragrafo descrittivo (sopra) e il bottone è diversa dalla distanza tra il bottone e il contenuto/elemento sottostante. Correggere applicando `margin-top` e `margin-bottom` (oppure `gap` nel container flex) IDENTICI sopra e sotto il bottone, in modo che il bottone risulti otticamente centrato nel proprio "respiro". Valore consigliato: `margin: clamp(28px, 4vh, 48px) 0;` o `gap: clamp(28px, 4vh, 48px)` se il container parent è flex column. Verificare anche che lo `scroll-indicator` (se presente sotto il bottone) abbia un distanziamento coerente con il ritmo. Se il pulsante è dentro un flex column con `gap`, normalizzare il gap in tutto il blocco hero content.
+- **Scope**: solo bottone "Scopri" nella hero di `index.html`.
+- **Files**: `style.css` o `css/hero.css`.
+- **Dependencies**: Task 28, Task 54 (se 54 cambia struttura hero, applicare 56 dopo).
+- **Notes**: misurare con DevTools che le distanze sopra/sotto siano uguali al pixel (o entro 2px di tolleranza per arrotondamenti `clamp`). Test su 375px, 768px, 1440px.
 
 ---
 
-### Task 56
+### Task 57
+- **Status**: done
+- **Agent**: coder
+- **Branch**: feature/servizi-images-fix
+- **Priority**: high
+- **Title**: Sezione "I nostri servizi" — immagini non visibili nelle card
+- **Desc**: Nella sezione "Tutto quello che serve per godersi la Sicilia" / "I nostri servizi" di `index.html`, passando il cursore sopra le card si capisce che dovrebbero esserci delle immagini (cursor pointer, hover effect attivo) ma le immagini NON vengono visualizzate. Investigare la causa: (1) verificare i path `src` delle `<img>` nelle card servizi (controllare se i file esistono in `assets/`); (2) verificare se le immagini sono caricate ma nascoste da CSS (`display: none`, `visibility: hidden`, `opacity: 0`, `height: 0`, parent `overflow: hidden` con dimensioni 0); (3) verificare la console del browser per 404 o errori di caricamento; (4) verificare se le card servizio usano `background-image` invece di `<img>` e se il path è corretto e accessibile. Una volta trovata la causa: ripristinare la visualizzazione delle immagini, assicurandosi che siano coerenti col design delle card servizio (dimensioni, aspect-ratio, object-fit cover, border-radius coerente con la card). Se le immagini mancano dagli assets, segnalare quali file servono e proporre placeholder coerenti dal pool esistente (`hero-home.jpg`, `concierge.jpg`, `sea.jpg`, ecc.).
+- **Scope**: sezione servizi in `index.html` (e `en/index.html`) — sia HTML che CSS che eventualmente JS che le genera.
+- **Files**: `index.html`, `en/index.html`, `style.css` o CSS pertinente, eventualmente `data/services.json` o `js/serviziSlider.js`, `assets/`.
+- **Dependencies**: Task 32.
+- **Notes**: prima di modificare, fare un audit veloce con DevTools (Network tab + Elements tab) per identificare la causa esatta. Documentare nel commit cosa era rotto.
+
+---
+
+### Task 58
+- **Status**: done
+- **Agent**: coder
+- **Branch**: feature/i18n-switcher-en-to-it
+- **Priority**: high
+- **Title**: Switcher lingua — bug ritorno da EN a IT
+- **Desc**: Il flusso utente attuale: l'utente è su una pagina IT, clicca "EN" → viene correttamente portato alla versione inglese della stessa pagina (es. `/about.html` → `/en/about.html`). Ma quando l'utente è su una pagina EN e clicca "IT" → viene portato a una pagina sbagliata (probabilmente la home IT, oppure una 404, oppure rimane su una pagina EN). Investigare la logica dello switcher in `js/i18n.js` (funzione `getAlternateLocaleHref` o equivalente) e correggere il calcolo del path inverso. Logica corretta: (1) se `window.location.pathname` inizia con `/en/`, rimuovere il prefisso `/en/` per ottenere il path IT (es. `/en/about.html` → `/about.html`, `/en/ville/aurea.html` → `/ville/aurea.html`, `/en/` → `/`); (2) se `window.location.pathname` NON inizia con `/en/`, aggiungere il prefisso (es. `/about.html` → `/en/about.html`, `/` o `/index.html` → `/en/index.html`). Gestire correttamente i casi edge: trailing slash, URL `/`, URL con query string e hash (preservarli), URL deep nested (`/ville/aurea.html`). Testare TUTTI i collegamenti switcher su TUTTE le pagine sia IT che EN: home, about, concierge, ville, contatti, prenotazione + 6 ville singole. Verificare anche i link `<link rel="alternate" hreflang>` nel `<head>`: devono puntare correttamente alla controparte.
+- **Scope**: solo logica switcher lingua + verifica `<link rel="alternate">` nei `<head>`.
+- **Files**: `js/i18n.js` (o `script.js` se logica inline), tutte le pagine HTML per verificare gli hreflang.
+- **Dependencies**: Task 20, Task 52.
+- **Notes**: scrivere unit test mentale (o reale se framework test è disponibile) per la funzione `getAlternateLocaleHref`. Test cases minimi: `/`, `/index.html`, `/about.html`, `/ville/aurea.html`, `/en/`, `/en/index.html`, `/en/about.html`, `/en/ville/aurea.html`. Documentare nel commit gli input/output attesi.
+
+---
+
+### Task 59
 - **Status**: done
 - **Agent**: ui-designer
-- **Branch**: openHands
+- **Branch**: feature/concierge-services-visibility
 - **Priority**: high
-- **Title**: Nella sezione Our Services non si vedono le immagini sotto la descrizione, compare solo la scritta nel cursore
-- **Desc**: Nella sezione Our Services non si vedono le immagini sotto la descrizione, compare solo la scritta nel cursore
-- **Scope**: index
-- **Files**: HTML pertinenti
-- **Dependencies**: nessuna.
+- **Title**: Pagina concierge — non tutti i servizi si vedono
+- **Desc**: Nella pagina `concierge.html` ("Un catalogo essenziale, ma completo" / "Servizi principali"), non tutti i servizi della catalogazione vengono visualizzati. Investigare la causa: (1) verificare HTML — sono presenti tutte le card servizio nel markup? (almeno: Wine & Food, Celebrations, Family Care + i 6 servizi principali Navetta, Mezzi, Gommoni, Chef, Favignana, Levanzo); (2) verificare CSS — la griglia/swiper della sezione servizi sta clippando o nascondendo elementi (`overflow: hidden` su parent troppo basso, `max-height` limitato, `display: none` su breakpoint, `grid-template-columns` che non avvolge); (3) verificare JS — eventuale slider Swiper con `slidesPerView` fisso che mostra solo i primi N senza scroll/navigation; (4) verificare se manca CTA/footer della sezione perché tagliato. Una volta identificata la causa: garantire che TUTTI i servizi siano visibili (o tramite scroll/swiper navigabile con frecce e dots SEMPRE visibili, o tramite griglia che avvolga tutti gli elementi su tutte le viewport). Aggiungere se necessario indicatori "scroll →" o pagination per chiarire all'utente che ci sono più contenuti. Replicare stesso fix su `en/concierge.html`.
+- **Scope**: sezione "Servizi principali" / catalogo della pagina `concierge.html` (e `en/concierge.html`).
+- **Files**: `concierge.html`, `en/concierge.html`, `style.css` o CSS pertinente, eventualmente `js/serviziSlider.js`.
+- **Dependencies**: Task 32, Task 37.
+- **Notes**: verificare visualizzazione su 375px, 768px, 1024px, 1440px. Se il problema è uno Swiper con navigazione invisibile, riusare il pattern Task 55 (frecce sempre visibili + pagination dots).
 
 ---
 
