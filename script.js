@@ -89,17 +89,10 @@
     }, { passive: true });
   }
   
-  // Mobile nav toggle + lang-switch clone nel drawer (per visibilità su mobile)
+  // Mobile nav toggle
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.getElementById('mainNav');
   if (toggle && nav) {
-    // Clona il lang-switch dentro il drawer una volta sola, marchiandolo come mobile
-    var sourceLang = document.querySelector('.lang-switch:not(.lang-switch--mobile)');
-    if (sourceLang && !nav.querySelector('.lang-switch--mobile')) {
-      var clone = sourceLang.cloneNode(true);
-      clone.classList.add('lang-switch--mobile');
-      nav.appendChild(clone);
-    }
     toggle.addEventListener('click', function () {
       var open = nav.classList.toggle('open');
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');

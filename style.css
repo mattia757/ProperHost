@@ -1868,20 +1868,14 @@ html{scroll-behavior:smooth}
 
 @media (max-width: 980px){
   .lang-switch{display:none}
-  .nav-mobile .lang-switch--mobile,
-  .nav#mainNav .lang-switch--mobile,
-  .nav .lang-switch--mobile{
+  .nav-mobile .lang-switch--mobile{
     display:inline-flex;
     margin: 24px 0 0;
     background: var(--bg-2);
     border-color: var(--line-strong);
   }
-  .nav-mobile .lang-switch--mobile a,
-  .nav#mainNav .lang-switch--mobile a,
-  .nav .lang-switch--mobile a{color: var(--text-2)}
-  .nav-mobile .lang-switch--mobile a.is-active,
-  .nav#mainNav .lang-switch--mobile a.is-active,
-  .nav .lang-switch--mobile a.is-active{background: var(--primary); color:#fff}
+  .nav-mobile .lang-switch--mobile a{color: var(--text-2)}
+  .nav-mobile .lang-switch--mobile a.is-active{background: var(--primary); color:#fff}
 }
 
 /* --- Section dividers naturali --- */
@@ -3300,14 +3294,6 @@ body .topbar.topbar--split.scrolled{
 @media (orientation: landscape) and (max-height: 500px){
   .hero.page-hero{ min-height: auto !important; padding-block: 110px 56px !important; }
   .hero-brandmark{ padding: 14vh 20px 100px !important; }
-}
-@media (max-width: 980px){
-  .nav .lang-switch--mobile a,
-  .nav-mobile .lang-switch--mobile a{
-    min-width: 44px; min-height: 44px;
-    padding: 10px 16px;
-    display: inline-flex; align-items: center; justify-content: center;
-  }
 }
 
 /* ============================================================
