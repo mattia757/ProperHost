@@ -120,13 +120,11 @@
 
       <a href="index.html" class="brand brand--center" aria-label="Properhost — Home">
         <span class="brand-main">Properhost</span>
-        <span class="brand-sub">Villas · Concierge · Services</span>
       </a>
 
       <nav class="nav nav--right" aria-label="Sezioni destre">
         <a href="index.html" class="active">Home</a>
         <a href="contatti.html">Contatti</a>
-        <a href="prenotazione.html" class="nav-book">Book</a>
       </nav>
     </div>
 
@@ -140,46 +138,6 @@
 
     <button class="nav-toggle" aria-label="Apri menu" aria-controls="mainNav" aria-expanded="false"><span></span></button>
   </header>
-
-  <!-- Quick booking modal -->
-  <div class="quick-book-modal" id="quickBookModal" role="dialog" aria-modal="true" aria-labelledby="quickBookTitle" hidden>
-    <div class="quick-book-overlay" data-close></div>
-    <div class="quick-book-content">
-      <button class="quick-book-close" aria-label="Chiudi" data-close>&times;</button>
-      <h3 id="quickBookTitle">Richiedi disponibilità</h3>
-      <form class="quick-book-form" action="contatti.html" method="get">
-        <div class="form-group">
-          <input type="text" name="name" placeholder="Il tuo nome" required>
-        </div>
-        <div class="form-group">
-          <select name="villa" required>
-            <option value="">Seleziona villa</option>
-            <option value="Villa Aurea">Villa Aurea - Taormina</option>
-            <option value="Villa Zagara">Villa Zagara - Noto</option>
-            <option value="Villa Bianca">Villa Bianca - Siracusa</option>
-            <option value="Villa Soho">Villa Soho - Ragusa</option>
-            <option value="Villa Manu">Villa Manu - Modica</option>
-            <option value="Villa Dolce Vita">Villa Dolce Vita - Scicli</option>
-          </select>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <input type="date" name="checkin" placeholder="Check-in" required>
-          </div>
-          <div class="form-group">
-            <input type="date" name="checkout" placeholder="Check-out" required>
-          </div>
-        </div>
-        <div class="form-group">
-          <input type="number" name="guests" placeholder="Numero ospiti" min="1" max="12" required>
-        </div>
-        <div class="form-group">
-          <textarea name="message" placeholder="Messaggio opzionale" rows="3"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Invia richiesta</button>
-      </form>
-    </div>
-  </div>
 
   <main id="main">
 
@@ -197,16 +155,6 @@
       <span class="hero-brandmark__tag">Villas · Concierge · Services</span>
     </div>
 
-    <div class="hero-cinema-content container">
-      <div class="hero-cinema-inner">
-        <div class="hero-cinema-text reveal">
-          <p>Ville private, dimore selezionate e servizi tailor-made per chi desidera un soggiorno autentico, raffinato e senza pensieri sulla costa siciliana. Ogni dettaglio coordinato per trasformare il viaggio in un'esperienza su misura.</p>
-        </div>
-        <a href="#villas" class="hero-discover reveal" aria-label="Scopri">
-          <span>Scopri</span>
-        </a>
-      </div>
-    </div>
   </section>
 
   <section class="intro intro-editorial">
@@ -397,7 +345,7 @@
           </button>
           <div class="faq-item__a" id="faq-a-1" role="region" aria-labelledby="faq-q-1">
             <div class="faq-item__a-inner">
-              Compila il form contatti o usa il pulsante "Richiedi disponibilità": riceverai una proposta personalizzata con villa, date, ospiti e servizi inclusi entro 24 ore lavorative.
+              Compila il form nella pagina Contatti: riceverai una proposta personalizzata con villa, date, ospiti e servizi inclusi entro 24 ore lavorative.
             </div>
           </div>
         </li>
@@ -504,7 +452,7 @@
         <a href="about.html">About</a>
         <a href="concierge.html">Concierge &amp; Servizi</a>
         <a href="ville.html">Ville</a>
-        <a href="contatti.html">Richiedi disponibilità</a>
+        <a href="contatti.html">Contatti</a>
       </div>
     </div>
     <div class="footer-wrap">

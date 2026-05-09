@@ -44,14 +44,6 @@
   </url>
 
   <url>
-    <loc>https://www.properhost.it/prenotazione.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-    <xhtml:link rel="alternate" hreflang="it" href="https://www.properhost.it/prenotazione.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.properhost.it/en/prenotazione.html"/>
-  </url>
-
-  <url>
     <loc>https://www.properhost.it/ville/aurea.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

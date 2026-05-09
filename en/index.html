@@ -81,13 +81,11 @@
 
       <a href="index.html" class="brand brand--center" aria-label="Properhost — Home">
         <span class="brand-main">Properhost</span>
-        <span class="brand-sub">Villas · Concierge · Services</span>
       </a>
 
       <nav class="nav nav--right" aria-label="Right sections">
         <a href="index.html" class="active">Home</a>
         <a href="contatti.html">Contact</a>
-        <a href="prenotazione.html" class="nav-book">Book</a>
       </nav>
     </div>
 
@@ -100,36 +98,6 @@
 
     <button class="nav-toggle" aria-label="Open menu" aria-controls="mainNav" aria-expanded="false"><span></span></button>
   </header>
-
-  <!-- Quick booking modal -->
-  <div class="quick-book-modal" id="quickBookModal" role="dialog" aria-modal="true" aria-labelledby="quickBookTitle" hidden>
-    <div class="quick-book-overlay" data-close></div>
-    <div class="quick-book-content">
-      <button class="quick-book-close" aria-label="Close" data-close>&times;</button>
-      <h3 id="quickBookTitle">Check availability</h3>
-      <form class="quick-book-form" action="../contatti.html" method="get">
-        <div class="form-group"><input type="text" name="name" placeholder="Your name" required></div>
-        <div class="form-group">
-          <select name="villa" required>
-            <option value="">Select a villa</option>
-            <option value="Villa Aurea">Villa Aurea — Taormina</option>
-            <option value="Villa Zagara">Villa Zagara — Noto</option>
-            <option value="Villa Bianca">Villa Bianca — Siracusa</option>
-            <option value="Villa Soho">Villa Soho — Ragusa</option>
-            <option value="Villa Manu">Villa Manu — Modica</option>
-            <option value="Villa Dolce Vita">Villa Dolce Vita — Scicli</option>
-          </select>
-        </div>
-        <div class="form-row">
-          <div class="form-group"><input type="date" name="checkin" required></div>
-          <div class="form-group"><input type="date" name="checkout" required></div>
-        </div>
-        <div class="form-group"><input type="number" name="guests" placeholder="Number of guests" min="1" max="12" required></div>
-        <div class="form-group"><textarea name="message" placeholder="Optional message" rows="3"></textarea></div>
-        <button type="submit" class="btn btn-primary">Send request</button>
-      </form>
-    </div>
-  </div>
 
   <main id="main">
 
@@ -146,16 +114,6 @@
       <span class="hero-brandmark__tag">Villas · Concierge · Services</span>
     </div>
 
-    <div class="hero-cinema-content container">
-      <div class="hero-cinema-inner">
-        <div class="hero-cinema-text reveal">
-          <p>Private villas, curated homes and tailor-made services for those seeking an authentic, refined, hassle-free stay on the Sicilian coast. Every detail orchestrated to turn the journey into a bespoke experience.</p>
-        </div>
-        <a href="#villas" class="hero-discover reveal" aria-label="Discover">
-          <span>Discover</span>
-        </a>
-      </div>
-    </div>
   </section>
 
   <section class="intro intro-editorial">
@@ -303,7 +261,7 @@
       <ul class="faq-list">
         <li class="faq-item">
           <button class="faq-item__q" aria-expanded="false" aria-controls="faq-a-1" id="faq-q-1"><span class="faq-item__q-text">How do I book a Properhost villa?</span><span class="faq-item__icon" aria-hidden="true">+</span></button>
-          <div class="faq-item__a" id="faq-a-1" role="region" aria-labelledby="faq-q-1"><div class="faq-item__a-inner">Fill in the contact form or click "Check availability": you'll receive a tailored proposal with villa, dates, guests and included services within 24 working hours.</div></div>
+          <div class="faq-item__a" id="faq-a-1" role="region" aria-labelledby="faq-q-1"><div class="faq-item__a-inner">Fill in the form on the Contact page: you'll receive a tailored proposal with villa, dates, guests and included services within 24 working hours.</div></div>
         </li>
         <li class="faq-item">
           <button class="faq-item__q" aria-expanded="false" aria-controls="faq-a-2" id="faq-q-2"><span class="faq-item__q-text">What does the concierge service include?</span><span class="faq-item__icon" aria-hidden="true">+</span></button>

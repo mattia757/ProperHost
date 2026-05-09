@@ -18,7 +18,6 @@ Target minimo:
 - `/ville.html`
 - `/ville/aurea.html` (campione villa singola)
 - `/contatti.html`
-- `/prenotazione.html`
 - `/en/` e almeno una pagina `/en/*` per controllo i18n
 
 ## Punti di attenzione tipici

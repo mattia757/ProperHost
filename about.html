@@ -88,7 +88,6 @@
       <a href="ville.html">Ville</a>
       <a href="contatti.html">Contatti</a>
     </nav>
-    <a href="prenotazione.html" class="nav-cta" data-quick-book>Richiedi disponibilità</a>
     <span class="lang-switch" role="group" aria-label="Lingua">
       <a href="#" class="is-active" aria-current="page">IT</a>
       <a href="en/about.html" hreflang="en">EN</a>
@@ -96,46 +95,6 @@
     <button class="nav-toggle" aria-label="Apri menu" aria-controls="mainNav" aria-expanded="false"><span></span></button>
   </div>
 </header>
-
-  <!-- Quick booking modal -->
-  <div class="quick-book-modal" id="quickBookModal" role="dialog" aria-modal="true" aria-labelledby="quickBookTitle" hidden>
-    <div class="quick-book-overlay" data-close></div>
-    <div class="quick-book-content">
-      <button class="quick-book-close" aria-label="Chiudi" data-close>&times;</button>
-      <h3 id="quickBookTitle">Richiedi disponibilità</h3>
-      <form class="quick-book-form" action="contatti.html" method="get">
-        <div class="form-group">
-          <input type="text" name="name" placeholder="Il tuo nome" required>
-        </div>
-        <div class="form-group">
-          <select name="villa" required>
-            <option value="">Seleziona villa</option>
-            <option value="Villa Aurea">Villa Aurea - Taormina</option>
-            <option value="Villa Zagara">Villa Zagara - Noto</option>
-            <option value="Villa Bianca">Villa Bianca - Siracusa</option>
-            <option value="Villa Soho">Villa Soho - Ragusa</option>
-            <option value="Villa Manu">Villa Manu - Modica</option>
-            <option value="Villa Dolce Vita">Villa Dolce Vita - Scicli</option>
-          </select>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <input type="date" name="checkin" placeholder="Check-in" required>
-          </div>
-          <div class="form-group">
-            <input type="date" name="checkout" placeholder="Check-out" required>
-          </div>
-        </div>
-        <div class="form-group">
-          <input type="number" name="guests" placeholder="Numero ospiti" min="1" max="12" required>
-        </div>
-        <div class="form-group">
-          <textarea name="message" placeholder="Messaggio opzionale" rows="3"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Invia richiesta</button>
-      </form>
-    </div>
-  </div>
 
 <main id="main">
 
@@ -256,7 +215,7 @@
         <a href="about.html">About</a>
         <a href="concierge.html">Concierge &amp; Servizi</a>
         <a href="ville.html">Ville</a>
-        <a href="contatti.html">Richiedi disponibilità</a>
+        <a href="contatti.html">Contatti</a>
       </div>
     </div>
     <div class="footer-wrap">

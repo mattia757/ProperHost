@@ -1,9 +1,6 @@
 /* ==========================================================
    Stili specifici per pagina: about, concierge, ville, villa singola,
-   contatti, prenotazione, dashboard, modal quick-book.
-   Implementazione attualmente in style.css:
-     - ville-page premium  1745-1835
-     - quick-book modal   1974-1990 + 2429-fine
-     - per-pagina blocchi 2010-2242
+   contatti, dashboard.
+   Implementazione attualmente in style.css.
    Da migrare qui in iterazione successiva del refactor.
    ========================================================== */

@@ -130,6 +130,9 @@
 }
 
 /* =================== CUSTOM CURSOR =================== */
+@media (hover: none), (pointer: coarse){
+  .custom-cursor, .custom-cursor-text{ display: none !important; }
+}
 .custom-cursor {
   position: fixed;
   top: 0;
@@ -392,20 +395,6 @@ em{font-style:italic;color:var(--accent-deep)}
   color:rgba(255,255,255,.78);
   text-transform:uppercase;
   margin-top:14px;
-}
-
-/* "Book" link */
-.nav-book{
-  position:relative;
-  padding-left:24px !important;
-}
-.nav-book::before{
-  content:'';
-  position:absolute;
-  left:0;top:50%;
-  transform:translateY(-50%);
-  width:14px;height:1px;
-  background:var(--accent-soft);
 }
 
 /* Mobile toggle (nascosto su desktop split) */
@@ -970,11 +959,7 @@ gap:var(--space-xl);
     min-height:80vh
   }
   
-  /* Prevent horizontal scroll */
-  *{
-    max-width:100vw;
-    overflow-x:hidden
-  }
+  /* Horizontal-scroll guard solo su body/html, non sull'universale (rompeva drawer/toast/overlay) */
   img{
     max-width:100%;
     height:auto
@@ -1183,7 +1168,7 @@ gap:var(--space-xl);
 .feature span{font-size:14.5px;line-height:1.75;color:var(--text-2);font-family:var(--font-body)}
 
 /* =================== SERVICES =================== */
-.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:var(--space-xl);border-top:1px solid var(--line-strong)}
+.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-sm);margin-top:var(--space-xl);border-top:1px solid var(--line-strong);padding-top:var(--space-sm)}
 .service{padding:54px 38px 54px 0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);position:relative;transition:background .5s var(--ease)}
 .service:nth-child(3n){border-right:none}
 .service:hover{background:var(--bg-warm)}
@@ -1272,7 +1257,7 @@ gap:var(--space-xl);align-items:start}
 .field-full{grid-column:1 / -1}
 .field label{font-family:var(--font-body);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.32em;color:var(--muted)}
 .field input,.field textarea,.field select{
-  font-family:var(--font-body);font-size:15px;
+  font-family:var(--font-body);font-size:16px;
   padding:14px 0;border:none;
   border-bottom:1px solid var(--line-strong);
   background:transparent;color:var(--text);
@@ -1424,12 +1409,11 @@ html{scroll-behavior:smooth}
 .hero.page-hero .hero-card{background:rgba(255,255,255,.08)}
 
 /* ============================================================
-   POLISH PASS — Task 07-15
+   POLISH PASS — Task 07-14
    Task 07: testi mai sui bordi · Task 08: transizioni più veloci
    Task 09: hero text position · Task 10: slider buttons polish
    Task 11: spaziatura sezioni · Task 12: whitespace fill content
    Task 13: bg image reveals · Task 14: ville cards premium
-   Task 15: CTA "Richiedi disponibilità" differenziata
    ============================================================ */
 
 /* --- Task 07: safe padding/spacing globale --- */
@@ -1833,83 +1817,6 @@ html{scroll-behavior:smooth}
   .cards--ville .card-body{padding: 24px 22px 28px}
 }
 
-/* --- Task 15: nav book / nav-cta differenziati come bottone gold --- */
-.nav-book{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding: 11px 22px !important;
-  border: 1px solid var(--accent) !important;
-  border-radius: var(--radius-full);
-  background: var(--accent);
-  color:#fff !important;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 10.5px;
-  letter-spacing: .26em;
-  text-transform: uppercase;
-  margin-left: 8px;
-  transition: background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease), transform .25s var(--ease), box-shadow .25s var(--ease) !important;
-}
-.nav-book::before{display:none !important}
-.nav-book::after{display:none !important}
-.nav-book:hover{
-  background: transparent;
-  color: var(--accent-soft) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(184,153,104,.28);
-}
-.topbar.scrolled .nav-book{
-  background: var(--primary);
-  border-color: var(--primary) !important;
-  color:#fff !important;
-}
-.topbar.scrolled .nav-book:hover{
-  background: var(--accent);
-  border-color: var(--accent) !important;
-  color:#fff !important;
-}
-
-.nav-cta{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding: 12px 22px;
-  border: 1px solid var(--accent);
-  border-radius: var(--radius-full);
-  background: var(--accent);
-  color:#fff;
-  font-family: var(--font-body);
-  font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: .26em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  transition: background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease), transform .25s var(--ease), box-shadow .25s var(--ease);
-}
-.nav-cta:hover{
-  background: transparent;
-  color: var(--accent-deep);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(184,153,104,.22);
-}
-.topbar:not(.scrolled) .nav-cta:hover{
-  color: var(--accent-soft);
-}
-.topbar.scrolled .nav-cta{
-  background: var(--primary);
-  border-color: var(--primary);
-  color:#fff;
-}
-.topbar.scrolled .nav-cta:hover{
-  background: var(--accent);
-  border-color: var(--accent);
-  color:#fff;
-}
-@media (max-width: 980px){
-  .nav-cta{display:none}
-}
-
 /* --- Task 52: language switcher IT/EN --- */
 .lang-switch{
   display: inline-flex;
@@ -1961,31 +1868,20 @@ html{scroll-behavior:smooth}
 
 @media (max-width: 980px){
   .lang-switch{display:none}
-  .nav-mobile .lang-switch--mobile{
+  .nav-mobile .lang-switch--mobile,
+  .nav#mainNav .lang-switch--mobile,
+  .nav .lang-switch--mobile{
     display:inline-flex;
     margin: 24px 0 0;
     background: var(--bg-2);
     border-color: var(--line-strong);
   }
-  .nav-mobile .lang-switch--mobile a{color: var(--text-2)}
-  .nav-mobile .lang-switch--mobile a.is-active{background: var(--primary); color:#fff}
-}
-
-/* --- Quick book modal: refinements --- */
-.quick-book-content h3{
-  text-align:left;
-  margin-bottom: 8px;
-}
-.quick-book-content::before{
-  content:"";
-  display:block;
-  width: 36px; height: 1px;
-  background: var(--accent);
-  margin-bottom: 22px;
-}
-.quick-book-form .btn-primary{
-  padding: 16px 36px;
-  letter-spacing: .28em;
+  .nav-mobile .lang-switch--mobile a,
+  .nav#mainNav .lang-switch--mobile a,
+  .nav .lang-switch--mobile a{color: var(--text-2)}
+  .nav-mobile .lang-switch--mobile a.is-active,
+  .nav#mainNav .lang-switch--mobile a.is-active,
+  .nav .lang-switch--mobile a.is-active{background: var(--primary); color:#fff}
 }
 
 /* --- Section dividers naturali --- */
@@ -2087,7 +1983,7 @@ html{scroll-behavior:smooth}
   transition: max-height .35s var(--ease);
 }
 .faq-item.is-open .faq-item__a{
-  max-height: 320px;
+  max-height: 80vh;
 }
 .faq-item__a-inner{
   padding: 4px 4px 28px;
@@ -2388,7 +2284,7 @@ html{scroll-behavior:smooth}
   align-self: flex-start;
 }
 
-/* Contact-card (form lato destro contatti/prenotazione) */
+/* Contact-card (form lato destro contatti) */
 .contact-card{
   padding: 56px 48px 52px;
 }
@@ -2424,102 +2320,6 @@ html{scroll-behavior:smooth}
 }
 .form-error {
   animation: fadeIn 0.3s ease;
-}
-
-/* =================== QUICK BOOK MODAL =================== */
-.quick-book-modal{
-  position:fixed;
-  inset:0;
-  z-index:1000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  opacity:0;
-  visibility:hidden;
-  transition:opacity .35s var(--ease), visibility .35s var(--ease);
-}
-.quick-book-modal[hidden]{display:none}
-.quick-book-modal.open{
-  opacity:1;
-  visibility:visible;
-}
-.quick-book-overlay{
-  position:absolute;
-  inset:0;
-  background:rgba(2,40,35,.85);
-  backdrop-filter:blur(8px);
-  cursor:pointer;
-}
-.quick-book-content{
-  position:relative;
-  background:var(--bg);
-  border-radius:var(--radius-lg);
-  padding:var(--space-xl);
-  max-width:480px;
-  width:calc(100% - 48px);
-  max-height:90vh;
-  overflow-y:auto;
-  box-shadow:var(--shadow-xl);
-  transform:translateY(40px) scale(.96);
-  transition:transform .4s var(--ease);
-}
-.quick-book-modal.open .quick-book-content{
-  transform:translateY(0) scale(1);
-}
-.quick-book-close{
-  position:absolute;
-  top:20px;
-  right:20px;
-  font-size:32px;
-  line-height:1;
-  color:var(--text);
-  opacity:.6;
-  cursor:pointer;
-  background:none;
-  border:none;
-  transition:opacity .25s var(--ease);
-}
-.quick-book-close:hover{opacity:1}
-.quick-book-content h3{
-  font-family:var(--font-display);
-  font-size:28px;
-  font-weight:400;
-  color:var(--primary);
-  margin-bottom:var(--space-lg);
-}
-.quick-book-form{display:flex;flex-direction:column;gap:var(--space-md)}
-.form-group{display:flex;flex-direction:column;gap:8px}
-.form-group input,.form-group select,.form-group textarea{
-  padding:16px;
-  border:1px solid var(--line-strong);
-  border-radius:var(--radius-sm);
-  font-family:var(--font-body);
-  font-size:15px;
-  background:var(--white);
-  color:var(--text);
-  transition:border-color .25s var(--ease);
-}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
-  outline:none;
-  border-color:var(--primary);
-}
-.form-row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:var(--space-sm);
-}
-.quick-book-form .btn{
-  margin-top:var(--space-sm);
-  width:100%;
-}
-
-@media (max-width:768px){
-  .quick-book-content{
-    padding:var(--space-lg);
-  }
-  .form-row{
-    grid-template-columns:1fr;
-  }
 }
 
 /* ============================================================
@@ -2599,15 +2399,10 @@ html{scroll-behavior:smooth}
 }
 .nav#mainNav a{ white-space: nowrap; }
 
-/* CTA + LANG — destra, mai a capo */
-.nav-cta,
+/* LANG — destra, mai a capo */
 .lang-switch{
   flex: 0 0 auto;
   white-space: nowrap;
-}
-.nav-cta{
-  font-size: clamp(9.5px, 0.9vw, 11px) !important;
-  padding: 11px clamp(14px, 1.4vw, 22px) !important;
 }
 
 /* TOGGLE — flex item ben fissato (visibile solo mobile) */
@@ -2617,7 +2412,6 @@ html{scroll-behavior:smooth}
 @media (max-width: 1180px){
   .brand-sub{ display: none !important; }
   .nav#mainNav{ gap: 16px !important; }
-  .nav-cta{ padding: 10px 14px !important; font-size: 9.5px !important; letter-spacing: .22em !important; }
   .lang-switch{ margin-left: 6px !important; }
 }
 
@@ -2662,7 +2456,6 @@ html{scroll-behavior:smooth}
   .nav#mainNav a:last-of-type{ border-bottom: none; }
   .nav#mainNav a::after{ display: none !important; }
 
-  .nav-cta{ display: none !important; }
   .lang-switch:not(.lang-switch--mobile){ display: none !important; }
   .nav-toggle{ display: inline-flex !important; }
 }
@@ -2979,20 +2772,6 @@ body .topbar.topbar--split.scrolled{
   color: var(--muted) !important;
 }
 
-/* "Book" link con dash gold prefix */
-.topbar--split .nav-wrap--split .nav-book{
-  position: relative;
-  padding-left: 24px !important;
-}
-.topbar--split .nav-wrap--split .nav-book::before{
-  content: '';
-  position: absolute;
-  left: 0; top: 50%;
-  transform: translateY(-50%);
-  width: 14px; height: 1px;
-  background: var(--accent-soft);
-}
-
 /* ASIDE — wrapper absolute top-right per lang switcher
    (lo styling visivo del lang-switch resta quello originale del sito) */
 .topbar--split .topbar-aside{
@@ -3023,11 +2802,6 @@ body .topbar.topbar--split.scrolled{
     letter-spacing: .36em !important;
   }
   .topbar--split .topbar-aside{ gap: 10px; }
-  .topbar--split .topbar-aside .nav-cta{
-    font-size: 9.5px !important;
-    padding: 9px 16px !important;
-    letter-spacing: .22em !important;
-  }
 }
 
 /* Mobile (≤980px): collasso → brand sx + hamburger dx, drawer */
@@ -3123,14 +2897,13 @@ body .topbar.topbar--split.scrolled{
   .topbar--split .nav-wrap--split .nav--left a::after,
   .topbar--split .nav-wrap--split .nav--right a::after{ display: none !important; }
 
-  /* Aside: nascondi CTA grosso, mantieni lang switch piccolo */
+  /* Aside: mantieni lang switch piccolo */
   .topbar--split .topbar-aside{
     position: static;
     transform: none;
     margin-left: auto;
     gap: 8px;
   }
-  .topbar--split .topbar-aside .nav-cta{ display: none !important; }
 
   /* Hamburger toggle visibile */
   .topbar--split .nav-toggle{
@@ -3405,4 +3178,162 @@ body .topbar.topbar--split.scrolled{
 }
 @media (prefers-reduced-motion: reduce){
   .villa-slider .villa-nav{ animation: none; }
+}
+
+/* ============================================================
+   Form submission toast — contatti.html success notification
+   ============================================================ */
+.form-toast{
+  position: fixed;
+  top: clamp(20px, 3vw, 32px);
+  right: clamp(20px, 3vw, 32px);
+  z-index: 9999;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 18px 50px rgba(0,0,0,.18);
+  padding: 18px 22px;
+  max-width: 360px;
+  width: calc(100% - 40px);
+  transform: translateX(120%);
+  opacity: 0;
+  transition: transform .45s var(--ease), opacity .35s var(--ease);
+}
+.form-toast[hidden]{ display: none !important; }
+.form-toast.is-visible{
+  transform: translateX(0);
+  opacity: 1;
+}
+.form-toast-icon{
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: rgba(11,107,94,.10);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.form-toast-icon svg{
+  width: 20px;
+  height: 20px;
+}
+.form-toast-content{
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.form-toast-title{
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--primary);
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.form-toast-text{
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.form-toast-close{
+  flex: 0 0 auto;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  margin-top: -2px;
+  transition: color .25s var(--ease);
+}
+.form-toast-close:hover{ color: var(--text); }
+
+@media (max-width: 600px){
+  .form-toast{
+    top: calc(env(safe-area-inset-top, 0px) + 96px);
+    right: 16px;
+    left: 16px;
+    max-width: none;
+    width: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .form-toast{
+    transition: opacity .2s ease;
+    transform: none;
+  }
+}
+
+/* ============================================================
+   Responsive UX patches (audit 2026-05)
+   - Touch target footer min 44px
+   - CTA padding più aderente su mobile
+   - contact-info sticky off su tablet/<=1100
+   - hero pagina interne: min-height adatta a landscape mobile
+   - service-grid: 1col fino a 600px (era 480)
+   - villa-detail features: 1col fino a 600px
+   - intro-editorial title fluido invece che fisso 28px
+   - lang-switch tap target accessibile
+   ============================================================ */
+@media (max-width: 1100px){
+  .contact-info{ position: static !important; top: auto !important; }
+}
+@media (max-width: 760px){
+  .footer-col a{ padding: 6px 0; min-height: 44px; line-height: 1.6; display: flex; align-items: center; }
+  .contact-list a, .contact-list span{ min-height: 44px; display: flex; align-items: center; }
+  .cta{ padding-block: clamp(64px, 9vw, 100px) !important; }
+  .intro-editorial-title{ font-size: clamp(28px, 6.5vw, 40px) !important; }
+}
+@media (max-width: 600px){
+  .service-grid{ grid-template-columns: 1fr !important; }
+  .villa-detail__features-grid{ grid-template-columns: 1fr !important; }
+  .field label{ font-size: 11px !important; letter-spacing: .24em !important; }
+}
+@media (orientation: landscape) and (max-height: 500px){
+  .hero.page-hero{ min-height: auto !important; padding-block: 110px 56px !important; }
+  .hero-brandmark{ padding: 14vh 20px 100px !important; }
+}
+@media (max-width: 980px){
+  .nav .lang-switch--mobile a,
+  .nav-mobile .lang-switch--mobile a{
+    min-width: 44px; min-height: 44px;
+    padding: 10px 16px;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+}
+
+/* ============================================================
+   Touch devices: neutralizza sticky-hover (transform/box-shadow)
+   per evitare che pulsanti/card restino "sollevati" dopo il tap
+   ============================================================ */
+@media (hover: none){
+  .btn:hover,
+  .btn-primary:hover,
+  .btn-ghost:hover,
+  .btn-gold:hover,
+  .btn-pill:hover,
+  .card:hover,
+  .service-card:hover,
+  .villa-feature:hover,
+  .cards--ville .card:hover,
+  .villa-nav:hover{
+    transform: none;
+    box-shadow: none;
+  }
+  .villa-nav-prev:hover,
+  .villa-nav-next:hover{
+    transform: translateY(-50%);
+  }
+  .card-media img,
+  .cards--ville .card:hover .card-media img{
+    transform: none !important;
+  }
 }

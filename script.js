@@ -89,10 +89,17 @@
     }, { passive: true });
   }
   
-  // Mobile nav toggle
+  // Mobile nav toggle + lang-switch clone nel drawer (per visibilità su mobile)
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.getElementById('mainNav');
   if (toggle && nav) {
+    // Clona il lang-switch dentro il drawer una volta sola, marchiandolo come mobile
+    var sourceLang = document.querySelector('.lang-switch:not(.lang-switch--mobile)');
+    if (sourceLang && !nav.querySelector('.lang-switch--mobile')) {
+      var clone = sourceLang.cloneNode(true);
+      clone.classList.add('lang-switch--mobile');
+      nav.appendChild(clone);
+    }
     toggle.addEventListener('click', function () {
       var open = nav.classList.toggle('open');
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
@@ -101,39 +108,102 @@
       a.addEventListener('click', function () { nav.classList.remove('open'); });
     });
   }
-  
-  // Quick book modal — opens from .nav-book (index.html) and .nav-cta (other pages)
-  var quickBookModal = document.getElementById('quickBookModal');
-  if (quickBookModal) {
-    function openQuickBook() {
-      quickBookModal.hidden = false;
-      requestAnimationFrame(function () {
-        quickBookModal.classList.add('open');
-      });
-      document.body.style.overflow = 'hidden';
-    }
-    function closeQuickBook() {
-      quickBookModal.classList.remove('open');
-      document.body.style.overflow = '';
-      setTimeout(function () { quickBookModal.hidden = true; }, 320);
-    }
 
-    var bookTriggers = document.querySelectorAll('.nav-book, .nav-cta, [data-quick-book]');
-    bookTriggers.forEach(function (trigger) {
-      trigger.addEventListener('click', function (e) {
-        e.preventDefault();
-        openQuickBook();
-      });
-    });
+  // Contact form AJAX submit + success toast (contatti.html / en/contatti.html)
+  var contactForm = document.querySelector('form.contact-form-plain');
+  var formToast = document.getElementById('formToast');
+  if (contactForm && formToast) {
+    var isEn = (document.documentElement.lang || '').toLowerCase().indexOf('en') === 0;
+    var loadingText = isEn ? 'Sending...' : 'Invio in corso...';
+    var errorText = isEn
+      ? 'An error occurred. Please try again or contact us directly.'
+      : 'Si è verificato un errore. Riprova o contattaci direttamente.';
 
-    quickBookModal.querySelectorAll('[data-close]').forEach(function (el) {
-      el.addEventListener('click', closeQuickBook);
-    });
+    var showFormToast = function () {
+      formToast.hidden = false;
+      requestAnimationFrame(function () { formToast.classList.add('is-visible'); });
 
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && quickBookModal.classList.contains('open')) {
-        closeQuickBook();
+      var hideToast = function () {
+        formToast.classList.remove('is-visible');
+        setTimeout(function () { formToast.hidden = true; }, 500);
+      };
+      var autoHide = setTimeout(hideToast, 6000);
+
+      var closeBtn = formToast.querySelector('.form-toast-close');
+      if (closeBtn) {
+        closeBtn.onclick = function () {
+          clearTimeout(autoHide);
+          hideToast();
+        };
       }
+    };
+
+    var validationErrorText = isEn
+      ? 'Please fill in all required fields.'
+      : 'Compila tutti i campi obbligatori.';
+
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Manual validation prima di lanciare il fetch
+      var nameField = contactForm.querySelector('[name="name"]');
+      var emailField = contactForm.querySelector('[name="email"]');
+      var messageField = contactForm.querySelector('[name="message"]');
+
+      contactForm.querySelectorAll('.field').forEach(function (f) { f.classList.remove('has-error'); });
+      var existingErr = contactForm.querySelector('.form-error');
+      if (existingErr) existingErr.remove();
+
+      var isValid = true;
+      if (!nameField || !nameField.value.trim()) {
+        isValid = false;
+        if (nameField) nameField.parentElement.classList.add('has-error');
+      }
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailField || !emailRegex.test(emailField.value)) {
+        isValid = false;
+        if (emailField) emailField.parentElement.classList.add('has-error');
+      }
+      if (!messageField || !messageField.value.trim() || messageField.value.trim().length < 10) {
+        isValid = false;
+        if (messageField) messageField.parentElement.classList.add('has-error');
+      }
+
+      if (!isValid) {
+        var errorMsg = document.createElement('p');
+        errorMsg.className = 'form-error';
+        errorMsg.style.cssText = 'color:#c00;font-size:13px;margin-top:12px';
+        errorMsg.textContent = validationErrorText;
+        contactForm.insertBefore(errorMsg, contactForm.firstChild);
+        return;
+      }
+
+      var submitBtn = contactForm.querySelector('button[type="submit"]');
+      var originalText = submitBtn ? submitBtn.textContent : '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = loadingText;
+      }
+
+      fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm)
+      })
+        .then(function (r) {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          showFormToast();
+          contactForm.reset();
+        })
+        .catch(function (err) {
+          console.error('Form submit error:', err);
+          alert(errorText);
+        })
+        .then(function () {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+          }
+        });
     });
   }
 
@@ -376,51 +446,11 @@
     });
   }
 
-// Contact form validation
-  var contactForm = document.querySelector('.contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-      var isValid = true;
-      var name = contactForm.querySelector('[name="name"]');
-      var email = contactForm.querySelector('[name="email"]');
-      var message = contactForm.querySelector('[name="message"]');
-      
-      // Clear previous errors
-      contactForm.querySelectorAll('.field').forEach(function(f) { f.classList.remove('has-error') });
-      
-      // Validate name
-      if (!name || !name.value.trim()) {
-        isValid = false;
-        if (name) name.parentElement.classList.add('has-error');
-      }
-      
-      // Validate email
-      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!email || !emailRegex.test(email.value)) {
-        isValid = false;
-        if (email) email.parentElement.classList.add('has-error');
-      }
-      
-      // Validate message
-      if (!message || !message.value.trim() || message.value.trim().length < 10) {
-        isValid = false;
-        if (message) message.parentElement.classList.add('has-error');
-      }
-      
-      if (!isValid) {
-        e.preventDefault();
-        // Show error message
-        var errorMsg = contactForm.querySelector('.form-error') || document.createElement('p');
-        errorMsg.className = 'form-error';
-        errorMsg.style.cssText = 'color:#c00;font-size:13px;margin-top:12px';
-        errorMsg.textContent = 'Compila tutti i campi obbligatori.';
-        contactForm.insertBefore(errorMsg, contactForm.firstChild);
-      }
-    });
-    
-    // Real-time validation feedback
-    contactForm.querySelectorAll('input, textarea').forEach(function(input) {
-      input.addEventListener('blur', function() {
+// Real-time blur validation feedback (per il form contatti)
+  var blurForm = document.querySelector('.contact-form');
+  if (blurForm) {
+    blurForm.querySelectorAll('input, textarea').forEach(function (input) {
+      input.addEventListener('blur', function () {
         var parent = input.parentElement;
         if (input.hasAttribute('required') && !input.value.trim()) {
           parent.classList.add('has-error');
