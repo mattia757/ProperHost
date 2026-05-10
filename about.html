@@ -22,8 +22,8 @@
   <link rel="canonical" href="https://www.properhost.it/about.html">
   <link rel="alternate" hreflang="it" href="https://www.properhost.it/about.html">
   <link rel="alternate" hreflang="en" href="https://www.properhost.it/en/about.html">
-  <link rel="icon" href="/logo.png" type="image/png">
-  <link rel="apple-touch-icon" href="/logo.png">
+  <link rel="icon" href="/logo-removebg-preview.png" type="image/png">
+  <link rel="apple-touch-icon" href="/logo-removebg-preview.png">
 
   <meta property="og:title" content="Properhost — About">
   <meta property="og:description" content="Il progetto Properhost: ospitalità siciliana di charme, valori, territorio e selezione di ville.">
@@ -43,10 +43,21 @@
       "@type": "Organization",
       "name": "Properhost",
       "url": "https://www.properhost.it",
-      "logo": "https://www.properhost.it/logo.png"
+      "logo": "https://www.properhost.it/logo-removebg-preview.png"
     }
   }
   </script>
+
+  <!-- TEST PREVIEW: logo come bg fisso del body. Rimuovere quando deciso. -->
+  <style>
+    body{
+      background-image: url('logo-removebg-preview.png');
+      background-repeat: no-repeat;
+      background-position: center 30vh;
+      background-size: clamp(280px, 45vw, 560px) auto;
+      background-attachment: fixed;
+    }
+  </style>
 </head>
 <body>
 
@@ -55,7 +66,7 @@
 <!-- Preloader -->
 <div class="preloader" id="preloader" role="status" aria-label="Caricamento in corso">
   <div class="preloader-logo">
-    <img src="logo.png" alt="Properhost" width="48" height="48">
+    <img src="logo-removebg-preview.png" alt="Properhost" width="48" height="48">
     <div class="preloader-logo-text">
       properhost
       <span>hospitality</span>
@@ -80,7 +91,7 @@
 
 <header class="topbar">
   <div class="container nav-wrap">
-    <a href="index.html" class="brand"><img src="logo.png" alt="Properhost Hospitality"><span class="brand-text"><span class="brand-main">properhost</span><span class="brand-sub">hospitality</span></span></a>
+    <a href="index.html" class="brand"><img src="logo-removebg-preview.png" alt="Properhost Hospitality"><span class="brand-text"><span class="brand-main">properhost</span><span class="brand-sub">hospitality</span></span></a>
     <nav class="nav" id="mainNav">
       <a href="index.html">Home</a>
       <a href="about.html" class="active">About</a>
