@@ -150,6 +150,20 @@
   var nav = document.getElementById('mainNav');
   if (toggle && nav) {
     var lastFocused = null;
+    var docLang = (document.documentElement.lang || 'it').toLowerCase();
+    var closeLabel = docLang.indexOf('en') === 0 ? 'Close menu' : 'Chiudi menu';
+
+    // Inserisce un pulsante X di chiusura visibile in alto a destra del drawer.
+    // Posizionamento + stile gestiti dal CSS (.nav-close).
+    var closeBtn = nav.querySelector('.nav-close');
+    if (!closeBtn){
+      closeBtn = document.createElement('button');
+      closeBtn.type = 'button';
+      closeBtn.className = 'nav-close';
+      closeBtn.setAttribute('aria-label', closeLabel);
+      closeBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M6 18L18 6"/></svg>';
+      nav.insertBefore(closeBtn, nav.firstChild);
+    }
 
     function setNavOpen(open){
       nav.classList.toggle('open', open);
@@ -163,6 +177,9 @@
         lastFocused.focus();
       }
     }
+
+    // Chiusura on X click
+    closeBtn.addEventListener('click', function(){ setNavOpen(false); toggle.focus(); });
 
     toggle.addEventListener('click', function(){
       setNavOpen(!nav.classList.contains('open'));
