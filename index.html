@@ -109,34 +109,22 @@
     </svg>
   </a>
 
-  <header class="topbar topbar--split">
-    <!-- Riga principale: 3 colonne grid (1fr auto 1fr) - tutto sullo stesso baseline -->
-    <div class="container nav-wrap nav-wrap--split">
-      <nav class="nav nav--left" aria-label="Sezioni" id="mainNav">
-        <a href="concierge.html">Concierge</a>
-        <a href="about.html">About</a>
-        <a href="ville.html">Ville</a>
-      </nav>
-
-      <a href="index.html" class="brand brand--center" aria-label="Properhost — Home">
-        <span class="brand-main">Properhost</span>
-      </a>
-
-      <nav class="nav nav--right" aria-label="Sezioni destre">
+  <header class="topbar">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand"><img src="logo.png" alt="Properhost Hospitality"><span class="brand-text"><span class="brand-main">properhost</span><span class="brand-sub">hospitality</span></span></a>
+      <nav class="nav" id="mainNav">
         <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="concierge.html">Concierge</a>
+        <a href="ville.html">Ville</a>
         <a href="contatti.html">Contatti</a>
       </nav>
-    </div>
-
-    <!-- Strip secondaria assoluta: SOLO lang switcher (CTA rimosso) -->
-    <div class="topbar-aside" aria-label="Lingua">
       <span class="lang-switch" role="group" aria-label="Lingua">
-        <a href="#" class="is-active" aria-current="page">IT</a>
+        <span class="is-active" aria-current="page">IT</span>
         <a href="en/index.html" hreflang="en">EN</a>
       </span>
+      <button class="nav-toggle" aria-label="Apri menu" aria-controls="mainNav" aria-expanded="false"><span></span></button>
     </div>
-
-    <button class="nav-toggle" aria-label="Apri menu" aria-controls="mainNav" aria-expanded="false"><span></span></button>
   </header>
 
   <main id="main">

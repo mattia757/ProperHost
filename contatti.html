@@ -89,7 +89,7 @@
       <a href="contatti.html" class="active">Contatti</a>
     </nav>
     <span class="lang-switch" role="group" aria-label="Lingua">
-      <a href="#" class="is-active" aria-current="page">IT</a>
+      <span class="is-active" aria-current="page">IT</span>
       <a href="en/contatti.html" hreflang="en">EN</a>
     </span>
     <button class="nav-toggle" aria-label="Apri menu" aria-controls="mainNav" aria-expanded="false"><span></span></button>
@@ -162,7 +162,7 @@
           </div>
           <div class="field">
             <label for="guests">Numero ospiti</label>
-            <input id="guests" type="number" name="guests" min="1" placeholder="4">
+            <input id="guests" type="number" inputmode="numeric" pattern="[0-9]*" name="guests" min="1" placeholder="4">
           </div>
           <div class="field">
             <label for="dates">Date del soggiorno</label>

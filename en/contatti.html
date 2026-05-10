@@ -58,7 +58,7 @@
     </nav>
     <span class="lang-switch" role="group" aria-label="Language">
       <a href="../contatti.html" hreflang="it">IT</a>
-      <a href="#" class="is-active" aria-current="page">EN</a>
+      <span class="is-active" aria-current="page">EN</span>
     </span>
     <button class="nav-toggle" aria-label="Open menu" aria-controls="mainNav" aria-expanded="false"><span></span></button>
   </div>
@@ -106,7 +106,7 @@
           <div class="field"><label for="name">Full name</label><input id="name" type="text" name="name" placeholder="Mario Rossi" required></div>
           <div class="field"><label for="email">Email</label><input id="email" type="email" name="email" placeholder="name@email.com" required></div>
           <div class="field"><label for="phone">Phone</label><input id="phone" type="tel" name="phone" placeholder="+39 333 1234567"></div>
-          <div class="field"><label for="guests">Number of guests</label><input id="guests" type="number" name="guests" min="1" placeholder="4"></div>
+          <div class="field"><label for="guests">Number of guests</label><input id="guests" type="number" inputmode="numeric" pattern="[0-9]*" name="guests" min="1" placeholder="4"></div>
           <div class="field"><label for="dates">Stay dates</label><input id="dates" type="text" name="dates" placeholder="e.g. 10-17 August"></div>
           <div class="field"><label for="villa">Villa or area of interest</label><input id="villa" type="text" name="villa_interest" placeholder="Taormina, Noto, Siracusa..."></div>
           <div class="field field-full"><label for="message">Message</label><textarea id="message" name="message" rows="6" placeholder="Tell us what you're looking for..." required></textarea></div>

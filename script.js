@@ -3,6 +3,38 @@
   // Reduced motion guard
   var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // requestAnimationFrame throttle helper — usato per coalescere scroll listener
+  function rafThrottle(fn){
+    var ticking = false;
+    return function(){
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function(){
+        ticking = false;
+        fn();
+      });
+    };
+  }
+
+  // --vh dinamica: evita il bug 100vh con barra Safari mobile dinamica.
+  // Usa visualViewport quando disponibile (più accurato durante zoom/keyboard).
+  function setVh(){
+    var h = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
+    document.documentElement.style.setProperty('--vh', (h * 0.01) + 'px');
+  }
+  setVh();
+  var vhResizeTimer;
+  window.addEventListener('resize', function(){
+    clearTimeout(vhResizeTimer);
+    vhResizeTimer = setTimeout(setVh, 150);
+  });
+  window.addEventListener('orientationchange', function(){
+    setTimeout(setVh, 200);
+  });
+  if (window.visualViewport){
+    window.visualViewport.addEventListener('resize', setVh);
+  }
+
   // Preloader
   var preloader = document.getElementById('preloader');
   var preloaderBar = document.getElementById('preloaderBar');
@@ -77,28 +109,86 @@
     });
   }
   
-  // Back to top button
+  // Back to top button (rAF-throttled)
   var backToTop = document.getElementById('backToTop');
   if (backToTop) {
-    window.addEventListener('scroll', function() {
-      if (window.scrollY > 400) {
-        backToTop.classList.add('visible');
-      } else {
-        backToTop.classList.remove('visible');
-      }
-    }, { passive: true });
+    window.addEventListener('scroll', rafThrottle(function() {
+      if (window.scrollY > 400) backToTop.classList.add('visible');
+      else backToTop.classList.remove('visible');
+    }), { passive: true });
   }
-  
-  // Mobile nav toggle
+
+  // Lang-switch: su mobile sta DENTRO il drawer (come ultimo elemento del menu),
+  // su desktop torna in .nav-wrap come pill inline. Spostiamo via JS in base al breakpoint.
+  var langSwitchEl = document.querySelector('.lang-switch:not(.lang-switch--mobile)');
+  var langOriginalParent = langSwitchEl ? langSwitchEl.parentElement : null;
+  var langOriginalNext = langSwitchEl ? langSwitchEl.nextSibling : null;
+  function placeLangSwitch(){
+    if (!langSwitchEl) return;
+    var isMobile = window.matchMedia('(max-width: 980px)').matches;
+    var navEl = document.getElementById('mainNav');
+    if (isMobile && navEl && langSwitchEl.parentElement !== navEl){
+      navEl.appendChild(langSwitchEl);
+    } else if (!isMobile && langOriginalParent && langSwitchEl.parentElement !== langOriginalParent){
+      // Restore: rimette il lang-switch nella posizione originale
+      if (langOriginalNext && langOriginalNext.parentElement === langOriginalParent){
+        langOriginalParent.insertBefore(langSwitchEl, langOriginalNext);
+      } else {
+        langOriginalParent.appendChild(langSwitchEl);
+      }
+    }
+  }
+  placeLangSwitch();
+  var langPlaceTimer;
+  window.addEventListener('resize', function(){
+    clearTimeout(langPlaceTimer);
+    langPlaceTimer = setTimeout(placeLangSwitch, 150);
+  });
+
+  // Mobile nav toggle — accessibile: Escape, click-outside, scroll lock, focus mgmt
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.getElementById('mainNav');
   if (toggle && nav) {
-    toggle.addEventListener('click', function () {
-      var open = nav.classList.toggle('open');
+    var lastFocused = null;
+
+    function setNavOpen(open){
+      nav.classList.toggle('open', open);
+      document.body.classList.toggle('is-nav-open', open);
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (open){
+        lastFocused = document.activeElement;
+        var firstLink = nav.querySelector('a');
+        if (firstLink) firstLink.focus();
+      } else if (lastFocused && typeof lastFocused.focus === 'function'){
+        lastFocused.focus();
+      }
+    }
+
+    toggle.addEventListener('click', function(){
+      setNavOpen(!nav.classList.contains('open'));
     });
-    nav.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () { nav.classList.remove('open'); });
+
+    // Chiusura on link click
+    nav.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ setNavOpen(false); });
+    });
+
+    // Chiusura on Escape
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && nav.classList.contains('open')){
+        setNavOpen(false);
+        toggle.focus();
+      }
+    });
+
+    // Click-outside (delegato sul document).
+    // Il .lang-switch è visivamente nel drawer su mobile (posizionato fixed
+     // dentro l'area del drawer) → escludilo dal click-outside.
+    document.addEventListener('click', function(e){
+      if (!nav.classList.contains('open')) return;
+      if (nav.contains(e.target) || toggle.contains(e.target)) return;
+      if (e.target.closest && e.target.closest('.lang-switch')) return;
+      setNavOpen(false);
     });
   }
 
@@ -200,14 +290,14 @@
     });
   }
 
-  // Topbar scrolled state
+  // Topbar scrolled state (rAF-throttled)
   var topbar = document.querySelector('.topbar');
   if (topbar) {
     var onScroll = function () {
       if (window.scrollY > 60) topbar.classList.add('scrolled');
       else topbar.classList.remove('scrolled');
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('scroll', rafThrottle(onScroll), { passive: true });
     onScroll();
   }
 
@@ -233,10 +323,11 @@
     revealEls.forEach(function (el) { el.classList.add('in'); });
   }
 
-  // Parallax effect for hero
+  // Parallax effect for hero (rAF-throttled, desktop-only)
   var heroSection = document.querySelector('.hero');
-  if (heroSection && !prefersReducedMotion) {
-    window.addEventListener('scroll', function() {
+  var heroIsTouch = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+  if (heroSection && !prefersReducedMotion && !heroIsTouch) {
+    window.addEventListener('scroll', rafThrottle(function() {
       var scrolled = window.scrollY;
       if (scrolled < window.innerHeight) {
         var heroBg = heroSection.querySelector('.hero-video-overlay');
@@ -244,7 +335,7 @@
           heroBg.style.transform = 'translateY(' + (scrolled * 0.3) + 'px)';
         }
       }
-    }, { passive: true });
+    }), { passive: true });
   }
 
   // Smooth reveal for service cards stagger
@@ -369,8 +460,10 @@
       startAutoplay();
     }, { passive: true });
 
-    // Keyboard
+    // Keyboard — non hijaccare le frecce quando l'utente sta scrivendo
     document.addEventListener('keydown', function (e) {
+      var t = e.target;
+      if (t && t.matches && t.matches('input, textarea, select, [contenteditable="true"]')) return;
       if (e.key === 'ArrowLeft') { prev(); startAutoplay(); }
       else if (e.key === 'ArrowRight') { next(); startAutoplay(); }
     });
@@ -380,17 +473,12 @@
     startAutoplay();
   }
 
-  // Hero scroll effect
+  // Hero scroll effect (rAF-throttled)
   var hero = document.querySelector('.hero');
   if (hero) {
-    window.addEventListener('scroll', function() {
-      var scrolled = window.scrollY;
-      if (scrolled > 100) {
-        hero.setAttribute('data-scrolled', 'true');
-      } else {
-        hero.setAttribute('data-scrolled', 'false');
-      }
-    }, { passive: true });
+    window.addEventListener('scroll', rafThrottle(function() {
+      hero.setAttribute('data-scrolled', window.scrollY > 100 ? 'true' : 'false');
+    }), { passive: true });
   }
 
   // Cursor follow effect for hero (desktop only)
