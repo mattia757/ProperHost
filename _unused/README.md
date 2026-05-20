@@ -1,32 +1,35 @@
-# _unused
+# _unused — Non deployare in produzione
 
-Questa cartella contiene file non utilizzati dal sito live di ProperHost.
-NON deployare questa cartella sul server di produzione.
+Cartella di archivio per file non serviti dal sito live o solo per sviluppo locale.
 
-## Contenuto
+## Contenuto aggiuntivo (rispetto al commit precedente)
 
-### js/ — Moduli JS (refactoring modulare non collegato all'HTML)
-I file HTML caricano solo `script.js`. Questa cartella contiene un refactoring
-modulare pianificato (entry point `js/main.js` + moduli ES) mai collegato alle pagine.
+| File/cartella | Motivo |
+|---------------|--------|
+| `hero.webm`, `hero.mp4` | Video hero legacy, sostituiti da `video_bello.*` |
+| `hero-home-alt.jpg` | Variante hero non referenziata |
+| `dashboard.html` | Pagina interna, esclusa da robots.txt |
+| `.agents/`, `AGENTS.md` | Documentazione e task per agenti AI |
+| `.github/` | Workflow CI (notifiche GitHub) |
+| `_logo_p*.png`, `_page_*.png`, `7bcad9c6-*.png` | Export/screenshot temporanei |
 
-### css/ — Moduli CSS (refactoring modulare non collegato all'HTML)
-I file HTML caricano solo `style.css`. Questa cartella contiene un refactoring
-modulare (`css/main.css` con @import) mai collegato alle pagine.
+## Struttura deploy (root del progetto)
 
-### data/ — File dati JSON (non caricati dal JS runtime)
-`villas.json` e i file `i18n/` sono stati creati per un sistema di dati dinamico
-che non è mai stato collegato al JS del sito.
-
-### scripts/ — Script di sviluppo
-`inject-cdn.js` — tool Node per iniettare CDN link negli HTML.
-
-### Dev configs
-- `package.json` — solo per linting (eslint/prettier)
-- `.prettierrc.json`, `.eslintrc.json`, `.editorconfig`, `.prettierignore`
-
-### Loghi non utilizzati
-- `logo.jpg`, `logo.png`, `logo-backup.png`, `logo-senza-sfondo.png`
-  Il sito usa solo `logo-removebg-preview.png`, `assets/logo-full-white.png` e `assets/logo-full-teal.png`.
-
-### optimize_photos.py
-Script Python per ottimizzare le foto (dev tool, non necessario in produzione).
+```
+/
+├── index.html, about.html, ville.html, contatti.html, concierge.html
+├── en/                    # Versione inglese
+├── ville/                 # Pagine singole villa
+├── css/style.css          # Stylesheet unico
+├── js/script.js           # JavaScript unico
+├── assets/
+│   ├── videos/            # Video hero
+│   ├── images/
+│   │   ├── hero/          # Poster e immagini hero
+│   │   ├── pages/         # Hero e visual pagine interne
+│   │   ├── villas/        # Foto ville (villa-1 … villa-6)
+│   │   └── brand/         # Loghi header
+├── logo-removebg-preview.png  # Favicon
+├── sitemap.xml, robots.txt, _headers, _redirects
+└── _unused/               # ← ESCLUDERE dal deploy
+```

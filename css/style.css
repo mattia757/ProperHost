@@ -3752,7 +3752,7 @@ body .topbar.topbar--split.scrolled{
 /* --- prefers-reduced-data: stop autoplay video hero --- */
 @media (prefers-reduced-data: reduce){
   .hero-video-bg{ display: none; }
-  .hero{ background-image: var(--hero-poster, url('assets/hero-home.jpg')); background-size: cover; background-position: center; }
+  .hero{ background-image: var(--hero-poster, url('../assets/images/hero/hero-home.jpg')); background-size: cover; background-position: center; }
 }
 
 /* --- Hover sticky cleanup esteso a span lang-switch --- */

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -10,7 +10,7 @@
 
   <meta property="og:title" content="Properhost · Hospitality — Villas and services in Sicily">
   <meta property="og:description" content="Private villas and tailor-made services for an authentic stay in Sicily.">
-  <meta property="og:image" content="https://www.properhost.it/assets/og-home.jpg">
+  <meta property="og:image" content="https://www.properhost.it/assets/images/hero/hero-home.jpg">
   <meta property="og:url" content="https://www.properhost.it/en/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_GB">
@@ -44,7 +44,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../css/style.css">
 
   <!-- CDN libraries (Lenis / GSAP / Swiper) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
@@ -74,8 +74,8 @@
   <header class="topbar">
     <div class="container nav-wrap">
       <a href="index.html" class="brand brand--full" aria-label="ProperHost — Home">
-        <img src="../assets/logo-full-white.png" alt="ProperHost" class="brand-logo brand-logo--light" fetchpriority="high">
-        <img src="../assets/logo-full-teal.png" alt="" class="brand-logo brand-logo--dark" aria-hidden="true">
+        <img src="../assets/images/brand/logo-full-white.png" alt="ProperHost" class="brand-logo brand-logo--light" fetchpriority="high">
+        <img src="../assets/images/brand/logo-full-teal.png" alt="" class="brand-logo brand-logo--dark" aria-hidden="true">
       </a>
       <nav class="nav" id="mainNav">
         <a href="index.html" class="active">Home</a>
@@ -95,9 +95,9 @@
   <main id="main">
 
   <section class="hero" id="home">
-    <video class="hero-video-bg" autoplay muted loop playsinline preload="metadata" poster="../assets/hero-home.jpg">
-      <source src="../assets/video_bello.webm" type="video/webm">
-      <source src="../assets/video_bello.mp4" type="video/mp4">
+    <video class="hero-video-bg" autoplay muted loop playsinline preload="metadata" poster="../assets/images/hero/hero-home.jpg">
+      <source src="../assets/videos/video_bello.webm" type="video/webm">
+      <source src="../assets/videos/video_bello.mp4" type="video/mp4">
     </video>
     <div class="hero-video-overlay"></div>
 
@@ -128,12 +128,12 @@
 
   <section class="villa-slider" id="villas" aria-label="Our villas">
     <div class="villa-slider-track">
-      <article class="villa-slide is-active" data-villa="Villa Aurea"><img src="../assets/villa-1.jpg" alt="Villa Aurea — Taormina" loading="lazy"></article>
-      <article class="villa-slide" data-villa="Villa Zagara"><img src="../assets/villa-2.jpg" alt="Villa Zagara — Noto" loading="lazy"></article>
-      <article class="villa-slide" data-villa="Villa Bianca"><img src="../assets/villa-3.jpg" alt="Villa Bianca — Siracusa" loading="lazy"></article>
-      <article class="villa-slide" data-villa="Villa Soho"><img src="../assets/villa-4.jpg" alt="Villa Soho — Ragusa" loading="lazy"></article>
-      <article class="villa-slide" data-villa="Villa Manu"><img src="../assets/villa-5.jpg" alt="Villa Manu — Modica" loading="lazy"></article>
-      <article class="villa-slide" data-villa="Villa Dolce Vita"><img src="../assets/villa-6.jpg" alt="Villa Dolce Vita — Scicli" loading="lazy"></article>
+      <article class="villa-slide is-active" data-villa="Villa Aurea"><img src="../assets/images/villas/villa-1.jpg" alt="Villa Aurea — Taormina" loading="lazy"></article>
+      <article class="villa-slide" data-villa="Villa Zagara"><img src="../assets/images/villas/villa-2.jpg" alt="Villa Zagara — Noto" loading="lazy"></article>
+      <article class="villa-slide" data-villa="Villa Bianca"><img src="../assets/images/villas/villa-3.jpg" alt="Villa Bianca — Siracusa" loading="lazy"></article>
+      <article class="villa-slide" data-villa="Villa Soho"><img src="../assets/images/villas/villa-4.jpg" alt="Villa Soho — Ragusa" loading="lazy"></article>
+      <article class="villa-slide" data-villa="Villa Manu"><img src="../assets/images/villas/villa-5.jpg" alt="Villa Manu — Modica" loading="lazy"></article>
+      <article class="villa-slide" data-villa="Villa Dolce Vita"><img src="../assets/images/villas/villa-6.jpg" alt="Villa Dolce Vita — Scicli" loading="lazy"></article>
     </div>
 
     <div class="villa-slider-overlay"></div>
@@ -152,7 +152,7 @@
     </div>
   </section>
 
-  <section class="bg-strip reveal" style="background-image:url('../assets/sea.jpg')" aria-label="Sicilian experience">
+  <section class="bg-strip reveal" style="background-image:url('../assets/images/pages/sea.jpg')" aria-label="Sicilian experience">
     <div class="container">
       <div class="section-tag">The island, lived in</div>
       <h2>An authentic Sicily, <em>told</em> with restraint</h2>
@@ -179,7 +179,7 @@
       </div>
     </div>
 
-    <div class="concierge-fixed-bg" role="img" aria-label="Concierge service in villa" style="background-image:url('../assets/concierge.jpg')"></div>
+    <div class="concierge-fixed-bg" role="img" aria-label="Concierge service in villa" style="background-image:url('../assets/images/pages/concierge.jpg')"></div>
   </section>
 
   <section class="services" id="services">
@@ -288,7 +288,7 @@
     </div>
   </section>
 
-  <section class="cta" id="contatti" style="--cta-image:url('../assets/cta.jpg')">
+  <section class="cta" id="contatti" style="--cta-image:url('../assets/images/pages/cta.jpg')">
     <div class="container reveal">
       <div class="section-tag">Get in touch</div>
       <h2>Let's design your stay in <em>Sicily</em>, together</h2>
@@ -333,6 +333,6 @@
     </div>
   </footer>
 
-  <script src="../script.js"></script>
+  <script src="../js/script.js"></script>
 </body>
 </html>

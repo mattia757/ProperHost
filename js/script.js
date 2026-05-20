@@ -294,8 +294,7 @@
           showFormToast();
           contactForm.reset();
         })
-        .catch(function (err) {
-          console.error('Form submit error:', err);
+        .catch(function () {
           alert(errorText);
         })
         .then(function () {
@@ -355,16 +354,10 @@
     }), { passive: true });
   }
 
-  // Smooth reveal for service cards stagger
-  // Bugfix Task 57/59: in passato venivano impostati inline opacity:0 + translateY,
-  // poi sostituiti aggiungendo la classe `.in`. Ma gli inline-style hanno priorità
-  // sui rule CSS, quindi le card restavano nascoste anche dopo `in`.
-  // Soluzione: niente inline-style, lasciamo fare al CSS `.reveal` / `.reveal.in`
-  // (che già esistono) e aggiungiamo solo lo stagger via transition-delay.
+  // Service cards stagger (CSS handles visibility via .reveal / .reveal.in)
   var serviceCards = document.querySelectorAll('.service-grid .service, .service-grid .service-card');
   if ('IntersectionObserver' in window && serviceCards.length) {
     serviceCards.forEach(function(card, i) {
-      // assicura che ogni service card sia trattata come reveal element
       if (!card.classList.contains('reveal')) card.classList.add('reveal');
       card.style.transitionDelay = (i * 0.08) + 's';
     });
@@ -381,14 +374,10 @@
     });
   }
 
-  // Safety net Task 57/59: dopo 1.5s qualunque .reveal ancora invisibile viene
-  // forzato a visibile. Copre il caso di ScrollTrigger/Lenis che non notificano
-  // l'IntersectionObserver, immagini fuori viewport iniziale o errori di script.
+  // Fallback: reveal elements near viewport if observer missed them
   setTimeout(function() {
     document.querySelectorAll('.reveal:not(.in)').forEach(function(el) {
       var rect = el.getBoundingClientRect();
-      // forza solo gli elementi sopra il fold + un po' sotto, gli altri
-      // verranno gestiti dall'observer normalmente
       if (rect.top < window.innerHeight + 200) {
         el.classList.add('in');
       }
@@ -409,7 +398,7 @@
     var touchStartX = 0;
     var touchEndX = 0;
 
-    // Dots indicator (Task 55: stile gestito interamente dal CSS via classi)
+    // Dots indicator
     var dotsContainer = document.createElement('div');
     dotsContainer.className = 'villa-slider-dots';
     dotsContainer.style.cssText = 'position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;gap:12px;z-index:7';
@@ -510,15 +499,11 @@
     }
   }
   
-  // Task 55 — Villa slider: frecce SEMPRE visibili (no più magnetic cursor)
-  // L'utente non aveva alcun modo evidente di scorrere le foto: ora le frecce
-  // restano sempre a video con leggero hover-amplify.
+  // Villa slider nav: always visible
   (function() {
     var slider = document.querySelector('.villa-slider');
     if (!slider) return;
-    var navButtons = slider.querySelectorAll('.villa-nav');
-    navButtons.forEach(function(btn) {
-      // forza visibilità (override dell'opacity:0 di base nel CSS)
+    slider.querySelectorAll('.villa-nav').forEach(function(btn) {
       btn.style.opacity = '1';
       btn.classList.add('villa-nav--visible');
     });
