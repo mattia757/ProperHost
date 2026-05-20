@@ -3015,19 +3015,35 @@ body .topbar.topbar--split.scrolled{
 }
 
 /* ============================================================
-   LOGO FULL ProperHost — icon + ProPerHost wordmark TEAL sempre
+   LOGO FULL ProperHost — BIANCO sul video, VERDE TEAL quando scrolled
+   Due immagini sovrapposte, cross-fade su .topbar.scrolled
    ============================================================ */
 .brand.brand--full{
   display: inline-flex !important;
   align-items: center;
   text-decoration: none;
   gap: 0;
+  position: relative;
 }
 .brand.brand--full .brand-logo{
   display: block;
   height: clamp(40px, 4.4vw, 56px);
   width: auto;
+  transition: opacity .35s var(--ease);
 }
+/* Versione bianca: visibile di default (sopra il video) */
+.brand.brand--full .brand-logo--light{ opacity: 1; }
+/* Versione teal: sovrapposta, nascosta di default */
+.brand.brand--full .brand-logo--dark{
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  opacity: 0;
+}
+/* Stato scrolled (navbar su sfondo cream): cross-fade alla versione verde */
+.topbar.scrolled .brand.brand--full .brand-logo--light{ opacity: 0; }
+.topbar.scrolled .brand.brand--full .brand-logo--dark{ opacity: 1; }
+
 @media (max-width: 760px){
   .brand.brand--full .brand-logo{ height: 36px; }
 }
