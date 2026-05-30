@@ -4,13 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Properhost · Hospitality — Ville</title>
-  <meta name="description" content="Le ville Properhost in Sicilia: dimore selezionate per location, privacy e carattere — da Taormina a Scicli.">
+  <meta name="description" content="Le strutture Properhost in Sicilia: appartamenti e ville selezionate a Trapani, Favignana e Cornino.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 
-  <!-- CDN libraries (Lenis / GSAP / Swiper) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js" defer crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer crossorigin="anonymous"></script>
@@ -25,30 +24,115 @@
   <link rel="apple-touch-icon" href="/logo-removebg-preview.png">
 
   <meta property="og:title" content="Properhost — Ville">
-  <meta property="og:description" content="Le ville Properhost in Sicilia: dimore selezionate per location, privacy e carattere — da Taormina a Scicli.">
-  <meta property="og:image" content="https://www.properhost.it/assets/ville-hero.jpg">
+  <meta property="og:description" content="Le strutture Properhost in Sicilia: appartamenti e ville selezionate a Trapani, Favignana e Cornino.">
   <meta property="og:url" content="https://www.properhost.it/ville.html">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="it_IT">
   <meta name="theme-color" content="#0b6b5e">
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": "Ville Properhost",
-    "url": "https://www.properhost.it/ville.html",
-    "numberOfItems": 6,
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Villa Aurea", "url": "https://www.properhost.it/ville/aurea.html" },
-      { "@type": "ListItem", "position": 2, "name": "Villa Zagara", "url": "https://www.properhost.it/ville/zagara.html" },
-      { "@type": "ListItem", "position": 3, "name": "Villa Bianca", "url": "https://www.properhost.it/ville/bianca.html" },
-      { "@type": "ListItem", "position": 4, "name": "Villa Soho", "url": "https://www.properhost.it/ville/soho.html" },
-      { "@type": "ListItem", "position": 5, "name": "Villa Manu", "url": "https://www.properhost.it/ville/manu.html" },
-      { "@type": "ListItem", "position": 6, "name": "Villa Dolce Vita", "url": "https://www.properhost.it/ville/dolce-vita.html" }
-    ]
-  }
-  </script>
+  <style>
+    /* Location tabs */
+    .location-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .location-tab {
+      padding: 0.5rem 1.4rem;
+      border: 1px solid var(--gold, #b8960c);
+      background: transparent;
+      color: var(--gold, #b8960c);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .location-tab.active,
+    .location-tab:hover {
+      background: var(--gold, #b8960c);
+      color: #fff;
+    }
+    .location-section { display: none; }
+    .location-section.active { display: block; }
+
+    /* Location heading */
+    .location-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+      color: var(--teal, #0b6b5e);
+    }
+    .location-sub {
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 2rem;
+      letter-spacing: 0.04em;
+    }
+
+    /* Villa card gallery */
+    .card-gallery {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+    .card-gallery .swiper { height: 100%; }
+    .card-gallery .swiper-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .card-gallery .swiper-button-next,
+    .card-gallery .swiper-button-prev {
+      color: #fff;
+      --swiper-navigation-size: 18px;
+    }
+    .card-gallery .swiper-pagination-bullet-active { background: #fff; }
+
+    /* Room tabs inside Villa Gioiello card */
+    .room-tabs {
+      display: flex;
+      gap: 0.4rem;
+      margin-bottom: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .room-tab {
+      padding: 0.3rem 0.8rem;
+      font-size: 0.72rem;
+      border: 1px solid currentColor;
+      border-radius: 2px;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: transparent;
+      color: #888;
+      transition: all 0.2s;
+    }
+    .room-tab.active { background: var(--teal,#0b6b5e); color: #fff; border-color: var(--teal,#0b6b5e); }
+    .room-panel { display: none; }
+    .room-panel.active { display: block; }
+
+    /* Amenity pills */
+    .amenities {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin: 0.8rem 0;
+    }
+    .amenity {
+      font-size: 0.72rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      background: #f0f7f5;
+      color: #0b6b5e;
+      letter-spacing: 0.03em;
+    }
+  </style>
 </head>
 <body>
 
@@ -69,11 +153,9 @@
   <p class="preloader-text">Caricamento...</p>
 </div>
 
-<!-- Custom Cursor (desktop only) -->
 <div class="custom-cursor" id="customCursor" aria-hidden="true"></div>
 <div class="custom-cursor-text" id="customCursorText" aria-hidden="true"></div>
 
-<!-- Back to Top -->
 <a href="#top" class="back-to-top" id="backToTop" aria-label="Torna all'inizio">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
     <path d="M12 19V5M5 12l7-7 7 7"/>
@@ -82,7 +164,10 @@
 
 <header class="topbar">
   <div class="container nav-wrap">
-    <a href="index.html" class="brand brand--full" aria-label="ProperHost — Home"><img src="assets/logo-full-white.png" alt="ProperHost" class="brand-logo brand-logo--light" fetchpriority="high"><img src="assets/logo-full-teal.png" alt="" class="brand-logo brand-logo--dark" aria-hidden="true"></a>
+    <a href="index.html" class="brand brand--full" aria-label="ProperHost — Home">
+      <img src="assets/logo-full-white.png" alt="ProperHost" class="brand-logo brand-logo--light" fetchpriority="high">
+      <img src="assets/logo-full-teal.png" alt="" class="brand-logo brand-logo--dark" aria-hidden="true">
+    </a>
     <nav class="nav" id="mainNav">
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
@@ -100,17 +185,17 @@
 
 <main id="main">
 
-<section class="hero page-hero" style="background-image:url('assets/ville-hero.jpg')">
+<section class="hero page-hero" style="background-image:url('assets/ville/villa-cellini/01.jpg')">
   <div class="container hero-grid">
     <div class="reveal">
-      <div class="eyebrow">Le nostre ville</div>
-      <h1>Dimore selezionate per <em>location</em>, privacy e carattere</h1>
-      <p>Una vetrina con griglia ordinata, immagini importanti e testi brevi: la collezione completa delle ville disponibili.</p>
+      <div class="eyebrow">Le nostre strutture</div>
+      <h1>Dimore selezionate tra <em>Trapani</em>, Favignana e Cornino</h1>
+      <p>Appartamenti di charme nel centro storico, ville sul mare e suite esclusive: ogni struttura è curata nei dettagli per un soggiorno autentico in Sicilia.</p>
     </div>
     <div class="hero-card reveal">
       <div class="small">Collection</div>
-      <h3>Dalla costa orientale al Val di Noto</h3>
-      <p>Ogni villa è presentata come un prodotto premium: pochi dati chiari, forte componente visiva e richiesta diretta.</p>
+      <h3>15 strutture, 3 destinazioni</h3>
+      <p>Dal centro storico di Trapani all'isola di Favignana, fino alla quiete di Cornino vista tramonto.</p>
     </div>
   </div>
 </section>
@@ -118,134 +203,576 @@
 <section class="section alt">
   <div class="container">
     <div class="reveal">
-      <div class="section-tag">Catalogo ville</div>
-      <h2 class="section-title">Una griglia pulita, <em>facile</em> da navigare</h2>
-      <p class="section-text">L’impostazione luxury del sito, con un catalogo allargato per sembrare una vera collezione navigabile.</p>
+      <div class="section-tag">Catalogo strutture</div>
+      <h2 class="section-title">Scegli la tua <em>destinazione</em></h2>
+      <p class="section-text">Filtra per zona e scopri la struttura giusta per il tuo soggiorno.</p>
     </div>
 
-    <div class="cards cards--ville">
-      <article class="card reveal">
-        <div class="card-media"><img src="assets/villa-1.jpg" alt="Villa Aurea — Taormina" loading="lazy"><span class="card-tag">Taormina</span></div>
-        <div class="card-body">
-          <div class="meta">10 ospiti · 5 camere</div>
-          <h3>Villa Aurea</h3>
-          <p>Linee pulite, piscina panoramica e luce dorata sulle terrazze vista mare.</p>
-          <div class="villa-highlights" aria-label="Caratteristiche principali">
-            <span><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21V13h6v8"/></svg> Vista mare</span>
-            <span><svg viewBox="0 0 24 24"><path d="M3 12c3-3 6-3 9 0s6 3 9 0M3 17c3-3 6-3 9 0s6 3 9 0"/></svg> Piscina</span>
-            <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Concierge</span>
-          </div>
-          <a href="ville/aurea.html" class="btn btn-gold">Scopri la villa</a>
-        </div>
-      </article>
-
-      <article class="card reveal">
-        <div class="card-media"><img src="assets/villa-2.jpg" alt="Villa Zagara — Noto" loading="lazy"><span class="card-tag">Noto</span></div>
-        <div class="card-body">
-          <div class="meta">8 ospiti · 4 camere</div>
-          <h3>Villa Zagara</h3>
-          <p>Patio ombreggiati e un giardino mediterraneo pensato per vivere l'esterno.</p>
-          <div class="villa-highlights" aria-label="Caratteristiche principali">
-            <span><svg viewBox="0 0 24 24"><path d="M12 3l3 6h6l-5 4 2 7-6-4-6 4 2-7-5-4h6z"/></svg> Giardino</span>
-            <span><svg viewBox="0 0 24 24"><path d="M3 12c3-3 6-3 9 0s6 3 9 0M3 17c3-3 6-3 9 0s6 3 9 0"/></svg> Piscina</span>
-            <span><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></svg> Patio</span>
-          </div>
-          <a href="ville/zagara.html" class="btn btn-gold">Scopri la villa</a>
-        </div>
-      </article>
-
-      <article class="card reveal">
-        <div class="card-media"><img src="assets/villa-3.jpg" alt="Villa Bianca — Siracusa" loading="lazy"><span class="card-tag">Siracusa</span></div>
-        <div class="card-body">
-          <div class="meta">12 ospiti · 6 camere</div>
-          <h3>Villa Bianca</h3>
-          <p>Privacy, accesso al mare e ambienti ampi per gruppi e famiglie.</p>
-          <div class="villa-highlights" aria-label="Caratteristiche principali">
-            <span><svg viewBox="0 0 24 24"><path d="M3 12c3-3 6-3 9 0s6 3 9 0M3 17c3-3 6-3 9 0s6 3 9 0"/></svg> Mare</span>
-            <span><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="10" r="2"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5M14 20c0-2 2-3 4-3s3 1 3 3"/></svg> Famiglie</span>
-            <span><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21V13h6v8"/></svg> 6 camere</span>
-          </div>
-          <a href="ville/bianca.html" class="btn btn-gold">Scopri la villa</a>
-        </div>
-      </article>
-
-      <article class="card reveal">
-        <div class="card-media"><img src="assets/villa-4.jpg" alt="Villa Soho — Ragusa" loading="lazy"><span class="card-tag">Ragusa</span></div>
-        <div class="card-body">
-          <div class="meta">6 ospiti · 3 camere</div>
-          <h3>Villa Soho</h3>
-          <p>Atmosfera contemporanea e interni dal gusto essenziale.</p>
-          <div class="villa-highlights" aria-label="Caratteristiche principali">
-            <span><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 12h16M12 4v16"/></svg> Design</span>
-            <span><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></svg> Centro</span>
-            <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Concierge</span>
-          </div>
-          <a href="ville/soho.html" class="btn btn-gold">Scopri la villa</a>
-        </div>
-      </article>
-
-      <article class="card reveal">
-        <div class="card-media"><img src="assets/villa-5.jpg" alt="Villa Manu — Modica" loading="lazy"><span class="card-tag">Modica</span></div>
-        <div class="card-body">
-          <div class="meta">10 ospiti · 5 camere</div>
-          <h3>Villa Manu</h3>
-          <p>Volumi mediterranei, piscina privata e grande area dining esterna.</p>
-          <div class="villa-highlights" aria-label="Caratteristiche principali">
-            <span><svg viewBox="0 0 24 24"><path d="M3 12c3-3 6-3 9 0s6 3 9 0M3 17c3-3 6-3 9 0s6 3 9 0"/></svg> Piscina</span>
-            <span><svg viewBox="0 0 24 24"><path d="M4 19h16M6 19V8h12v11M9 19v-6h6v6"/></svg> Dining</span>
-            <span><svg viewBox="0 0 24 24"><path d="M12 3l3 6h6l-5 4 2 7-6-4-6 4 2-7-5-4h6z"/></svg> Privata</span>
-          </div>
-          <a href="ville/manu.html" class="btn btn-gold">Scopri la villa</a>
-        </div>
-      </article>
-
-      <article class="card reveal">
-        <div class="card-media"><img src="assets/villa-6.jpg" alt="Villa Dolce Vita — Scicli" loading="lazy"><span class="card-tag">Scicli</span></div>
-        <div class="card-body">
-          <div class="meta">8 ospiti · 4 camere</div>
-          <h3>Villa Dolce Vita</h3>
-          <p>Una dimora luminosa con spazi pensati per relax, sole e convivialità.</p>
-          <div class="villa-highlights" aria-label="Caratteristiche principali">
-            <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg> Luce</span>
-            <span><svg viewBox="0 0 24 24"><path d="M3 12c3-3 6-3 9 0s6 3 9 0M3 17c3-3 6-3 9 0s6 3 9 0"/></svg> Piscina</span>
-            <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg> Relax</span>
-          </div>
-          <a href="ville/dolce-vita.html" class="btn btn-gold">Scopri la villa</a>
-        </div>
-      </article>
+    <!-- Location tabs -->
+    <div class="location-tabs" role="tablist">
+      <button class="location-tab active" role="tab" aria-selected="true" onclick="showLocation('trapani', this)">Trapani</button>
+      <button class="location-tab" role="tab" aria-selected="false" onclick="showLocation('favignana', this)">Favignana</button>
+      <button class="location-tab" role="tab" aria-selected="false" onclick="showLocation('cornino', this)">Cornino</button>
     </div>
-  </div>
-</section>
 
-<section class="bg-strip reveal" style="background-image:url('assets/sea.jpg')" aria-label="Esperienza in villa">
-  <div class="container">
-    <div class="section-tag">Le ville, da vivere</div>
-    <h2>Locazioni iconiche, <em>privacy</em> assoluta</h2>
-    <p>Dalla terrazza panoramica di Taormina al patio barocco del Val di Noto: ogni dimora racconta una Sicilia diversa, con la stessa attenzione al dettaglio.</p>
-  </div>
-</section>
+    <!-- ============================================================ TRAPANI -->
+    <div class="location-section active" id="loc-trapani">
+      <h2 class="location-heading">Trapani</h2>
+      <p class="location-sub">Centro storico, porto, lungomare — tutto a portata di piedi.</p>
+      <div class="cards cards--ville">
 
-<section class="section">
-  <div class="container grid-2">
-    <div class="reveal">
-      <div class="section-tag">Come scegliere</div>
-      <h2 class="section-title">La villa giusta dipende da <em>posizione</em> e stile</h2>
-      <p class="section-text">Costa est, sud-est barocco, privacy assoluta o esperienza family-friendly: ti aiutiamo a orientarti senza trasformare la scelta in un portale tecnico.</p>
-      <ul class="list">
-        <li>Per panorami iconici: Taormina e costa orientale.</li>
-        <li>Per architettura e tranquillità: Noto, Modica, Scicli.</li>
-        <li>Per gruppi grandi: ville con più zone living e terrazze.</li>
-      </ul>
-    </div>
-    <div class="image-panel reveal"><img src="assets/about-panel.jpg" alt="Paesaggio siciliano con ville di lusso"></div>
+        <!-- Dimora del Polpo -->
+        <article class="card reveal">
+          <div class="card-media card-gallery">
+            <div class="swiper swiper-villa">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="assets/ville/dimora-del-polpo/01.jpg" alt="Dimora del Polpo" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/dimora-del-polpo/02.jpg" alt="Dimora del Polpo" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/dimora-del-polpo/03.jpg" alt="Dimora del Polpo" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/dimora-del-polpo/04.jpg" alt="Dimora del Polpo" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/dimora-del-polpo/05.jpg" alt="Dimora del Polpo" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/dimora-del-polpo/06.jpg" alt="Dimora del Polpo" loading="lazy"></div>
+              </div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+            <span class="card-tag">Trapani</span>
+          </div>
+          <div class="card-body">
+            <div class="meta">2 ospiti · 1 camera</div>
+            <h3>Dimora del Polpo</h3>
+            <p>Appartamento luminoso con balcone privato e vista mare. Posizione centrale, a piedi da ristoranti, lungomare e imbarco per le Egadi.</p>
+            <div class="amenities">
+              <span class="amenity">Vista mare</span>
+              <span class="amenity">Cucina attrezzata</span>
+              <span class="amenity">Aria condizionata</span>
+              <span class="amenity">Wi-Fi</span>
+              <span class="amenity">Lavatrice</span>
+              <span class="amenity">Smart TV</span>
+            </div>
+            <a href="contatti.html" class="btn btn-gold">Richiedi info</a>
+          </div>
+        </article>
+
+        <!-- La Falce House -->
+        <article class="card reveal">
+          <div class="card-media card-gallery">
+            <div class="swiper swiper-villa">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="assets/ville/la-falce-house/01.jpg" alt="La Falce House" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/la-falce-house/02.jpg" alt="La Falce House" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/la-falce-house/03.jpg" alt="La Falce House" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/la-falce-house/04.jpg" alt="La Falce House" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/la-falce-house/05.jpg" alt="La Falce House" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/la-falce-house/06.jpg" alt="La Falce House" loading="lazy"></div>
+              </div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+            <span class="card-tag">Trapani</span>
+          </div>
+          <div class="card-body">
+            <div class="meta">4 ospiti · 1 camera + divano letto</div>
+            <h3>La Falce House</h3>
+            <p>Nel cuore del centro storico con splendida vista sul porto e sul mare. Ideale per coppie e famiglie, a due passi dalle Isole Egadi.</p>
+            <div class="amenities">
+              <span class="amenity">Vista porto</span>
+              <span class="amenity">Cucina attrezzata</span>
+              <span class="amenity">Aria condizionata</span>
+              <span class="amenity">Wi-Fi</span>
+              <span class="amenity">Lavatrice</span>
+              <span class="amenity">TV</span>
+            </div>
+            <a href="contatti.html" class="btn btn-gold">Richiedi info</a>
+          </div>
+        </article>
+
+        <!-- Lucatola's Home -->
+        <article class="card reveal">
+          <div class="card-media card-gallery">
+            <div class="swiper swiper-villa">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="assets/ville/lucatola-home/01.jpg" alt="Lucatola's Home" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/lucatola-home/02.jpg" alt="Lucatola's Home" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/lucatola-home/03.jpg" alt="Lucatola's Home" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/lucatola-home/04.jpg" alt="Lucatola's Home" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/lucatola-home/05.jpg" alt="Lucatola's Home" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/lucatola-home/06.jpg" alt="Lucatola's Home" loading="lazy"></div>
+              </div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+            <span class="card-tag">Trapani</span>
+          </div>
+          <div class="card-body">
+            <div class="meta">2 ospiti · 1 camera</div>
+            <h3>Lucatola's Home</h3>
+            <p>Elegante appartamento moderno a pochi passi dal porto e dal centro storico. Patio esterno e doccia esterna per vivere la città con stile.</p>
+            <div class="amenities">
+              <span class="amenity">Patio esterno</span>
+              <span class="amenity">Doccia esterna</span>
+              <span class="amenity">Aria condizionata</span>
+              <span class="amenity">Wi-Fi</span>
+              <span class="amenity">TV</span>
+            </div>
+            <a href="contatti.html" class="btn btn-gold">Richiedi info</a>
+          </div>
+        </article>
+
+        <!-- Maria's Home 1 -->
+        <article class="card reveal">
+          <div class="card-media card-gallery">
+            <div class="swiper swiper-villa">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="assets/ville/marias-home-1/01.jpg" alt="Maria's Home 1" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/marias-home-1/02.jpg" alt="Maria's Home 1" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/marias-home-1/03.jpg" alt="Maria's Home 1" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/marias-home-1/04.jpg" alt="Maria's Home 1" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/marias-home-1/05.jpg" alt="Maria's Home 1" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/marias-home-1/06.jpg" alt="Maria's Home 1" loading="lazy"></div>
+              </div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+            <span class="card-tag">Trapani</span>
+          </div>
+          <div class="card-body">
+            <div class="meta">Centro storico · 1 camera</div>
+            <h3>Maria's Home 1</h3>
+            <p>Nel cuore del centro storico a 2 minuti dalla Cattedrale di San Lorenzo. Accogliente e funzionale, ideale per scoprire Trapani a piedi.</p>
+            <div class="amenities">
+              <span class="amenity">Centro storico</span>
+              <span class="amenity">Aria condizionata</span>
+              <span class="amenity">Wi-Fi</span>
+              <span class="amenity">Lavatrice</span>
+              <span class="amenity">Macchina caffè</span>
+              <span class="amenity">TV</span>
+            </div>
+            <a href="contatti.html" class="btn btn-gold">Richiedi info</a>
+          </div>
+        </article>
+
+        <!-- Maria's Home 2 -->
+        <article class="card reveal">
+          <div class="card-media card-gallery">
+            <div class="swiper swiper-villa">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="assets/ville/marias-home-2/01.jpg" alt="Maria's Home 2" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/marias-home-2/02.jpg" alt="Maria's Home 2" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/marias-home-2/03.jpg" alt="Maria's Home 2" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/marias-home-2/04.jpg" alt="Maria's Home 2" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/marias-home-2/05.jpg" alt="Maria's Home 2" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/marias-home-2/06.jpg" alt="Maria's Home 2" loading="lazy"></div>
+              </div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+            <span class="card-tag">Trapani</span>
+          </div>
+          <div class="card-body">
+            <div class="meta">Centro storico · 1 camera</div>
+            <h3>Maria's Home 2</h3>
+            <p>Appartamento curato nei dettagli nel pieno centro di Trapani, a pochi passi dal mare e dai principali punti di interesse.</p>
+            <div class="amenities">
+              <span class="amenity">Centro storico</span>
+              <span class="amenity">Aria condizionata</span>
+              <span class="amenity">Wi-Fi</span>
+              <span class="amenity">Lavatrice</span>
+              <span class="amenity">Macchina caffè</span>
+              <span class="amenity">TV</span>
+            </div>
+            <a href="contatti.html" class="btn btn-gold">Richiedi info</a>
+          </div>
+        </article>
+
+        <!-- Palazzo Lucatelli Suite -->
+        <article class="card reveal">
+          <div class="card-media card-gallery">
+            <div class="swiper swiper-villa">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="assets/ville/palazzo-lucatelli/01.jpg" alt="Palazzo Lucatelli Suite" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/palazzo-lucatelli/02.jpg" alt="Palazzo Lucatelli Suite" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/palazzo-lucatelli/03.jpg" alt="Palazzo Lucatelli Suite" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/palazzo-lucatelli/04.jpg" alt="Palazzo Lucatelli Suite" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/palazzo-lucatelli/05.jpg" alt="Palazzo Lucatelli Suite" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/palazzo-lucatelli/06.jpg" alt="Palazzo Lucatelli Suite" loading="lazy"></div>
+              </div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+            <span class="card-tag">Trapani</span>
+          </div>
+          <div class="card-body">
+            <div class="meta">2 ospiti · Suite</div>
+            <h3>Palazzo Lucatelli Suite</h3>
+            <p>Design raffinato a 1 minuto dal porto. Illuminazione studiata, dettagli eleganti e balcone con vista mare in pieno centro storico.</p>
+            <div class="amenities">
+              <span class="amenity">Vista mare</span>
+              <span class="amenity">Design</span>
+              <span class="amenity">Cucina attrezzata</span>
+              <span class="amenity">Aria condizionata</span>
+              <span class="amenity">Wi-Fi</span>
+              <span class="amenity">Lavatrice</span>
+            </div>
+            <a href="contatti.html" class="btn btn-gold">Richiedi info</a>
+          </div>
+        </article>
+
+        <!-- Palazzo Torrearsa Suites 1 -->
+        <article class="card reveal">
+          <div class="card-media card-gallery">
+            <div class="swiper swiper-villa">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="assets/ville/torrearsa-1/01.jpg" alt="Palazzo Torrearsa Suite 1" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/torrearsa-1/02.jpg" alt="Palazzo Torrearsa Suite 1" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/torrearsa-1/03.jpg" alt="Palazzo Torrearsa Suite 1" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/torrearsa-1/04.jpg" alt="Palazzo Torrearsa Suite 1" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/torrearsa-1/05.jpg" alt="Palazzo Torrearsa Suite 1" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/torrearsa-1/06.jpg" alt="Palazzo Torrearsa Suite 1" loading="lazy"></div>
+              </div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+            <span class="card-tag">Trapani</span>
+          </div>
+          <div class="card-body">
+            <div class="meta">2 ospiti · Suite 1</div>
+            <h3>Palazzo Torrearsa Suites 1</h3>
+            <p>Elegante suite in centro storico, a 1 minuto dal porto. Ambienti moderni, TV 50", cucina attrezzata e balcone con vista mare.</p>
+            <div class="amenities">
+              <span class="amenity">Vista mare</span>
+              <span class="amenity">Cucina attrezzata</span>
+              <span class="amenity">Aria condizionata</span>
+              <span class="amenity">Wi-Fi</span>
+              <span class="amenity">Lavatrice</span>
+              <span class="amenity">TV 50"</span>
+            </div>
+            <a href="contatti.html" class="btn btn-gold">Richiedi info</a>
+          </div>
+        </article>
+
+        <!-- Palazzo Torrearsa Suites 2 -->
+        <article class="card reveal">
+          <div class="card-media card-gallery">
+            <div class="swiper swiper-villa">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="assets/ville/torrearsa-2/01.jpg" alt="Palazzo Torrearsa Suite 2" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/torrearsa-2/02.jpg" alt="Palazzo Torrearsa Suite 2" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/torrearsa-2/03.jpg" alt="Palazzo Torrearsa Suite 2" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/torrearsa-2/04.jpg" alt="Palazzo Torrearsa Suite 2" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/torrearsa-2/05.jpg" alt="Palazzo Torrearsa Suite 2" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/torrearsa-2/06.jpg" alt="Palazzo Torrearsa Suite 2" loading="lazy"></div>
+              </div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+            <span class="card-tag">Trapani</span>
+          </div>
+          <div class="card-body">
+            <div class="meta">2 ospiti · Suite 2</div>
+            <h3>Palazzo Torrearsa Suites 2</h3>
+            <p>Elegante suite in centro storico, a 1 minuto dal porto. Ambienti moderni, TV 50", cucina attrezzata e balcone con vista mare.</p>
+            <div class="amenities">
+              <span class="amenity">Vista mare</span>
+              <span class="amenity">Cucina attrezzata</span>
+              <span class="amenity">Aria condizionata</span>
+              <span class="amenity">Wi-Fi</span>
+              <span class="amenity">Lavatrice</span>
+              <span class="amenity">TV 50"</span>
+            </div>
+            <a href="contatti.html" class="btn btn-gold">Richiedi info</a>
+          </div>
+        </article>
+
+        <!-- Palazzo Torrearsa Suites 3 -->
+        <article class="card reveal">
+          <div class="card-media card-gallery">
+            <div class="swiper swiper-villa">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="assets/ville/torrearsa-3/01.jpg" alt="Palazzo Torrearsa Suite 3" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/torrearsa-3/02.jpg" alt="Palazzo Torrearsa Suite 3" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/torrearsa-3/03.jpg" alt="Palazzo Torrearsa Suite 3" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/torrearsa-3/04.jpg" alt="Palazzo Torrearsa Suite 3" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/torrearsa-3/05.jpg" alt="Palazzo Torrearsa Suite 3" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/torrearsa-3/06.jpg" alt="Palazzo Torrearsa Suite 3" loading="lazy"></div>
+              </div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+            <span class="card-tag">Trapani</span>
+          </div>
+          <div class="card-body">
+            <div class="meta">2 ospiti · Suite 3</div>
+            <h3>Palazzo Torrearsa Suites 3</h3>
+            <p>Elegante suite in centro storico, a 1 minuto dal porto. Ambienti moderni, TV 50", cucina attrezzata e balcone con vista mare.</p>
+            <div class="amenities">
+              <span class="amenity">Vista mare</span>
+              <span class="amenity">Cucina attrezzata</span>
+              <span class="amenity">Aria condizionata</span>
+              <span class="amenity">Wi-Fi</span>
+              <span class="amenity">Lavatrice</span>
+              <span class="amenity">TV 50"</span>
+            </div>
+            <a href="contatti.html" class="btn btn-gold">Richiedi info</a>
+          </div>
+        </article>
+
+        <!-- Palazzo Torrearsa Suites 4 -->
+        <article class="card reveal">
+          <div class="card-media card-gallery">
+            <div class="swiper swiper-villa">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="assets/ville/torrearsa-4/01.jpg" alt="Palazzo Torrearsa Suite 4" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/torrearsa-4/02.jpg" alt="Palazzo Torrearsa Suite 4" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/torrearsa-4/03.jpg" alt="Palazzo Torrearsa Suite 4" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/torrearsa-4/04.jpg" alt="Palazzo Torrearsa Suite 4" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/torrearsa-4/05.jpg" alt="Palazzo Torrearsa Suite 4" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/torrearsa-4/06.jpg" alt="Palazzo Torrearsa Suite 4" loading="lazy"></div>
+              </div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+            <span class="card-tag">Trapani</span>
+          </div>
+          <div class="card-body">
+            <div class="meta">2 ospiti · Suite 4</div>
+            <h3>Palazzo Torrearsa Suites 4</h3>
+            <p>Elegante suite in centro storico, a 1 minuto dal porto. Ambienti moderni, TV 50", cucina attrezzata e balcone con vista mare.</p>
+            <div class="amenities">
+              <span class="amenity">Vista mare</span>
+              <span class="amenity">Cucina attrezzata</span>
+              <span class="amenity">Aria condizionata</span>
+              <span class="amenity">Wi-Fi</span>
+              <span class="amenity">Lavatrice</span>
+              <span class="amenity">TV 50"</span>
+            </div>
+            <a href="contatti.html" class="btn btn-gold">Richiedi info</a>
+          </div>
+        </article>
+
+        <!-- Aloha Apartment -->
+        <article class="card reveal">
+          <div class="card-media card-gallery">
+            <div class="swiper swiper-villa">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="assets/ville/aloha-apartment/01.jpg" alt="Aloha Apartment" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/aloha-apartment/02.jpg" alt="Aloha Apartment" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/aloha-apartment/03.jpg" alt="Aloha Apartment" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/aloha-apartment/04.jpg" alt="Aloha Apartment" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/aloha-apartment/05.jpg" alt="Aloha Apartment" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/aloha-apartment/06.jpg" alt="Aloha Apartment" loading="lazy"></div>
+              </div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+            <span class="card-tag">Trapani</span>
+          </div>
+          <div class="card-body">
+            <div class="meta">4 ospiti · 1 camera</div>
+            <h3>Aloha Apartment</h3>
+            <p>Appartamento accogliente e ben arredato nel centro di Trapani. Spazi luminosi e funzionali, ideale per coppie e famiglie alla scoperta della città.</p>
+            <div class="amenities">
+              <span class="amenity">Centro città</span>
+              <span class="amenity">Aria condizionata</span>
+              <span class="amenity">Wi-Fi</span>
+              <span class="amenity">Cucina attrezzata</span>
+              <span class="amenity">TV</span>
+            </div>
+            <a href="contatti.html" class="btn btn-gold">Richiedi info</a>
+          </div>
+        </article>
+
+      </div><!-- /cards -->
+    </div><!-- /loc-trapani -->
+
+    <!-- ============================================================ FAVIGNANA -->
+    <div class="location-section" id="loc-favignana">
+      <h2 class="location-heading">Favignana</h2>
+      <p class="location-sub">L'isola più grande delle Egadi — mare cristallino, tramonti e relax.</p>
+      <div class="cards cards--ville">
+
+        <!-- Villa Gioiello — villa unica con stanze multiple -->
+        <article class="card reveal">
+          <div class="card-media card-gallery">
+            <div class="swiper swiper-villa">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="assets/ville/villa-gioiello/01.jpg" alt="Villa Gioiello" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/villa-gioiello/02.jpg" alt="Villa Gioiello" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/villa-gioiello/03.jpg" alt="Villa Gioiello" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/villa-gioiello/04.jpg" alt="Villa Gioiello" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/villa-gioiello/05.jpg" alt="Villa Gioiello — Camera Matrimoniale" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/villa-gioiello/06.jpg" alt="Villa Gioiello — Camera Matrimoniale" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/villa-gioiello/07.jpg" alt="Villa Gioiello — Camera Matrimoniale" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/villa-gioiello/08.jpg" alt="Villa Gioiello — Camera Superior" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/villa-gioiello/09.jpg" alt="Villa Gioiello — Camera Superior" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/villa-gioiello/10.jpg" alt="Villa Gioiello — Camera Superior" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/villa-gioiello/11.jpg" alt="Villa Gioiello — Camera Superior" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/villa-gioiello/12.jpg" alt="Villa Gioiello — Camera Superior" loading="lazy"></div>
+              </div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+            <span class="card-tag">Favignana</span>
+          </div>
+          <div class="card-body">
+            <h3>Villa Gioiello</h3>
+            <p style="margin-bottom:0.8rem">Villa situata a 7–10 minuti a piedi dal centro di Favignana, con ingresso privato e giardino riservato per ogni unità. Parcheggio privato gratuito incluso. Disponibile in tre configurazioni:</p>
+
+            <!-- Room tabs -->
+            <div class="room-tabs">
+              <button class="room-tab active" onclick="showRoom('gioiello-apt', this)">Appartamento</button>
+              <button class="room-tab" onclick="showRoom('gioiello-mat', this)">Camera Matrimoniale</button>
+              <button class="room-tab" onclick="showRoom('gioiello-sup', this)">Camera Superior</button>
+            </div>
+
+            <div class="room-panel active" id="gioiello-apt">
+              <div class="meta">2–3 ospiti · A 10 m dal mare</div>
+              <p style="font-size:0.88rem;margin:0.5rem 0">Appartamento indipendente a 10 metri dal mare, 5 minuti a piedi dal centro. Camera da letto, cucina attrezzata, bagno con doccia e patio privato. A pochi passi dallo Stabilimento Florio e Camparia.</p>
+              <div class="amenities">
+                <span class="amenity">10 m dal mare</span>
+                <span class="amenity">Patio</span>
+                <span class="amenity">Cucina attrezzata</span>
+                <span class="amenity">Aria condizionata</span>
+                <span class="amenity">Wi-Fi</span>
+                <span class="amenity">Lavatrice</span>
+                <span class="amenity">Macchina caffè</span>
+              </div>
+            </div>
+
+            <div class="room-panel" id="gioiello-mat">
+              <div class="meta">2 ospiti · Camera matrimoniale</div>
+              <p style="font-size:0.88rem;margin:0.5rem 0">Camera matrimoniale con ingresso indipendente e giardino privato. Senza cucina. A 10 minuti a piedi dal centro, 15 minuti dal porto.</p>
+              <div class="amenities">
+                <span class="amenity">Giardino privato</span>
+                <span class="amenity">Ingresso indip.</span>
+                <span class="amenity">Aria condizionata</span>
+                <span class="amenity">Wi-Fi</span>
+                <span class="amenity">TV</span>
+                <span class="amenity">Parcheggio</span>
+              </div>
+            </div>
+
+            <div class="room-panel" id="gioiello-sup">
+              <div class="meta">2–3 ospiti · Camera Superior</div>
+              <p style="font-size:0.88rem;margin:0.5rem 0">Camera matrimoniale superior con cameretta, bagno privato e cucina. Ingresso indipendente e giardino riservato. A 7 minuti dal centro, 15 minuti dal porto.</p>
+              <div class="amenities">
+                <span class="amenity">Giardino privato</span>
+                <span class="amenity">Cucina</span>
+                <span class="amenity">Bagno privato</span>
+                <span class="amenity">Aria condizionata</span>
+                <span class="amenity">Wi-Fi</span>
+                <span class="amenity">Parcheggio</span>
+              </div>
+            </div>
+
+            <a href="contatti.html" class="btn btn-gold" style="margin-top:1rem">Richiedi info</a>
+          </div>
+        </article>
+
+        <!-- Villa Odyssea -->
+        <article class="card reveal">
+          <div class="card-media card-gallery">
+            <div class="swiper swiper-villa">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="assets/ville/villa-odyssea/01.jpg" alt="Villa Odyssea" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/villa-odyssea/02.jpg" alt="Villa Odyssea" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/villa-odyssea/03.jpg" alt="Villa Odyssea" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/villa-odyssea/04.jpg" alt="Villa Odyssea" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/villa-odyssea/05.jpg" alt="Villa Odyssea" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/villa-odyssea/06.jpg" alt="Villa Odyssea" loading="lazy"></div>
+              </div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+            <span class="card-tag">Favignana</span>
+          </div>
+          <div class="card-body">
+            <div class="meta">fino a 8 ospiti · Villa vista mare</div>
+            <h3>Villa Odyssea</h3>
+            <p>Splendida villa vista mare sul lato del tramonto, perfetta per gruppi e famiglie fino a 8 ospiti. A 200 m dalla spiaggia, con barbecue e parcheggio gratuito.</p>
+            <div class="amenities">
+              <span class="amenity">Vista mare</span>
+              <span class="amenity">Tramonti</span>
+              <span class="amenity">200 m spiaggia</span>
+              <span class="amenity">Barbecue</span>
+              <span class="amenity">2 bagni</span>
+              <span class="amenity">Cucina</span>
+              <span class="amenity">Parcheggio</span>
+              <span class="amenity">Wi-Fi</span>
+            </div>
+            <a href="contatti.html" class="btn btn-gold">Richiedi info</a>
+          </div>
+        </article>
+
+      </div><!-- /cards -->
+    </div><!-- /loc-favignana -->
+
+    <!-- ============================================================ CORNINO -->
+    <div class="location-section" id="loc-cornino">
+      <h2 class="location-heading">Cornino</h2>
+      <p class="location-sub">Zona tranquilla sul lato del tramonto — natura, mare e totale relax.</p>
+      <div class="cards cards--ville">
+
+        <!-- Villa Cellini -->
+        <article class="card reveal">
+          <div class="card-media card-gallery">
+            <div class="swiper swiper-villa">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="assets/ville/villa-cellini/01.jpg" alt="Villa Cellini" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/villa-cellini/02.jpg" alt="Villa Cellini" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/villa-cellini/03.jpg" alt="Villa Cellini" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/villa-cellini/04.jpg" alt="Villa Cellini" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/villa-cellini/05.jpg" alt="Villa Cellini" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/ville/villa-cellini/06.jpg" alt="Villa Cellini" loading="lazy"></div>
+              </div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+            <span class="card-tag">Cornino</span>
+          </div>
+          <div class="card-body">
+            <div class="meta">fino a 6 ospiti · 2 camere · 2 bagni</div>
+            <h3>Villa Cellini</h3>
+            <p>Villa vista mare con tramonti mozzafiato. Giardino, veranda, barbecue, forno a legna e un campo da tennis privato — il plus esclusivo di questa dimora.</p>
+            <div class="amenities">
+              <span class="amenity">Vista mare tramonto</span>
+              <span class="amenity">Campo da tennis</span>
+              <span class="amenity">Giardino</span>
+              <span class="amenity">Barbecue</span>
+              <span class="amenity">Forno a legna</span>
+              <span class="amenity">Parcheggio</span>
+              <span class="amenity">Wi-Fi</span>
+              <span class="amenity">Lavatrice</span>
+            </div>
+            <a href="contatti.html" class="btn btn-gold">Richiedi info</a>
+          </div>
+        </article>
+
+      </div><!-- /cards -->
+    </div><!-- /loc-cornino -->
+
   </div>
 </section>
 
 <section class="cta" style="--cta-image:url('assets/sea.jpg')">
   <div class="container reveal">
     <div class="section-tag">Contatti</div>
-    <h2>Hai già in mente una <em>zona</em> o una villa?</h2>
-    <p>Compila il form contatti con date, numero ospiti e preferenze principali: ti risponderemo con disponibilità e servizi dedicati.</p>
+    <h2>Hai già in mente una <em>struttura</em> o una zona?</h2>
+    <p>Scrivici con le tue date, il numero di ospiti e le preferenze: ti risponderemo con disponibilità e servizi dedicati.</p>
     <a href="contatti.html" class="btn btn-primary">Vai al form contatti</a>
   </div>
 </section>
@@ -284,5 +811,45 @@
 </footer>
 
 <script src="script.js"></script>
+<script>
+  // Location tab switcher
+  function showLocation(id, btn) {
+    document.querySelectorAll('.location-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.location-tab').forEach(b => b.classList.remove('active'));
+    document.getElementById('loc-' + id).classList.add('active');
+    btn.classList.add('active');
+    // Re-init swipers in the newly visible section
+    setTimeout(initSwipers, 50);
+  }
+
+  // Room tab switcher (Villa Gioiello)
+  function showRoom(id, btn) {
+    const card = btn.closest('.card-body');
+    card.querySelectorAll('.room-panel').forEach(p => p.classList.remove('active'));
+    card.querySelectorAll('.room-tab').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Init all Swiper instances
+  function initSwipers() {
+    document.querySelectorAll('.swiper-villa').forEach(function(el) {
+      if (el.swiper) return; // already initialized
+      new Swiper(el, {
+        loop: true,
+        pagination: { el: el.querySelector('.swiper-pagination'), clickable: true },
+        navigation: {
+          nextEl: el.querySelector('.swiper-button-next'),
+          prevEl: el.querySelector('.swiper-button-prev'),
+        },
+        preloadImages: false,
+        lazy: true,
+      });
+    });
+  }
+
+  // Run on DOMContentLoaded (Swiper script is deferred)
+  window.addEventListener('load', initSwipers);
+</script>
 </body>
 </html>

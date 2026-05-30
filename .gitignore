@@ -1,0 +1,10 @@
+# Foto villa — gestite fuori da git (file pesanti)
+assets/ville/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp
