@@ -2,8 +2,8 @@
   "nav": {
     "home": "Home",
     "about": "About",
-    "concierge": "Concierge",
-    "villas": "Villas",
+    "concierge": "Services",
+    "villas": "Properties",
     "services": "Services",
     "contact": "Contact"
   },
