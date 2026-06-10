@@ -3051,30 +3051,61 @@ body .topbar.topbar--split.scrolled{
   .brand.brand--full .brand-logo{ height: 32px; }
 }
 
-/* Footer credit — Realizzato da Mosh */
+/* Footer credit — Realizzato da Mosh (angolo basso-sinistra) */
 .footer-credit{
   display:flex;
   align-items:center;
-  justify-content:center;
+  justify-content:flex-start;
+  align-self:flex-start;
   gap:10px;
-  width:100%;
-  padding-top:28px;
-  margin-top:4px;
+  width:auto;
+  padding-top:20px;
+  margin-top:0;
 }
 .footer-credit__label{
   font-family:var(--font-body);
-  font-size:12px;
-  color:rgba(255,255,255,.5);
-  letter-spacing:.06em;
+  font-size:11px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  color:rgba(255,255,255,.72);
+  white-space:nowrap;
 }
 .footer-credit__logo{
   display:block;
-  height:clamp(22px, 2.8vw, 30px);
+  height:clamp(30px, 3.6vw, 38px);
   width:auto;
-  opacity:.88;
-  transition:opacity .25s var(--ease);
+  border-radius:6px;
+  opacity:1;
+  box-shadow:0 3px 14px rgba(0,0,0,.18);
+  transition:transform .25s var(--ease), box-shadow .25s var(--ease);
 }
-.footer-credit__link:hover .footer-credit__logo{ opacity:1; }
+.footer-credit__link{
+  display:inline-flex;
+  line-height:0;
+  text-decoration:none;
+  flex-shrink:0;
+}
+.footer-credit__link:hover .footer-credit__logo,
+.footer-credit:hover .footer-credit__logo{
+  transform:translateY(-1px);
+  box-shadow:0 4px 18px rgba(0,0,0,.22);
+}
+@media (max-width:760px){
+  .footer-credit{
+    padding-top:16px;
+    align-self:flex-start;
+    flex-wrap:wrap;
+    gap:8px 10px;
+  }
+  .footer-credit__label{
+    font-size:10px;
+    letter-spacing:.16em;
+  }
+  .footer-credit__logo{
+    height:32px;
+  }
+}
 
 /* CTA with longer copy */
 .btn--fluid{

@@ -7,7 +7,7 @@
   <meta name="description" content="Properhost services: transfers, private chefs, tours, tailor-made experiences in Sicily.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
 
   <!-- CDN libraries (Lenis / GSAP / Swiper) -->
@@ -22,12 +22,30 @@
   <link rel="alternate" hreflang="it" href="https://www.properhost-sicily.com/concierge.html">
   <link rel="alternate" hreflang="en" href="https://www.properhost-sicily.com/en/concierge.html">
   <link rel="icon" href="/logo-properhost.png" type="image/png">
+  <link rel="apple-touch-icon" href="/logo-properhost.png">
   <meta property="og:title" content="Properhost — Services">
   <meta property="og:description" content="Properhost services: transfers, private chefs, tours, tailor-made experiences in Sicily.">
   <meta property="og:image" content="https://www.properhost-sicily.com/assets/concierge-hero.jpg">
+  <meta property="og:url" content="https://www.properhost-sicily.com/en/concierge.html">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_GB">
   <meta name="theme-color" content="#0b6b5e">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Hospitality services",
+    "provider": {
+      "@type": "Organization",
+      "name": "Properhost",
+      "url": "https://www.properhost-sicily.com",
+      "telephone": "+39-339-2923-744"
+    },
+    "areaServed": "Sicily",
+    "url": "https://www.properhost-sicily.com/en/concierge.html"
+  }
+  </script>
 </head>
 <body>
 
@@ -105,45 +123,60 @@
       <h2 class="section-title">An essential catalogue, <em>complete</em></h2>
     </div>
     <div class="service-grid">
-      <article class="service reveal"><span class="service-number">01</span><h4>Shuttle service</h4><p>Shuttle service on request for port and airport. Comfortable, fast and punctual.</p></article>
-      <article class="service reveal"><span class="service-number">02</span><h4>Vehicle rental</h4><p>Cars, scooters and bicycles to move around in total freedom during your stay.</p></article>
-      <article class="service reveal"><span class="service-number">03</span><h4>Boat rental</h4><p>A dinghy on request to explore hidden coves and live the sea on your own terms.</p></article>
-      <article class="service reveal"><span class="service-number">04</span><h4>Private chef</h4><p>Sicilian cuisine straight to your villa: traditional dishes, fresh local ingredients.</p></article>
-      <article class="service reveal"><span class="service-number">05</span><h4>Favignana tour</h4><p>The pearl of the Egadi Islands: Cala Rossa, Cala Azzurra and crystalline waters.</p></article>
-      <article class="service reveal"><span class="service-number">06</span><h4>Levanzo tour</h4><p>Relax and authentic nature among clear waters, small villages and unique atmospheres.</p></article>
+      <article class="service-card reveal">
+        <div class="service-icon">🚐</div>
+        <h3>Shuttle service</h3>
+        <p>Shuttle service on request for port and airport. Comfortable, fast and punctual.</p>
+      </article>
+      <article class="service-card reveal">
+        <div class="service-icon">🚗</div>
+        <h3>Vehicle rental</h3>
+        <p>Cars, scooters and e-bikes delivered straight to your property: total freedom to explore the island at your pace.</p>
+      </article>
+      <article class="service-card reveal">
+        <div class="service-icon">⛵</div>
+        <h3>Boat rental</h3>
+        <p>Dinghies and small boats to discover hidden coves, with or without a skipper on board.</p>
+      </article>
+      <article class="service-card reveal">
+        <div class="service-icon">👨‍🍳</div>
+        <h3>Private chef</h3>
+        <p>In-property dinners curated by Sicilian chefs: bespoke menus, local ingredients, refined service.</p>
+      </article>
+      <article class="service-card reveal">
+        <div class="service-icon">🏝️</div>
+        <h3>Favignana tour</h3>
+        <p>Guided excursions to Favignana, between historic tuna factories, turquoise coves and panoramic views.</p>
+      </article>
+      <article class="service-card reveal">
+        <div class="service-icon">🌊</div>
+        <h3>Levanzo tour</h3>
+        <p>Boat days to Levanzo: sea caves, crystalline waters and authentic food stops.</p>
+      </article>
     </div>
 
     <div class="cards" style="margin-top:36px">
-      <article class="card reveal"><div class="card-body"><div class="meta">Experience</div><h3>Wine &amp; Food</h3><p>Private tastings, cooking classes and food &amp; wine itineraries in the island's most iconic areas.</p></div></article>
-      <article class="card reveal"><div class="card-body"><div class="meta">Special occasions</div><h3>Celebrations</h3><p>Anniversaries, proposals, small weddings and moments to design with discreet, elegant settings.</p></div></article>
-      <article class="card reveal"><div class="card-body"><div class="meta">Family support</div><h3>Family Care</h3><p>Babysitting, family-friendly activities and easy organisation for stays with children.</p></div></article>
-    </div>
-  </div>
-</section>
-
-<section class="bg-strip reveal" style="background-image:url('../assets/concierge.jpg')" aria-label="In-villa experiences">
-  <div class="container">
-    <div class="section-tag">Bespoke</div>
-    <h2>One <em>point of contact</em>, never an automated menu</h2>
-    <p>Every request reaches the person handling your stay directly. No intermediate steps, no automation, no sales pressure.</p>
-  </div>
-</section>
-
-<section class="section section-alt">
-  <div class="container">
-    <div class="section-head reveal" style="text-align:center;max-width:680px;margin:0 auto">
-      <div class="section-tag">Services</div>
-      <h2 class="section-title">What we can <em>arrange</em> for you</h2>
-      <p class="section-text">A selection of experiences and comforts you can request through the contact form: we coordinate every detail.</p>
-    </div>
-
-    <div class="service-grid">
-      <article class="service-card reveal"><div class="service-icon">🚐</div><h3>Shuttle service</h3><p>Shuttle service on request for port and airport. Comfortable, fast and punctual.</p></article>
-      <article class="service-card reveal"><div class="service-icon">🚗</div><h3>Vehicle rental</h3><p>Cars, scooters and e-bikes delivered straight to your property: total freedom to explore the island at your pace.</p></article>
-      <article class="service-card reveal"><div class="service-icon">⛵</div><h3>Boat rental</h3><p>Dinghies and small boats to discover hidden coves, with or without a skipper on board.</p></article>
-      <article class="service-card reveal"><div class="service-icon">👨‍🍳</div><h3>Private chef</h3><p>In-property dinners curated by Sicilian chefs: bespoke menus, local ingredients, refined service.</p></article>
-      <article class="service-card reveal"><div class="service-icon">🏝️</div><h3>Favignana tour</h3><p>Guided excursions to Favignana, between historic tuna factories, turquoise coves and panoramic views.</p></article>
-      <article class="service-card reveal"><div class="service-icon">🌊</div><h3>Levanzo tour</h3><p>Boat days to Levanzo: sea caves, crystalline waters and authentic food stops.</p></article>
+      <article class="card reveal">
+        <div class="card-body">
+          <div class="meta">Experience</div>
+          <h3>Wine & Food</h3>
+          <p>Private tastings, cooking classes and food & wine itineraries in the island's most iconic areas.</p>
+        </div>
+      </article>
+      <article class="card reveal">
+        <div class="card-body">
+          <div class="meta">Special occasions</div>
+          <h3>Celebrations</h3>
+          <p>Anniversaries, proposals, small weddings and moments to design with discreet, elegant settings.</p>
+        </div>
+      </article>
+      <article class="card reveal">
+        <div class="card-body">
+          <div class="meta">Family support</div>
+          <h3>Family Care</h3>
+          <p>Babysitting, family-friendly activities and easy organisation for stays with children.</p>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -162,14 +195,16 @@
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-col"><div class="footer-brand"><span class="brand-main">properhost</span><span class="brand-sub">hospitality</span></div><p class="lead">Sicilian charm hospitality, hand-picked villas and tailor-made services for authentic stays on the island.</p><p style="color:rgba(255,255,255,.55);font-size:13px">Palermo · Sicily · Italy</p></div>
-      <div class="footer-col"><h5>Contact</h5><a href="tel:+393392923744">+39 339 2923 744</a><a href="tel:+393925108539">+39 392 5108 539</a><a href="mailto:properhost.company@gmail.com">properhost.company@gmail.com</a></div>
+      <div class="footer-col"><div class="footer-brand"><span class="brand-main">properhost</span><span class="brand-sub">hospitality</span></div><p class="lead">Sicilian charm hospitality, hand-picked villas and tailor-made services for authentic stays on the island.</p><p style="color:rgba(255,255,255,.55);font-size:13px">Trapani · Sicily · Italy</p></div>
+      <div class="footer-col"><h5>Contact</h5><a href="tel:+393392923744">+39 339 2923 744</a><a href="tel:+393925108539">+39 392 5108 539</a><a href="mailto:properhost.company@gmail.com">properhost.company@gmail.com</a><a href="https://www.properhost-sicily.com" target="_blank" rel="noopener">www.properhost-sicily.com</a></div>
       <div class="footer-col"><h5>Navigate</h5><a href="index.html">Home</a><a href="about.html">About</a><a href="concierge.html">Services</a><a href="ville.html">Properties</a><a href="contatti.html">Contact</a></div>
     </div>
     <div class="footer-wrap"><div>© 2026 Properhost — All rights reserved</div><div>Hospitality · Sicily · <a href="../concierge.html" style="color:inherit;text-decoration:underline">IT</a></div></div>
     <div class="footer-credit">
       <span class="footer-credit__label">Made by</span>
-      <img src="../assets/logo-mosh.png" alt="Mosh" class="footer-credit__logo" width="100" height="32">
+      <a href="https://www.instagram.com/mosh_comunication/" class="footer-credit__link" target="_blank" rel="noopener noreferrer" aria-label="Mosh on Instagram">
+        <img src="../assets/logo-mosh.png" alt="Mosh" class="footer-credit__logo" width="100" height="32">
+      </a>
     </div>
   </div>
 </footer>
