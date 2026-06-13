@@ -3022,27 +3022,28 @@ body .topbar.topbar--split.scrolled{
   display: inline-flex !important;
   align-items: center;
   text-decoration: none;
-  gap: 0;
+  gap: 4px;
   position: relative;
 }
 .brand.brand--full .brand-logo{
   display: block;
-  height: clamp(40px, 4.4vw, 56px);
+  height: clamp(36px, 4vw, 52px);
   width: auto;
   transition: opacity .35s var(--ease);
 }
 /* Versione bianca: visibile di default (sopra il video) */
-.brand.brand--full .brand-logo--light{ opacity: 1; }
+.brand.brand--full .brand-logo--light{ opacity: 1; filter: brightness(0) invert(1); }
 /* Versione teal: sovrapposta, nascosta di default */
 .brand.brand--full .brand-logo--dark{
   position: absolute;
   top: 0; left: 0;
   height: 100%;
   opacity: 0;
+  filter: none;
 }
 /* Stato scrolled (navbar su sfondo cream): cross-fade alla versione verde */
 .topbar.scrolled .brand.brand--full .brand-logo--light{ opacity: 0; }
-.topbar.scrolled .brand.brand--full .brand-logo--dark{ opacity: 1; }
+.topbar.scrolled .brand.brand--full .brand-logo--dark{ opacity: 1; filter: brightness(0) saturate(100%) invert(29%) sepia(64%) saturate(436%) hue-rotate(131deg) brightness(91%) contrast(97%); }
 
 @media (max-width: 760px){
   .brand.brand--full .brand-logo{ height: 36px; }
@@ -3050,6 +3051,30 @@ body .topbar.topbar--split.scrolled{
 @media (max-width: 480px){
   .brand.brand--full .brand-logo{ height: 32px; }
 }
+
+
+
+
+
+
+
+
+/* Wordmark image accanto al logo */
+
+.brand-wordmark-img {
+  height: clamp(22px, 2.2vw, 32px);
+  width: auto;
+  display: block;
+  filter: brightness(0) invert(1);
+  transition: filter 0.3s ease;
+  align-self: center;
+  transform: translateY(-4px);
+}
+.topbar.scrolled .brand-wordmark-img {
+  filter: none;
+}
+@media (max-width: 760px) { .brand-wordmark-img { height: 22px; } }
+@media (max-width: 480px) { .brand-wordmark-img { height: 19px; } }
 
 /* Footer credit — Realizzato da Mosh (angolo basso-sinistra) */
 .footer-credit{

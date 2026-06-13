@@ -264,9 +264,16 @@
         isValid = false;
         if (emailField) emailField.parentElement.classList.add('has-error');
       }
-      if (!messageField || !messageField.value.trim() || messageField.value.trim().length < 10) {
+      if (!messageField || !messageField.value.trim()) {
         isValid = false;
         if (messageField) messageField.parentElement.classList.add('has-error');
+      }
+
+      // Check privacy checkbox
+      var privacyField = contactForm.querySelector('[name="privacy"]');
+      if (privacyField && !privacyField.checked) {
+        isValid = false;
+        if (privacyField.closest('.field')) privacyField.closest('.field').classList.add('has-error');
       }
 
       if (!isValid) {
@@ -541,6 +548,19 @@
         item.classList.add('is-open');
         btn.setAttribute('aria-expanded', 'true');
       }
+    });
+  }
+
+
+  // Date range: check-out must be after check-in
+  var dateIn = document.getElementById('date_in');
+  var dateOut = document.getElementById('date_out');
+  if (dateIn && dateOut) {
+    var today = new Date().toISOString().split('T')[0];
+    dateIn.min = today;
+    dateIn.addEventListener('change', function () {
+      dateOut.min = dateIn.value;
+      if (dateOut.value && dateOut.value < dateIn.value) dateOut.value = '';
     });
   }
 
