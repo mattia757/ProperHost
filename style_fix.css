@@ -63,6 +63,72 @@
   --font-body:'Inter','Helvetica Neue',Arial,sans-serif;
 }
 
+/* =================== PRELOADER =================== */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s var(--ease), visibility 0.6s;
+}
+}
+.preloader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.preloader-logo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.preloader-logo img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+.preloader-logo-text {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--text);
+}
+.preloader-logo-text span {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.preloader-bar {
+  width: 120px;
+  height: 2px;
+  background: var(--bg-3);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.preloader-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  border-radius: var(--radius-full);
+  transition: width 0.3s var(--ease);
+}
+.preloader-text {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 20px;
+  letter-spacing: 0.05em;
+}
 
 /* =================== CUSTOM CURSOR =================== */
 @media (hover: none), (pointer: coarse){
@@ -1206,10 +1272,10 @@ gap:var(--space-xl);align-items:start}
 .contact-form .btn{min-width:240px;margin-top:8px}
 
 /* =================== REVEAL =================== */
-.reveal{opacity:1;transform:none;transition:opacity .4s var(--ease), transform .6s var(--ease), filter .6s var(--ease)}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .4s var(--ease), transform .6s var(--ease), filter .6s var(--ease)}
 .reveal.in{opacity:1;transform:none}
 .reveal.in .reveal-inner{animation:revealSlideUp 1s var(--ease) forwards}
-.reveal .reveal-inner{opacity:1;transform:none}
+.reveal .reveal-inner{opacity:0;transform:translateY(20px)}
 
 @keyframes revealSlideUp{
   from{opacity:0;transform:translateY(20px)}
@@ -1238,7 +1304,7 @@ gap:var(--space-xl);align-items:start}
 .reveal-blur.in{filter:blur(0)}
 
 /* Stagger delays for children */
-.reveal-stagger > *{opacity:1;transform:none;transition:opacity .5s var(--ease), transform .5s var(--ease)}
+.reveal-stagger > *{opacity:0;transform:translateY(20px);transition:opacity .5s var(--ease), transform .5s var(--ease)}
 .reveal-stagger.in > *{opacity:1;transform:translateY(0)}
 .reveal-stagger.in > *:nth-child(1){transition-delay:.0s}
 .reveal-stagger.in > *:nth-child(2){transition-delay:.1s}
@@ -1408,6 +1474,7 @@ html{scroll-behavior:smooth}
 .villa-slider-title{transition: opacity .3s var(--ease), transform .5s var(--ease) !important}
 .villa-nav{transition: opacity .25s var(--ease), transform .25s var(--ease), background .25s var(--ease), box-shadow .25s var(--ease) !important}
 
+.preloader{transition: opacity .4s var(--ease), visibility .4s !important}
 
 .btn-pill,.btn,.btn-primary,.btn-outline,.btn-ghost,.btn-gold{
   transition: background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease), transform .25s var(--ease), box-shadow .25s var(--ease) !important;

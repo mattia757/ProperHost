@@ -35,6 +35,45 @@
     window.visualViewport.addEventListener('resize', setVh);
   }
 
+  // Preloader
+  var preloader = document.getElementById('preloader');
+  var preloaderBar = document.getElementById('preloaderBar');
+  if (preloader) {
+    var loaded = false;
+    var progress = 0;
+    var interval = setInterval(function() {
+      progress += Math.random() * 15;
+      if (progress > 90) progress = 90;
+      if (preloaderBar) preloaderBar.style.width = progress + '%';
+    }, 150);
+
+    function hidePreloader() {
+      if (loaded) return;
+      loaded = true;
+      clearInterval(interval);
+      if (preloaderBar) preloaderBar.style.width = '100%';
+      setTimeout(function() {
+        preloader.classList.add('hidden');
+        if (document.body) document.body.style.overflow = '';
+      }, 400);
+    }
+
+    // 1) Se già pronto, nascondi subito
+    if (document.readyState === 'complete') {
+      hidePreloader();
+    } else {
+      // 2) DOMContentLoaded: DOM pronto, non aspettiamo video/immagini
+      document.addEventListener('DOMContentLoaded', hidePreloader);
+      // 3) window.load: fallback (tutte le risorse caricate)
+      window.addEventListener('load', hidePreloader);
+      // 4) Timeout di sicurezza assoluto: 2.5s max su qualsiasi device
+      setTimeout(hidePreloader, 2500);
+    }
+
+    // Prevent scroll while loading
+    if (document.body) document.body.style.overflow = 'hidden';
+  }
+  
   // Custom cursor (desktop only, no reduced motion)
   var cursor = document.getElementById('customCursor');
   var cursorText = document.getElementById('customCursorText');
@@ -354,25 +393,19 @@
     });
   }
 
-  // Safety net: dopo 1.5s forza visibili gli elementi nel viewport (sopra il fold).
+  // Safety net Task 57/59: dopo 1.5s qualunque .reveal ancora invisibile viene
+  // forzato a visibile. Copre il caso di ScrollTrigger/Lenis che non notificano
+  // l'IntersectionObserver, immagini fuori viewport iniziale o errori di script.
   setTimeout(function() {
     document.querySelectorAll('.reveal:not(.in)').forEach(function(el) {
       var rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight + 300) {
-        el.style.transitionDelay = '0s';
+      // forza solo gli elementi sopra il fold + un po' sotto, gli altri
+      // verranno gestiti dall'observer normalmente
+      if (rect.top < window.innerHeight + 200) {
         el.classList.add('in');
       }
     });
   }, 1500);
-
-  // Safety net allargato: dopo 3s forza visibili TUTTI i .reveal rimasti,
-  // indipendentemente dalla posizione. Copre qualsiasi errore di IntersectionObserver.
-  setTimeout(function() {
-    document.querySelectorAll('.reveal:not(.in)').forEach(function(el) {
-      el.style.transitionDelay = '0s';
-      el.classList.add('in');
-    });
-  }, 3000);
 
   // Villa slider
   var slider = document.querySelector('.villa-slider');
@@ -540,14 +573,4 @@
   var blurForm = document.querySelector('.contact-form');
   if (blurForm) {
     blurForm.querySelectorAll('input, textarea').forEach(function (input) {
-      input.addEventListener('blur', function () {
-        var parent = input.parentElement;
-        if (input.hasAttribute('required') && !input.value.trim()) {
-          parent.classList.add('has-error');
-        } else {
-          parent.classList.remove('has-error');
-        }
-      });
-    });
-  }
-})();
+      input.addEventListen

@@ -22,7 +22,7 @@
   <link rel="apple-touch-icon" href="/assets/logo-senza-sfondo.png">
   <meta property="og:title" content="Properhost — Properties">
   <meta property="og:description" content="Properhost properties: apartments and villas in Trapani, Favignana and Cornino.">
-  <meta property="og:url" content="https://www.properhost-sicily.com/en/ville.html">
+  <meta property="og:url" content="https://www.properhost-sicily.com/en/strutture.html">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_GB">
   <meta name="theme-color" content="#0b6b5e">
@@ -48,11 +48,7 @@
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to content</a>
-<div class="preloader" id="preloader" role="status" aria-label="Loading">
-  <div class="preloader-logo"><img src="../logo-properhost.png" alt="Properhost" width="48" height="48"><div class="preloader-logo-text">properhost<span>hospitality</span></div></div>
-  <div class="preloader-bar"><div class="preloader-bar-fill" id="preloaderBar"></div></div>
-  <p class="preloader-text">Loading...</p>
-</div>
+
 <div class="custom-cursor" id="customCursor" aria-hidden="true"></div>
 <div class="custom-cursor-text" id="customCursorText" aria-hidden="true"></div>
 <a href="#top" class="back-to-top" id="backToTop" aria-label="Back to top">
@@ -64,8 +60,8 @@
         <img src="../assets/logo-wordmark.png" alt="" class="brand-wordmark-img" aria-hidden="true">
       </a>
     <nav class="nav" id="mainNav">
-      <a href="index.html">Home</a><a href="about.html">About</a><a href="concierge.html">Services</a>
-      <a href="ville.html" class="active">Properties</a><a href="contatti.html">Contact</a>
+      <a href="index.html">Home</a><a href="ville.html" class="active">Properties</a><a href="concierge.html">Services</a>
+      <a href="about.html">About</a><a href="contatti.html">Contact</a>
     </nav>
     <span class="lang-switch" role="group" aria-label="Language">
       <a href="../ville.html" hreflang="it">IT</a><span class="is-active" aria-current="page">EN</span>
@@ -242,8 +238,8 @@
 
         <article class="card reveal">
           <div class="card-media card-gallery"><div class="swiper swiper-villa" data-slug="villa-odyssea" data-count="27"><div class="swiper-wrapper"></div><div class="swiper-button-prev"></div><div class="swiper-button-next"></div><div class="swiper-pagination"></div></div><span class="card-tag">Favignana</span></div>
-          <div class="card-body"><div class="meta">up to 8 guests · Sea-view villa</div><h3>Villa Odyssea</h3>
-            <p>Stunning sea-view villa on the sunset side of Favignana, perfect for groups and families up to 8. 200 m from the beach, BBQ and free parking.</p>
+          <div class="card-body"><div class="meta">up to 8 guests · Sea-view struttura</div><h3>Villa Odyssea</h3>
+            <p>Stunning sea-view struttura on the sunset side of Favignana, perfect for groups and families up to 8. 200 m from the beach, BBQ and free parking.</p>
             <div class="amenities"><span class="amenity">Sea view</span><span class="amenity">Sunsets</span><span class="amenity">200 m beach</span><span class="amenity">BBQ</span><span class="amenity">2 bathrooms</span><span class="amenity">Kitchen</span><span class="amenity">Parking</span><span class="amenity">Wi-Fi</span></div>
             <a href="contatti.html" class="btn btn-gold">Enquire</a></div>
         </article>
@@ -260,7 +256,7 @@
         <article class="card reveal">
           <div class="card-media card-gallery"><div class="swiper swiper-villa" data-slug="villa-cellini" data-count="74"><div class="swiper-wrapper"></div><div class="swiper-button-prev"></div><div class="swiper-button-next"></div><div class="swiper-pagination"></div></div><span class="card-tag">Cornino</span></div>
           <div class="card-body"><div class="meta">up to 6 guests · 2 bedrooms · 2 bathrooms</div><h3>Villa Cellini</h3>
-            <p>Sea-view villa with breathtaking sunsets. Garden, veranda, BBQ, wood-fired oven — and an exclusive private tennis court.</p>
+            <p>Sea-view struttura with breathtaking sunsets. Garden, veranda, BBQ, wood-fired oven — and an exclusive private tennis court.</p>
             <div class="amenities"><span class="amenity">Sea view sunsets</span><span class="amenity">Tennis court</span><span class="amenity">Garden</span><span class="amenity">BBQ</span><span class="amenity">Wood oven</span><span class="amenity">Parking</span><span class="amenity">Wi-Fi</span><span class="amenity">Washing machine</span></div>
             <a href="contatti.html" class="btn btn-gold">Enquire</a></div>
         </article>
@@ -320,7 +316,7 @@
     wrapper.innerHTML=html;
   }
   function initSwipers(){
-    document.querySelectorAll('.swiper-villa').forEach(function(el){
+    document.querySelectorAll('.swiper-struttura').forEach(function(el){
       buildSlides(el);
       if(el.swiper)return;
       new Swiper(el,{loop:true,pagination:{el:el.querySelector('.swiper-pagination'),clickable:true,dynamicBullets:true,dynamicMainBullets:3},navigation:{nextEl:el.querySelector('.swiper-button-next'),prevEl:el.querySelector('.swiper-button-prev')},preloadImages:false,lazy:true});
